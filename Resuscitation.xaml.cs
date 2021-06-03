@@ -13,27 +13,27 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Resuscitation : Page
     {
-        public MainPage()
+        public Resuscitation()
         {
             this.InitializeComponent();
-            Frame mainFrame = Window.Current.Content as Frame;
-            mainFrame.ContentTransitions = null;
-        } 
-
-        private void InputLater_Click(object sender, RoutedEventArgs e)
-        {
-            // Go to main page
-            this.Frame.Navigate(typeof(InputTime));
         }
 
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+            }
+        }
     }
 }
