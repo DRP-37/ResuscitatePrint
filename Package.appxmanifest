@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -8,14 +8,14 @@
 
   <Identity
     Name="846b8f8a-2c3a-4785-824f-a867c3dd288c"
-    Publisher="CN=Euan Imperial"
-    Version="1.0.0.0" />
+    Publisher="CN=robjb"
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="846b8f8a-2c3a-4785-824f-a867c3dd288c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Resuscitate</DisplayName>
-    <PublisherDisplayName>Euan Imperial</PublisherDisplayName>
+    <PublisherDisplayName>DRP Group 37</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -37,7 +37,7 @@
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="Resuscitate"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
