@@ -12,7 +12,7 @@ jobs:
     env:
       SigningCertificate: Resuscitate_TemporaryKey.pfx
       Solution_Path: Resuscitate.sln
-      UWP_Project_Path: Resuscitate.csproj
+      UWP_Project_Path: Resuscitate\Resuscitate.csproj
       UWP_Project_Directory: .\
 
     steps:

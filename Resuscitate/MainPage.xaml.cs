@@ -29,7 +29,7 @@ namespace Resuscitate
             mainFrame.ContentTransitions = null;
         } 
 
-        private void InputLater_Click(object sender, RoutedEventArgs e)
+        public void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Go to main page
             this.Frame.Navigate(typeof(InputTime));

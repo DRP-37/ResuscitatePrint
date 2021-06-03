@@ -3,6 +3,8 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting.AppContainer;
 using Resuscitate;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace ResuscitateTest
 {
@@ -12,7 +14,15 @@ namespace ResuscitateTest
         [UITestMethod]
         public void TestMethod1()
         {
-            MainPage mp = new MainPage();
+            MainPage mainPage = new MainPage();
+            InputTime inputTime = new InputTime();
+            Resuscitation resuscitation = new Resuscitation();
+        }
+
+        [TestMethod]
+        public void Addition()
+        {
+            Assert.AreEqual(5, 3 + 2);
         }
     }
 }
