@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj": {}
+    "C:\\Users\\Euan Imperial\\OneDrive - Imperial College London\\Imperial Work\\Second Year\\DRP\\Resuscitate\\Resuscitate.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj": {
+    "C:\\Users\\Euan Imperial\\OneDrive - Imperial College London\\Imperial Work\\Second Year\\DRP\\Resuscitate\\Resuscitate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj",
+        "projectUniqueName": "C:\\Users\\Euan Imperial\\OneDrive - Imperial College London\\Imperial Work\\Second Year\\DRP\\Resuscitate\\Resuscitate.csproj",
         "projectName": "Resuscitate",
-        "projectPath": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj",
+        "projectPath": "C:\\Users\\Euan Imperial\\OneDrive - Imperial College London\\Imperial Work\\Second Year\\DRP\\Resuscitate\\Resuscitate.csproj",
         "packagesPath": "C:\\Users\\Euan Imperial\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\obj\\",
+        "outputPath": "C:\\Users\\Euan Imperial\\OneDrive - Imperial College London\\Imperial Work\\Second Year\\DRP\\Resuscitate\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

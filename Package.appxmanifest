@@ -4,7 +4,8 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  IgnorableNamespaces="uap mp uap5">
 
   <Identity
     Name="846b8f8a-2c3a-4785-824f-a867c3dd288c"
@@ -31,15 +32,27 @@
     <Application Id="App"
       Executable="$targetnametoken$.exe"
       EntryPoint="Resuscitate.App">
-      <uap:VisualElements
-        DisplayName="Resuscitate"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Resuscitate"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
-      </uap:VisualElements>
+
+	  <uap:VisualElements
+		  DisplayName="Resuscitate"
+		  Square150x150Logo="Assets\Square150x150Logo.png"
+		  Square44x44Logo="Assets\Square44x44Logo.png"
+		  Description="Resuscitate"
+		  BackgroundColor="transparent">
+		  <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+		  <uap:SplashScreen Image="Assets\SplashScreen.png" />
+	  </uap:VisualElements>
+		
+      <Extensions>
+		  <uap5:Extension
+			Category="windows.appExecutionAlias"
+			Executable="Resuscitate.exe"
+			EntryPoint="Resuscitate.App">
+			  <uap5:AppExecutionAlias>
+				  <uap5:ExecutionAlias Alias="Resuscitate.exe" />
+			  </uap5:AppExecutionAlias>
+		  </uap5:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
