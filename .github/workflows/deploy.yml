@@ -55,7 +55,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
+        tag_name: ${{ github.ref }} ${{ github.event.head_commit.message }}
         release_name: Rescuscitate ${{ github.event.head_commit.message }}
         draft: false
         prerelease: false
