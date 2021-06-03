@@ -32,18 +32,22 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         
-    - name: Update manifest version
+    - name: Decode the Pfx
       run: |
-        [xml]$manifest = get-content ".\$env:UWP_Project_Directory\Package.appxmanifest"
-        $manifest.Package.Identity.Version = "${{steps.getVersion.outputs.result}}"
-        $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
+        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
+        $currentDirectory = Get-Location
+        $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:UWP_Project_Directory -AdditionalChildPath $env:SigningCertificate
+        [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         
     - name: Build the sideload solution
-      run: msbuild $env:Solution_Path /p:Platform=x86 /p:AppxBundle=$env:AppxBundle /p:AppxBundlePlatforms="x86|x64" /p:AppxPackageDir=C:\DeployOutput /p:PackageCertificateKeyFile=$env:SigningCertificate /p:PackageCertificatePassword=${{ secrets.Pfx_Key }} /restore
+      run: msbuild $env:Solution_Path /p:Platform=x86 /p:AppxBundle=$env:AppxBundle /p:AppxBundlePlatforms="x86|x64" /p:AppxPackageDir=C:\DeployOutput /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
       env:
         AppxBundle: Always
         BuildMode: StoreUpload
         Configuration: Release
+
+    - name: Remove the .pfx
+      run: Remove-Item -path $env:UWP_Project_Directory/$env:SigningCertificate
    
     - name: Create archive
       run: Compress-Archive -Path C:\DeployOutput\* -DestinationPath C:\DeployOutput\Resuscitate.zip
