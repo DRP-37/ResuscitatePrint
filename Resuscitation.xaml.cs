@@ -27,6 +27,7 @@ namespace Resuscitate
 
         public Resuscitation()
         {
+            // Initialise
             this.InitializeComponent();
 
             // Start timer
@@ -51,17 +52,77 @@ namespace Resuscitate
             TimeView.Text = minsStr + ":" + secsStr;
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
 
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
         }
 
-        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            // this.Frame.Navigate(InitialAssessment);
+        }
+
+        private void ApgarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AirwayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void VentilationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void IntubationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CPRButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LineInsertionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BloodButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void initialAssessment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MedicationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OtherProceduresButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NotesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
         }
