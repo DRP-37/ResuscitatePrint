@@ -1,0 +1,2 @@
+C:\Users\Euan Imperial\source\repos\Resuscitate\Resuscitate\Resuscitate.csproj;x64
+C:\Users\Euan Imperial\source\repos\Resuscitate\ResuscitateTest\ResuscitateTest.csproj;x64
