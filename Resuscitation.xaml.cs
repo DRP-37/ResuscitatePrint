@@ -59,12 +59,12 @@ namespace Resuscitate
 
         private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)
         {
-            // this.Frame.Navigate(InitialAssessment);
+            //this.Frame.Navigate(InitialAssessment);
         }
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(ApgarAssessment));
         }
 
         private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
