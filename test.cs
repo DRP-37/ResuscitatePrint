@@ -8,7 +8,7 @@ namespace Resuscitate
 {
     class test
     {
-        static void main(string[] args)
+        static void Main(string[] args)
         {
             Console.Write("Hello");
         }
