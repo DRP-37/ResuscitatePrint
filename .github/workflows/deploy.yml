@@ -39,3 +39,37 @@ jobs:
         $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:UWP_Project_Directory -AdditionalChildPath $env:SigningCertificate
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         
+      - name: Build the sideload solution
+      run: msbuild $env:Solution_Path /p:Platform=x86 /p:AppxBundle=$env:AppxBundle /p:AppxBundlePlatforms="x86|x64" /p:AppxPackageDir=C:\DeployOutput /p:PackageCertificateKeyFile=$env:SigningCertificate /restore
+      env:
+        AppxBundle: Always
+        BuildMode: StoreUpload
+        Configuration: Release
+
+    - name: Remove the .pfx
+      run: Remove-Item -path $env:UWP_Project_Directory/$env:SigningCertificate
+   
+    - name: Create archive
+      run: Compress-Archive -Path C:\DeployOutput\* -DestinationPath C:\DeployOutput\Resuscitate.zip
+
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: RC 2
+        draft: false
+        prerelease: false
+
+    - name: Update release asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: C:\DeployOutput\Resuscitate.zip
+        asset_name: Resuscitate.zip
+        asset_content_type: application/zip
