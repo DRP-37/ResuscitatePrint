@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Diagnostics;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,12 +23,18 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class InputTime : Page
     {
-        public InputTime()
+       public InputTime()
         {
             this.InitializeComponent();
         }
 
-        private void InputLater_Click(object sender, RoutedEventArgs e)
+        private void inputLater_Click(object sender, RoutedEventArgs e)
+        {
+            // Go to main page
+            this.Frame.Navigate(typeof(Resuscitation));
+        }
+
+        private void now_Click(object sender, RoutedEventArgs e)
         {
             // Go to main page
             this.Frame.Navigate(typeof(Resuscitation));

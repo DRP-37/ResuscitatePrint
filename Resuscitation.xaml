@@ -9,7 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="backButton" Content="Back" Margin="978,613,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="backButton_Click"/>
+        <Button x:Name="backButton" Content="Back" Margin="1176,819,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="backButton_Click"/>
+        <TextBox x:Name="TimeView" HorizontalAlignment="Center" Margin="0,26,0,0" Text="00:00" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" Width="150" TextChanged="TimeView_TextChanged" FontSize="48" BorderBrush="#00000000" TextAlignment="Center" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" IsReadOnly="True" ManipulationMode="None"/>
 
     </Grid>
 </Page>
