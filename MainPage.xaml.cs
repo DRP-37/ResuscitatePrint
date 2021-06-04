@@ -22,6 +22,8 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -33,6 +35,8 @@ namespace Resuscitate
         {
             // Go to main page
             this.Frame.Navigate(typeof(InputTime));
+
+            Data d = new Data();
         }
 
     }

@@ -39,6 +39,14 @@
       "frameworks": {
         "uap10.0.17763": {
           "dependencies": {
+            "FirebaseAuthentication.net": {
+              "target": "Package",
+              "version": "[3.7.1, )"
+            },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "Microsoft.NETCore.UniversalWindowsPlatform": {
               "target": "Package",
               "version": "[6.2.10, )"
