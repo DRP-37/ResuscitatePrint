@@ -64,7 +64,8 @@ namespace Resuscitate
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ApgarAssessment),TimeView.Text);
+            string[] time = TimeView.Text.Split(';');
+            this.Frame.Navigate(typeof(ApgarAssessment), new TimeSpan(0,Int32.Parse(time[0]), Int32.Parse(time[1])));
         }
 
         private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
