@@ -51,6 +51,14 @@
               "target": "Package",
               "version": "[2.4.0, )"
             },
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
             "Microsoft.NETCore.UniversalWindowsPlatform": {
               "target": "Package",
               "version": "[6.2.10, )"

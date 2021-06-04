@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Google.Cloud.Firestore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windows.UI.Popups;
 
 namespace Resuscitate
@@ -55,8 +56,8 @@ namespace Resuscitate
 
             db = FirestoreDb.Create(project);
 
-            var dialog = new MessageDialog("Connected");
-            await dialog.ShowAsync();
+            //var dialog = new MessageDialog("Connected");
+            //await dialog.ShowAsync();
 
             DocumentReference dr = db.Collection("Data").Document(name);
             Dictionary<string, object> data = new Dictionary<string, object>();
@@ -70,13 +71,12 @@ namespace Resuscitate
             data.Add("Data", list);
             await dr.SetAsync(list);
 
-            dialog = new MessageDialog("Data Added");
-            await dialog.ShowAsync();
-
-            checkData();
+            //dialog = new MessageDialog("Data Added");
+            //await dialog.ShowAsync();
         }
 
-        public async void checkData()
+        [TestMethod]
+        public async DocumentSnapshot checkData()
         {
             DocumentReference dr = db.Collection("Data").Document(name);
             DocumentSnapshot snap = await dr.GetSnapshotAsync();
@@ -87,8 +87,8 @@ namespace Resuscitate
 
                 foreach (var field in item)
                 {
-                    var dialog = new MessageDialog(field.Key);
-                    await dialog.ShowAsync();
+                    //var dialog = new MessageDialog(field.Key + "-" + field.Value);
+                    //await dialog.ShowAsync();
                 }
             }
             

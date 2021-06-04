@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Fjkh1sH1mNMbGXrpvI4zfiEY1W0WfwddYpu62kskIxJT3rQhhOUubJvDRT6Trq9j7AZYaMWHNZaut7KNs/9F7w==",
+  "dgSpecHash": "Zimf37pfsIMtaoVL+LSwRn7fGy2eKRbz1CxPDfkwtsDFxI1QTz17Tl7JOQ3gkyeNgoYbBT/9iix5eqZxtFhkgA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,8 @@
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.net.uwpcoreruntimesdk\\2.2.10\\microsoft.net.uwpcoreruntimesdk.2.2.10.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.netcore.platforms\\2.1.0\\microsoft.netcore.platforms.2.1.0.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\microsoft.netcore.universalwindowsplatform\\6.2.10\\microsoft.netcore.universalwindowsplatform.6.2.10.nupkg.sha512",
+    "C:\\Users\\Euan Imperial\\.nuget\\packages\\mstest.testadapter\\2.2.4\\mstest.testadapter.2.2.4.nupkg.sha512",
+    "C:\\Users\\Euan Imperial\\.nuget\\packages\\mstest.testframework\\2.2.4\\mstest.testframework.2.2.4.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\Euan Imperial\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform\\6.2.10\\runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.2.10.nupkg.sha512",
