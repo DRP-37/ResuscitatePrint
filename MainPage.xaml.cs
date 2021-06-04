@@ -37,11 +37,16 @@ namespace Resuscitate
             // Go to main page
             this.Frame.Navigate(typeof(InputTime));
 
-            ApgarScore apgar = new ApgarScore(TimeSpan.Zero);
+            ApgarScore apgar = new ApgarScore("00:00");
             database.addApgar(apgar);
 
             database.sendToFirestore();
         }
 
+        private void ReviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Go to review page
+            this.Frame.Navigate(typeof(ReviewPage));
+        }
     }
 }

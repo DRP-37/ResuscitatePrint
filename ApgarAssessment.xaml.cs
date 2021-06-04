@@ -20,7 +20,6 @@ namespace Resuscitate
         int tone;
         int response;
         int colour;
-
         Button[] colours;
         Button[] hrs;
         Button[] respirations;
@@ -46,15 +45,17 @@ namespace Resuscitate
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
+            Timing timing = new Timing();
+            timing.Offset = 0;
+            timing.Count = 0;
+            Frame.Navigate(typeof(Resuscitation), timing);
             
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var timeString = (e.Parameter as string).Split(':');
-            int minutes = timeString[0][0] == '0' ? (timeString[0][1] - '0') : int.Parse(timeString[0]);
-            int seconds = timeString[1][0] == '0' ? (timeString[1][1] - '0') : int.Parse(timeString[1]);
-            TimeSpan time = new TimeSpan(0, minutes, seconds);
+            string time = (string)e.Parameter;
+           
             score = new ApgarScore(time);
         }
 
@@ -101,5 +102,7 @@ namespace Resuscitate
             buttons[2].Background = new SolidColorBrush(Colors.White);
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
+
+   
     }
 }

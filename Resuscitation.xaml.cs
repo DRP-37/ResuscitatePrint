@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Amazon.Runtime.Internal.Util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -22,8 +24,9 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
-        readonly DispatcherTimer Timer = new DispatcherTimer();
-        private int Count_Seconds = 0;
+        Data data = new Data();
+        private readonly DispatcherTimer Timer = new DispatcherTimer();
+        private int Count_Seconds;
 
         public Resuscitation()
         {
@@ -34,6 +37,18 @@ namespace Resuscitate
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Take value from previous screen
+            Timing Timing = (Timing)e.Parameter;
+            Count_Seconds = Timing.Offset + Timing.Count;
+
+            // Initialise timer
+            TimeView.Text = Timing.ToString();
+
+            base.OnNavigatedTo(e);
         }
 
         private void Timer_Tick(object sender, object e)
@@ -64,6 +79,7 @@ namespace Resuscitate
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
         {
+           
             this.Frame.Navigate(typeof(ApgarAssessment),TimeView.Text);
         }
 
@@ -102,11 +118,6 @@ namespace Resuscitate
 
         }
 
-        private void initialAssessment_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void MedicationButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -123,6 +134,17 @@ namespace Resuscitate
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ReviewPage));
+        }
+
+
+        private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
 
         }
