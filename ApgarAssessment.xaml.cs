@@ -22,9 +22,30 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ApgarAssessment : Page
     {
+        int hr;
+        int resp;
+        int tone;
+        int response;
+        int colour;
+
+        ApgarScore score;
         public ApgarAssessment()
         {
             this.InitializeComponent();
+        }
+
+        private void confirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            score.HeartRate = hr;
+            score.Respiration = resp;
+            score.Tone = tone;
+            score.Response = response;
+            score.Colour = colour;
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            score = new ApgarScore((TimeSpan)e.Parameter);
         }
     }
 }
