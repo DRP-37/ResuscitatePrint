@@ -8,11 +8,11 @@ namespace Resuscitate
 {
     class ApgarScore
     {
-        public ApgarScore(DateTime time) {
+        public ApgarScore(TimeSpan time) {
             Time = time;
         }
 
-        public DateTime Time { get; set; }
+        public TimeSpan Time { get; set; }
         public int HeartRate { get; set; }
         public int Colour { get; set; }
         public int Response { get; set; }
