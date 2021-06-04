@@ -22,6 +22,9 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        Data database = new Data();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -33,6 +36,11 @@ namespace Resuscitate
         {
             // Go to main page
             this.Frame.Navigate(typeof(InputTime));
+
+            ApgarScore apgar = new ApgarScore(TimeSpan.Zero);
+            database.addApgar(apgar);
+
+            database.sendToFirestore();
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
