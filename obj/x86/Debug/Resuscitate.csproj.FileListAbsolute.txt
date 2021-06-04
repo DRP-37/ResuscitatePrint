@@ -89,3 +89,4 @@ C:\Users\Euan Imperial\source\repos\Resuscitate\obj\x86\Debug\qualifiers.txt.int
 C:\Users\Euan Imperial\source\repos\Resuscitate\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Euan Imperial\source\repos\Resuscitate\obj\x86\Debug\ProjectArchitectures.txt
 C:\Users\Euan Imperial\source\repos\Resuscitate\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_636885310160000000.json
+C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\Firebase.Storage.dll

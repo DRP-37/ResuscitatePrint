@@ -23,6 +23,7 @@ namespace Resuscitate
     public sealed partial class MainPage : Page
     {
 
+        Data database = new Data();
 
         public MainPage()
         {
@@ -36,7 +37,10 @@ namespace Resuscitate
             // Go to main page
             this.Frame.Navigate(typeof(InputTime));
 
-            Data d = new Data();
+            ApgarScore apgar = new ApgarScore(TimeSpan.Zero);
+            database.addApgar(apgar);
+
+            database.sendToFirestore();
         }
 
     }

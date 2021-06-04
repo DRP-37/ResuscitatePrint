@@ -43,6 +43,10 @@
               "target": "Package",
               "version": "[3.7.1, )"
             },
+            "FirebaseStorage.net": {
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
             "Google.Cloud.Firestore": {
               "target": "Package",
               "version": "[2.4.0, )"

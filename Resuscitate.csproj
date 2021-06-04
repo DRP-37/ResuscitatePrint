@@ -116,9 +116,11 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ApgarScore.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data.cs" />
     <Compile Include="Resuscitation.xaml.cs">
       <DependentUpon>Resuscitation.xaml</DependentUpon>
     </Compile>
@@ -166,6 +168,9 @@
   <ItemGroup>
     <PackageReference Include="FirebaseAuthentication.net">
       <Version>3.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="FirebaseStorage.net">
+      <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="Google.Cloud.Firestore">
       <Version>2.4.0</Version>

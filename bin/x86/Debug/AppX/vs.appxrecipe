@@ -30,17 +30,21 @@
     <AppXManifest Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-04T00:16:48.232</Modified>
+      <Modified>2021-06-04T01:35:19.035</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\Resuscitate.exe">
       <PackagePath>entrypoint\Resuscitate.exe</PackagePath>
-      <Modified>2021-06-04T00:16:47.738</Modified>
+      <Modified>2021-06-04T01:35:18.589</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\firebaseauthentication.net\3.7.1\lib\netstandard1.1\Firebase.Auth.dll">
       <PackagePath>Firebase.Auth.dll</PackagePath>
       <Modified>2021-04-06T09:55:26.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\firebasestorage.net\1.0.3\lib\netstandard1.1\Firebase.Storage.dll">
+      <PackagePath>Firebase.Storage.dll</PackagePath>
+      <Modified>2018-11-26T21:49:32.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.api.commonprotos\2.3.0\lib\netstandard2.0\Google.Api.CommonProtos.dll">
       <PackagePath>Google.Api.CommonProtos.dll</PackagePath>
@@ -178,19 +182,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-06-04T00:16:47.656</Modified>
+      <Modified>2021-06-04T01:34:44.856</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\Resuscitation.xbf">
       <PackagePath>Resuscitation.xbf</PackagePath>
-      <Modified>2021-06-04T00:16:47.656</Modified>
+      <Modified>2021-06-04T01:34:44.856</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\InputTime.xbf">
       <PackagePath>InputTime.xbf</PackagePath>
-      <Modified>2021-06-04T00:16:47.656</Modified>
+      <Modified>2021-06-04T01:34:44.856</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-06-04T00:16:47.657</Modified>
+      <Modified>2021-06-04T01:34:44.857</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -198,11 +202,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-06-04T00:04:05.172</Modified>
+      <Modified>2021-06-04T01:14:38.952</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x86\Debug\Core\Resuscitate.exe">
       <PackagePath>Resuscitate.exe</PackagePath>
-      <Modified>2021-06-04T00:16:48.228</Modified>
+      <Modified>2021-06-04T01:35:19.032</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

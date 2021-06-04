@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Akntt4/QadWPI5fRDjGAk43Xds2c3lR8G7VUO+clEiiewLxpRTRz0tDl14gAGzfJmftLsRbih94t+H0zf1PJSQ==",
+  "dgSpecHash": "Fjkh1sH1mNMbGXrpvI4zfiEY1W0WfwddYpu62kskIxJT3rQhhOUubJvDRT6Trq9j7AZYaMWHNZaut7KNs/9F7w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Euan Imperial\\.nuget\\packages\\firebaseauthentication.net\\3.7.1\\firebaseauthentication.net.3.7.1.nupkg.sha512",
+    "C:\\Users\\Euan Imperial\\.nuget\\packages\\firebasestorage.net\\1.0.3\\firebasestorage.net.1.0.3.nupkg.sha512",
     "C:\\Users\\Euan Imperial\\.nuget\\packages\\google.api.commonprotos\\2.3.0\\google.api.commonprotos.2.3.0.nupkg.sha512",
     "C:\\Users\\Euan Imperial\\.nuget\\packages\\google.api.gax\\3.3.0\\google.api.gax.3.3.0.nupkg.sha512",
     "C:\\Users\\Euan Imperial\\.nuget\\packages\\google.api.gax.grpc\\3.3.0\\google.api.gax.grpc.3.3.0.nupkg.sha512",

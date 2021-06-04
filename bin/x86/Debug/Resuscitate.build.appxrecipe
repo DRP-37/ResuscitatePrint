@@ -31,6 +31,9 @@
     <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\firebaseauthentication.net\3.7.1\lib\netstandard1.1\Firebase.Auth.dll">
       <PackagePath>Firebase.Auth.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\firebasestorage.net\1.0.3\lib\netstandard1.1\Firebase.Storage.dll">
+      <PackagePath>Firebase.Storage.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.api.commonprotos\2.3.0\lib\netstandard2.0\Google.Api.CommonProtos.dll">
       <PackagePath>Google.Api.CommonProtos.dll</PackagePath>
     </AppxPackagedFile>
