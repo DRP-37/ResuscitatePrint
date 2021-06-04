@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,6 +24,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
+        Data data = new Data();
         private readonly DispatcherTimer Timer = new DispatcherTimer();
         private int Count_Seconds;
 
@@ -77,6 +79,7 @@ namespace Resuscitate
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
         {
+           
             this.Frame.Navigate(typeof(ApgarAssessment),TimeView.Text);
         }
 
@@ -139,6 +142,7 @@ namespace Resuscitate
         {
             this.Frame.Navigate(typeof(ReviewPage));
         }
+
 
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {

@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-04T04:06:10.620</Modified>
+      <Modified>2021-06-04T04:41:42.024</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitate.exe">
       <PackagePath>entrypoint\Resuscitate.exe</PackagePath>
-      <Modified>2021-06-04T04:06:10.136</Modified>
+      <Modified>2021-06-04T04:41:41.212</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\awssdk.core\3.7.0.31\lib\netstandard2.0\AWSSDK.Core.dll">
       <PackagePath>AWSSDK.Core.dll</PackagePath>
@@ -206,31 +206,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitate.xr.xml">
       <PackagePath>Resuscitate.xr.xml</PackagePath>
-      <Modified>2021-06-04T04:06:03.105</Modified>
+      <Modified>2021-06-04T04:41:41.108</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-06-04T04:06:10.053</Modified>
+      <Modified>2021-06-04T04:40:06.950</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\ApgarAssessment.xbf">
       <PackagePath>ApgarAssessment.xbf</PackagePath>
-      <Modified>2021-06-04T04:06:10.041</Modified>
+      <Modified>2021-06-04T04:41:41.117</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitation.xbf">
       <PackagePath>Resuscitation.xbf</PackagePath>
-      <Modified>2021-06-04T04:06:10.048</Modified>
+      <Modified>2021-06-04T04:40:06.945</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\InputTime.xbf">
       <PackagePath>InputTime.xbf</PackagePath>
-      <Modified>2021-06-04T04:06:10.053</Modified>
+      <Modified>2021-06-04T04:40:06.951</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-06-04T04:06:10.053</Modified>
+      <Modified>2021-06-04T04:40:06.951</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\ReviewPage.xbf">
       <PackagePath>ReviewPage.xbf</PackagePath>
-      <Modified>2021-06-04T04:06:10.054</Modified>
+      <Modified>2021-06-04T04:40:06.951</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -238,11 +238,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-06-04T04:06:03.716</Modified>
+      <Modified>2021-06-04T04:40:07.542</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Core\Resuscitate.exe">
       <PackagePath>Resuscitate.exe</PackagePath>
-      <Modified>2021-06-04T04:06:10.616</Modified>
+      <Modified>2021-06-04T04:41:42.018</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

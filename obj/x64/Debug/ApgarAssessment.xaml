@@ -8,93 +8,110 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:ConnectionId='2' x:Name="colour0" Content="Pale/Blue-White" Margin="383,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                     >
+        <Button x:ConnectionId='2' x:Name="colour0" Content="Pale/Blue-White" Margin="325,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                     >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='3' x:Name="colour1" Content="Blue/Blue Extremities" Margin="673,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                     >
+        <Button x:ConnectionId='3' x:Name="colour1" Content="Blue/Blue Extremities" Margin="615,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                     >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='4' x:Name="colour2" Content="Pink" Margin="965,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                     >
+        <Button x:ConnectionId='4' x:Name="colour2" Content="Pink" Margin="907,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                     >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='5' x:Name="hr0" Content="Absent" Margin="383,359,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                 >
+        <Button x:ConnectionId='5' x:Name="hr0" Content="Absent" Margin="325,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                 >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='6' x:Name="hr1" Content="&lt;100" Margin="673,359,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                 >
+        <Button x:ConnectionId='6' x:Name="hr1" Content="&lt;100" Margin="615,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                 >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='7' x:Name="hr2" Content="&gt;100" Margin="965,359,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                 >
+        <Button x:ConnectionId='7' x:Name="hr2" Content="&gt;100" Margin="907,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                 >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='8' x:Name="response0" Content="None" Margin="383,484,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                       >
+        <Button x:ConnectionId='8' x:Name="response0" Content="None" Margin="325,368,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                       >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='9' x:Name="response1" Content="Some Movement" Margin="673,484,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                       >
+        <Button x:ConnectionId='9' x:Name="response1" Content="Some Movement" Margin="615,368,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                       >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='10' x:Name="response2" Content="Crying" Margin="965,484,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                       >
+        <Button x:ConnectionId='10' x:Name="response2" Content="Crying" Margin="907,368,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                       >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='11' x:Name="tone0" Content="Floppy" Margin="383,619,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
+        <Button x:ConnectionId='11' x:Name="tone0" Content="Floppy" Margin="325,503,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='12' x:Name="tone1" Content="Some Flexion" Margin="672,619,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
+        <Button x:ConnectionId='12' x:Name="tone1" Content="Some Flexion" Margin="614,503,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:ConnectionId='13' x:Name="tone2" Content="Well Flexed" Margin="965,619,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
+        <Button x:ConnectionId='13' x:Name="tone2" Content="Well Flexed" Margin="907,503,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
         </Button>
         <Viewbox Stretch="Fill" VerticalAlignment="Top" Width="816" Height="71" Margin="342,945,342,0"/>
-        <Grid Margin="379,755,305,174" Background="White" BorderBrush="Black">
-            <Button x:ConnectionId='18' x:Name="resp0" Content="Absent" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
-                <Button.RenderTransform>
-                    <CompositeTransform Rotation="-0.381"/>
-                </Button.RenderTransform>
-            </Button>
-            <Button x:ConnectionId='19' x:Name="resp1" Content="Weak Cry/Poor Effort" Margin="289,0,0,0" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
-                <Button.RenderTransform>
-                    <CompositeTransform Rotation="-0.381"/>
-                </Button.RenderTransform>
-            </Button>
-            <Button x:ConnectionId='20' x:Name="resp2" Content="Good Respiration" Margin="582,0,0,0" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                   >
-                <Button.RenderTransform>
-                    <CompositeTransform Rotation="-0.381"/>
-                </Button.RenderTransform>
-            </Button>
-
-        </Grid>
-        <TextBlock x:ConnectionId='14' x:Name="textBlock" HorizontalAlignment="Left" Margin="379,165,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" FontSize="20" TextAlignment="Center"/>
-        <TextBlock x:ConnectionId='15' x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="675,165,0,0" Text="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
-        <TextBlock x:ConnectionId='16' x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="959,165,0,0" Text="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
-        <Button x:ConnectionId='17' x:Name="confirm" Content="Confirm Selection" Margin="1250,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="76" UseLayoutRounding="False" Width="187" d:LayoutRounding="Auto" FontSize="20" Background="White" BorderBrush="Black"                            >
+        <Button x:ConnectionId='14' x:Name="resp0" Content="Absent" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                    Margin="321,639,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.99999999999999989" ScaleY="0.99999999999999989"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.381"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:ConnectionId='15' x:Name="resp1" Content="Weak Cry/Poor Effort" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                    Margin="610,639,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.99999999999999989" ScaleY="0.99999999999999989"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.381"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:ConnectionId='16' x:Name="resp2" Content="Good Respiration" RenderTransformOrigin="0.5,0.5" Height="71" UseLayoutRounding="False" Width="234" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black"                    Margin="903,639,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.99999999999999989" ScaleY="0.99999999999999989"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.381"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock x:ConnectionId='17' x:Name="textBlock" HorizontalAlignment="Left" Margin="321,49,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" FontSize="20" TextAlignment="Center"/>
+        <TextBlock x:ConnectionId='18' x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="617,49,0,0" Text="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
+        <TextBlock x:ConnectionId='19' x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="901,49,0,0" Text="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
+        <Button x:ConnectionId='20' x:Name="confirm" Content="Confirm Selection" Margin="1250,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="76" UseLayoutRounding="False" Width="187" d:LayoutRounding="Auto" FontSize="20" Background="White" BorderBrush="Black"                            >
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.005"/>
             </Button.RenderTransform>
         </Button>
+        <TextBlock x:ConnectionId='21' x:Name="textBlock1" HorizontalAlignment="Left" Margin="112,132,0,0" Text="Colour" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="167" FontSize="20"/>
+        <TextBlock x:ConnectionId='22' x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="112,267,0,0" Text="Heartrate" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="167" FontSize="20"/>
+        <TextBlock x:ConnectionId='23' x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="77,392,0,0" Text="Response to Stimulus" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="202" FontSize="20"/>
+        <TextBlock x:ConnectionId='24' x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Margin="112,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="167" Text="Muscle Tone" FontSize="20"/>
+        <TextBlock x:ConnectionId='25' x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="112,665,0,0" Text="Respiratory Effort" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="167" FontSize="20"/>
 
     </Grid>
 </Page>
