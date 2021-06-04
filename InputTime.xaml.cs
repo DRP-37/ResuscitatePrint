@@ -28,16 +28,26 @@ namespace Resuscitate
             this.InitializeComponent();
         }
 
-        private void inputLater_Click(object sender, RoutedEventArgs e)
+        private void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Go to main page
             this.Frame.Navigate(typeof(Resuscitation));
         }
 
-        private void now_Click(object sender, RoutedEventArgs e)
+        private void Now_Click(object sender, RoutedEventArgs e)
         {
             // Go to main page
             this.Frame.Navigate(typeof(Resuscitation));
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+            }
         }
     }
 }

@@ -8,8 +8,7 @@ namespace Resuscitate
 {
     class ApgarScore
     {
-        public ApgarScore(TimeSpan time)
-        {
+        public ApgarScore(TimeSpan time) {
             Time = time;
         }
 
@@ -21,8 +20,7 @@ namespace Resuscitate
         public int Respiration { get; set; }
 
         override
-        public String ToString()
-        {
+        public String ToString() {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("Time: " + Time.ToString() + '\n');
