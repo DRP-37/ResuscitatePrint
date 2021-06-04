@@ -16,6 +16,8 @@ namespace Resuscitate
             Data db = new Data();
             db.sendToFirestore();
 
+            
+            
             DocumentSnapshot snap = db.checkData();
             if (snap.Exists)
             {
