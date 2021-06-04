@@ -1,27 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj": {}
+    "C:\\Users\\robjb\\Source\\Repos\\Resuscitate\\Resuscitate.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj": {
+    "C:\\Users\\robjb\\Source\\Repos\\Resuscitate\\Resuscitate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj",
+        "projectUniqueName": "C:\\Users\\robjb\\Source\\Repos\\Resuscitate\\Resuscitate.csproj",
         "projectName": "Resuscitate",
-        "projectPath": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\Resuscitate.csproj",
-        "packagesPath": "C:\\Users\\Euan Imperial\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Euan Imperial\\source\\repos\\Resuscitate\\obj\\",
+        "projectPath": "C:\\Users\\robjb\\Source\\Repos\\Resuscitate\\Resuscitate.csproj",
+        "packagesPath": "C:\\Users\\robjb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\robjb\\Source\\Repos\\Resuscitate\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Euan Imperial\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\robjb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "uap10.0.17763"
@@ -39,6 +39,10 @@
       "frameworks": {
         "uap10.0.17763": {
           "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.7.0.31, )"
+            },
             "FirebaseAuthentication.net": {
               "target": "Package",
               "version": "[3.7.1, )"

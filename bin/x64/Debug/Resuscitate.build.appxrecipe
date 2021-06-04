@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>DESKTOP-1F71LEF</Machine>
-    <WindowsUser>Euan Imperial</WindowsUser>
+    <Machine>ROB-LAPTOP</Machine>
+    <WindowsUser>robjb</WindowsUser>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetOsVersion>10.0</TargetOsVersion>
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
@@ -10,250 +10,259 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>846b8f8a-2c3a-4785-824f-a867c3dd288c</PackageIdentityName>
     <PackageIdentityPublisher>CN=robjb</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\Euan Imperial\source\repos\Resuscitate\obj\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\robjb\Source\Repos\Resuscitate\obj\x64\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\AppX</LayoutDir>
+    <LayoutDir>C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\Resuscitate.exe">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitate.exe">
       <PackagePath>entrypoint\Resuscitate.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\firebaseauthentication.net\3.7.1\lib\netstandard1.1\Firebase.Auth.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\awssdk.core\3.7.0.31\lib\netstandard2.0\AWSSDK.Core.dll">
+      <PackagePath>AWSSDK.Core.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\firebaseauthentication.net\3.7.1\lib\netstandard1.1\Firebase.Auth.dll">
       <PackagePath>Firebase.Auth.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\firebasestorage.net\1.0.3\lib\netstandard1.1\Firebase.Storage.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\firebasestorage.net\1.0.3\lib\netstandard1.1\Firebase.Storage.dll">
       <PackagePath>Firebase.Storage.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.api.commonprotos\2.3.0\lib\netstandard2.0\Google.Api.CommonProtos.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.api.commonprotos\2.3.0\lib\netstandard2.0\Google.Api.CommonProtos.dll">
       <PackagePath>Google.Api.CommonProtos.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.api.gax\3.3.0\lib\netstandard2.0\Google.Api.Gax.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.api.gax\3.3.0\lib\netstandard2.0\Google.Api.Gax.dll">
       <PackagePath>Google.Api.Gax.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.api.gax.grpc\3.3.0\lib\netstandard2.0\Google.Api.Gax.Grpc.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.api.gax.grpc\3.3.0\lib\netstandard2.0\Google.Api.Gax.Grpc.dll">
       <PackagePath>Google.Api.Gax.Grpc.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.api.gax.grpc.grpccore\3.3.0\lib\netstandard2.0\Google.Api.Gax.Grpc.GrpcCore.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.api.gax.grpc.grpccore\3.3.0\lib\netstandard2.0\Google.Api.Gax.Grpc.GrpcCore.dll">
       <PackagePath>Google.Api.Gax.Grpc.GrpcCore.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.apis\1.48.0\lib\netstandard2.0\Google.Apis.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.apis\1.48.0\lib\netstandard2.0\Google.Apis.dll">
       <PackagePath>Google.Apis.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.apis.auth\1.48.0\lib\netstandard2.0\Google.Apis.Auth.PlatformServices.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.apis.auth\1.48.0\lib\netstandard2.0\Google.Apis.Auth.PlatformServices.dll">
       <PackagePath>Google.Apis.Auth.PlatformServices.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.apis.auth\1.48.0\lib\netstandard2.0\Google.Apis.Auth.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.apis.auth\1.48.0\lib\netstandard2.0\Google.Apis.Auth.dll">
       <PackagePath>Google.Apis.Auth.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.apis.core\1.48.0\lib\netstandard2.0\Google.Apis.Core.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.apis.core\1.48.0\lib\netstandard2.0\Google.Apis.Core.dll">
       <PackagePath>Google.Apis.Core.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.cloud.firestore\2.4.0\lib\netstandard2.0\Google.Cloud.Firestore.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.cloud.firestore\2.4.0\lib\netstandard2.0\Google.Cloud.Firestore.dll">
       <PackagePath>Google.Cloud.Firestore.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.cloud.firestore.v1\2.3.0\lib\netstandard2.0\Google.Cloud.Firestore.V1.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.cloud.firestore.v1\2.3.0\lib\netstandard2.0\Google.Cloud.Firestore.V1.dll">
       <PackagePath>Google.Cloud.Firestore.V1.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.longrunning\2.1.0\lib\netstandard2.0\Google.LongRunning.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.longrunning\2.1.0\lib\netstandard2.0\Google.LongRunning.dll">
       <PackagePath>Google.LongRunning.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\google.protobuf\3.15.8\lib\netstandard2.0\Google.Protobuf.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\google.protobuf\3.15.8\lib\netstandard2.0\Google.Protobuf.dll">
       <PackagePath>Google.Protobuf.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\grpc.auth\2.36.4\lib\netstandard2.0\Grpc.Auth.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\grpc.auth\2.36.4\lib\netstandard2.0\Grpc.Auth.dll">
       <PackagePath>Grpc.Auth.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\grpc.core\2.36.4\runtimes\win-x64\native\grpc_csharp_ext.x64.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\grpc.core\2.36.4\runtimes\win-x64\native\grpc_csharp_ext.x64.dll">
       <PackagePath>grpc_csharp_ext.x64.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\grpc.core\2.36.4\lib\netstandard2.0\Grpc.Core.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\grpc.core\2.36.4\lib\netstandard2.0\Grpc.Core.dll">
       <PackagePath>Grpc.Core.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\grpc.core.api\2.36.4\lib\netstandard2.0\Grpc.Core.Api.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\grpc.core.api\2.36.4\lib\netstandard2.0\Grpc.Core.Api.dll">
       <PackagePath>Grpc.Core.Api.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\microsoft.bcl.asyncinterfaces\1.0.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\microsoft.bcl.asyncinterfaces\1.1.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll">
       <PackagePath>Microsoft.Bcl.AsyncInterfaces.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\mstest.testframework\2.2.4\lib\uap10.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testframework\2.2.4\lib\uap10.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\mstest.testframework\2.2.4\lib\uap10.0\Microsoft.VisualStudio.TestPlatform.TestFramework.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testframework\2.2.4\lib\uap10.0\Microsoft.VisualStudio.TestPlatform.TestFramework.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.TestFramework.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\newtonsoft.json\12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\newtonsoft.json\12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.10\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.10\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\system.linq.async\4.0.0\lib\netstandard2.0\System.Linq.Async.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\system.linq.async\4.0.0\lib\netstandard2.0\System.Linq.Async.dll">
       <PackagePath>System.Linq.Async.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll">
       <PackagePath>System.Runtime.CompilerServices.Unsafe.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\mstest.testadapter\2.2.4\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json">
+      <PackagePath>resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testadapter\2.2.4\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\mstest.testadapter\2.2.4\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testadapter\2.2.4\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\mstest.testadapter\2.2.4\build\uap10.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testadapter\2.2.4\build\uap10.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\.nuget\packages\mstest.testadapter\2.2.4\build\uap10.0\Microsoft.TestPlatform.AdapterUtilities.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testadapter\2.2.4\build\uap10.0\Microsoft.TestPlatform.AdapterUtilities.dll">
       <PackagePath>Microsoft.TestPlatform.AdapterUtilities.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json">
-      <PackagePath>resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\Resuscitate.xr.xml">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitate.xr.xml">
       <PackagePath>Resuscitate.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\Resuscitation.xbf">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\ApgarAssessment.xbf">
+      <PackagePath>ApgarAssessment.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitation.xbf">
       <PackagePath>Resuscitation.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\InputTime.xbf">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\InputTime.xbf">
       <PackagePath>InputTime.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\ReviewPage.xbf">
+      <PackagePath>ReviewPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Euan Imperial\source\repos\Resuscitate\bin\x64\Debug\Core\Resuscitate.exe">
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Core\Resuscitate.exe">
       <PackagePath>Resuscitate.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\robjb\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
       <Name>Microsoft.NET.CoreRuntime.2.2</Name>
       <Version>2.2.27902.3</Version>
       <Architecture>x86</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.27902.3, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\robjb\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\robjb\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
       <Name>Microsoft.NET.CoreRuntime.2.2</Name>
       <Version>2.2.27902.3</Version>
       <Architecture>x64</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.27902.3, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\robjb\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\robjb\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx">
       <Name>Microsoft.NET.CoreRuntime.2.2</Name>
       <Version>2.2.27902.3</Version>
       <Architecture>arm</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreRuntime.2.2, MinVersion = 2.2.27902.3, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\robjb\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreRuntime.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\robjb\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
       <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
       <Version>2.2.28529.0</Version>
       <Architecture>x86</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.28529.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\robjb\.nuget\packages\runtime.win10-x86.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\robjb\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
       <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
       <Version>2.2.28529.0</Version>
       <Architecture>x64</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.28529.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\robjb\.nuget\packages\runtime.win10-x64.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
+    <ResolvedSDKReference Include="C:\Users\robjb\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx">
       <Name>Microsoft.NET.CoreFramework.Debug.2.2</Name>
       <Version>2.2.28529.0</Version>
       <Architecture>arm</Architecture>
       <FrameworkIdentity>Name = Microsoft.NET.CoreFramework.Debug.2.2, MinVersion = 2.2.28529.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
+      <AppxLocation>C:\Users\robjb\.nuget\packages\runtime.win10-arm.microsoft.net.uwpcoreruntimesdk\2.2.10\build\..\tools\Appx\Microsoft.NET.CoreFramework.Debug.2.2.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27810.0</Version>
+      <Version>14.0.29231.0</Version>
       <Architecture>ARM</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.29231.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27810.0</Version>
+      <Version>14.0.29231.0</Version>
       <Architecture>ARM64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.29231.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM64\Microsoft.VCLibs.ARM64.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27810.0</Version>
+      <Version>14.0.29231.0</Version>
       <Architecture>x64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.29231.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
       <Name>Microsoft.VCLibs.140.00.Debug</Name>
-      <Version>14.0.27810.0</Version>
+      <Version>14.0.29231.0</Version>
       <Architecture>x86</Architecture>
-      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.27810.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.29231.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
       <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
       <MoreInfo></MoreInfo>
     </ResolvedSDKReference>

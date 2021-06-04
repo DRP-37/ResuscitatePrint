@@ -76,10 +76,10 @@ namespace Resuscitate
         }
 
         [TestMethod]
-        public async DocumentSnapshot checkData()
+        public  DocumentSnapshot checkData()
         {
             DocumentReference dr = db.Collection("Data").Document(name);
-            DocumentSnapshot snap = await dr.GetSnapshotAsync();
+            DocumentSnapshot snap =  dr.GetSnapshotAsync().Result;
 
             if (snap.Exists)
             {
@@ -91,6 +91,7 @@ namespace Resuscitate
                     //await dialog.ShowAsync();
                 }
             }
+            return snap;
             
         }
     }

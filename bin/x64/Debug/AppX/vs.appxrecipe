@@ -30,13 +30,17 @@
     <AppXManifest Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-06-04T03:48:52.333</Modified>
+      <Modified>2021-06-04T04:06:10.620</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitate.exe">
       <PackagePath>entrypoint\Resuscitate.exe</PackagePath>
-      <Modified>2021-06-04T03:48:50.476</Modified>
+      <Modified>2021-06-04T04:06:10.136</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\awssdk.core\3.7.0.31\lib\netstandard2.0\AWSSDK.Core.dll">
+      <PackagePath>AWSSDK.Core.dll</PackagePath>
+      <Modified>2021-05-28T18:40:58.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\firebaseauthentication.net\3.7.1\lib\netstandard1.1\Firebase.Auth.dll">
       <PackagePath>Firebase.Auth.dll</PackagePath>
@@ -110,9 +114,9 @@
       <PackagePath>Grpc.Core.Api.dll</PackagePath>
       <Modified>2021-03-22T02:17:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\microsoft.bcl.asyncinterfaces\1.0.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll">
+    <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\microsoft.bcl.asyncinterfaces\1.1.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll">
       <PackagePath>Microsoft.Bcl.AsyncInterfaces.dll</PackagePath>
-      <Modified>2019-09-13T02:27:48.000</Modified>
+      <Modified>2019-11-15T08:36:44.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testframework\2.2.4\lib\uap10.0\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</PackagePath>
@@ -144,7 +148,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json">
       <PackagePath>resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json</PackagePath>
-      <Modified>2021-06-04T03:21:09.879</Modified>
+      <Modified>2021-06-04T03:57:20.781</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\.nuget\packages\mstest.testadapter\2.2.4\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll">
       <PackagePath>Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll</PackagePath>
@@ -202,27 +206,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitate.xr.xml">
       <PackagePath>Resuscitate.xr.xml</PackagePath>
-      <Modified>2021-06-04T03:48:50.335</Modified>
+      <Modified>2021-06-04T04:06:03.105</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-06-04T03:48:50.366</Modified>
+      <Modified>2021-06-04T04:06:10.053</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\ApgarAssessment.xbf">
       <PackagePath>ApgarAssessment.xbf</PackagePath>
-      <Modified>2021-06-04T03:48:50.362</Modified>
+      <Modified>2021-06-04T04:06:10.041</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Resuscitation.xbf">
       <PackagePath>Resuscitation.xbf</PackagePath>
-      <Modified>2021-06-04T03:48:50.366</Modified>
+      <Modified>2021-06-04T04:06:10.048</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\InputTime.xbf">
       <PackagePath>InputTime.xbf</PackagePath>
-      <Modified>2021-06-04T03:48:50.366</Modified>
+      <Modified>2021-06-04T04:06:10.053</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-06-04T03:48:50.366</Modified>
+      <Modified>2021-06-04T04:06:10.053</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\ReviewPage.xbf">
+      <PackagePath>ReviewPage.xbf</PackagePath>
+      <Modified>2021-06-04T04:06:10.054</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -230,11 +238,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-06-04T03:48:51.200</Modified>
+      <Modified>2021-06-04T04:06:03.716</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\robjb\Source\Repos\Resuscitate\bin\x64\Debug\Core\Resuscitate.exe">
       <PackagePath>Resuscitate.exe</PackagePath>
-      <Modified>2021-06-04T03:48:52.329</Modified>
+      <Modified>2021-06-04T04:06:10.616</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
