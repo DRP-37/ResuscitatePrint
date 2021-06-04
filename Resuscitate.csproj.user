@@ -8,6 +8,6 @@
     <LargeTileSource>D:\Users\Una Miralles\Downloads\image0.png</LargeTileSource>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <UseSimulator>false</UseSimulator>
+    <UseSimulator>true</UseSimulator>
   </PropertyGroup>
 </Project>

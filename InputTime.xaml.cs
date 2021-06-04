@@ -23,6 +23,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class InputTime : Page
     {
+
        public InputTime()
         {
             this.InitializeComponent();
@@ -30,14 +31,46 @@ namespace Resuscitate
 
         private void InputLater_Click(object sender, RoutedEventArgs e)
         {
+            // Set timer
+            var Timing = new Timing { IsSet = false, Offset = 0, Count = 0 };
+
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation));
+            this.Frame.Navigate(typeof(Resuscitation), Timing);
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
         {
+            // Set timer
+            var Timing = new Timing { IsSet = true, Offset = 0, Count = 0 };
+
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation));
+            this.Frame.Navigate(typeof(Resuscitation), Timing);
+        }
+
+        private void SetTime_Click(object sender, RoutedEventArgs e)
+        {
+            int mins, secs;
+
+            // Parse minutes and seconds input
+            bool isMinsParsable = Int32.TryParse(TimeMinutes.Text, out mins);
+            isMinsParsable &= mins < 99;
+
+            bool isSecsParsable = Int32.TryParse(TimeSeconds.Text, out secs);
+            isMinsParsable &= secs < 60;
+
+            // Incorrect input
+            if (!isMinsParsable || !isSecsParsable)
+            {
+                // Change background of SetTime to red
+                SetTime.Background.Equals("#7FFF0000");
+                return;
+            }
+
+            // Set timer
+            var Timing = new Timing { IsSet = true, Offset = mins * 60 + secs, Count = 0 };
+
+            // Go to main page
+            this.Frame.Navigate(typeof(Resuscitation), Timing);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +81,16 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
+        }
+
+        private void TimeMinutes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TimeSeconds_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
