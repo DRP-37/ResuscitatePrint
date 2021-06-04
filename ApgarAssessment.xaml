@@ -90,7 +90,7 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="379,165,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" FontSize="20" TextAlignment="Center"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="675,165,0,0" Text="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="959,165,0,0" Text="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
-        <Button x:Name="confirm" Content="Confirm Selection" Margin="1225,860,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="76" UseLayoutRounding="False" Width="187" d:LayoutRounding="Auto" FontSize="20" Background="White" BorderBrush="Black" Click="confirmButton_Click">
+        <Button x:Name="confirm" Content="Confirm Selection" Margin="1250,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="76" UseLayoutRounding="False" Width="187" d:LayoutRounding="Auto" FontSize="20" Background="White" BorderBrush="Black" Click="confirmButton_Click">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.005"/>
             </Button.RenderTransform>
