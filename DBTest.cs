@@ -13,7 +13,7 @@ namespace Resuscitate
         public void test1()
         {
             Assert.AreEqual(1, 1);
-            Data db = new Data();
+            PatientData db = new PatientData();
             db.sendToFirestore();
 
             

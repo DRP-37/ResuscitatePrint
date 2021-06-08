@@ -24,7 +24,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
-        Data data = new Data();
+        PatientData data = new PatientData();
         private readonly DispatcherTimer Timer = new DispatcherTimer();
         private Timing TimingCount;
 

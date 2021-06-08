@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resuscitate
+namespace Resuscitate.DataClasses
 {
-    class ApgarScore
+    class ApgarScore : Event
     {
         public ApgarScore(string time) {
             Time = time;
@@ -19,8 +19,8 @@ namespace Resuscitate
         public int Tone { get; set; }
         public int Respiration { get; set; }
 
-        override
-        public String ToString() {
+        public String toString()
+        {
             StringBuilder sb = new StringBuilder();
 
             sb.Append("Time: " + Time.ToString() + '\n');

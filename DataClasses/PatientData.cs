@@ -4,9 +4,9 @@ using Google.Cloud.Firestore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windows.UI.Popups;
 
-namespace Resuscitate
+namespace Resuscitate.DataClasses
 {
-    class Data
+    class PatientData
     {
         private FirestoreDb db;
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
