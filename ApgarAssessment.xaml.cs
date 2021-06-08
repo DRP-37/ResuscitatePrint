@@ -49,7 +49,7 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private void confirmButton_Click(object sender, RoutedEventArgs e)
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             score.HeartRate = hr;
             score.Respiration = respiration;
@@ -60,7 +60,16 @@ namespace Resuscitate
             timing.Offset = 0;
             timing.Count = 0;
             Frame.Navigate(typeof(Resuscitation), timing);
-            
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+            }
         }
 
         private void colour_Click(object sender, RoutedEventArgs e)

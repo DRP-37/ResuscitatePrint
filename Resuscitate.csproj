@@ -150,8 +150,8 @@
     <Compile Include="NotesPage.xaml.cs">
       <DependentUpon>NotesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObservationsPage.xaml.cs">
-      <DependentUpon>ObservationsPage.xaml</DependentUpon>
+    <Compile Include="ObservationPage.xaml.cs">
+      <DependentUpon>ObservationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PatientPage.xaml.cs">
       <DependentUpon>PatientPage.xaml</DependentUpon>
@@ -235,7 +235,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ObservationsPage.xaml">
+    <Page Include="ObservationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

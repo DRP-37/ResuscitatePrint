@@ -83,7 +83,7 @@ namespace Resuscitate
 
         private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ObservationsPage), TimingCount);
+            this.Frame.Navigate(typeof(ObservationPage), TimingCount);
         }
 
         private void AirwayButton_Click(object sender, RoutedEventArgs e)
