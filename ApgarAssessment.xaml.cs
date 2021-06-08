@@ -26,7 +26,9 @@ namespace Resuscitate
         Button[] tones;
         Button[] responses;
         Timing TimingCount;
+        TextBox displayScore;
 
+        int scoreCount;
         ApgarScore score;
         public ApgarAssessment()
         {
@@ -38,6 +40,8 @@ namespace Resuscitate
             tones = new Button[] { tone0, tone1, tone2 };
             responses = new Button[] { response0, response1, response2 };
 
+            displayScore = Score;
+            scoreCount = 0;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -75,38 +79,53 @@ namespace Resuscitate
         private void colour_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
+            int prevIndex = FindSelected(colours);
             changeColours(colours, selected);
             this.colour = selected.Name[selected.Name.Length - 1] - '0';
+
+            UpdateScore(prevIndex, colour);
             Console.WriteLine(this.colour);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
+            int prevIndex = FindSelected(hrs);
             changeColours(hrs, selected);
             this.hr = selected.Name[selected.Name.Length - 1] - '0';
+
+            UpdateScore(prevIndex, hr);
             Console.WriteLine(this.colour);
         }
 
         private void response_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
+            int prevIndex = FindSelected(responses);
             changeColours(responses, selected);
             this.response = selected.Name[selected.Name.Length - 1] - '0';
+
+            UpdateScore(prevIndex, response);
         }
 
         private void tone_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
+            int prevIndex = FindSelected(tones);
             changeColours(tones, selected);
             this.tone = selected.Name[selected.Name.Length - 1] - '0';
+
+            UpdateScore(prevIndex, tone);
         }
 
         private void resp_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
+            int prevIndex = FindSelected(respirations);
             changeColours(respirations, selected);
             this.respiration = selected.Name[selected.Name.Length - 1] - '0';
+
+            UpdateScore(prevIndex, respiration);
         }
 
         private void changeColours(Button[] buttons, Button sender) {
@@ -116,6 +135,29 @@ namespace Resuscitate
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
 
-   
+        // Returns the index of the currently selected button;
+        // Returns -1 if a button has not been selected
+        private int FindSelected(Button[] buttons)
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                Button curr = buttons[i];
+                SolidColorBrush colour = curr.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        // Updates the Current Score displayed on screen
+        private void UpdateScore(int prev, int curr) 
+        {
+            scoreCount = prev == -1 ? (scoreCount + curr) : (scoreCount + curr - prev);
+            displayScore.Text = "" + scoreCount;
+        }
     }
 }

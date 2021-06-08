@@ -109,6 +109,8 @@
         <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="112,665,0,0" Text="Respiratory Effort" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="167" FontSize="20"/>
         <Button x:Name="BackButton" Content="Back" Margin="85,857,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Margin="1217,857,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
+        <TextBox x:Name="Score" HorizontalAlignment="Left" IsTabStop="False" Margin="1186,720,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Height="45" Margin="1258,691,0,0" Text="Score" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" SelectionChanged="TextBlock_SelectionChanged" Foreground="Gray" FontSize="36"/>
 
     </Grid>
 </Page>
