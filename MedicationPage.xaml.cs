@@ -22,9 +22,25 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class MedicationPage : Page
     {
+        public Timing TimingCount { get; set; }
+
         public MedicationPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            // Update View with Time
+            TimeView.Text = TimingCount.ToString();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Take value from previous screen
+            TimingCount = (Timing)e.Parameter;
+
+            base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +56,11 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
+        }
+
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -23,8 +23,9 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class InputTime : Page
     {
+        public Timing TimingCount { get; set; }
 
-       public InputTime()
+        public InputTime()
         {
             this.InitializeComponent();
         }
@@ -32,19 +33,21 @@ namespace Resuscitate
         private void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
-            var Timing = new Timing { IsSet = false, Offset = 0, Count = 0 };
+            TimingCount = new Timing { IsSet = false, Offset = 0};
+            TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), Timing);
+            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
-            var Timing = new Timing { IsSet = true, Offset = 0, Count = 0 };
+            TimingCount = new Timing { IsSet = true, Offset = 0};
+            TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), Timing);
+            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void SetTime_Click(object sender, RoutedEventArgs e)
@@ -67,10 +70,11 @@ namespace Resuscitate
             }
 
             // Set timer
-            var Timing = new Timing { IsSet = true, Offset = mins * 60 + secs, Count = 0 };
+            TimingCount = new Timing { IsSet = true, Offset = mins * 60 + secs};
+            TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), Timing);
+            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

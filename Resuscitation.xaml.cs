@@ -25,45 +25,21 @@ namespace Resuscitate
     public sealed partial class Resuscitation : Page
     {
         Data data = new Data();
-        private readonly DispatcherTimer Timer = new DispatcherTimer();
-        private Timing TimingCount;
+        public Timing TimingCount { get; set; }
 
         public Resuscitation()
         {
             // Initialise
             this.InitializeComponent();
-
-            // Start timer
-            Timer.Tick += Timer_Tick;
-            Timer.Interval = new TimeSpan(0, 0, 1);
-            Timer.Start();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+      
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            // Initialise timer
-            TimeView.Text = TimingCount.ToString();
-
             base.OnNavigatedTo(e);
-        }
-
-        private void Timer_Tick(object sender, object e)
-        {
-            // Update Time
-            TimingCount.Count ++;
-
-            // Update View with Time
-            String minsStr, secsStr;
-            int mins = TimingCount.TotalTime() / 60;
-            int secs = TimingCount.TotalTime() % 60;
-
-            minsStr = mins < 10 ? "0" + mins.ToString() : mins.ToString();
-            secsStr = secs < 10 ? "0" + secs.ToString() : secs.ToString();
-
-            TimeView.Text = minsStr + ":" + secsStr;
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
@@ -131,16 +107,15 @@ namespace Resuscitate
             this.Frame.Navigate(typeof(NotesPage), TimingCount);
         }
 
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            // Nothing
-        }
-
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ReviewPage));
         }
 
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
+        }
 
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {

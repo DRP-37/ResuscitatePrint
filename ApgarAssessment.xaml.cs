@@ -15,21 +15,23 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ApgarAssessment : Page
     {
-        int hr;
-        int respiration;
-        int tone;
-        int response;
-        int colour;
-        Button[] colours;
-        Button[] hrs;
-        Button[] respirations;
-        Button[] tones;
-        Button[] responses;
-        Timing TimingCount;
-        TextBox displayScore;
+        private Timing TimingCount { get; set; }
 
-        int scoreCount;
-        ApgarScore score;
+        private int hr;
+        private int respiration;
+        private int tone;
+        private int response;
+        private int colour;
+        private Button[] colours;
+        private Button[] hrs;
+        private Button[] respirations;
+        private Button[] tones;
+        private Button[] responses;
+        private TextBox displayScore;
+
+        private int scoreCount;
+        private ApgarScore score;
+
         public ApgarAssessment()
         {
             this.InitializeComponent();
@@ -46,9 +48,8 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
-
-            score = new ApgarScore(TimingCount.ToString());
 
             base.OnNavigatedTo(e);
         }
@@ -60,10 +61,7 @@ namespace Resuscitate
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
-            Timing timing = new Timing();
-            timing.Offset = 0;
-            timing.Count = 0;
-            Frame.Navigate(typeof(Resuscitation), timing);
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -158,6 +156,16 @@ namespace Resuscitate
         {
             scoreCount = prev == -1 ? (scoreCount + curr) : (scoreCount + curr - prev);
             displayScore.Text = "" + scoreCount;
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
+        }
+
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
