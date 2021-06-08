@@ -13,6 +13,11 @@ namespace Resuscitate
         public int Offset { get; set; }
         public int Count { get; set; }
 
+        public int TotalTime()
+        {
+            return Offset + Count;
+        }
+
         public override string ToString()
         {
             string minsStr, secsStr;

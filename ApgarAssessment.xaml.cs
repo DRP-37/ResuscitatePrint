@@ -25,17 +25,28 @@ namespace Resuscitate
         Button[] respirations;
         Button[] tones;
         Button[] responses;
-        
+        Timing TimingCount;
+
         ApgarScore score;
         public ApgarAssessment()
         {
             this.InitializeComponent();
+
             colours = new Button[] { colour0, colour1, colour2 };
             hrs = new Button[] { hr0, hr1, hr2 };
             respirations = new Button[] { resp0, resp1, resp2 };
             tones = new Button[] { tone0, tone1, tone2 };
             responses = new Button[] { response0, response1, response2 };
 
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            TimingCount = (Timing)e.Parameter;
+
+            score = new ApgarScore(TimingCount.ToString());
+
+            base.OnNavigatedTo(e);
         }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
@@ -50,13 +61,6 @@ namespace Resuscitate
             timing.Count = 0;
             Frame.Navigate(typeof(Resuscitation), timing);
             
-        }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            string time = (string)e.Parameter;
-           
-            score = new ApgarScore(time);
         }
 
         private void colour_Click(object sender, RoutedEventArgs e)

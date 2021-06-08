@@ -26,7 +26,7 @@ namespace Resuscitate
     {
         Data data = new Data();
         private readonly DispatcherTimer Timer = new DispatcherTimer();
-        private int Count_Seconds;
+        private Timing TimingCount;
 
         public Resuscitation()
         {
@@ -42,11 +42,10 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            Timing Timing = (Timing)e.Parameter;
-            Count_Seconds = Timing.Offset + Timing.Count;
+            TimingCount = (Timing)e.Parameter;
 
             // Initialise timer
-            TimeView.Text = Timing.ToString();
+            TimeView.Text = TimingCount.ToString();
 
             base.OnNavigatedTo(e);
         }
@@ -54,12 +53,12 @@ namespace Resuscitate
         private void Timer_Tick(object sender, object e)
         {
             // Update Time
-            Count_Seconds ++;
+            TimingCount.Count ++;
 
             // Update View with Time
             String minsStr, secsStr;
-            int mins = Count_Seconds / 60;
-            int secs = Count_Seconds % 60;
+            int mins = TimingCount.TotalTime() / 60;
+            int secs = TimingCount.TotalTime() % 60;
 
             minsStr = mins < 10 ? "0" + mins.ToString() : mins.ToString();
             secsStr = secs < 10 ? "0" + secs.ToString() : secs.ToString();
@@ -69,73 +68,72 @@ namespace Resuscitate
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)
         {
-            //this.Frame.Navigate(InitialAssessment);
+            this.Frame.Navigate(typeof(AssessmentsPage), TimingCount);
         }
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
         {
-           
-            this.Frame.Navigate(typeof(ApgarAssessment),TimeView.Text);
+            this.Frame.Navigate(typeof(ApgarAssessment), TimingCount);
         }
 
         private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(ObservationsPage), TimingCount);
         }
 
         private void AirwayButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(AirwayPage), TimingCount);
         }
 
         private void VentilationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(VentilationPage), TimingCount);
         }
 
         private void IntubationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(IntubationPage), TimingCount);
         }
 
         private void CPRButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(CPRPage), TimingCount);
         }
 
         private void LineInsertionButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(LineInsertionPage), TimingCount);
         }
 
         private void BloodButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(BloodGasPage), TimingCount);
         }
 
         private void MedicationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(MedicationPage), TimingCount);
         }
 
         private void OtherProceduresButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(DrainsPage), TimingCount);
         }
 
         private void NotesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(NotesPage), TimingCount);
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
@@ -146,7 +144,7 @@ namespace Resuscitate
 
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
-
+            // Nothing
         }
     }
 }
