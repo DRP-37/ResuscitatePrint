@@ -18,7 +18,7 @@ namespace Resuscitate
 
         private MediaCapture _mediaCapture;
         private InMemoryRandomAccessStream _memoryBuffer;
-        private String DEFAULT_AUDIO_FILENAME = "resuscitationNotesAudio.mp3";
+        private String DEFAULT_AUDIO_FILENAME = "resuscitationNotesAudio";
         private String _fileName;
 
         public bool IsRecording { get; set; }

@@ -72,6 +72,8 @@ namespace Resuscitate
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
+            // Temporary button to showcase it works - we could have the audio recording 
+            // Moved to the review page
             await this._audioRecorder.PlayFromDisk(Dispatcher);
         }
 
@@ -79,20 +81,15 @@ namespace Resuscitate
         {
             if (!isRecording)
             {
-                SwitchIcon("ms-appx:///Assets/MicrophoneOff.png");
+                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/MicrophoneOff.png"));
                 this._audioRecorder.Record();
                 isRecording = true;
             } else
             {
-                SwitchIcon("ms-appx:///Assets/Microphone.png");
+                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Microphone.png"));
                 this._audioRecorder.StopRecording();
                 isRecording = false;
             }
-        }
-
-        private void SwitchIcon(String path)
-        {
-            RecordImage.Source = new BitmapImage(new Uri(path));
         }
     }
 }
