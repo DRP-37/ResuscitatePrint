@@ -30,7 +30,7 @@ namespace Resuscitate.DataClasses
             return getNote(notesList.Count - 1);
         }
 
-        public String toString()
+        override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
 

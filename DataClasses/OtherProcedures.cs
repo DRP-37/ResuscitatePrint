@@ -15,7 +15,7 @@ namespace Resuscitate.DataClasses
             otherProcedures.Add((time, procedure));
         }
 
-        public String toString()
+        override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
 

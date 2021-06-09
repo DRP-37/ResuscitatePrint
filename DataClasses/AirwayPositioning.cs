@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class AirwayPositioning
+    class AirwayPositioning : Event
     {
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
     }
 }

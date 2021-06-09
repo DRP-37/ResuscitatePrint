@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class Observation
+    class Observation : Event
     {
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
     }
 }

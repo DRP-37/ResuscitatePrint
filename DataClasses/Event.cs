@@ -8,6 +8,6 @@ namespace Resuscitate.DataClasses
 {
     interface Event
     {
-        String toString();
+        String ToString();
     }
 }

@@ -8,27 +8,32 @@ namespace Resuscitate.DataClasses
 {
     class ApgarScore : Event
     {
-        public ApgarScore(string time) {
-            Time = time;
+        private Timing time;
+        private int colour;
+        private int hr;
+        private int response;
+        private int tone;
+        private int respiration;
+
+        public ApgarScore(Timing time, int col, int hr, int responce, int tone, int resp) {
+            this.time = time;
+            this.colour = col;
+            this.hr = hr;
+            this.response = responce;
+            this.tone = tone;
+            this.respiration = resp;
         }
 
-        public string Time { get; set; }
-        public int HeartRate { get; set; }
-        public int Colour { get; set; }
-        public int Response { get; set; }
-        public int Tone { get; set; }
-        public int Respiration { get; set; }
-
-        public String toString()
+        override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Time: " + Time.ToString() + '\n');
-            sb.Append("Colour: " + Colour.ToString() + '\n');
-            sb.Append("Heart Rate: " + HeartRate.ToString() + '\n');
-            sb.Append("Response to Stimulation: " + Response.ToString() + '\n');
-            sb.Append("Muscle Tone: " + Tone.ToString() + '\n');
-            sb.Append("Respiratory Effort: " + Respiration.ToString() + '\n');
+            sb.Append("Time: " + time.ToString() + '\n');
+            sb.Append("Colour: " + colour.ToString() + '\n');
+            sb.Append("Heart Rate: " + hr.ToString() + '\n');
+            sb.Append("Response to Stimulation: " + response.ToString() + '\n');
+            sb.Append("Muscle Tone: " + tone.ToString() + '\n');
+            sb.Append("Respiratory Effort: " + respiration.ToString() + '\n');
 
             return sb.ToString();
         }

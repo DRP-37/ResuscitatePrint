@@ -20,7 +20,7 @@ namespace Resuscitate.DataClasses
             this.successful = successful;
         }
 
-        public string toString()
+        override public string ToString()
         {
             StringBuilder sb = new StringBuilder();
 

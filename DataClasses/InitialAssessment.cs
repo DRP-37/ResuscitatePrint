@@ -18,21 +18,24 @@ namespace Resuscitate.DataClasses
     }
     internal class InitialAssessment : Event
     {
-        ApgarScore Apgar;
-        TemperatureReg TempReg;
-        CordClamping Clamping;
-        TimeSpan Time;
+        private ApgarScore Apgar;
+        private TemperatureReg TempReg;
+        private CordClamping Clamping;
+        private Timing Time;
 
-        internal ApgarScore Apgar { get => Apgar; set => Apgar = value; }
-        public TemperatureReg TempReg { get => TempReg; set => TempReg = value; }
-        public CordClamping Clamping { get => Clamping; set => Clamping = value; }
-        public TimeSpan Time { get => Time; set => Time = value; }
+        public InitialAssessment(ApgarScore apgar, TemperatureReg temp, CordClamping cc, Timing ts)
+        {
+            this.Apgar = apgar;
+            this.TempReg = temp;
+            this.Clamping = cc;
+            this.Time = ts;
+        }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Initial Assessment at " +);
-            sb.Append('\t' + Apgar.toString() + '\n');
+            sb.Append('\t' + Apgar.ToString() + '\n');
             sb.Append('\t' + TempToString(TempReg) + '\n');
             sb.Append('\t' + CordClampToString(Clamping));
             if (Clamping == CordClamping.Now)
@@ -50,16 +53,12 @@ namespace Resuscitate.DataClasses
             {
                 case TemperatureReg.Dry:
                     return "Dry and Wrap";
-                    break;
                 case TemperatureReg.PretermBag:
                     return "Bag (Preterm)";
-                    break;
                 case TemperatureReg.TermBag:
                     return "Bag (Term)";
-                    break;
                 default: 
                     return "";
-                    break;
 
             }
         }

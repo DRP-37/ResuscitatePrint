@@ -24,24 +24,30 @@ namespace Resuscitate.DataClasses
         Absent,
         Present
     }
-    class Reassessment :  Event
+    class Reassessment : Event
     {
-        HeartRate hr;
-        ChestMovement Movement;
-        RespiratoryEffort effort;
-        TimeSpan time;
+        private HeartRate hr;
+        private ChestMovement movement;
+        private RespiratoryEffort effort;
+        private Timing time;
 
-        public HeartRate Hr { get => Hr; set => Hr = value; }
-        public ChestMovement Movement { get => Movement; set => Movement = value; }
-        public RespiratoryEffort Effort { get => effort; set => effort = value; }
-        public TimeSpan Time { get => time; set => time = value; }
+        public Reassessment(HeartRate hr, ChestMovement cm, RespiratoryEffort e, Timing ts)
+        {
+            this.hr = hr;
+            this.movement = cm;
+            this.effort = e;
+            this.time = ts;
+        }
 
         public override String ToString() {
             StringBuilder sb = new StringBuilder();
             sb.Append("Reassessment:" + '\n');
-            sb.Append('\t' + "Heart rate (bpm): " + HeartRateToString() + '\n');
-            sb.Append('\t' + "Chest movement: " + Movement.ToString() + '\n');
-            sb.Append('\t' + )
+            sb.Append('\t' + "Heart Rate (bpm): " + HeartRateToString() + '\n');
+            sb.Append('\t' + "Chest Movement: " + movement.ToString() + '\n');
+            sb.Append('\t' + "Respiratory Effor: " + effort.ToString() + "\n");
+            sb.Append('\t' + "Timespan: " + time.ToString());
+
+            return sb.ToString();
         }
 
         private String HeartRateToString() {
