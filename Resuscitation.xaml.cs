@@ -35,7 +35,6 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-      
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 

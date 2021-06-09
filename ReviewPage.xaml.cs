@@ -22,9 +22,19 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ReviewPage : Page
     {
+        public Timing TimingCount { get; set; }
+
         public ReviewPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Take value from previous screen
+            TimingCount = (Timing)e.Parameter;
+
+            base.OnNavigatedTo(e);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +58,11 @@ namespace Resuscitate
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

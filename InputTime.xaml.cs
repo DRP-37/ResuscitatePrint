@@ -96,5 +96,10 @@ namespace Resuscitate
         {
 
         }
+
+        private void TimeColon_Copy_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

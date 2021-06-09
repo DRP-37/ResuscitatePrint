@@ -38,7 +38,7 @@ namespace Resuscitate
         public void InitTiming()
         {
             Count = 0;
-            Time = "00:00";
+            Time = ToString();
 
             // Start timer
             Timer.Tick += Timer_Tick;
