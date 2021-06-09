@@ -12,46 +12,16 @@ namespace Resuscitate.DataClasses
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
         string project = "resuscitate-4c0ec";
 
-        string name = "Euan";
-        string dob = "";
+        // Patient Data
+        private string name = "Euan";
+        private string dob = "";
+        private List<ApgarScore> apgars = new List<ApgarScore>();
 
-        ApgarScore[] apgars = new ApgarScore[5];
-        int currentApgar = 0;
 
-        public void setName(string name)
-        {
-            this.name = name;
-        }
-
-        public void setDOB(string dob)
-        {
-            this.dob = dob;
-        }
-
-        public void addApgar(ApgarScore apgar)
-        {
-            apgars[currentApgar] = apgar;
-            currentApgar++;
-        }
-
-        public string[] apgarStrings()
-        {
-            string[] apgarStrings = new string[5];
-            for (int i=0; i < 5; i++)
-            {
-                if (apgars[i] == null)
-                {
-                    apgarStrings[i] = "N/A";
-                } else {
-                    apgarStrings[i] = apgars[i].ToString();
-                }
-            }
-            return apgarStrings;
-        }
-
+        // Database Functions
         public async void sendToFirestore()
         {
-            
+
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 
             db = FirestoreDb.Create(project);
@@ -75,24 +45,37 @@ namespace Resuscitate.DataClasses
             //await dialog.ShowAsync();
         }
 
-        [TestMethod]
-        public  DocumentSnapshot checkData()
+        // Data Functions
+
+        public void setName(string name)
         {
-            DocumentReference dr = db.Collection("Data").Document(name);
-            DocumentSnapshot snap =  dr.GetSnapshotAsync().Result;
+            this.name = name;
+        }
 
-            if (snap.Exists)
+        public void setDOB(string dob)
+        {
+            this.dob = dob;
+        }
+
+        public void addApgar(ApgarScore apgar)
+        {
+            apgars.Add(apgar);
+        }
+
+        public string[] apgarStrings()
+        {
+            string[] apgarStrings = new string[5];
+            for (int i=0; i < apgars.Count; i++)
             {
-                Dictionary<string, object> item = snap.ToDictionary();
-
-                foreach (var field in item)
+                if (apgars[i] == null)
                 {
-                    //var dialog = new MessageDialog(field.Key + "-" + field.Value);
-                    //await dialog.ShowAsync();
+                    apgarStrings[i] = "N/A";
+                } else {
+                    apgarStrings[i] = apgars[i].ToString();
                 }
             }
-            return snap;
-            
+            return apgarStrings;
         }
+
     }
 }
