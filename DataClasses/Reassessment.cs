@@ -26,11 +26,15 @@ namespace Resuscitate.DataClasses
     }
     class Reassessment : Event
     {
+        private HeartRate hr;
+        private ChestMovement movement;
+        private RespiratoryEffort effort;
+        private TimeSpan time;
 
-        public HeartRate Hr { get => Hr; set => Hr = value; }
-        public ChestMovement Movement { get => Movement; set => Movement = value; }
-        public RespiratoryEffort Effort { get => Effort; set => Effort = value; }
-        public TimeSpan Time { get => Time; set => Time = value; }
+        public HeartRate Hr { get => hr; set => hr = value; }
+        public ChestMovement Movement { get => movement; set => movement = value; }
+        public RespiratoryEffort Effort { get => effort; set => effort = value; }
+        public TimeSpan Time { get => time; set => time = value; }
 
 
 

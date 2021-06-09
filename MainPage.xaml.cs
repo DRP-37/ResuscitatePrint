@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using Resuscitate.DataClasses;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Resuscitate
@@ -36,11 +36,6 @@ namespace Resuscitate
         {
             // Go to main page
             this.Frame.Navigate(typeof(InputTime));
-
-            ApgarScore apgar = new ApgarScore("00:00");
-            database.addApgar(apgar);
-
-            database.sendToFirestore();
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)

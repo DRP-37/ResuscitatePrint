@@ -8,12 +8,15 @@ namespace Resuscitate.DataClasses
 {
     class Observation : Event
     {
-        
+        private float oximeterOxygen;
+        private float hr;
+        private float oxygenGiven;
+        private Timing time;
 
-        public float OximeterOxygen { get => OximeterOxygen; set => OximeterOxygen = value; }
-        public float Hr { get => Hr; set => Hr = value; }
-        public float OxygenGiven { get => OxygenGiven; set => OxygenGiven = value; }
-        public TimeSpan Time { get => Time; set => Time = value; }
+        public float OximeterOxygen { get => oximeterOxygen; set => oximeterOxygen = value; }
+        public float Hr { get => hr; set => hr = value; }
+        public float OxygenGiven { get => oxygenGiven; set => oxygenGiven = value; }
+        public Timing Time { get => time; set => time = value; }
 
         public override string ToString()
         {

@@ -18,23 +18,25 @@ namespace Resuscitate.DataClasses
     }
     internal class InitialAssessment : Event
     {
-        private ApgarScore Apgar;
-        private TemperatureReg TempReg;
-        private CordClamping Clamping;
-        private Timing Time;
+        private ApgarScore apgar;
+        private TemperatureReg tempreg;
+        private CordClamping clamping;
+        private Timing time;
 
-        public InitialAssessment(ApgarScore apgar, TemperatureReg temp, CordClamping cc, Timing ts)
+        public ApgarScore Apgar { get => apgar; set => apgar = value; }
+        public TemperatureReg TempReg { get => tempreg; set => tempreg = value; }
+        public CordClamping Clamping { get => clamping; set => clamping = value; }
+        public Timing Time { get => time; set => time = value; }
+
+        public InitialAssessment(Timing t)
         {
-            this.Apgar = apgar;
-            this.TempReg = temp;
-            this.Clamping = cc;
-            this.Time = ts;
+            this.Time = t;
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Initial Assessment at " +);
+            sb.Append("Initial Assessment at " + Time.ToString());
             sb.Append('\t' + Apgar.ToString() + '\n');
             sb.Append('\t' + TempToString(TempReg) + '\n');
             sb.Append('\t' + CordClampToString(Clamping));

@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media;
-
+using Resuscitate.DataClasses;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
@@ -48,18 +48,19 @@ namespace Resuscitate
         {
             TimingCount = (Timing)e.Parameter;
 
-            score = new ApgarScore(TimingCount.ToString());
-
+            score = new ApgarScore();
+            score.Time = TimingCount;
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            score.HeartRate = hr;
+            score.Hr = hr;
             score.Respiration = respiration;
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
+
             Timing timing = new Timing();
             timing.Offset = 0;
             timing.Count = 0;
@@ -159,5 +160,7 @@ namespace Resuscitate
             scoreCount = prev == -1 ? (scoreCount + curr) : (scoreCount + curr - prev);
             displayScore.Text = "" + scoreCount;
         }
+
+
     }
 }
