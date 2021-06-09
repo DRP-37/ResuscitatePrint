@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    interface Event
+    class Event
     {
-        String ToString();
+        override public String ToString() { return ""; }
     }
 }

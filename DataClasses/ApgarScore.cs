@@ -22,9 +22,6 @@ namespace Resuscitate.DataClasses
         public int Tone { get => tone; set => tone = value; }
         public int Respiration { get => respiration; set => respiration = value; }
 
-
-        
-
         override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -35,8 +32,14 @@ namespace Resuscitate.DataClasses
             sb.Append("Response to Stimulation: " + Response.ToString() + '\n');
             sb.Append("Muscle Tone: " + Tone.ToString() + '\n');
             sb.Append("Respiratory Effort: " + Respiration.ToString() + '\n');
+            sb.Append("Total score: " + totalScore().ToString());
 
             return sb.ToString();
+        }
+
+        public int totalScore()
+        {
+            return Colour + Hr + Response + Tone + Respiration;
         }
     }
 }

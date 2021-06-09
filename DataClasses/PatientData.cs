@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Google.Cloud.Firestore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windows.UI.Popups;
@@ -13,8 +14,10 @@ namespace Resuscitate.DataClasses
         string project = "resuscitate-4c0ec";
 
         // Patient Data
-        private string name = "Euan";
-        private string dob = "";
+        private string name;
+        private string dob;
+        public string Name { get => name; set => name = value; }
+        public string DOB { get => dob; set => dob = value; }
         private List<ApgarScore> apgars = new List<ApgarScore>();
         private List<AirwayPositioning> positionings = new List<AirwayPositioning>();
         private List<Observation> observations = new List<Observation>();
@@ -26,27 +29,34 @@ namespace Resuscitate.DataClasses
         private List<LineInsertion> insertions = new List<LineInsertion>();
         private List<Notes> notes = new List<Notes>();
 
-
-
         // Database Functions
         public async void sendToFirestore()
         {
-
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 
             db = FirestoreDb.Create(project);
 
-            //var dialog = new MessageDialog("Connected");
-            //await dialog.ShowAsync();
+            var dialog = new MessageDialog("Connected");
+            await dialog.ShowAsync();
 
             DocumentReference dr = db.Collection("Data").Document(name);
             Dictionary<string, object> data = new Dictionary<string, object>();
+
 
             Dictionary<string, object> list = new Dictionary<string, object>
             {
                 { "Name", name },
                 { "Date of Birth", dob },
-                { "Apgar Score", apgarStrings() }
+                { "Initial Assessment", initialAssessment.ToString() },
+                { "Apgar Scores", listToStrings(apgars) },
+                { "Observations",  listToStrings(observations) },
+                { "Airway Positioning",  listToStrings(positionings) },
+                { "Reassessments",  listToStrings(reassessments) },
+                { "Other Procedures",  listToStrings(procedures) },
+                { "Intubation & Suction",  listToStrings(intubationAndSuctions) },
+                { "Compressions",  listToStrings(compressions) },
+                { "Insertions",  listToStrings(insertions) },
+                { "Notes",  listToStrings(notes) },
             };
             data.Add("Data", list);
             await dr.SetAsync(list);
@@ -56,17 +66,6 @@ namespace Resuscitate.DataClasses
         }
 
         // Data Functions
-
-        public void setName(string name)
-        {
-            this.name = name;
-        }
-
-        public void setDOB(string dob)
-        {
-            this.dob = dob;
-        }
-
         public void addApgar(ApgarScore apgar)
         {
             apgars.Add(apgar);
@@ -109,19 +108,26 @@ namespace Resuscitate.DataClasses
             notes.Add(note);
         }
 
-        public string[] apgarStrings()
+        public string[] listToStrings(IEnumerable<Event> eItems)
         {
-            string[] apgarStrings = new string[5];
-            for (int i=0; i < apgars.Count; i++)
+            List<Event> items = eItems.ToList();
+
+            if (items.Count == 0)
+            {
+                return new string[] { "N/A" };
+            }
+
+            string[] listOfStrings = new string[items.Count];
+            for (int i = 0; i < items.Count; i++)
             {
                 if (apgars[i] == null)
                 {
-                    apgarStrings[i] = "N/A";
+                    listOfStrings[i] = "N/A";
                 } else {
-                    apgarStrings[i] = apgars[i].ToString();
+                    listOfStrings[i] = items[i].ToString();
                 }
             }
-            return apgarStrings;
+            return listOfStrings;
         }
 
     }
