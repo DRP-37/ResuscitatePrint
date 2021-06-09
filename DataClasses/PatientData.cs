@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Firebase.Storage;
 using Google.Cloud.Firestore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windows.UI.Popups;
@@ -64,6 +66,22 @@ namespace Resuscitate.DataClasses
 
             //dialog = new MessageDialog("Data Added");
             //await dialog.ShowAsync();
+        }
+
+        public async void sendToStorage(string fileName)
+        {
+            var stream = File.Open(fileName, FileMode.Open);
+
+            var task = new FirebaseStorage("gs://resuscitate-4c0ec.appspot.com")
+                .Child("Resuscitation Recordings")
+                .Child(name)
+                .Child(fileName)
+                .PutAsync(stream);
+
+            var downloadUrl = await task;
+
+            var dialog = new MessageDialog("File uploaded");
+            await dialog.ShowAsync();
         }
 
         // Data Functions
