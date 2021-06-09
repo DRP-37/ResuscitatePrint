@@ -16,6 +16,16 @@ namespace Resuscitate.DataClasses
         private string name = "Euan";
         private string dob = "";
         private List<ApgarScore> apgars = new List<ApgarScore>();
+        private List<AirwayPositioning> positionings = new List<AirwayPositioning>();
+        private List<Observation> observations = new List<Observation>();
+        private InitialAssessment initialAssessment;
+        private List<Reassessment> reassessments = new List<Reassessment>();
+        private List<OtherProcedures> procedures = new List<OtherProcedures>();
+        private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();
+        private List<CardiacCompressions> compressions = new List<CardiacCompressions>();
+        private List<LineInsertion> insertions = new List<LineInsertion>();
+        private List<Notes> notes = new List<Notes>();
+
 
 
         // Database Functions
@@ -60,6 +70,43 @@ namespace Resuscitate.DataClasses
         public void addApgar(ApgarScore apgar)
         {
             apgars.Add(apgar);
+        }
+
+        public void addAirwayPos(AirwayPositioning pos) {
+            positionings.Add(pos);
+        }
+
+        public void addObservation(Observation obs) {
+            observations.Add(obs);
+        }
+
+        public void addInitialAssessment(InitialAssessment assess) {
+            initialAssessment = assess;
+        }
+
+        public void addReassessment(Reassessment assess) {
+            reassessments.Add(assess);
+        }
+
+        public void addProcedure(OtherProcedures proc) {
+            procedures.Add(proc);
+        }
+
+        public void addIAndS(IntubationAndSuction intubation)
+        {
+            intubationAndSuctions.Add(intubation);
+        }
+
+        public void addCompression(CardiacCompressions compression) {
+            compressions.Add(compression);
+        }
+
+        public void addInsertions(LineInsertion ins) {
+            insertions.Add(ins);
+        }
+
+        public void addNote(Notes note) {
+            notes.Add(note);
         }
 
         public string[] apgarStrings()
