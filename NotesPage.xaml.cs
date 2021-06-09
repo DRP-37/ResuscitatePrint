@@ -16,7 +16,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
 {
@@ -81,12 +80,12 @@ namespace Resuscitate
         {
             if (!isRecording)
             {
-                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/MicrophoneOff.png"));
+                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Microphone.png"));
                 this._audioRecorder.Record();
                 isRecording = true;
             } else
             {
-                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Microphone.png"));
+                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/MicrophoneOff.png"));
                 this._audioRecorder.StopRecording();
                 isRecording = false;
             }
