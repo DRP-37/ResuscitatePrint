@@ -120,7 +120,6 @@
       <DependentUpon>AirwayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApgarAssessment.xaml.cs" />
-    <Compile Include="ApgarScore.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -133,7 +132,18 @@
     <Compile Include="CPRPage.xaml.cs">
       <DependentUpon>CPRPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data.cs" />
+    <Compile Include="DataClasses\AirwayPositioning.cs" />
+    <Compile Include="DataClasses\ApgarScore.cs" />
+    <Compile Include="DataClasses\CardiacCompressions.cs" />
+    <Compile Include="DataClasses\Event.cs" />
+    <Compile Include="DataClasses\InitialAssessment.cs" />
+    <Compile Include="DataClasses\IntubationAndSuction.cs" />
+    <Compile Include="DataClasses\LineInsertion.cs" />
+    <Compile Include="DataClasses\Notes.cs" />
+    <Compile Include="DataClasses\Observation.cs" />
+    <Compile Include="DataClasses\OtherProcedures.cs" />
+    <Compile Include="DataClasses\PatientData.cs" />
+    <Compile Include="DataClasses\Reassessment.cs" />
     <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
@@ -295,6 +305,10 @@
     <Content Include="resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".github\workflows\deploy.yml" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

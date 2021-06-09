@@ -36,16 +36,25 @@ namespace Resuscitate.DataClasses
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Initial Assessment at " + Time.ToString());
-            sb.Append('\t' + Apgar.ToString() + '\n');
-            sb.Append('\t' + TempToString(TempReg) + '\n');
-            sb.Append('\t' + CordClampToString(Clamping));
-            if (Clamping == CordClamping.Now)
+
+            sb.Append("Initial Assessment at " + Time.ToString() + "\n");
+            try
             {
-                sb.Append(" " + Time.ToString() + '\n');
+                sb.Append('\t' + Apgar.ToString() + '\n');
+                sb.Append('\t' + TempToString(TempReg) + '\n');
+                sb.Append('\t' + CordClampToString(Clamping));
+                if (Clamping == CordClamping.Now)
+                {
+                    sb.Append(" " + Time.ToString() + '\n');
+                }
+                else
+                {
+                    sb.Append('\n');
+                }
             }
-            else {
-                sb.Append('\n');
+            catch (Exception e)
+            {
+                sb.Append("N/A");
             }
 
             return sb.ToString();
