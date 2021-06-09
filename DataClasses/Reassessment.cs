@@ -26,32 +26,27 @@ namespace Resuscitate.DataClasses
     }
     class Reassessment : Event
     {
-        private HeartRate hr;
-        private ChestMovement movement;
-        private RespiratoryEffort effort;
-        private Timing time;
 
-        public Reassessment(HeartRate hr, ChestMovement cm, RespiratoryEffort e, Timing ts)
-        {
-            this.hr = hr;
-            this.movement = cm;
-            this.effort = e;
-            this.time = ts;
-        }
+        public HeartRate Hr { get => Hr; set => Hr = value; }
+        public ChestMovement Movement { get => Movement; set => Movement = value; }
+        public RespiratoryEffort Effort { get => Effort; set => Effort = value; }
+        public TimeSpan Time { get => Time; set => Time = value; }
+
+
 
         public override String ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Reassessment:" + '\n');
+            sb.Append("Reassessment at " + Time.ToString() + " :\n");
             sb.Append('\t' + "Heart Rate (bpm): " + HeartRateToString() + '\n');
-            sb.Append('\t' + "Chest Movement: " + movement.ToString() + '\n');
-            sb.Append('\t' + "Respiratory Effor: " + effort.ToString() + "\n");
-            sb.Append('\t' + "Timespan: " + time.ToString());
+            sb.Append('\t' + "Chest Movement: " + Movement.ToString() + '\n');
+            sb.Append('\t' + "Respiratory Effor: " + RespEffortToString() + "\n");
+            sb.Append('\t' + "Timespan: " + Time.ToString());
 
             return sb.ToString();
         }
 
         private String HeartRateToString() {
-            switch (hr) {
+            switch (Hr) {
                 case HeartRate.LessSixty:
                     return "<60";
                 case HeartRate.SixtyToEighty:
@@ -66,7 +61,22 @@ namespace Resuscitate.DataClasses
             }
         }
 
-        private String 
+        private String RespEffortToString()
+        {
+            switch (Effort)
+            {
+                case RespiratoryEffort.None:
+                    return "No Effort";
+                case RespiratoryEffort.Gasping:
+                    return "Gasping";
+                case RespiratoryEffort.Weak:
+                    return "Weak Effort";
+                case RespiratoryEffort.Regular:
+                    return "Regular Respirations";
+                default:
+                    return "";
+            }
 
+        }
     }
 }
