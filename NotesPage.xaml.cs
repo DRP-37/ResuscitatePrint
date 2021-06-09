@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,6 +24,7 @@ namespace Resuscitate
     public sealed partial class NotesPage : Page
     {
         public Timing TimingCount { get; set; }
+        private String userInput;
 
         public NotesPage()
         {
@@ -39,7 +41,8 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO: Do we want a save button to update the user input  
+            userInput = UserNotes.Text;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +58,11 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void UserNotes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ConfirmButton.Background = new SolidColorBrush(Colors.LightGreen);
         }
     }
 }
