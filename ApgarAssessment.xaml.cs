@@ -51,11 +51,8 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-<<<<<<< HEAD
-=======
             score = new ApgarScore();
             score.Time = TimingCount;
->>>>>>> backendDataClasses
             base.OnNavigatedTo(e);
         }
 
@@ -66,15 +63,7 @@ namespace Resuscitate
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
-<<<<<<< HEAD
             Frame.Navigate(typeof(Resuscitation), TimingCount);
-=======
-
-            Timing timing = new Timing();
-            timing.Offset = 0;
-            timing.Count = 0;
-            Frame.Navigate(typeof(Resuscitation), timing);
->>>>>>> backendDataClasses
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -171,18 +160,5 @@ namespace Resuscitate
             displayScore.Text = "" + scoreCount;
         }
 
-<<<<<<< HEAD
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            // Nothing
-        }
-
-        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-=======
-
->>>>>>> backendDataClasses
     }
 }
