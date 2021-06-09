@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Resuscitate.DataClasses;
 
 namespace Resuscitate
 {
@@ -12,13 +13,14 @@ namespace Resuscitate
     {
         public void test1()
         {
+            
             Assert.AreEqual(1, 1);
-            Data db = new Data();
+            PatientData db = new PatientData();
             db.sendToFirestore();
 
             
             
-            DocumentSnapshot snap = db.checkData();
+            /*DocumentSnapshot snap = db.checkData();
             if (snap.Exists)
             {
                 Dictionary<string, object> item = snap.ToDictionary();
@@ -27,7 +29,7 @@ namespace Resuscitate
                 {
                     Console.Write("{0} - {1}\n", field.Key, field.Value);
                 }
-            }
+            }*/
         }
     }
 }

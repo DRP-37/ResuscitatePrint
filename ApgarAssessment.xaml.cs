@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media;
-
+using Resuscitate.DataClasses;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
@@ -51,17 +51,30 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+<<<<<<< HEAD
+=======
+            score = new ApgarScore();
+            score.Time = TimingCount;
+>>>>>>> backendDataClasses
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            score.HeartRate = hr;
+            score.Hr = hr;
             score.Respiration = respiration;
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
+<<<<<<< HEAD
             Frame.Navigate(typeof(Resuscitation), TimingCount);
+=======
+
+            Timing timing = new Timing();
+            timing.Offset = 0;
+            timing.Count = 0;
+            Frame.Navigate(typeof(Resuscitation), timing);
+>>>>>>> backendDataClasses
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -158,6 +171,7 @@ namespace Resuscitate
             displayScore.Text = "" + scoreCount;
         }
 
+<<<<<<< HEAD
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
             // Nothing
@@ -167,5 +181,8 @@ namespace Resuscitate
         {
 
         }
+=======
+
+>>>>>>> backendDataClasses
     }
 }
