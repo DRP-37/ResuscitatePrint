@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +24,18 @@ namespace Resuscitate
     public sealed partial class DrainsPage : Page
     {
         public Timing TimingCount { get; set; }
+        private Button[] drains;
+        // Drain Procedure:
+        // 0: Chest Drain: Left
+        // 1: Chest Drain: Right
+        // 2: Abdominal Drain
+        private int drainProcedure;
 
         public DrainsPage()
         {
             this.InitializeComponent();
+
+            drains = new Button[] { ChestDrainLeft, ChestDrainRight, AbdominalDrain };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +48,8 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // set data structure with drainProcedure and time stamp of selection
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +65,21 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Nothing
+        }
+
+        // Update colours and selection of procedure on click
+        private void Drain_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateColours(drains, sender as Button);
+            drainProcedure = Array.IndexOf(drains, sender as Button);
+        }
+
+        private void UpdateColours(Button[] buttons, Button sender)
+        {
+            buttons[0].Background = new SolidColorBrush(Colors.White);
+            buttons[1].Background = new SolidColorBrush(Colors.White);
+            buttons[2].Background = new SolidColorBrush(Colors.White);
+            sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
     }
 }
