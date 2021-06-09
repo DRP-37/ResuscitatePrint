@@ -42,7 +42,7 @@ namespace Resuscitate.DataClasses
             DocumentReference dr = db.Collection("Data").Document(name);
             Dictionary<string, object> data = new Dictionary<string, object>();
 
-            
+
             Dictionary<string, object> list = new Dictionary<string, object>
             {
                 { "Name", name },
@@ -58,24 +58,6 @@ namespace Resuscitate.DataClasses
                 { "Insertions",  listToStrings(insertions) },
                 { "Notes",  listToStrings(notes) },
             };
-            
-            /*
-            Dictionary<string, object> list = new Dictionary<string, object>
-            {
-                { "Name", name },
-                { "Date of Birth", dob },
-                { "Initial Assessment", initialAssessment.ToString() },
-                { "Apgar Scores", "" },
-                { "Observations",  "" },
-                { "Airway Positioning",  "" },
-                { "Reassessments",  "" },
-                { "Other Procedures",  "" },
-                { "Intubation & Suction",  "" },
-                { "Compressions",  "" },
-                { "Insertions",  "" },
-                { "Notes",  "" },
-            };
-            */
 
             data.Add("Data", list);
             await dr.SetAsync(list);
