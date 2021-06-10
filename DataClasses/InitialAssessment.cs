@@ -61,7 +61,7 @@ namespace Resuscitate.DataClasses
                     sb.Append('\n');
                 }
             }
-            catch (Exception e)
+            catch
             {
                 sb.Append("N/A");
             }

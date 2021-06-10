@@ -90,7 +90,7 @@ namespace Resuscitate
                     IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
                     playbackMediaElement.SetSource(stream, storageFile.FileType);
                     playbackMediaElement.Play();
-                } catch (Exception e)
+                } catch
                 {
                     var dialog = new MessageDialog("Please record a note before playing");
                     await dialog.ShowAsync();

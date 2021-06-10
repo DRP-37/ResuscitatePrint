@@ -156,7 +156,7 @@ namespace Resuscitate.DataClasses
                     {
                         listOfStrings[i] = items[i].ToString();
                     }
-                    catch (Exception e)
+                    catch
                     {
                         listOfStrings[i] = "N/A";
                     }
