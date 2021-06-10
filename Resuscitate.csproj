@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="DataClasses\AirwayPositioning.cs" />
     <Compile Include="DataClasses\ApgarScore.cs" />
+    <Compile Include="DataClasses\BloodGas.cs" />
     <Compile Include="DataClasses\CardiacCompressions.cs" />
     <Compile Include="DataClasses\Event.cs" />
     <Compile Include="DataClasses\EventAndTiming.cs" />

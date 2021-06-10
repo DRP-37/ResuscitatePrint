@@ -59,6 +59,7 @@ namespace Resuscitate
             statusEvent.Name = "Positioning";
             statusEvent.Data = positioning.positionToString();
             statusEvent.Time = positioning.Time.ToString();
+            statusEvent.Event = positioning;
 
             var dialog = new MessageDialog(positioning.ToString());
             await dialog.ShowAsync();

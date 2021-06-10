@@ -63,6 +63,7 @@ namespace Resuscitate
             statusEvent.Name = "Drain";
             statusEvent.Data = procedures.procedureToString();
             statusEvent.Time = procedures.Time.ToString();
+            statusEvent.Event = procedures;
 
             Frame.Navigate(typeof(Resuscitation), TimingCount);
         }

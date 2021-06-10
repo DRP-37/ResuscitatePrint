@@ -72,6 +72,7 @@ namespace Resuscitate
             statusEvent.Name = "Apgar Test";
             statusEvent.Data = score.totalScore().ToString();
             statusEvent.Time = score.Time.ToString();
+            statusEvent.Event = score;
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount,score));
         }

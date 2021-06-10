@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,6 +25,11 @@ namespace Resuscitate
     public sealed partial class LineInsertionPage : Page
     {
         public Timing TimingCount { get; set; }
+        private string tick = "\u2713";
+        private string cross = "\u2A09";
+
+        private LineInsertion insertion;
+        private StatusEvent statusEvent;
 
         public LineInsertionPage()
         {
@@ -34,12 +41,25 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            insertion = new LineInsertion();
+            insertion.Time = TimingCount;
+
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            statusEvent.Name = "Line Insertion";
+            statusEvent.Data = insertion.insertionToString() + (insertion.Successful ? tick : cross);
+            statusEvent.Time = insertion.Time.ToString();
+            statusEvent.Event = insertion;
 
+            var dialog = new MessageDialog(insertion.ToString());
+            await dialog.ShowAsync();
+
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
