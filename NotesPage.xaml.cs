@@ -33,6 +33,7 @@ namespace Resuscitate
         {
             this.InitializeComponent();
             this._audioRecorder = new AudioRecorder();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -45,7 +46,6 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Do we want a save button to save progress midway 
             userInput = UserNotes.Text;
         }
 
