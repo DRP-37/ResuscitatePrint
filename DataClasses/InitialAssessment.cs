@@ -46,7 +46,10 @@ namespace Resuscitate.DataClasses
             sb.Append("Initial Assessment at " + Time.ToString() + "\n");
             try
             {
-                sb.Append('\t' + Apgar.ToString() + '\n');
+                sb.Append('\t' + "Colour: "+ Colour.ToString() + '\n');
+                sb.Append('\t' + "Muscle Tone: " + Tone.ToString() + '\n');
+                sb.Append('\t' + "Respiratory Effort: " + respEffort.ToString() + '\n');
+                sb.Append('\t' + "Heart Rate: " + heartRate.ToString() + '\n');
                 sb.Append('\t' + TempToString(TempReg) + '\n');
                 sb.Append('\t' + CordClampToString(Clamping));
                 if (Clamping == CordClamping.Now)
