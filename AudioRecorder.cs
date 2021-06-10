@@ -9,6 +9,7 @@ using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
 namespace Resuscitate
@@ -83,10 +84,18 @@ namespace Resuscitate
             {
                 MediaElement playbackMediaElement = new MediaElement();
                 StorageFolder storageFolder = Package.Current.InstalledLocation;
-                StorageFile storageFile = await storageFolder.GetFileAsync(this._fileName);
-                IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
-                playbackMediaElement.SetSource(stream, storageFile.FileType);
-                playbackMediaElement.Play();
+                try
+                {
+                    StorageFile storageFile = await storageFolder.GetFileAsync(this._fileName);
+                    IRandomAccessStream stream = await storageFile.OpenAsync(FileAccessMode.Read);
+                    playbackMediaElement.SetSource(stream, storageFile.FileType);
+                    playbackMediaElement.Play();
+                } catch (Exception e)
+                {
+                    var dialog = new MessageDialog("Please record a note before playing");
+                    await dialog.ShowAsync();
+                }
+
             });
         }
     }
