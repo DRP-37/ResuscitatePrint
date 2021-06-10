@@ -24,12 +24,14 @@ namespace Resuscitate
     {
 
         PatientData database = new PatientData();
+        public static bool patienInformationComplete {get; set;}
 
         public MainPage()
         {
             this.InitializeComponent();
             Frame mainFrame = Window.Current.Content as Frame;
             mainFrame.ContentTransitions = null;
+            patienInformationComplete = false;
         } 
 
         private void Start_Click(object sender, RoutedEventArgs e)

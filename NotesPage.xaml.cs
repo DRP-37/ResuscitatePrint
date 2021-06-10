@@ -46,7 +46,9 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            ConfirmButton.Background = new SolidColorBrush(new Windows.UI.Color() { R = 242, G = 242, B = 242 });
             userInput = UserNotes.Text;
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
