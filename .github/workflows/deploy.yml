@@ -34,11 +34,6 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
-    - name: Update manifest version
-      run: |
-        [xml]$manifest = get-content ".\$env:UWP_Project_Directory\Package.appxmanifest"
-        $manifest.Package.Identity.Version = "${{steps.getVersion.outputs.result}}"
-        $manifest.save(".\$env:UWP_Project_Directory\Package.appxmanifest")
         
     - name: Decode the Pfx
       run: |
