@@ -8,30 +8,40 @@ namespace Resuscitate.DataClasses
 {
     class OtherProcedures : Event
     {
-        List<(Timing, ProcedureType)> otherProcedures = new List<(Timing, ProcedureType)>();
+        private Timing time;
+        private ProcedureType procedureType;
 
-        public void addProcedure(Timing time, ProcedureType procedure)
-        {
-            otherProcedures.Add((time, procedure));
-        }
+        public Timing Time { get => time; set => time = value; }
+        public ProcedureType Procedure { get => procedureType; set => procedureType = value; }
 
         override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var p in otherProcedures)
-            {
-                sb.Append("Time: " + p.Item1.ToString() + ", Procedure: " + p.Item2.ToString() + "\n");
-            }
+            sb.Append("Time: " + time.ToString() + ", Procedure: " + procedureToString());
 
             return sb.ToString();
+        }
+
+        public String procedureToString()
+        {
+            if (procedureType == ProcedureType.ChestLeft)
+            {
+                return "Left Chest Drain";
+            } else if (procedureType == ProcedureType.ChestRight)
+            {
+                return "Right Chest Drain";
+            } else
+            {
+                return "Abdominal Drain";
+            }
         }
     }
 
     enum ProcedureType
     {
-        ChestLeft,
-        ChestRight,
-        Abdominal
+        ChestLeft = 0,
+        ChestRight = 1,
+        Abdominal = 2
     }
 }

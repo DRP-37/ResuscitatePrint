@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace Resuscitate
         // 1: Chest Drain: Right
         // 2: Abdominal Drain
         private int drainProcedure;
+        private OtherProcedures procedures;
+        private StatusEvent statusEvent;
 
         public DrainsPage()
         {
@@ -43,12 +46,21 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            procedures = new OtherProcedures();
+            procedures.Time = TimingCount;
+
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             // set data structure with drainProcedure and time stamp of selection
+
+            procedures.Procedure = (ProcedureType)drainProcedure;
+            statusEvent.Name = "Drain";
+            statusEvent.Data = procedures.procedureToString();
+            statusEvent.Time = procedures.Time.ToString();
+
             Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 

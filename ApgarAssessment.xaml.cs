@@ -31,6 +31,7 @@ namespace Resuscitate
 
         private int scoreCount;
         private ApgarScore score;
+        private StatusEvent statusEvent;
 
         public ApgarAssessment()
         {
@@ -53,6 +54,9 @@ namespace Resuscitate
 
             score = new ApgarScore();
             score.Time = TimingCount;
+
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
@@ -63,6 +67,11 @@ namespace Resuscitate
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
+
+            statusEvent.Name = "Apgar Test";
+            statusEvent.Data = score.totalScore().ToString();
+            statusEvent.Time = score.Time.ToString();
+
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount,score));
         }
 
