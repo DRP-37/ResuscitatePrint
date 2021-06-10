@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,17 +23,32 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class MedicationPage : Page
     {
+        private static int NUM_MEDICATIONS = 8;
+        
         public Timing TimingCount { get; set; }
+
+        // Doses:
+        // 0: Adrenaline 1 in 10,000 (0.1 ml/kg) IV  
+        // 1: Adrenaline 1 in 10,000 (0.3 ml/kg) IV  
+        // 2: Sodium Bicarbonate 4.2% (2 to 4 mls/kg) IV 
+        // 3: Dextrose (2.5mls/kg) IV 
+        // 4: Red cell transfusion 
+        // 5: Adrenaline via ETT 
+        // 6: Surfactant via ETT 120mg 
+        // 7: Surfactant via ETT 240mg
+        private Button[] Medications;
+        private TextBlock[] DoseViews;
+        private int[] NumDoses = new int[NUM_MEDICATIONS];
+        private bool[] DoseGiven = new bool[NUM_MEDICATIONS];
 
         public MedicationPage()
         {
             this.InitializeComponent();
-        }
-
-        private void Timer_Tick(object sender, object e)
-        {
-            // Update View with Time
-            TimeView.Text = TimingCount.ToString();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            Medications = new Button[] { ADR1Button, ADR2Button, SodBicarbButton, DextroseButton,
+                CellTransfusionButton, ADRviaETTButton, Surfactant120Button, Surfactant240Button };
+            DoseViews = new TextBlock[] { ADR1Dose, ADR2Dose, SodBicarbDose, DextroseDose,
+                CellTransfusionDose, ADRviaETTDose, Surfactant120Dose, Surfactant240Dose };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,15 +57,28 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             base.OnNavigatedTo(e);
+
+            // Reset DoseGiven and buttons' colours
+            foreach (Button Medication in Medications)
+            {
+                Medication.Background = new SolidColorBrush(Colors.White);
+            }
+
+            DoseGiven = new bool[NUM_MEDICATIONS];
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SelectionMade(Medications))
+            {
+                Frame.Navigate(typeof(Resuscitation), TimingCount);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            ResetDoses();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame.CanGoBack)
@@ -61,6 +90,64 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DoseGiven_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            if (button == null)
+                return;
+
+            int reference = Array.IndexOf(Medications, button);
+
+            SolidColorBrush Colour = button.Background as SolidColorBrush;
+
+            if (Colour.Color == Colors.White)
+            {
+                NumDoses[reference]++;
+                DoseGiven[reference] = true;
+                button.Background = new SolidColorBrush(Colors.LightGreen);
+            } else
+            {
+                NumDoses[reference]--;
+                DoseGiven[reference] = false;
+                button.Background = new SolidColorBrush(Colors.White);
+            }
+
+            DoseViews[reference].Text = NumDoses[reference].ToString();
+        }
+
+        private void ResetDoses()
+        {
+            for (int i = 0; i < NUM_MEDICATIONS; i++)
+            {
+                if (DoseGiven[i])
+                {
+                    NumDoses[i]--;
+                    DoseViews[i].Text = NumDoses[i].ToString();
+                }
+            }
+        }
+
+        // Move to its own class later on - needed it many classes
+        private bool SelectionMade(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Resuscitate
     {
         public Timing TimingCount { get; set; }
         private Button[] positions;
+
         // Airway Positioning:
         // 0: Neutral Head Position
         // 1: Recheck position

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +24,20 @@ namespace Resuscitate
     public sealed partial class CPRPage : Page
     {
         public Timing TimingCount { get; set; }
+        DispatcherTimer Timer = new DispatcherTimer();
+        private int Count = 0;
+
+        private List<int> Timings = new List<int>();
 
         public CPRPage()
         {
             this.InitializeComponent();
+
+            // Initialise timer
+            Timer.Tick += Timer_Tick;
+            Timer.Interval = new TimeSpan(0, 0, 1);
+
+            StartButton.Background = new SolidColorBrush(Colors.LightGray);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -37,18 +48,52 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private void Timer_Tick(object sender, object e)
         {
-
+            Count++;
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            Timer.Stop();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame.CanGoBack)
             {
                 rootFrame.GoBack();
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Timer.Stop();
+
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+            }
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (StartButton.Content.Equals("Start"))
+            {
+                Timer.Start();
+                HeartBeating.Visibility = Visibility.Visible;
+                StartButton.Content = "Stop";
+                StartButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
+
+            } else
+            {
+                Timer.Stop();
+                Timings.Add(Count);
+                Count = 0;
+                HeartBeating.Visibility = Visibility.Collapsed;
+                StartButton.Content = "Start";
+                StartButton.Background = new SolidColorBrush(Colors.LightGray);
             }
         }
 
