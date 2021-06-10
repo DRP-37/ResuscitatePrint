@@ -196,8 +196,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\heart100bpm.gif" />
+    <Content Include="Assets\heart90bpm.gif" />
     <Content Include="Assets\Microphone.png" />
     <Content Include="Assets\MicrophoneOff.png" />
+    <Content Include="Assets\unfilled_heart.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
