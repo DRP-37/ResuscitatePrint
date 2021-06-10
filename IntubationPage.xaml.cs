@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +24,23 @@ namespace Resuscitate
     public sealed partial class IntubationPage : Page
     {
         public Timing TimingCount { get; set; }
+        private Button[] confirmations;
+        private int confirmation;
+        // Confirmation:
+        // 0: ET-CO2
+        // 1: Equal Air Entry
+        // 2: Unequal Air Entry
+        private bool isIntubation; 
+        // True: Intubation
+        // Flase: Suction
+        private bool isSuccessful;
+        private bool allowConfirmation;
 
         public IntubationPage()
         {
             this.InitializeComponent();
+            confirmations = new Button[] { ETCO2, EqualAir, UnequalAir };
+            allowConfirmation = false;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +53,11 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (allowConfirmation ||
+                (SelectionMade(confirmations) && Confirmation.Visibility == Visibility.Visible)) { 
+             // set data structure 
+                Frame.Navigate(typeof(Resuscitation), TimingCount);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +73,69 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Unsuccessful_Click(object sender, RoutedEventArgs e)
+        {
+            isSuccessful = false;
+            allowConfirmation = true;
+            Confirmation.Visibility = Visibility.Collapsed;
+            UpdateColours(new Button[] { Unsuccessful, Success }, sender as Button);
+        }
+
+        private void Success_Click(object sender, RoutedEventArgs e)
+        {
+            isSuccessful = true;
+            allowConfirmation = false;
+            Confirmation.Visibility = Visibility.Visible;
+            UpdateColours(new Button[] { Unsuccessful, Success }, sender as Button);
+        }
+
+        private void Suction_Click(object sender, RoutedEventArgs e)
+        {
+            isIntubation = false;
+            allowConfirmation = true;
+            Success.Visibility = Visibility.Collapsed;
+            Unsuccessful.Visibility = Visibility.Collapsed;
+            UpdateColours(new Button[] { Intubation, Suction }, sender as Button);
+        }
+
+        private void Intubation_Click(object sender, RoutedEventArgs e)
+        {
+            allowConfirmation = false;
+            isIntubation = true;
+            Success.Visibility = Visibility.Visible;
+            Unsuccessful.Visibility = Visibility.Visible;
+            UpdateColours(new Button[] { Intubation, Suction }, sender as Button);
+        }
+
+        private void Confirmation_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateColours(confirmations, sender as Button);
+            confirmation = Array.IndexOf(confirmations, sender as Button);
+        }
+
+        private bool SelectionMade(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void UpdateColours(Button[] buttons, Button sender)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
+            }
+            sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
     }
 }

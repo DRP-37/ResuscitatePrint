@@ -12,5 +12,68 @@
         <Button x:Name="BackButton" Content="Back" Margin="67,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Margin="987,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Mode=OneWay, Path=TimingCount.Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
+        <Button x:Name="hr0" Content="&lt;60 bpm" Margin="330,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" UseLayoutRounding="False" Width="145" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="hr1" Content="60 to 80 bpm" Margin="510,161,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" UseLayoutRounding="False" Width="145" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="hr2" Content="80 to 100 bpm" Margin="690,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" UseLayoutRounding="False" Width="145" d:LayoutRounding="Auto" FontSize="19.5" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="absent" Content="Absent" Margin="330,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" UseLayoutRounding="False" Width="328" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="movement_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="present" Content="Present" Margin="693,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" UseLayoutRounding="False" Width="326" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="movement_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp0" Content="No Effort" RenderTransformOrigin="0.5,0.5" Height="50" UseLayoutRounding="False" Width="148" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="330,305,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp1" Content="Gasping" RenderTransformOrigin="0.5,0.5" Height="50" UseLayoutRounding="False" Width="148" d:LayoutRounding="Auto" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="513,305,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp2" Content="Weak Effort" RenderTransformOrigin="0.5,0.5" Height="50" UseLayoutRounding="False" Width="148" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="694,305,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="67,168,0,0" Text="Heartrate" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="142" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Margin="67,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Chest Movement" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="67,313,0,0" Text="Respiratory Effort" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="264" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy5" HorizontalAlignment="Left" Margin="67,379,0,0" Text="Pulse Oximeter" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="278" FontSize="36" FontWeight="Normal"/>
+        <Button x:Name="hr3" Content="&gt;100 bpm" Margin="867,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" UseLayoutRounding="False" Width="145" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp3" Content="   Regular &#xD;&#xA;Respirations" RenderTransformOrigin="0.5,0.5" Height="50" UseLayoutRounding="False" Width="148" d:LayoutRounding="Auto" FontSize="15" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="871,305,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="517,379,0,0" Text="Percentage Oxygen" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="322" FontSize="36" FontWeight="Normal"/>
+        <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Margin="67,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Oxygen Levels" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy6" HorizontalAlignment="Left" Margin="67,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Heart Rate" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy7" HorizontalAlignment="Left" Margin="355,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy8" HorizontalAlignment="Left" Margin="738,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy9" HorizontalAlignment="Left" Margin="355,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="bpm" FontSize="26"/>
+        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="277,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="32" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged"/>
+        <TextBox x:Name="PercentOxygen" HorizontalAlignment="Left" Height="48" Margin="655,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="32" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="PercentOxygen_TextChanged"/>
+        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="277,515,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="32" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HeartRate_TextChanged"/>
     </Grid>
 </Page>
