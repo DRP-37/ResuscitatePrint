@@ -18,15 +18,22 @@ namespace Resuscitate.DataClasses
     }
     internal class InitialAssessment : Event
     {
-        private ApgarScore apgar;
+        private int colour;
+        private int tone;
+        private int respEffort;
+        private int heartRate;
         private TemperatureReg tempreg;
         private CordClamping clamping;
         private Timing time;
 
-        public ApgarScore Apgar { get => apgar; set => apgar = value; }
+        
         public TemperatureReg TempReg { get => tempreg; set => tempreg = value; }
         public CordClamping Clamping { get => clamping; set => clamping = value; }
         public Timing Time { get => time; set => time = value; }
+        public int Colour { get => colour; set => colour = value; }
+        public int Tone { get => tone; set => tone = value; }
+        public int RespEffort { get => respEffort; set => respEffort = value; }
+        public int HeartRate { get => heartRate; set => heartRate = value; }
 
         public InitialAssessment(Timing t)
         {
