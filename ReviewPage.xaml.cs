@@ -54,6 +54,7 @@ namespace Resuscitate
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
+            TimingCount.Stop();
             this.Frame.Navigate(typeof(MainPage));
         }
 

@@ -46,6 +46,11 @@ namespace Resuscitate
             Timer.Start();
         }
 
+        internal void Stop()
+        {
+            Timer.Stop();
+        }
+
         private void Timer_Tick(object sender, object e)
         {
             Count++;
