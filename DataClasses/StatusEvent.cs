@@ -9,11 +9,16 @@ namespace Resuscitate
 {
     class StatusEvent
     {
-        public string Name { get; }
-        public string Data { get; }
-        public string Time { get; }
+        public string Name { get; set; }
+        public string Data { get; set; }
+        public string Time { get; set; }
 
-        public Event Event { get; }
+        public Event Event { get; set; }
+
+        public StatusEvent()
+        {
+
+        }
 
         // TODO: add Event to constructor
         public StatusEvent(string Name, string Data, string Time)

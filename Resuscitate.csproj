@@ -147,7 +147,6 @@
     <Compile Include="DataClasses\OtherProcedures.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
     <Compile Include="DataClasses\Reassessment.cs" />
-    <Compile Include="DataClasses\StatusEvent.cs" />
     <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
@@ -184,7 +183,7 @@
     <Compile Include="StaffPage.xaml.cs">
       <DependentUpon>StaffPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatusEvent.cs" />
+    <Compile Include="DataClasses\StatusEvent.cs" />
     <Compile Include="StatusList.cs" />
     <Compile Include="Timing.cs" />
     <Compile Include="VentilationPage.xaml.cs">
