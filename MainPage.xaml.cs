@@ -34,11 +34,15 @@ namespace Resuscitate
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            // Go to main page
+            // Debug testing the firestore
+            /*
             database.Name = "Euan S-W";
             database.DOB = "30.10.2000";
             database.addInitialAssessment(new InitialAssessment(new Timing()));
             database.sendToFirestore();
+            */
+
+            // Go to main page
             this.Frame.Navigate(typeof(InputTime));
         }
 
