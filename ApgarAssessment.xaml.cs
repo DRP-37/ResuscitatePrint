@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media;
 using Resuscitate.DataClasses;
+using Windows.UI.Popups;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
@@ -31,6 +32,7 @@ namespace Resuscitate
 
         private int scoreCount;
         private ApgarScore score;
+        private StatusEvent statusEvent;
 
         public ApgarAssessment()
         {
@@ -53,6 +55,9 @@ namespace Resuscitate
 
             score = new ApgarScore();
             score.Time = TimingCount;
+
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
@@ -63,6 +68,12 @@ namespace Resuscitate
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
+
+            statusEvent.Name = "Apgar Test";
+            statusEvent.Data = score.totalScore().ToString();
+            statusEvent.Time = score.Time.ToString();
+            statusEvent.Event = score;
+
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount,score));
         }
 

@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="DataClasses\AirwayPositioning.cs" />
     <Compile Include="DataClasses\ApgarScore.cs" />
+    <Compile Include="DataClasses\BloodGas.cs" />
     <Compile Include="DataClasses\CardiacCompressions.cs" />
     <Compile Include="DataClasses\Event.cs" />
     <Compile Include="DataClasses\EventAndTiming.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="DataClasses\OtherProcedures.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
     <Compile Include="DataClasses\Reassessment.cs" />
+    <Compile Include="DataClasses\StatusEvent.cs" />
     <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
