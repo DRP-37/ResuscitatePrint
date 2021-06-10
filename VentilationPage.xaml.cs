@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +24,20 @@ namespace Resuscitate
     public sealed partial class VentilationPage : Page
     {
         public Timing TimingCount { get; set; }
+        private Button[] procedures;
+        private int? airGiven = null;
+        // Ventilation Support:
+        // 0: Inflation Breaths: Via Mask
+        // 1: Inflation Breaths: Via ETT
+        // 2: Ventilation Breaths: Via Mask
+        // 3: Ventilation Breaths: Via ETT
+        // 4: Mask CPAP
+        private int ventilationProcedure;
 
         public VentilationPage()
         {
             this.InitializeComponent();
+            procedures = new Button[] { InflationMask, InflationETT, VentilationMask, VentilationETT, MaskCPAP };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +50,11 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SelectionMade(procedures) && airGiven != null)
+            {
+                // set data structure with ventilation procedure and time stamp of selection
+                Frame.Navigate(typeof(Resuscitation), TimingCount);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -52,9 +67,52 @@ namespace Resuscitate
             }
         }
 
+        private void Ventilation_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateColours(procedures, sender as Button);
+            ventilationProcedure = Array.IndexOf(procedures, sender as Button);
+        }
+
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int temp;
+            if (!int.TryParse(AirGiven.Text, out temp))
+            {
+                // if parsing attempt wasn't successful
+                // output message to enter only numbers
+            } else
+            {
+                airGiven = temp;
+            }
+
+        }
+
+        private bool SelectionMade(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void UpdateColours(Button[] buttons, Button sender)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
+            }
+            sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
     }
 }
