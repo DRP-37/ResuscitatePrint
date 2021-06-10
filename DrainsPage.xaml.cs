@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,6 +49,8 @@ namespace Resuscitate
 
             procedures = new OtherProcedures();
             procedures.Time = TimingCount;
+
+            statusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }

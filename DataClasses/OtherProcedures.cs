@@ -40,8 +40,8 @@ namespace Resuscitate.DataClasses
 
     enum ProcedureType
     {
-        ChestLeft = 0,
-        ChestRight = 1,
-        Abdominal = 2
+        ChestLeft,
+        ChestRight,
+        Abdominal
     }
 }
