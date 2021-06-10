@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +24,17 @@ namespace Resuscitate
     public sealed partial class AirwayPage : Page
     {
         public Timing TimingCount { get; set; }
+        private Button[] positions;
+        // Airway Positioning:
+        // 0: Neutral Head Position
+        // 1: Recheck position
+        // 2: Two-person Technique
+        private int airwayProcedure; 
 
         public AirwayPage()
         {
             this.InitializeComponent();
+            positions = new Button[] { NeutralPosition, RecheckPosition, TwoPerson };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +47,12 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // set data structure with airway procedure and time stamp of selection
+            // if a selection has not been made do not allow confirm
+            if (SelectionMade(positions))
+            {
+                Frame.Navigate(typeof(Resuscitation), TimingCount);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -56,5 +69,35 @@ namespace Resuscitate
         {
 
         }
+
+        private void NeutralPosition_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateColours(positions, sender as Button);
+            airwayProcedure = Array.IndexOf(positions, sender as Button);
+        }
+
+        // Move to its own class later on - needed it many classes
+        private bool SelectionMade(Button[] buttons)
+        {
+            foreach(Button button in buttons)
+            { 
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void UpdateColours(Button[] buttons, Button sender)
+        {
+            buttons[0].Background = new SolidColorBrush(Colors.White);
+            buttons[1].Background = new SolidColorBrush(Colors.White);
+            buttons[2].Background = new SolidColorBrush(Colors.White);
+            sender.Background = new SolidColorBrush(Colors.LightGreen);
+        }
     }
+
 }
