@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +24,24 @@ namespace Resuscitate
     public sealed partial class ObservationPage : Page
     {
         public Timing TimingCount { get; set; }
+        private Button[] responses;
+        private Button[] hrs;
+        private int response;
+        private int hr;
+        private bool movement;
+        // int? is implicitly set to null if undeclared
+        // using it instead of int to know whether any input has been added
+        // Representing as a number instead of String to catch invalid input
+        private int? oxygenLvl;
+        private int? heartRate;
+        private int? oxygenPercent;
+
 
         public ObservationPage()
         {
             this.InitializeComponent();
+            responses = new Button[] { resp0, resp1, resp2, resp3 };
+            hrs = new Button[] { hr0, hr1, hr2, hr3 };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +54,10 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // Set data structure
+            //TODO: Not really sure if all data needs to be added for this to be valid
+            // but a check will need to added
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -55,6 +73,78 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void movement_Click(object sender, RoutedEventArgs e)
+        {
+            movement = (sender as Button).Equals(absent);
+            UpdateColours(new Button[] { absent, present}, sender as Button);
+        }
+
+        private void hr_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = (sender as Button);
+            UpdateColours(hrs, selected);
+            this.hr = selected.Name[selected.Name.Length - 1] - '0';
+        }
+
+        private void resp_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = (sender as Button);
+            UpdateColours(responses, selected);
+            this.response = selected.Name[selected.Name.Length - 1] - '0';
+        }
+
+        private bool SelectionMade(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void UpdateColours(Button[] buttons, Button sender)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
+            }
+            sender.Background = new SolidColorBrush(Colors.LightGreen);
+        }
+
+        private void ParseInput(TextBox textBox, int? input)
+        {
+            int temp;
+            if (!int.TryParse(textBox.Text, out temp))
+            {
+                // if parsing attempt wasn't successful
+                // output message to enter only numbers
+            }
+            else
+            {
+                input = temp;
+            }
+        }
+
+        private void OxygenLevels_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParseInput(OxygenLevels, oxygenLvl);
+        }
+
+        private void PercentOxygen_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParseInput(PercentOxygen, oxygenPercent);
+        }
+
+        private void HeartRate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ParseInput(HeartRate, heartRate);
         }
     }
 }
