@@ -12,5 +12,102 @@
         <Button x:Name="BackButton" Content="Back" Margin="67,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Margin="987,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Mode=OneWay, Path=TimingCount.Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
+        <Button x:Name="colour0" Content="Pale" Margin="330,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="colour_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="colour1" Content="Blue" Margin="576,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="colour_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="colour2" Content="Pink" Margin="823,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="colour_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="hr0" Content="Absent" Margin="330,559,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="hr1" Content="&lt;100 bpm" Margin="576,559,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="hr2" Content="&gt;100 bpm" Margin="823,559,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="tone0" Content="Floppy" Margin="330,409,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="tone_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="tone1" Content="Some Tone" Margin="575,409,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="tone_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="tone2" Content="Good Tone" Margin="823,409,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="tone_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp0" Content="No Breathing Effort" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="330,485,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp1" Content="Inadequate Breathing" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="575,485,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="resp2" Content="Regular Breathing" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="823,485,0,0" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" ScaleY="0.99999999999999989" ScaleX="0.99999999999999989" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="66,130,0,0" Text="Cord Clamping" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="276" FontSize="28" FontWeight="Normal"/>
+        <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="67,564,0,0" Text="Heartrate" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="142" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Margin="67,424,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="142" Text="Muscle Tone" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="67,493,0,0" Text="Respiratory Effort" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="264" FontSize="26"/>
+        <Button x:Name="cord0" Content="Immediate" Margin="330,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="cord_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="cord1" Content="Clamped Now" Margin="576,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="cord_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="cord2" Content="Delayed" Margin="823,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="cord_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="temp0" Content="Dry &amp; Wrap" Margin="330,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="temp_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="temp1" Content="Plastic Bag (Preterm)" Margin="575,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="19.5" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="temp_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="temp2" Content="Plastic Bag (Term)" Margin="823,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="45" UseLayoutRounding="False" Width="198" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="temp_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="-0.285" SkewX="0.224"/>
+            </Button.RenderTransform>
+        </Button>
+        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="66,184,0,0" Text="Temperature Regulations" TextWrapping="Wrap" VerticalAlignment="Top" Height="83" Width="276" FontSize="28" FontWeight="Normal"/>
+        <TextBlock x:Name="textBlock1_Copy4" HorizontalAlignment="Left" Margin="64,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="142" Text="Colour" FontSize="26"/>
+        <TextBlock x:Name="textBlock1_Copy5" HorizontalAlignment="Left" Margin="40,271,0,0" Text="Other Observations" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="409" FontSize="36" FontWeight="Normal"/>
     </Grid>
 </Page>
