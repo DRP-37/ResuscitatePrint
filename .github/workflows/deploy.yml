@@ -36,7 +36,7 @@ jobs:
         
     - name: Decode the Pfx
       run: |
-        $pfx_cert_byte = [System.Convert]::FromBase64String(${{ secrets.BASE64_ENCODED_PFX }})
+        $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
         $certificatePath = Join-Path -Path $currentDirectory -ChildPath $env:UWP_Project_Directory -AdditionalChildPath $env:SigningCertificate
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         
