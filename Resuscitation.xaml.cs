@@ -37,8 +37,17 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            if (e.Parameter.GetType() == typeof(EventAndTiming))
+            {
+                var EAndT = (EventAndTiming)e.Parameter;
+                TimingCount = EAndT.Timing;
+                var medicalEvent = EAndT.MedicalEvent;
+                data.addItem(medicalEvent);
+            }
+            else {
+                TimingCount = (Timing)e.Parameter;
+            }
+            
 
             base.OnNavigatedTo(e);
         }

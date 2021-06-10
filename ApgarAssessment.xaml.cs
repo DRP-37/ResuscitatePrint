@@ -63,7 +63,7 @@ namespace Resuscitate
             score.Tone = tone;
             score.Response = response;
             score.Colour = colour;
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount,score));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

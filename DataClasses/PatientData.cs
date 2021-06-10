@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Firebase.Storage;
+using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Firebase.Storage;
-using Google.Cloud.Firestore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Windows.UI.Popups;
 
 namespace Resuscitate.DataClasses
@@ -90,23 +89,28 @@ namespace Resuscitate.DataClasses
             apgars.Add(apgar);
         }
 
-        public void addAirwayPos(AirwayPositioning pos) {
+        public void addAirwayPos(AirwayPositioning pos)
+        {
             positionings.Add(pos);
         }
 
-        public void addObservation(Observation obs) {
+        public void addObservation(Observation obs)
+        {
             observations.Add(obs);
         }
 
-        public void addInitialAssessment(InitialAssessment assess) {
+        public void addInitialAssessment(InitialAssessment assess)
+        {
             initialAssessment = assess;
         }
 
-        public void addReassessment(Reassessment assess) {
+        public void addReassessment(Reassessment assess)
+        {
             reassessments.Add(assess);
         }
 
-        public void addProcedure(OtherProcedures proc) {
+        public void addProcedure(OtherProcedures proc)
+        {
             procedures.Add(proc);
         }
 
@@ -115,15 +119,18 @@ namespace Resuscitate.DataClasses
             intubationAndSuctions.Add(intubation);
         }
 
-        public void addCompression(CardiacCompressions compression) {
+        public void addCompression(CardiacCompressions compression)
+        {
             compressions.Add(compression);
         }
 
-        public void addInsertions(LineInsertion ins) {
+        public void addInsertions(LineInsertion ins)
+        {
             insertions.Add(ins);
         }
 
-        public void addNote(Notes note) {
+        public void addNote(Notes note)
+        {
             notes.Add(note);
         }
 
@@ -156,6 +163,50 @@ namespace Resuscitate.DataClasses
                 }
             }
             return listOfStrings;
+        }
+
+        public void addItem(Event item)
+        {
+            if (item.GetType() == typeof(ApgarScore))
+            {
+                addApgar((ApgarScore)item);
+            }
+            else if (item.GetType() == typeof(AirwayPositioning))
+            {
+                addAirwayPos((AirwayPositioning)item);
+            }
+            else if (item.GetType() == typeof(CardiacCompressions))
+            {
+                addCompression((CardiacCompressions)item);
+            }
+            else if (item.GetType() == typeof(InitialAssessment))
+            {
+                addInitialAssessment((InitialAssessment)item);
+            }
+            else if (item.GetType() == typeof(IntubationAndSuction))
+            {
+                addIAndS((IntubationAndSuction)item);
+            }
+            else if (item.GetType() == typeof(LineInsertion))
+            {
+                addInsertions((LineInsertion)item);
+            }
+            else if (item.GetType() == typeof(Notes))
+            {
+                addNote((Notes)item);
+            }
+            else if (item.GetType() == typeof(Observation))
+            {
+                addObservation((Observation)item);
+            }
+            else if (item.GetType() == typeof(OtherProcedures))
+            {
+                addProcedure((OtherProcedures)item);
+            }
+            else if (item.GetType() == typeof(Reassessment))
+            {
+                addReassessment((Reassessment)item);
+            }
         }
 
     }

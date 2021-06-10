@@ -137,6 +137,7 @@
     <Compile Include="DataClasses\ApgarScore.cs" />
     <Compile Include="DataClasses\CardiacCompressions.cs" />
     <Compile Include="DataClasses\Event.cs" />
+    <Compile Include="DataClasses\EventAndTiming.cs" />
     <Compile Include="DataClasses\InitialAssessment.cs" />
     <Compile Include="DataClasses\IntubationAndSuction.cs" />
     <Compile Include="DataClasses\LineInsertion.cs" />
