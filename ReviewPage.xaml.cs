@@ -22,7 +22,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ReviewPage : Page
     {
-        public Timing TimingCount { get; set; }
+        public Timing TimingCount;
 
         public ReviewPage()
         {
@@ -54,7 +54,7 @@ namespace Resuscitate
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            TimingCount.Stop();
+            //TimingCount.Stop();
             this.Frame.Navigate(typeof(MainPage));
         }
 
