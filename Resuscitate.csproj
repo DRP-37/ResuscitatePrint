@@ -182,6 +182,8 @@
     <Compile Include="StaffPage.xaml.cs">
       <DependentUpon>StaffPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatusEvent.cs" />
+    <Compile Include="StatusList.cs" />
     <Compile Include="Timing.cs" />
     <Compile Include="VentilationPage.xaml.cs">
       <DependentUpon>VentilationPage.xaml</DependentUpon>

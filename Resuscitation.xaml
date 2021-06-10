@@ -5,7 +5,7 @@
     xmlns:local="using:Resuscitate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:c="clr-namespace:Resuscitate"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="using:Resuscitate.DataClasses"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -50,12 +50,43 @@
         <Button x:Name="ReviewButton" Margin="1181,19,0,0"  VerticalAlignment="Top" Height="78" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#330071FF" BorderBrush="#7F0071FF" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="24" Text="Review"/>
         </Button>
-        <Rectangle HorizontalAlignment="Left" Height="186" Margin="27,111,0,0" Stroke="Black" VerticalAlignment="Top" Width="604"/>
         <Rectangle HorizontalAlignment="Left" Height="558" Margin="819,111,0,0" Stroke="Black" VerticalAlignment="Top" Width="529"/>
         <TextBlock HorizontalAlignment="Left" Margin="27,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="190" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1"><Run Text="A"/><Run Text="ssessments"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="228,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="197" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Breathing"/>
         <TextBlock HorizontalAlignment="Left" Margin="427,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Circulation"/>
         <TextBlock HorizontalAlignment="Left" Margin="626,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Drugs"/>
 
+        <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,111,0,0" Width="767">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name" Style="{ThemeResource CaptionTextBlockStyle}"/>
+            <TextBlock Grid.Column="1" Text="Data" Style="{ThemeResource CaptionTextBlockStyle}"/>
+            <TextBlock Grid.Column="2" Text="Time" Style="{ThemeResource CaptionTextBlockStyle}"/>
+        </Grid>
+
+        <ListView  ItemsSource="{x:Bind StatusList.Events}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="27,149,0,0" Height="162" Width="767">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="TableDataTemplate" x:DataType="local:StatusEvent">
+                    <Grid Height="48" AutomationProperties.Name="{x:Bind Time}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="256"/>
+                            <ColumnDefinition Width="426"/>
+                            <ColumnDefinition Width="85"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Name}" />
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{x:Bind Data}"/>
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{x:Bind Time}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
