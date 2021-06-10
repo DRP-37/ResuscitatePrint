@@ -126,7 +126,7 @@ namespace Resuscitate
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ReviewPage));
+            this.Frame.Navigate(typeof(ReviewPage), TimingCount);
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
