@@ -8,38 +8,16 @@ namespace Resuscitate.DataClasses
 {
     class Notes : Event
     {
-        private List<String> notesList = new List<String>();
-
-        void addNote(String note)
+        public Notes(string note)
         {
-            notesList.Add(note);
+            this.Note = note;
         }
 
-        List<String> getListOfNotes()
-        {
-            return notesList;
-        }
-
-        String getNote(int i)
-        {
-            return notesList[i];
-        }
-
-        String getLastNote()
-        {
-            return getNote(notesList.Count - 1);
-        }
+        public string Note { get; set; }
 
         override public String ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (var n in notesList)
-            {
-                sb.Append(n + "\n");
-            }
-
-            return sb.ToString();
+            return Note;
         }
     }
 }

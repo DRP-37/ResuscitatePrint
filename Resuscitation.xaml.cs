@@ -1,4 +1,5 @@
 ﻿using Amazon.Runtime.Internal.Util;
+using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
 using System.IO;
