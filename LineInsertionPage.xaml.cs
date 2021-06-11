@@ -122,5 +122,10 @@ namespace Resuscitate
             }
             return false;
         }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

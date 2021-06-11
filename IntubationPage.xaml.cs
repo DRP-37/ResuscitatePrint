@@ -170,5 +170,10 @@ namespace Resuscitate
             }
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

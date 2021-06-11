@@ -98,5 +98,10 @@ namespace Resuscitate
             buttons[2].Background = new SolidColorBrush(Colors.White);
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
+        }
     }
 }

@@ -186,7 +186,8 @@ namespace Resuscitate
                 return null;
             }
 
-            return new StatusEvent(name, selected.Content.ToString().Replace("\r\n", ""), time);
+            TextBlock Text = selected.Content as TextBlock;
+            return new StatusEvent(name, Text.Text.Replace("\n", " "), time);
         }
 
         private bool SelectionMade(Button[] buttons)
@@ -235,6 +236,11 @@ namespace Resuscitate
             {
                 return temp;
             }
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
         }
     }
 }
