@@ -80,7 +80,13 @@ namespace Resuscitate
             statusEvent.Event = initialAssessment;
 
             // Add check whether a proper selection has been made
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            List<Event> Events = new List<Event>();
+            Events.Add(initialAssessment);
+
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            StatusEvents.Add(statusEvent);
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media;
 using Resuscitate.DataClasses;
 using Windows.UI.Popups;
+using System.Collections.Generic;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
@@ -69,12 +70,18 @@ namespace Resuscitate
             score.Response = response;
             score.Colour = colour;
 
-            statusEvent.Name = "Apgar Test";
+            statusEvent.Name = "Apgar Score";
             statusEvent.Data = score.totalScore().ToString();
             statusEvent.Time = score.Time.ToString();
             statusEvent.Event = score;
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, score, statusEvent));
+            List<Event> Events = new List<Event>();
+            Events.Add(score);
+
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            StatusEvents.Add(statusEvent);
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

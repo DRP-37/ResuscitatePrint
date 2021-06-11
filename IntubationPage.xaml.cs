@@ -76,7 +76,13 @@ namespace Resuscitate
                 statusEvent.Time = intubationAndSuction.Time.ToString();
                 statusEvent.Event = intubationAndSuction;
 
-                Frame.Navigate(typeof(Resuscitation), TimingCount);
+                List<Event> Events = new List<Event>();
+                Events.Add(intubationAndSuction);
+
+                List<StatusEvent> StatusEvents = new List<StatusEvent>();
+                StatusEvents.Add(statusEvent);
+
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
         }
 

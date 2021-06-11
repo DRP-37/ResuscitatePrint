@@ -65,7 +65,13 @@ namespace Resuscitate
             statusEvent.Time = procedures.Time.ToString();
             statusEvent.Event = procedures;
 
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            List<Event> Events = new List<Event>();
+            Events.Add(procedures);
+
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            StatusEvents.Add(statusEvent);
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

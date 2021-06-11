@@ -90,7 +90,14 @@ namespace Resuscitate
             statusEvent.Time = reassessment.Time.ToString();
             statusEvent.Event = reassessment;
 
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            List<Event> Events = new List<Event>();
+            Events.Add(observation);
+            Events.Add(reassessment);
+
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            StatusEvents.Add(statusEvent);
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
