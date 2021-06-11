@@ -60,21 +60,27 @@ namespace Resuscitate
 
         private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            statusEvent.Name = "Line Insertion";
-            statusEvent.Data = insertion.insertionToString() + (insertion.Successful ? tick : cross);
-            statusEvent.Time = insertion.Time.ToString();
-            statusEvent.Event = insertion;
-
-            var dialog = new MessageDialog(insertion.ToString());
-            await dialog.ShowAsync();
-
             // set data structure with line insertion, whether it was successful
             // and time stamp of selection
             // if a selection has not been made do not allow confirm
             if (SelectionMade(insertionButtons) && 
                 SelectionMade(new Button[] { Successful, Unsuccessful}))
             {
-                Frame.Navigate(typeof(Resuscitation), TimingCount);
+                statusEvent.Name = "Line Insertion";
+                statusEvent.Data = insertion.insertionToString() + (insertion.Successful ? tick : cross);
+                statusEvent.Time = insertion.Time.ToString();
+                statusEvent.Event = insertion;
+
+                var dialog = new MessageDialog(insertion.ToString());
+                await dialog.ShowAsync();
+
+                List<Event> Events = new List<Event>();
+                Events.Add(insertion);
+
+                List<StatusEvent> StatusEvents = new List<StatusEvent>();
+                StatusEvents.Add(statusEvent);
+
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
         }
 

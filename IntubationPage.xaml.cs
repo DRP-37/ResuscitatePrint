@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -36,6 +38,9 @@ namespace Resuscitate
         private bool isSuccessful;
         private bool allowConfirmation;
 
+        private IntubationAndSuction intubationAndSuction;
+        private StatusEvent statusEvent;
+
         public IntubationPage()
         {
             this.InitializeComponent();
@@ -48,16 +53,49 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            intubationAndSuction = new IntubationAndSuction();
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             if (allowConfirmation ||
-                (SelectionMade(confirmations) && Confirmation.Visibility == Visibility.Visible)) { 
-             // set data structure 
-                Frame.Navigate(typeof(Resuscitation), TimingCount);
+                (SelectionMade(confirmations) && Confirmation.Visibility == Visibility.Visible)) {
+                // set data structure 
+
+                intubationAndSuction.Time = TimingCount;
+                intubationAndSuction.Intubation = isIntubation;
+                intubationAndSuction.Suction = !isIntubation;
+                intubationAndSuction.Confirmation = (IntubationConfirmation)confirmation;
+                intubationAndSuction.IntubationSuccess = isSuccessful;
+
+                statusEvent.Name = isIntubation ? "Intubation" : "Suction";
+                statusEvent.Data = isIntubation ? intubationString() : "Suction under direct vision";
+                statusEvent.Time = intubationAndSuction.Time.ToString();
+                statusEvent.Event = intubationAndSuction;
+
+                List<Event> Events = new List<Event>();
+                Events.Add(intubationAndSuction);
+
+                List<StatusEvent> StatusEvents = new List<StatusEvent>();
+                StatusEvents.Add(statusEvent);
+
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
+        }
+
+        private string intubationString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(isSuccessful ? "Successful" : "Unsuccessful");
+            sb.Append(" intubation");
+            if (isSuccessful)
+            {
+                sb.Append($", confirmation: {intubationAndSuction.ConfirmationToString()}");
+            }
+            return sb.ToString();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

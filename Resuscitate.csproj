@@ -148,6 +148,7 @@
     <Compile Include="DataClasses\OtherProcedures.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
     <Compile Include="DataClasses\Reassessment.cs" />
+    <Compile Include="DataClasses\Ventillation.cs" />
     <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>

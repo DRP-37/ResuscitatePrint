@@ -67,7 +67,7 @@
             <TextBlock Grid.Column="2" Text="Time" Style="{ThemeResource CaptionTextBlockStyle}"/>
         </Grid>
 
-        <ListView  ItemsSource="{x:Bind StatusList.Events}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="27,149,0,0" Height="162" Width="767">
+        <ListView  ItemsSource="{x:Bind StatusList.Events}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="27,149,0,0" Height="162" Width="767" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>

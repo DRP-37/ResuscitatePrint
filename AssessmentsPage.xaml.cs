@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,9 @@ namespace Resuscitate
         private int tone;
         private int colour;
 
+        InitialAssessment initialAssessment;
+        StatusEvent statusEvent;
+
         public AssessmentsPage()
         {
             this.InitializeComponent();
@@ -53,14 +57,36 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            initialAssessment = new InitialAssessment(TimingCount);
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             // Set data structure
+            initialAssessment.Colour = colour;
+            initialAssessment.Tone = tone;
+            initialAssessment.RespEffort = respiration;
+            initialAssessment.HeartRate = hr;
+
+            initialAssessment.Clamping = (CordClamping)cord;
+            initialAssessment.TempReg = (TemperatureReg)temp;
+
+            statusEvent.Name = "New Assessment";
+            statusEvent.Data = initialAssessment.ToString(); ;
+            statusEvent.Time = initialAssessment.Time.ToString();
+            statusEvent.Event = initialAssessment;
+
             // Add check whether a proper selection has been made
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            List<Event> Events = new List<Event>();
+            Events.Add(initialAssessment);
+
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            StatusEvents.Add(statusEvent);
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

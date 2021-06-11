@@ -63,21 +63,28 @@ namespace Resuscitate
 
         private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            positioning.Positioning = (Positioning)position;
-
-            statusEvent.Name = "Positioning";
-            statusEvent.Data = positioning.positionToString();
-            statusEvent.Time = positioning.Time.ToString();
-            statusEvent.Event = positioning;
-
-            var dialog = new MessageDialog(positioning.ToString());
-            await dialog.ShowAsync();
-
+            
             // set data structure with airway procedure and time stamp of selection
             // if a selection has not been made do not allow confirm
             if (SelectionMade(positions))
             {
-                Frame.Navigate(typeof(Resuscitation), TimingCount);
+                positioning.Positioning = (Positioning)position;
+
+                statusEvent.Name = "Positioning";
+                statusEvent.Data = positioning.positionToString();
+                statusEvent.Time = positioning.Time.ToString();
+                statusEvent.Event = positioning;
+
+                var dialog = new MessageDialog(positioning.ToString());
+                await dialog.ShowAsync();
+
+                List<Event> Events = new List<Event>();
+                Events.Add(positioning);
+
+                List<StatusEvent> StatusEvents = new List<StatusEvent>();
+                StatusEvents.Add(statusEvent);
+
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
         }
 

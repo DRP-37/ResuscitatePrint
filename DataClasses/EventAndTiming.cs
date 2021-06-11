@@ -8,14 +8,14 @@ namespace Resuscitate.DataClasses
 {
     class EventAndTiming
     {
-        public EventAndTiming(Timing t, Event e, StatusEvent s) {
+        public EventAndTiming(Timing t, List<Event> e, List<StatusEvent> s) {
             Timing = t;
-            MedicalEvent = e;
-            StatusEvent = s;
+            MedicalEvents = e;
+            StatusEvents = s;
         }
 
         public Timing Timing { get; set; }
-        internal Event MedicalEvent { get; set; }
-        public StatusEvent StatusEvent { get; set; }
+        internal List<Event> MedicalEvents { get; set; }
+        public List<StatusEvent> StatusEvents { get; set; }
     }
 }

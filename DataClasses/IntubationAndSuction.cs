@@ -46,7 +46,7 @@ namespace Resuscitate.DataClasses
 
         }
 
-        private String ConfirmationToString() {
+        public String ConfirmationToString() {
             switch (Confirmation) {
                 case IntubationConfirmation.ETCO2:
                     return "ETC02";

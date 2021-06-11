@@ -43,9 +43,15 @@ namespace Resuscitate
             {
                 var EAndT = (EventAndTiming)e.Parameter;
                 TimingCount = EAndT.Timing;
-                var medicalEvent = EAndT.MedicalEvent;
-                data.addItem(medicalEvent);
-                StatusList.Events.Add(EAndT.StatusEvent);
+
+                foreach (Event Event in EAndT.MedicalEvents)
+                {
+                    data.addItem(Event);
+                }
+
+                foreach (StatusEvent Event in EAndT.StatusEvents) {
+                    StatusList.Events.Add(Event);
+                }
             }
             else {
                 TimingCount = (Timing)e.Parameter;
