@@ -33,6 +33,8 @@ namespace Resuscitate
         {
             // Initialise
             this.InitializeComponent();
+
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -43,20 +45,13 @@ namespace Resuscitate
                 TimingCount = EAndT.Timing;
                 var medicalEvent = EAndT.MedicalEvent;
                 data.addItem(medicalEvent);
+                StatusList.Events.Add(EAndT.StatusEvent);
             }
             else {
                 TimingCount = (Timing)e.Parameter;
             }
             
             base.OnNavigatedTo(e);
-
-            // Can be used to check StatusList
-            /*StatusList.Events.Add(new StatusEvent("Apgar", "4", "00:56"));
-            StatusList.Events.Add(new StatusEvent("Heart Rate", "4", "01:45"));
-            StatusList.Events.Add(new StatusEvent("Chest Drain (Left)", "N/A", "03:52"));
-            StatusList.Events.Add(new StatusEvent("Apgar", "4", "00:58"));
-            StatusList.Events.Add(new StatusEvent("Heart Rate", "4", "01:41"));
-            StatusList.Events.Add(new StatusEvent("Chest Drain (Left)", "N/A", "03:56"));*/
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)

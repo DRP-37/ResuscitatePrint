@@ -74,7 +74,7 @@ namespace Resuscitate
             statusEvent.Time = score.Time.ToString();
             statusEvent.Event = score;
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount,score));
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, score, statusEvent));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

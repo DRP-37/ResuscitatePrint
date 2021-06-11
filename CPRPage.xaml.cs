@@ -56,6 +56,7 @@ namespace Resuscitate
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             Timer.Stop();
+            Timings.Add(Count);
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -68,6 +69,7 @@ namespace Resuscitate
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Timer.Stop();
+            Timings.Add(Count);
 
             Frame rootFrame = Window.Current.Content as Frame;
 
