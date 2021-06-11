@@ -15,10 +15,7 @@ namespace Resuscitate
 
         public Event Event { get; set; }
 
-        public StatusEvent()
-        {
-
-        }
+        public StatusEvent() { }
 
         // TODO: add Event to constructor
         public StatusEvent(string Name, string Data, string Time)

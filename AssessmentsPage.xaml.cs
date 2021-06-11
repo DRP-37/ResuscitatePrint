@@ -83,8 +83,15 @@ namespace Resuscitate
             List<Event> Events = new List<Event>();
             Events.Add(initialAssessment);
 
+            string Time = initialAssessment.Time.ToString();
+
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            StatusEvents.Add(statusEvent);
+            AddIfNotNull(GenerateStatusEvent("Colour", colours, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Heart Rate", hrs, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Muscle", tones, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Temperature Regulation", tempRegulations, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Cord Clamping", cordClamping, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", respirations, Time), StatusEvents);
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
@@ -152,6 +159,36 @@ namespace Resuscitate
             buttons[1].Background = new SolidColorBrush(Colors.White);
             buttons[2].Background = new SolidColorBrush(Colors.White);
             sender.Background = new SolidColorBrush(Colors.LightGreen);
+        }
+
+        private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time)
+        {
+            Button selected = null;
+
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    selected = button;
+                }
+            }
+
+            if (selected == null)
+            {
+                return null;
+            }
+
+            return new StatusEvent(name, selected.Content.ToString(), time); ;
+        }
+
+        private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)
+        {
+            if (Event != null)
+            {
+                StatusEvents.Add(Event);
+            }
         }
     }
 }
