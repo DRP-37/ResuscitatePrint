@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,6 +58,12 @@ namespace Resuscitate
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             TimingCount.Stop();
+
+            // Send data to the firestore
+            // This will be replaced with the actual patient data being passed around.
+            //PatientData patientData = new PatientData();
+            //patientData.sendToFirestore();
+
             this.Frame.Navigate(typeof(MainPage));
         }
 

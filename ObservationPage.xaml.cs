@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,9 @@ namespace Resuscitate
         private int? heartRate;
         private int? oxygenPercent;
 
+        private Reassessment reassessment;
+        private Observation observation;
+        private StatusEvent statusEvent;
 
         public ObservationPage()
         {
@@ -49,6 +53,10 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            reassessment = new Reassessment();
+            observation = new Observation();
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
@@ -57,6 +65,31 @@ namespace Resuscitate
             // Set data structure
             //TODO: Not really sure if all data needs to be added for this to be valid
             // but a check will need to added
+
+            reassessment.Time = TimingCount;
+            observation.Time = TimingCount;
+
+            reassessment.Hr = (HeartRate)hr;
+            reassessment.Movement = (ChestMovement)(movement ? 1 : 0);
+            reassessment.Effort = (RespiratoryEffort)response;
+
+            if (heartRate != null) {
+                observation.Hr = (float)heartRate;
+            }
+            if (oxygenLvl != null)
+            {
+                observation.OximeterOxygen = (float)oxygenLvl;
+            }
+            if (oxygenPercent != null)
+            {
+                observation.OxygenGiven = (float)oxygenPercent;
+            }
+
+            statusEvent.Name = "Reassessment and Observation";
+            statusEvent.Data = "";
+            statusEvent.Time = reassessment.Time.ToString();
+            statusEvent.Event = reassessment;
+
             Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
