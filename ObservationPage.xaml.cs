@@ -63,53 +63,60 @@ namespace Resuscitate
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             // Set data structure
-            //TODO: Not really sure if all data needs to be added for this to be valid
-            // but a check will need to added
+            bool invalidValues = false;
+            List<Event> Events = new List<Event>();
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            string Time = TimingCount.ToString();
 
             reassessment.Time = TimingCount;
             observation.Time = TimingCount;
 
-            reassessment.Hr = (HeartRate)hr;
-            reassessment.Movement = (ChestMovement)movement;
-            reassessment.Effort = (RespiratoryEffort)response;
-
             if (heartRate != null) {
                 observation.Hr = (float)heartRate;
-            }
-            if (oxygenLvl != null)
-            {
-                observation.OximeterOxygen = (float)oxygenLvl;
-            }
-            if (oxygenPercent != null)
-            {
-                observation.OxygenGiven = (float)oxygenPercent;
-            }
-
-            List<Event> Events = new List<Event>();
-            Events.Add(observation);
-            Events.Add(reassessment);
-
-            string Time = reassessment.Time.ToString();
-
-            List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            AddIfNotNull(GenerateStatusEvent("Heart Rate Range", hrs, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", responses, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Chest Movement", movements, Time), StatusEvents);
-
-            if (heartRate != null)
-            {
                 StatusEvents.Add(new StatusEvent("Heart Rate", heartRate + " bpm", Time));
             }
 
             if (oxygenLvl != null)
             {
-                StatusEvents.Add(new StatusEvent("Oxygen Level", oxygenLvl + "%", Time));
+                if (oxygenLvl > 100)
+                {
+                    invalidValues = true;
+                    OxygenLevels.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                } else
+                {
+                    observation.OximeterOxygen = (float)oxygenLvl;
+                    StatusEvents.Add(new StatusEvent("Oxygen Level", oxygenLvl + "%", Time));
+                }
             }
 
             if (oxygenPercent != null)
             {
-                StatusEvents.Add(new StatusEvent("Oxygen Percent", oxygenPercent + "%", Time));
+                if (oxygenLvl > 100)
+                {
+                    invalidValues = true;
+                    PercentOxygen.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                } else
+                {
+                    observation.OxygenGiven = (float)oxygenPercent;
+                    StatusEvents.Add(new StatusEvent("Oxygen Percent", oxygenPercent + "%", Time));
+                }
             }
+
+            if (invalidValues)
+            {
+                return;
+            }
+
+            reassessment.Hr = (HeartRate)hr;
+            reassessment.Movement = (ChestMovement)movement;
+            reassessment.Effort = (RespiratoryEffort)response;
+
+            Events.Add(observation);
+            Events.Add(reassessment);
+
+            AddIfNotNull(GenerateStatusEvent("Heart Rate Range", hrs, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", responses, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Chest Movement", movements, Time), StatusEvents);
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
@@ -119,15 +126,11 @@ namespace Resuscitate
             Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
-        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void movement_Click(object sender, RoutedEventArgs e)
         {
-            movement = (sender as Button).Equals(absent) ? 0 : 1;
-            UpdateColours(new Button[] { absent, present}, sender as Button);
+            Button selected = (sender as Button);
+            movement = selected.Equals(absent) ? 0 : 1;
+            UpdateColours(movements, selected);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
@@ -144,58 +147,24 @@ namespace Resuscitate
             this.response = selected.Name[selected.Name.Length - 1] - '0';
         }
 
-        private bool SelectionMade(Button[] buttons)
-        {
-            foreach (Button button in buttons)
-            {
-                SolidColorBrush colour = button.Background as SolidColorBrush;
-
-                if (colour.Color == Colors.LightGreen)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private void UpdateColours(Button[] buttons, Button sender)
-        {
-            foreach (Button button in buttons)
-            {
-                button.Background = new SolidColorBrush(Colors.White);
-            }
-            sender.Background = new SolidColorBrush(Colors.LightGreen);
-        }
-
-        private void ParseInput(TextBox textBox, int? input)
-        {
-            
-            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
-            int temp;
-            if (!int.TryParse(textBox.Text, out temp))
-            {
-                // if parsing attempt wasn't successful
-                // output message to enter only numbers
-            }
-            else
-            {
-                input = temp;
-            }
-        }
-
         private void OxygenLevels_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ParseInput(OxygenLevels, oxygenLvl);
+            oxygenLvl = ParseInt(OxygenLevels);
         }
 
         private void PercentOxygen_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ParseInput(PercentOxygen, oxygenPercent);
+            oxygenPercent = ParseInt(PercentOxygen);
         }
 
         private void HeartRate_TextChanged(object sender, TextChangedEventArgs e)
-        {          
-            ParseInput(HeartRate, heartRate);
+        {
+            heartRate = ParseInt(HeartRate);
+        }
+
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Nothing
         }
 
         private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time)
@@ -217,7 +186,21 @@ namespace Resuscitate
                 return null;
             }
 
-            return new StatusEvent(name, selected.Content.ToString(), time); ;
+            return new StatusEvent(name, selected.Content.ToString().Replace("\r\n", ""), time);
+        }
+
+        private bool SelectionMade(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)
@@ -225,6 +208,32 @@ namespace Resuscitate
             if (Event != null)
             {
                 StatusEvents.Add(Event);
+            }
+        }
+
+        private void UpdateColours(Button[] buttons, Button sender)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
+            }
+            sender.Background = new SolidColorBrush(Colors.LightGreen);
+        }
+
+        // Returns null if unsuccessful
+        private int? ParseInt(TextBox textBox)
+        {
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+            int temp;
+            if (!int.TryParse(textBox.Text, out temp))
+            {
+                // if parsing attempt wasn't successful
+                // output message to enter only numbers
+                return null;
+            }
+            else
+            {
+                return temp;
             }
         }
     }
