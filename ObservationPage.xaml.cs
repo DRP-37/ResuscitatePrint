@@ -120,6 +120,8 @@ namespace Resuscitate
 
         private void ParseInput(TextBox textBox, int? input)
         {
+            
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             int temp;
             if (!int.TryParse(textBox.Text, out temp))
             {
@@ -143,7 +145,7 @@ namespace Resuscitate
         }
 
         private void HeartRate_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        {          
             ParseInput(HeartRate, heartRate);
         }
     }

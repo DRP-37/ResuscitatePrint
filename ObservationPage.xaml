@@ -72,8 +72,8 @@
         <TextBlock x:Name="textBlock1_Copy7" HorizontalAlignment="Left" Margin="355,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
         <TextBlock x:Name="textBlock1_Copy8" HorizontalAlignment="Left" Margin="738,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
         <TextBlock x:Name="textBlock1_Copy9" HorizontalAlignment="Left" Margin="355,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="bpm" FontSize="26"/>
-        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="277,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="32" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged"/>
-        <TextBox x:Name="PercentOxygen" HorizontalAlignment="Left" Height="48" Margin="655,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="32" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="PercentOxygen_TextChanged"/>
-        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="277,515,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="32" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HeartRate_TextChanged"/>
+        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="277,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Center" MaxLength="5"/>
+        <TextBox x:Name="PercentOxygen" HorizontalAlignment="Left" Height="48" Margin="655,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="PercentOxygen_TextChanged" MaxLength="5" TextAlignment="Center"/>
+        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="277,515,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center" MaxLength="5"/>
     </Grid>
 </Page>

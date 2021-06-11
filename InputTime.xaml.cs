@@ -89,12 +89,14 @@ namespace Resuscitate
 
         private void TimeMinutes_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            TextBox textBox = (TextBox)sender;
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
         }
 
         private void TimeSeconds_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            TextBox textBox = (TextBox)sender;
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
         }
 
         private void TimeColon_Copy_SelectionChanged(object sender, RoutedEventArgs e)

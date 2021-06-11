@@ -39,6 +39,6 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="325,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="384" FontWeight="Bold" Foreground="Gray" Text="Air Or Oxygen Given:" Height="56"/>
         <TextBlock HorizontalAlignment="Left" Margin="835,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="56" FontWeight="Bold" Foreground="Gray" Text="%" Height="56" RenderTransformOrigin="0.458,0.476"/>
-        <TextBox x:Name="AirGiven" HorizontalAlignment="Left" Height="67" Margin="750,500,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" FontSize="36" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="AirGiven_TextChanged"/>
+        <TextBox x:Name="AirGiven" HorizontalAlignment="Left" Height="67" Margin="750,500,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" FontSize="20" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="AirGiven_TextChanged" MaxLength="5" TextAlignment="Center"/>
     </Grid>
 </Page>

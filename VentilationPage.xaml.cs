@@ -80,6 +80,8 @@ namespace Resuscitate
 
         private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
         {
+            TextBox textBox = (TextBox)sender;
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             int temp;
             if (!int.TryParse(AirGiven.Text, out temp))
             {
