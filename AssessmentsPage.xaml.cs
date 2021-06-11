@@ -39,7 +39,6 @@ namespace Resuscitate
         private int colour;
 
         InitialAssessment initialAssessment;
-        StatusEvent statusEvent;
 
         public AssessmentsPage()
         {
@@ -58,7 +57,6 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             initialAssessment = new InitialAssessment(TimingCount);
-            statusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
@@ -73,11 +71,6 @@ namespace Resuscitate
 
             initialAssessment.Clamping = (CordClamping)cord;
             initialAssessment.TempReg = (TemperatureReg)temp;
-
-            statusEvent.Name = "New Assessment";
-            statusEvent.Data = initialAssessment.ToString(); ;
-            statusEvent.Time = initialAssessment.Time.ToString();
-            statusEvent.Event = initialAssessment;
 
             // Add check whether a proper selection has been made
             List<Event> Events = new List<Event>();

@@ -27,9 +27,10 @@ namespace Resuscitate
         public Timing TimingCount { get; set; }
         private Button[] responses;
         private Button[] hrs;
+        private Button[] movements;
         private int response;
         private int hr;
-        private bool movement;
+        private int movement;
         // int? is implicitly set to null if undeclared
         // using it instead of int to know whether any input has been added
         // Representing as a number instead of String to catch invalid input
@@ -39,13 +40,13 @@ namespace Resuscitate
 
         private Reassessment reassessment;
         private Observation observation;
-        private StatusEvent statusEvent;
 
         public ObservationPage()
         {
             this.InitializeComponent();
             responses = new Button[] { resp0, resp1, resp2, resp3 };
             hrs = new Button[] { hr0, hr1, hr2, hr3 };
+            movements = new Button[] { absent, present };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -55,7 +56,6 @@ namespace Resuscitate
 
             reassessment = new Reassessment();
             observation = new Observation();
-            statusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
@@ -70,7 +70,7 @@ namespace Resuscitate
             observation.Time = TimingCount;
 
             reassessment.Hr = (HeartRate)hr;
-            reassessment.Movement = (ChestMovement)(movement ? 1 : 0);
+            reassessment.Movement = (ChestMovement)movement;
             reassessment.Effort = (RespiratoryEffort)response;
 
             if (heartRate != null) {
@@ -85,17 +85,31 @@ namespace Resuscitate
                 observation.OxygenGiven = (float)oxygenPercent;
             }
 
-            statusEvent.Name = "Reassessment and Observation";
-            statusEvent.Data = "";
-            statusEvent.Time = reassessment.Time.ToString();
-            statusEvent.Event = reassessment;
-
             List<Event> Events = new List<Event>();
             Events.Add(observation);
             Events.Add(reassessment);
 
+            string Time = reassessment.Time.ToString();
+
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            StatusEvents.Add(statusEvent);
+            AddIfNotNull(GenerateStatusEvent("Heart Rate Range", hrs, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", responses, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Chest Movement", movements, Time), StatusEvents);
+
+            if (heartRate != null)
+            {
+                StatusEvents.Add(new StatusEvent("Heart Rate", heartRate + " bpm", Time));
+            }
+
+            if (oxygenLvl != null)
+            {
+                StatusEvents.Add(new StatusEvent("Oxygen Level", oxygenLvl + "%", Time));
+            }
+
+            if (oxygenPercent != null)
+            {
+                StatusEvents.Add(new StatusEvent("Oxygen Percent", oxygenPercent + "%", Time));
+            }
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
@@ -117,7 +131,7 @@ namespace Resuscitate
 
         private void movement_Click(object sender, RoutedEventArgs e)
         {
-            movement = (sender as Button).Equals(absent);
+            movement = (sender as Button).Equals(absent) ? 0 : 1;
             UpdateColours(new Button[] { absent, present}, sender as Button);
         }
 
@@ -187,6 +201,36 @@ namespace Resuscitate
         private void HeartRate_TextChanged(object sender, TextChangedEventArgs e)
         {          
             ParseInput(HeartRate, heartRate);
+        }
+
+        private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time)
+        {
+            Button selected = null;
+
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    selected = button;
+                }
+            }
+
+            if (selected == null)
+            {
+                return null;
+            }
+
+            return new StatusEvent(name, selected.Content.ToString(), time); ;
+        }
+
+        private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)
+        {
+            if (Event != null)
+            {
+                StatusEvents.Add(Event);
+            }
         }
     }
 }
