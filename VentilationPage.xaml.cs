@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,9 @@ namespace Resuscitate
         // 4: Mask CPAP
         private int ventilationProcedure;
 
+        private Ventillation ventilation;
+        private StatusEvent statusEvent;
+
         public VentilationPage()
         {
             this.InitializeComponent();
@@ -45,6 +49,9 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            ventilation = new Ventillation();
+            statusEvent = new StatusEvent();
+
             base.OnNavigatedTo(e);
         }
 
@@ -53,6 +60,15 @@ namespace Resuscitate
             if (SelectionMade(procedures) && airGiven != null)
             {
                 // set data structure with ventilation procedure and time stamp of selection
+                ventilation.Time = TimingCount;
+                ventilation.Oxygen = (float)airGiven;
+                ventilation.VentType = (VentillationType)ventilationProcedure;
+
+                statusEvent.Name = "Ventilation";
+                statusEvent.Data = $"{ventilation.ventToString()}, {airGiven}%";
+                statusEvent.Time = ventilation.Time.ToString();
+                statusEvent.Event = ventilation;
+
                 Frame.Navigate(typeof(Resuscitation), TimingCount);
             }
         }

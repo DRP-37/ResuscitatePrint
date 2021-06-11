@@ -29,12 +29,12 @@ namespace Resuscitate.DataClasses
         private HeartRate hr;
         private ChestMovement movement;
         private RespiratoryEffort effort;
-        private TimeSpan time;
+        private Timing time;
 
         public HeartRate Hr { get => hr; set => hr = value; }
         public ChestMovement Movement { get => movement; set => movement = value; }
         public RespiratoryEffort Effort { get => effort; set => effort = value; }
-        public TimeSpan Time { get => time; set => time = value; }
+        public Timing Time { get => time; set => time = value; }
 
 
 
