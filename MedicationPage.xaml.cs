@@ -94,12 +94,7 @@ namespace Resuscitate
         {
             ResetDoses();
 
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
