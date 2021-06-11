@@ -32,22 +32,24 @@ namespace Resuscitate.DataClasses
             if (ventType == VentillationType.InflationMask)
             {
                 return "Inflation via Mask";
-            } else if (ventType == VentillationType.InflationETT)
+            }
+            else if (ventType == VentillationType.InflationETT)
             {
                 return "Inflation via ETT";
             }
-            else if(ventType == VentillationType.VentMask)
+            else if (ventType == VentillationType.VentMask)
             {
                 return "Ventillation via Mask";
             }
-            else if(ventType == VentillationType.VentETT)
+            else if (ventType == VentillationType.VentETT)
             {
                 return "Ventillation via ETT";
             }
-            else if(ventType == VentillationType.MaskCPAP)
+            else if (ventType == VentillationType.MaskCPAP)
             {
                 return "Mask CPAP";
-            } else
+            }
+            else
             {
                 return "";
             }
