@@ -81,7 +81,8 @@ namespace Resuscitate
                 if (oxygenLvl > 100)
                 {
                     invalidValues = true;
-                    OxygenLevels.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                    OxygenLevels.BorderBrush = new SolidColorBrush(Colors.Red);
+                    OxygenLevels.Background = new SolidColorBrush(Colors.PaleVioletRed);
                 } else
                 {
                     observation.OximeterOxygen = (float)oxygenLvl;

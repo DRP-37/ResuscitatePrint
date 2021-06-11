@@ -36,13 +36,14 @@
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Ventilation Breaths:&#xA;via ETT" FontSize="27"/>
         </Button>
-        <Button x:Name="MaskCPAP" Content="Mask CPAP" Margin="468,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
+        <Button x:Name="MaskCPAP" Margin="468,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Mask CPAP" FontSize="27"/>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="325,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="384" FontWeight="Bold" Foreground="Gray" Text="Air Or Oxygen Given:" Height="56"/>
         <TextBlock HorizontalAlignment="Left" Margin="835,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="56" FontWeight="Bold" Foreground="Gray" Text="%" Height="56" RenderTransformOrigin="0.458,0.476"/>
-        <TextBox x:Name="AirGiven" HorizontalAlignment="Left" Height="67" Margin="750,500,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" FontSize="20" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="AirGiven_TextChanged" MaxLength="5" TextAlignment="Center"/>
+        <TextBox x:Name="AirGiven" HorizontalAlignment="Left" Height="67" Margin="750,500,0,0" Text="" VerticalAlignment="Top" Width="78" FontSize="36" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="AirGiven_TextChanged" MaxLength="5" TextAlignment="Center"/>
     </Grid>
 </Page>

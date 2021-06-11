@@ -57,19 +57,33 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionMade(procedures) && airGiven != null)
+            if (SelectionMade(procedures))
             {
+                bool hasAirGiven = airGiven != null;
+
+                if (hasAirGiven && airGiven > 100)
+                {
+                    AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+                    AirGiven.Background = new SolidColorBrush(Colors.PaleVioletRed);
+                    return;
+                }
+
+                List<Event> EventList = new List<Event>();
+                List<StatusEvent> StatusList = new List<StatusEvent>();
+
                 // set data structure with ventilation procedure and time stamp of selection
                 ventilation.Time = TimingCount;
-                ventilation.Oxygen = (float)airGiven;
+                ventilation.Oxygen = hasAirGiven ? (float)airGiven : -1;
                 ventilation.VentType = (VentillationType)ventilationProcedure;
+                EventList.Add(ventilation);
 
-                statusEvent.Name = "Ventilation";
-                statusEvent.Data = $"{ventilation.ventToString()}, {airGiven}%";
+                statusEvent.Name = ventilation.ventToString();
+                statusEvent.Data = hasAirGiven ? $"{airGiven}% Air/Oxygen Given" : "N/I";
                 statusEvent.Time = ventilation.Time.ToString();
                 statusEvent.Event = ventilation;
+                StatusList.Add(statusEvent);
 
-                Frame.Navigate(typeof(Resuscitation), TimingCount);
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
             }
         }
 
