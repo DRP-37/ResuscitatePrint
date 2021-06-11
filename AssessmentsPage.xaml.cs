@@ -31,12 +31,12 @@ namespace Resuscitate
         private Button[] tones;
         private Button[] tempRegulations;
         private Button[] cordClamping;
-        private int cord;
-        private int temp;
-        private int hr;
-        private int respiration;
-        private int tone;
-        private int colour;
+        private int cord = -1;
+        private int temp = -1;
+        private int hr = -1;
+        private int respiration = -1;
+        private int tone = -1;
+        private int colour = -1;
 
         InitialAssessment initialAssessment;
 
@@ -101,42 +101,97 @@ namespace Resuscitate
 
         private void colour_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                this.colour = -1;
+                return;
+            }
+
             changeColours(colours, selected);
             this.colour = selected.Name[selected.Name.Length - 1] - '0';
+            Console.WriteLine(this.colour);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                this.hr = -1;
+                return;
+            }
+
             changeColours(hrs, selected);
             this.hr = selected.Name[selected.Name.Length - 1] - '0';
         }
 
         private void tone_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                this.tone = -1;
+                return;
+            }
+
             changeColours(tones, selected);
             this.tone = selected.Name[selected.Name.Length - 1] - '0';
         }
 
         private void resp_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                this.respiration = -1;
+                return;
+            }
+
             changeColours(respirations, selected);
             this.respiration = selected.Name[selected.Name.Length - 1] - '0';
         }
 
         private void cord_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                this.cord = -1;
+                return;
+            }
+
             changeColours(cordClamping, selected);
             this.cord = selected.Name[selected.Name.Length - 1] - '0';
         }
 
         private void temp_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                this.temp = -1;
+                return;
+            }
+
             changeColours(tempRegulations, selected);
             this.temp = selected.Name[selected.Name.Length - 1] - '0';
         }

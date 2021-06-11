@@ -89,7 +89,7 @@
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="901,178,0,0" Text="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="20" TextAlignment="Center"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="112,258,0,0" Text="Colour" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="167" FontSize="20"/>
         <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="112,373,0,0" Text="Heartrate" TextWrapping="Wrap" VerticalAlignment="Top" Height="35" Width="167" FontSize="20"/>
-        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="77,0,0,0" Text="Response to Stimulus" TextWrapping="Wrap" VerticalAlignment="Center" Height="38" Width="202" FontSize="20"/>
+        <TextBlock x:Name="textBlock1_Copy1" HorizontalAlignment="Left" Margin="76,471,0,0" Text="Response to Stimulus" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="202" FontSize="20"/>
         <TextBlock x:Name="textBlock1_Copy2" HorizontalAlignment="Left" Margin="112,597,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="38" Width="167" Text="Muscle Tone" FontSize="20"/>
         <TextBlock x:Name="textBlock1_Copy3" HorizontalAlignment="Left" Margin="112,715,0,0" Text="Respiratory Effort" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="167" FontSize="20"/>
         <Button x:Name="BackButton" Content="Back" Margin="1209,433,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
