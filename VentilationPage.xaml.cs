@@ -64,7 +64,7 @@ namespace Resuscitate
                 if (hasAirGiven && airGiven > 100)
                 {
                     AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
-                    AirGiven.Background = new SolidColorBrush(Colors.PaleVioletRed);
+                    AirGiven.Background = new SolidColorBrush(Colors.LightPink);
                     return;
                 }
 
@@ -94,13 +94,23 @@ namespace Resuscitate
 
         private void Ventilation_Click(object sender, RoutedEventArgs e)
         {
-            UpdateColours(procedures, sender as Button);
-            ventilationProcedure = Array.IndexOf(procedures, sender as Button);
+            Button selected = (sender as Button);
+            int index = Array.IndexOf(procedures, selected);
+            if (this.ventilationProcedure == index)
+            {
+                procedures[index].Background = new SolidColorBrush(Colors.White);
+                ventilationProcedure = -1;
+            }
+            else
+            {
+                UpdateColours(procedures, selected);
+                ventilationProcedure = index;
+            }
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)

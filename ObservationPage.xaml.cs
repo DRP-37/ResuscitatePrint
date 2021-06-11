@@ -28,9 +28,9 @@ namespace Resuscitate
         private Button[] responses;
         private Button[] hrs;
         private Button[] movements;
-        private int response;
-        private int hr;
-        private int movement;
+        private int response = -1;
+        private int hr = -1;
+        private int movement = -1;
         // int? is implicitly set to null if undeclared
         // using it instead of int to know whether any input has been added
         // Representing as a number instead of String to catch invalid input
@@ -96,6 +96,7 @@ namespace Resuscitate
                 {
                     invalidValues = true;
                     PercentOxygen.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                    PercentOxygen.Background = new SolidColorBrush(Colors.LightPink);
                 } else
                 {
                     observation.OxygenGiven = (float)oxygenPercent;
@@ -130,22 +131,50 @@ namespace Resuscitate
         private void movement_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            movement = selected.Equals(absent) ? 0 : 1;
-            UpdateColours(movements, selected);
+            int index = Array.IndexOf(movements, selected);
+
+            if (this.movement == index)
+            {
+                movements[index].Background = new SolidColorBrush(Colors.White);
+                movement = -1;
+            }
+            else
+            {
+                UpdateColours(movements, selected);
+                this.movement = index;
+            }
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            UpdateColours(hrs, selected);
-            this.hr = selected.Name[selected.Name.Length - 1] - '0';
+            int index = Array.IndexOf(hrs, selected);
+            if (this.hr == index)
+            {
+                hrs[index].Background = new SolidColorBrush(Colors.White);
+                hr = -1;
+            }
+            else
+            {
+                UpdateColours(hrs, selected);
+                this.hr = selected.Name[selected.Name.Length - 1] - '0';
+            }
         }
 
         private void resp_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            UpdateColours(responses, selected);
-            this.response = selected.Name[selected.Name.Length - 1] - '0';
+            int index = Array.IndexOf(responses, selected);
+            if (this.response == index)
+            {
+                responses[index].Background = new SolidColorBrush(Colors.White);
+                response = -1;
+            }
+            else
+            {
+                UpdateColours(responses, selected);
+                this.response = selected.Name[selected.Name.Length - 1] - '0';
+            }
         }
 
         private void OxygenLevels_TextChanged(object sender, TextChangedEventArgs e)
