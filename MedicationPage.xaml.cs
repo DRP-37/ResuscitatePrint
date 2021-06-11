@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,6 +42,9 @@ namespace Resuscitate
         private int[] NumDoses = new int[NUM_MEDICATIONS];
         private bool[] DoseGiven = new bool[NUM_MEDICATIONS];
 
+        private Medication medication;
+        private StatusEvent statusEvent;
+
         public MedicationPage()
         {
             this.InitializeComponent();
@@ -58,6 +62,9 @@ namespace Resuscitate
 
             base.OnNavigatedTo(e);
 
+            medication = new Medication();
+            statusEvent = new StatusEvent();
+
             // Reset DoseGiven and buttons' colours
             foreach (Button Medication in Medications)
             {
@@ -71,6 +78,14 @@ namespace Resuscitate
         {
             if (SelectionMade(Medications))
             {
+                medication.Time = TimingCount;
+                medication.setData(DoseGiven);
+
+                statusEvent.Name = "Medication Given";
+                statusEvent.Data = "";
+                statusEvent.Time = medication.Time.ToString();
+                statusEvent.Event = medication;
+
                 Frame.Navigate(typeof(Resuscitation), TimingCount);
             }
         }

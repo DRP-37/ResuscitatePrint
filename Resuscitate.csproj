@@ -142,6 +142,7 @@
     <Compile Include="DataClasses\InitialAssessment.cs" />
     <Compile Include="DataClasses\IntubationAndSuction.cs" />
     <Compile Include="DataClasses\LineInsertion.cs" />
+    <Compile Include="DataClasses\Medication.cs" />
     <Compile Include="DataClasses\Notes.cs" />
     <Compile Include="DataClasses\Observation.cs" />
     <Compile Include="DataClasses\OtherProcedures.cs" />
