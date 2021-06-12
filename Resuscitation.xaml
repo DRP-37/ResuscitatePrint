@@ -36,7 +36,7 @@
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Line"/><LineBreak/><Run Text="Insertion"/></TextBlock>
         </Button>
         <Button x:Name="BloodButton" Margin="427,578,0,0"  VerticalAlignment="Top" Height="91" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BloodButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Blood"/><LineBreak/><Run Text="Results"/></TextBlock>
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Blood Gas"/><LineBreak/><Run Text="Results"/></TextBlock>
         </Button>
         <Button x:Name="MedicationButton" Margin="626,346,0,0"  VerticalAlignment="Top" Height="90" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="MedicationButton_Click">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Medication"/><LineBreak/><Run Text="Given"/></TextBlock>
