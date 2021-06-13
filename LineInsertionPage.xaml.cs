@@ -58,7 +58,7 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private  void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             // set data structure with line insertion, whether it was successful
             // and time stamp of selection

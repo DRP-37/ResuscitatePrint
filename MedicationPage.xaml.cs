@@ -27,6 +27,7 @@ namespace Resuscitate
         private static int NUM_MEDICATIONS = 8;
         
         public Timing TimingCount { get; set; }
+        private TextBlock[] NameViews;
 
         // Doses:
         // 0: Adrenaline 1 in 10,000 (0.1 ml/kg) IV  
@@ -53,6 +54,8 @@ namespace Resuscitate
                 CellTransfusionButton, ADRviaETTButton, Surfactant120Button, Surfactant240Button };
             DoseViews = new TextBlock[] { ADR1Dose, ADR2Dose, SodBicarbDose, DextroseDose,
                 CellTransfusionDose, ADRviaETTDose, Surfactant120Dose, Surfactant240Dose };
+            NameViews = new TextBlock[] { ADR1View, ADR2View, SodBicarbView, DextroseView, 
+                CellTransfusionView, ADRviaETTView, Surfactant120View, Surfactant240View};
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
