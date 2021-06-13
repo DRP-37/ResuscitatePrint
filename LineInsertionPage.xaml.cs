@@ -125,7 +125,7 @@ namespace Resuscitate
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            // Nothing
         }
     }
 }

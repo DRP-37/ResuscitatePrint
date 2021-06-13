@@ -92,7 +92,12 @@ namespace Resuscitate
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
+            // Nothing
+        }
 
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
         }
     }
 }
