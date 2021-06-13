@@ -95,9 +95,8 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            ResetDoses();
-
             Frame.Navigate(typeof(Resuscitation), TimingCount);
+            ResetDoses();
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
