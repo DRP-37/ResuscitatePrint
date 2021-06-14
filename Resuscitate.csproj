@@ -185,6 +185,9 @@
       <DependentUpon>ReviewDocsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReviewPage.xaml.cs" />
+    <Compile Include="SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReviewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SignUpPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
