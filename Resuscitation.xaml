@@ -50,7 +50,11 @@
         <Button x:Name="ReviewButton" Margin="1181,19,0,0"  VerticalAlignment="Top" Height="78" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#330071FF" BorderBrush="#7F0071FF" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="24" Text="Review"/>
         </Button>
-        <Rectangle HorizontalAlignment="Left" Height="558" Margin="819,111,0,0" Stroke="Black" VerticalAlignment="Top" Width="529"/>
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Height="558" Margin="819,111,0,0" VerticalAlignment="Top" Width="529" BorderBrush="Gray">
+            <ScrollViewer  Name="MyScrollViewer"  MinZoomFactor="1" ZoomMode="Enabled" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+                <Image Name="Algorithm"   Source="Assets/AlgoDiagram.png" Width="448"/>
+            </ScrollViewer>
+        </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="27,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="190" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1"><Run Text="A"/><Run Text="ssessments"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="228,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="197" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Breathing"/>
         <TextBlock HorizontalAlignment="Left" Margin="427,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Circulation"/>

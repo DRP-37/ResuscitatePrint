@@ -204,6 +204,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AlgoDiagram.png" />
     <Content Include="Assets\heart100bpm.gif" />
     <Content Include="Assets\heart90bpm.gif" />
     <Content Include="Assets\Microphone.png" />
