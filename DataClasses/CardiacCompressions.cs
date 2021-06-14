@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class CardiacCompressions : Event
+    public class CardiacCompressions : Event
     {
         private List<Timing> start = new List<Timing>();
         private List<Timing> end = new List<Timing>();

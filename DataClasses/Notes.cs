@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class Notes : Event
+    public class Notes : Event
     {
         public Notes(string note)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class Event
+    public class Event
     {
         override public String ToString() { return ""; }
     }

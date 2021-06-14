@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class Observation : Event
+    public class Observation : Event
     {
         private Timing time;
         private float oximeterOxygen;

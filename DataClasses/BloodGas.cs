@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class BloodGas : Event
+    public class BloodGas : Event
     {
         private Timing time;
         private float pH;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class AirwayPositioning : Event
+    public class AirwayPositioning : Event
     {
         private Timing time;
         private Positioning pos;
@@ -41,7 +41,7 @@ namespace Resuscitate.DataClasses
         }
     }
 
-    enum Positioning
+    public enum Positioning
     {
         Neutral,
         RHP,

@@ -147,6 +147,7 @@
     <Compile Include="DataClasses\Observation.cs" />
     <Compile Include="DataClasses\OtherProcedures.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
+    <Compile Include="DataClasses\PatientTiming.cs" />
     <Compile Include="DataClasses\Reassessment.cs" />
     <Compile Include="DataClasses\Ventillation.cs" />
     <Compile Include="DBTest.cs" />

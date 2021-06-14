@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class Ventillation : Event
+    public class Ventillation : Event
     {
         private Timing time;
         private VentillationType ventType;
@@ -56,7 +56,7 @@ namespace Resuscitate.DataClasses
         }
     }
 
-    enum VentillationType
+    public enum VentillationType
     {
         InflationMask,
         InflationETT,
