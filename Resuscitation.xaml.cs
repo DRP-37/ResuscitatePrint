@@ -42,7 +42,6 @@ namespace Resuscitate
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -59,6 +58,13 @@ namespace Resuscitate
 
                 foreach (StatusEvent Event in EAndT.StatusEvents) {
                     StatusList.Events.Add(Event);
+                }
+
+                int lastItem = EAndT.StatusEvents.Count - 1;
+
+                if (lastItem > -1)
+                {
+                    StatusListView.ScrollIntoView(EAndT.StatusEvents[lastItem]);
                 }
             }
             else {
