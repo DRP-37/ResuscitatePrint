@@ -64,7 +64,8 @@ namespace Resuscitate
                 if ((string)dict["email"] == email && (string)dict["password"] == Encoding.UTF8.GetString(password))
                 {
                     Frame.Navigate(typeof(ReviewDocsPage));
-                } else
+                }
+                else
                 {
                     var dialog = new MessageDialog("Incorrect email or password");
                     await dialog.ShowAsync();
@@ -79,7 +80,7 @@ namespace Resuscitate
 
         private async void checkSignIn(string email, byte[] password)
         {
-            
+
 
         }
     }
