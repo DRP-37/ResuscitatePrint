@@ -256,16 +256,8 @@ namespace Resuscitate
         {
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             int temp;
-            if (!int.TryParse(textBox.Text, out temp))
-            {
-                // if parsing attempt wasn't successful
-                // output message to enter only numbers
-                return null;
-            }
-            else
-            {
-                return temp;
-            }
+            int.TryParse(textBox.Text, out temp);
+            return temp;
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)

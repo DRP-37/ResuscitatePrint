@@ -20,11 +20,18 @@ namespace Resuscitate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SignInPage : Page
+    public sealed partial class SignUpPage : Page
     {
-        public SignInPage()
+        public SignUpPage()
         {
             this.InitializeComponent();
+        }
+
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Password does not match up
+            // Account with this email exists already
+            Frame.Navigate(typeof(ReviewDocsPage));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -35,19 +42,6 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
-        }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            // check credentials
-            // * incorrect password
-            // * Could not find account  
-            Frame.Navigate(typeof(ReviewDocsPage));
-        }
-
-        private void RegisterButtonTextBlock_PointerPressed(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(SignUpPage));
         }
     }
 }
