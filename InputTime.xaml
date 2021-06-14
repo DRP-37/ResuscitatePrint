@@ -21,6 +21,9 @@
         <Button x:Name="PatientInfo" Margin="872,403,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="PatientInfo_Click">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Patient&#xA;Information" FontSize="24"/>
         </Button>
+        <Button x:Name="StaffInfo" Margin="872,523,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="StaffInfo_Click">
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Staff&#xA;Information" FontSize="24"/>
+        </Button>
 
     </Grid>
 </Page>

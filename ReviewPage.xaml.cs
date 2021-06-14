@@ -81,5 +81,10 @@ namespace Resuscitate
         {
             this.Frame.Navigate(typeof(PatientPage), TimingCount);
         }
+
+        private void StaffInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StaffPage), TimingCount);
+        }
     }
 }
