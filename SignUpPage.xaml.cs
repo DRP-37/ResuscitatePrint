@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,16 +26,35 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class SignUpPage : Page
     {
+
+        private SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
+        private FirestoreDb db;
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
+        string project = "resuscitate-4c0ec";
+
         public SignUpPage()
         {
             this.InitializeComponent();
         }
 
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        private async void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             // Password does not match up
-            // Account with this email exists already
-            Frame.Navigate(typeof(ReviewDocsPage));
+            var email = UsernameTextBox.Text;
+
+            if (PasswordTextBox.Password != PasswordTextBox_Copy.Password)
+            {
+                var dialog = new MessageDialog("Passwords do not match");
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                var password = sha1.ComputeHash(Encoding.ASCII.GetBytes(PasswordTextBox.Password));
+                signUp(email, password);
+
+                // Account with this email exists already
+                Frame.Navigate(typeof(ReviewDocsPage));
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -42,6 +65,25 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
+        }
+
+        private async void signUp(string email, byte[] password)
+        {
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+
+            db = FirestoreDb.Create(project);
+
+            DocumentReference dr = db.Collection("Users").Document(email);
+            Dictionary<string, object> data = new Dictionary<string, object>();
+
+            Dictionary<string, object> list = new Dictionary<string, object>
+            {
+                { "email", email },
+                { "password", Encoding.UTF8.GetString(password) }
+            };
+
+            data.Add("Data", list);
+            await dr.SetAsync(list);
         }
     }
 }

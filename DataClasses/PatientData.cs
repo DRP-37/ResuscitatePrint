@@ -43,7 +43,6 @@ namespace Resuscitate.DataClasses
             DocumentReference dr = db.Collection("Data").Document(name);
             Dictionary<string, object> data = new Dictionary<string, object>();
 
-
             Dictionary<string, object> list = new Dictionary<string, object>
             {
                 { "Name", name },
