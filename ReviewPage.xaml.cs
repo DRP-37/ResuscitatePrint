@@ -92,7 +92,7 @@ namespace Resuscitate
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), TimingCount);
+            this.Frame.Navigate(typeof(PatientPage), new PatientTiming(TimingCount, patientData));
         }
     }
 }

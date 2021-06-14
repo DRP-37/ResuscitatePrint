@@ -25,7 +25,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
-        PatientData data = new PatientData("Jonathan", "01/01/2000");
+        PatientData data = new PatientData();
         private Timing TimingCount;
         private StatusList StatusList = new StatusList();
 
