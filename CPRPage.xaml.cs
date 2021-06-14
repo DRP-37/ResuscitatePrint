@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,11 +28,14 @@ namespace Resuscitate
         DispatcherTimer Timer = new DispatcherTimer();
         private int Count = 0;
 
-        private List<int> Timings = new List<int>();
+        private List<StatusEvent> StatusEvents;
+        private CardiacCompressions compressions;
+        private static bool START_EVENT = true;
 
         public CPRPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             // Initialise timer
             Timer.Tick += Timer_Tick;
@@ -45,6 +49,9 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
+            compressions = new CardiacCompressions();
+            StatusEvents = new List<StatusEvent>();
+
             base.OnNavigatedTo(e);
         }
 
@@ -53,21 +60,13 @@ namespace Resuscitate
             Count++;
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
-        {
-            Timer.Stop();
-            Timings.Add(Count);
-
-            // TODO: Use list of seconds to make events
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
-        }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Timer.Stop();
-            Timings.Add(Count);
+            List<Event> Events = new List<Event>();
+            Events.Add(compressions);
+            
 
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -75,19 +74,30 @@ namespace Resuscitate
             if (StartButton.Content.Equals("Start"))
             {
                 Timer.Start();
+                StatusEvents.Add(GenerateStatusEvent(START_EVENT, compressions));
+
                 HeartBeating.Visibility = Visibility.Visible;
                 StartButton.Content = "Stop";
                 StartButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
 
-            } else
+            }
+            else
             {
                 Timer.Stop();
-                Timings.Add(Count);
+                StatusEvents.Add(GenerateStatusEvent(!START_EVENT, compressions));
+
                 Count = 0;
                 HeartBeating.Visibility = Visibility.Collapsed;
                 StartButton.Content = "Start";
                 StartButton.Background = new SolidColorBrush(Colors.LightGray);
             }
+        }
+
+        // StartEvent is true when generating a CPR start event. If it is a CPR end event then it is false.
+        private StatusEvent GenerateStatusEvent(bool StartEvent, Event Event)
+        {
+            string Data = StartEvent ? "Started" : "Ended after " + Count + " seconds";
+            return new StatusEvent("Cardiac Compressions", Data, TimingCount.Time, Event);
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)

@@ -31,7 +31,7 @@ namespace Resuscitate
         private StatusList StatusList = new StatusList();
 
         private Timing TimingCount;
-        private string CurrTime = DateTime.Now.ToString("HH:mm");
+        private string CurrTime;
 
         public Resuscitation()
         {
@@ -46,6 +46,8 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            CurrTime = DateTime.Now.ToString("HH:mm");
+
             if (e.Parameter.GetType() == typeof(EventAndTiming))
             {
                 var EAndT = (EventAndTiming)e.Parameter;
@@ -70,12 +72,12 @@ namespace Resuscitate
             else {
                 TimingCount = (Timing)e.Parameter;
             }
-            
+
             base.OnNavigatedTo(e);
         }
         private void Timer_Tick(object sender, object e)
         {
-            CurrTime = DateTime.Now.ToString("HH:mm");
+            CurrTimeView.Text = DateTime.Now.ToString("HH:mm");
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
@@ -156,6 +158,12 @@ namespace Resuscitate
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
             // Nothing
+        }
+
+        // Changes the image's width to fit the scroller screen
+        private void AlgoScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Algorithm.Width = AlgoScrollViewer.ViewportWidth;
         }
     }
 }

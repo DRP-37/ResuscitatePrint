@@ -120,13 +120,13 @@
                     </ListView>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Gray" Margin="30,21,0,0">
-                <ScrollViewer  x:Name="MyScrollViewer"  MinZoomFactor="1" ZoomMode="Enabled" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
-                    <Image x:Name="Algorithm"   Source="Assets/AlgoDiagram.png" Width="448"/>
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Gray" Margin="30,30,0,0">
+                <ScrollViewer  x:Name="AlgoScrollViewer" SizeChanged="AlgoScrollViewer_SizeChanged" MinZoomFactor="1" ZoomMode="Enabled" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+                    <Image x:Name="Algorithm" Source="Assets/AlgoDiagram.png" Stretch="Uniform"/>
                 </ScrollViewer>
             </Grid>
         </Grid>
-        <Button x:Name="ReviewButton" Margin="0,27,35,0"  VerticalAlignment="Top" Height="78" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#330071FF" BorderBrush="#7F0071FF" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click" HorizontalAlignment="Right">
+        <Button x:Name="ReviewButton" Margin="0,27,35,0"  VerticalAlignment="Top" Height="78" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#330071FF" BorderBrush="#7F0071FF" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click" HorizontalAlignment="Right" Width="169">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="24" Text="Review"/>
         </Button>
         <TextBlock HorizontalAlignment="Right" Height="30" Margin="0,20,255,0" Text="Current Time" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="24" Foreground="Gray"/>
