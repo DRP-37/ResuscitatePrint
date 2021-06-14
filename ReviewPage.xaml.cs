@@ -39,7 +39,9 @@ namespace Resuscitate
             var PT = (PatientTiming)e.Parameter;
             patientData = PT.PatientData;
             TimingCount = PT.Timing;
-            Console.WriteLine(patientData.ToString());
+
+            //var dialog = new MessageDialog(patientData.ToString());
+            //await dialog.ShowAsync();
 
             // Take value from previous screen
 
@@ -68,7 +70,7 @@ namespace Resuscitate
         {
             TimingCount.Stop();
 
-
+            patientData.sendToFirestore();
 
             // Send data to the firestore
             // This will be replaced with the actual patient data being passed around.

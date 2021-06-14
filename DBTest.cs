@@ -15,7 +15,7 @@ namespace Resuscitate
         {
             
             Assert.AreEqual(1, 1);
-            PatientData db = new PatientData();
+            PatientData db = new PatientData("Jonathan", "01.01.2000");
             db.sendToFirestore();
 
             

@@ -22,13 +22,19 @@ namespace Resuscitate.DataClasses
         private List<ApgarScore> apgars = new List<ApgarScore>();
         private List<AirwayPositioning> positionings = new List<AirwayPositioning>();
         private List<Observation> observations = new List<Observation>();
-        private InitialAssessment initialAssessment;
+        private InitialAssessment initialAssessment = new InitialAssessment(new Timing());
         private List<Reassessment> reassessments = new List<Reassessment>();
         private List<OtherProcedures> procedures = new List<OtherProcedures>();
         private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();
         private List<CardiacCompressions> compressions = new List<CardiacCompressions>();
         private List<LineInsertion> insertions = new List<LineInsertion>();
         private List<Notes> notes = new List<Notes>();
+
+        public PatientData(string name, string dob)
+        {
+            this.name = name;
+            this.dob = dob;
+        }
 
         // Database Functions
         public async void sendToFirestore()
