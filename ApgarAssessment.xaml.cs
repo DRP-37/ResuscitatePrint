@@ -64,6 +64,13 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            // If not all options are pressed
+            if (FindSelected(tones) == -1 || FindSelected(responses) == -1 || FindSelected(hrs) == -1 
+                || FindSelected(colours) == -1 || FindSelected(respirations) == -1)
+            {
+                return;
+            }
+
             score.Hr = hr;
             score.Respiration = respiration;
             score.Tone = tone;
@@ -86,40 +93,63 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void colour_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
             int prevIndex = FindSelected(colours);
+            int selectedIndex = Array.IndexOf(colours, selected);
+
+            if (prevIndex == selectedIndex)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                scoreCount -= selectedIndex;
+                displayScore.Text = scoreCount.ToString();
+                return;
+            }
+
             changeColours(colours, selected);
             this.colour = selected.Name[selected.Name.Length - 1] - '0';
 
             UpdateScore(prevIndex, colour);
-            Console.WriteLine(this.colour);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
             int prevIndex = FindSelected(hrs);
+            int selectedIndex = Array.IndexOf(hrs, selected);
+
+            if (prevIndex == selectedIndex)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                scoreCount -= selectedIndex;
+                displayScore.Text = scoreCount.ToString();
+                return;
+            }
+
             changeColours(hrs, selected);
             this.hr = selected.Name[selected.Name.Length - 1] - '0';
 
             UpdateScore(prevIndex, hr);
-            Console.WriteLine(this.colour);
         }
 
         private void response_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
             int prevIndex = FindSelected(responses);
+            int selectedIndex = Array.IndexOf(responses, selected);
+
+            if (prevIndex == selectedIndex)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                scoreCount -= selectedIndex;
+                displayScore.Text = scoreCount.ToString();
+                return;
+            }
+
             changeColours(responses, selected);
             this.response = selected.Name[selected.Name.Length - 1] - '0';
 
@@ -128,8 +158,18 @@ namespace Resuscitate
 
         private void tone_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
             int prevIndex = FindSelected(tones);
+            int selectedIndex = Array.IndexOf(tones, selected);
+
+            if (prevIndex == selectedIndex)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                scoreCount -= selectedIndex;
+                displayScore.Text = scoreCount.ToString();
+                return;
+            }
+
             changeColours(tones, selected);
             this.tone = selected.Name[selected.Name.Length - 1] - '0';
 
@@ -138,11 +178,20 @@ namespace Resuscitate
 
         private void resp_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
+            Button selected = sender as Button;
             int prevIndex = FindSelected(respirations);
+            int selectedIndex = Array.IndexOf(respirations, selected);
+
+            if (prevIndex == selectedIndex)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                scoreCount -= selectedIndex;
+                displayScore.Text = scoreCount.ToString();
+                return;
+            }
+
             changeColours(respirations, selected);
             this.respiration = selected.Name[selected.Name.Length - 1] - '0';
-
             UpdateScore(prevIndex, respiration);
         }
 
@@ -175,7 +224,7 @@ namespace Resuscitate
         private void UpdateScore(int prev, int curr) 
         {
             scoreCount = prev == -1 ? (scoreCount + curr) : (scoreCount + curr - prev);
-            displayScore.Text = "" + scoreCount;
+            displayScore.Text = scoreCount.ToString();
         }
 
     }

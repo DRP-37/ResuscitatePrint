@@ -51,7 +51,7 @@ namespace Resuscitate
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
             // Go to review page
-            this.Frame.Navigate(typeof(ReviewPage));
+            this.Frame.Navigate(typeof(SignInPage));
         }
     }
 }

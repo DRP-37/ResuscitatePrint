@@ -18,7 +18,9 @@
         <TextBlock x:Name="TimeColon_Copy" HorizontalAlignment="Left" Margin="603,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="75" FontFamily="Microsoft JhengHei UI" FontSize="56" Width="332" SelectionHighlightColor="#00E81123" TextAlignment="Left" SelectionChanged="TimeColon_Copy_SelectionChanged"><Run Text="minutes"/><Run Text=" ago"/></TextBlock>
         <Button x:Name="SetTime" Content="Set Time" Margin="872,290,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="SetTime_Click"/>
         <TextBlock x:Name="TimeColon_Copy1" HorizontalAlignment="Left" Margin="386,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="88" FontFamily="Microsoft JhengHei UI" FontSize="56" Width="619" SelectionHighlightColor="#00E81123" TextAlignment="Left" SelectionChanged="TimeColon_Copy_SelectionChanged"><Run Text="Input t"/><Run Text="ime "/><Run Text="since"/><Run Text=" birth:"/></TextBlock>
-        <Button x:Name="PatientInfo" Content="    Patient &#xD;&#xA;Information" Margin="872,403,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="PatientInfo_Click"/>
+        <Button x:Name="PatientInfo" Margin="872,403,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="PatientInfo_Click">
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Patient&#xA;Information" FontSize="24"/>
+        </Button>
 
     </Grid>
 </Page>

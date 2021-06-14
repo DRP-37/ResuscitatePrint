@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Text.RegularExpressions;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,15 +33,13 @@ namespace Resuscitate
         // 0: Neutral Head Position
         // 1: Recheck position
         // 2: Two-person Technique
-        private int airwayProcedure; 
+        private int airwayProcedure = -1; 
 
         // Position:
         // 0: Neutral Head Position
         // 1: Recheck Head Position and Jaw Support
         // 2: Two-person Technique
-        private int position = 0; // Set to 0 for now, will change when page is implemented
         private AirwayPositioning positioning;
-        private StatusEvent statusEvent;
 
         public AirwayPage()
         {
@@ -54,35 +53,32 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             positioning = new AirwayPositioning();
-            positioning.Time = TimingCount;
-
-            statusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
 
-        private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button selection = SelectionMade(positions);
+
             // set data structure with airway procedure and time stamp of selection
             // if a selection has not been made do not allow confirm
-            if (SelectionMade(positions))
+            if (selection != null)
             {
-                positioning.Positioning = (Positioning)position;
+                string Time = TimingCount.ToString();
 
-                statusEvent.Name = "Positioning";
-                statusEvent.Data = positioning.positionToString();
-                statusEvent.Time = positioning.Time.ToString();
-                statusEvent.Event = positioning;
+                positioning.Positioning = (Positioning)airwayProcedure;
+                positioning.Time = TimingCount;
 
-                var dialog = new MessageDialog(positioning.ToString());
-                await dialog.ShowAsync();
+                // var dialog = new MessageDialog(positioning.ToString());
+                // await dialog.ShowAsync();
 
                 List<Event> Events = new List<Event>();
                 Events.Add(positioning);
 
                 List<StatusEvent> StatusEvents = new List<StatusEvent>();
-                StatusEvents.Add(statusEvent);
+                TextBlock Text = selection.Content as TextBlock;
+                StatusEvents.Add(new StatusEvent("Airway Positioning", Text.Text.Replace("\n", " "), Time));
 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
@@ -90,27 +86,30 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void NeutralPosition_Click(object sender, RoutedEventArgs e)
         {
-            UpdateColours(positions, sender as Button);
-            airwayProcedure = Array.IndexOf(positions, sender as Button);
+            int index = Array.IndexOf(positions, sender as Button);
+            if (airwayProcedure == index)
+            {
+                positions[index].Background = new SolidColorBrush(Colors.White);
+                airwayProcedure = -1;
+            } else
+            {
+                UpdateColours(positions, sender as Button);
+                airwayProcedure = index;
+            }
         }
 
         // Move to its own class later on - needed it many classes
-        private bool SelectionMade(Button[] buttons)
+        private Button SelectionMade(Button[] buttons)
         {
             foreach(Button button in buttons)
             { 
@@ -118,10 +117,10 @@ namespace Resuscitate
 
                 if (colour.Color == Colors.LightGreen)
                 {
-                    return true;
+                    return button;
                 }
             }
-            return false;
+            return null;
         }
 
         private void UpdateColours(Button[] buttons, Button sender)
@@ -130,6 +129,11 @@ namespace Resuscitate
             buttons[1].Background = new SolidColorBrush(Colors.White);
             buttons[2].Background = new SolidColorBrush(Colors.White);
             sender.Background = new SolidColorBrush(Colors.LightGreen);
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
         }
     }
 

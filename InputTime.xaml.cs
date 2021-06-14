@@ -108,5 +108,10 @@ namespace Resuscitate
         {
             this.Frame.Navigate(typeof(PatientPage), TimingCount);
         }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
+        }
     }
 }

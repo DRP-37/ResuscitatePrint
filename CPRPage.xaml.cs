@@ -58,12 +58,8 @@ namespace Resuscitate
             Timer.Stop();
             Timings.Add(Count);
 
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            // TODO: Use list of seconds to make events
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -71,12 +67,7 @@ namespace Resuscitate
             Timer.Stop();
             Timings.Add(Count);
 
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
