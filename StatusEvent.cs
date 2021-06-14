@@ -18,11 +18,12 @@ namespace Resuscitate
         public StatusEvent() { }
 
         // TODO: add Event to constructor
-        public StatusEvent(string Name, string Data, string Time)
+        public StatusEvent(string Name, string Data, string Time, Event Event)
         {
             this.Name = Name;
             this.Data = Data;
             this.Time = Time;
+            this.Event = Event;
         }
 
     }

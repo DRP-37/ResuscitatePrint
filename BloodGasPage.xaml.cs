@@ -57,7 +57,7 @@ namespace Resuscitate
             if (values[0] != null)
             {
                 bloodGas.PH = (float)values[0];
-                StatusEvents.Add(new StatusEvent("pH", values[0] + "", Time));
+                StatusEvents.Add(new StatusEvent("pH", values[0] + "", Time, bloodGas));
             }
             
            /* if (values[1] != null)
@@ -75,13 +75,13 @@ namespace Resuscitate
             if (values[3] != null)
             {
                 bloodGas.Lactate = (float)values[3];
-                StatusEvents.Add(new StatusEvent("Lactate", values[3] + "", Time));
+                StatusEvents.Add(new StatusEvent("Lactate", values[3] + "", Time, bloodGas));
             }
 
             if (values[4] != null)
             {
                 bloodGas.Glucose = (float)values[4];
-                StatusEvents.Add(new StatusEvent("Glucose", values[4] + " mmol/l", Time));
+                StatusEvents.Add(new StatusEvent("Glucose", values[4] + " mmol/l", Time, bloodGas));
             }
 
            /* if (values[5] != null)

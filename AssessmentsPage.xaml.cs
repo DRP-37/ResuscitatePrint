@@ -79,12 +79,12 @@ namespace Resuscitate
             string Time = initialAssessment.Time.ToString();
 
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            AddIfNotNull(GenerateStatusEvent("Colour", colours, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Heart Rate", hrs, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Muscle", tones, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Temperature Regulation", tempRegulations, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Cord Clamping", cordClamping, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", respirations, Time), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Colour", colours, Time, initialAssessment), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Heart Rate", hrs, Time, initialAssessment), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Muscle", tones, Time, initialAssessment), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Temperature Regulation", tempRegulations, Time, initialAssessment), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Cord Clamping", cordClamping, Time, initialAssessment), StatusEvents);
+            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", respirations, Time, initialAssessment), StatusEvents);
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
@@ -204,7 +204,7 @@ namespace Resuscitate
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
 
-        private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time)
+        private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time, Event Event)
         {
             Button selected = null;
 
@@ -223,7 +223,7 @@ namespace Resuscitate
                 return null;
             }
 
-            return new StatusEvent(name, selected.Content.ToString(), time); ;
+            return new StatusEvent(name, selected.Content.ToString(), time, Event); ;
         }
 
         private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)

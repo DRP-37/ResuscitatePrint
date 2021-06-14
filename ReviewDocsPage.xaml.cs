@@ -25,6 +25,10 @@ namespace Resuscitate
         public ReviewDocsPage()
         {
             this.InitializeComponent();
+
+            // This line would this page to cache everything while ignoring the reset when navigating
+            //      to the main page from the review page. Use if needed:
+            // this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

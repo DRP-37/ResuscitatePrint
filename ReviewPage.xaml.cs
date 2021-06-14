@@ -50,11 +50,6 @@ namespace Resuscitate
             }
         }
 
-        private void Start_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             TimingCount.Stop();
@@ -63,6 +58,15 @@ namespace Resuscitate
             // This will be replaced with the actual patient data being passed around.
             //PatientData patientData = new PatientData();
             //patientData.sendToFirestore();
+
+            // Clear cache stored locally
+            var frame = Window.Current.Content as Frame;
+            if (frame != null)
+            {
+                var cacheSize = ((frame)).CacheSize;
+                ((frame)).CacheSize = 0;
+                ((frame)).CacheSize = cacheSize;
+            }
 
             this.Frame.Navigate(typeof(MainPage));
         }

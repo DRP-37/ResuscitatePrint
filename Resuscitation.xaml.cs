@@ -26,10 +26,12 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
-        PatientData data = new PatientData();
-        private Timing TimingCount;
-        DispatcherTimer Timer = new DispatcherTimer();
+        private PatientData data = new PatientData();
+        private DispatcherTimer Timer = new DispatcherTimer();
         private StatusList StatusList = new StatusList();
+
+        private Timing TimingCount;
+        private string CurrTime = DateTime.Now.ToString("HH:mm");
 
         public Resuscitation()
         {
@@ -67,7 +69,7 @@ namespace Resuscitate
         }
         private void Timer_Tick(object sender, object e)
         {
-            Time.Text = DateTime.Now.ToString("HH:mm");
+            CurrTime = DateTime.Now.ToString("HH:mm");
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
