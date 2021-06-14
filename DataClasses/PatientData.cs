@@ -15,14 +15,14 @@ namespace Resuscitate.DataClasses
         string project = "resuscitate-4c0ec";
 
         // Patient Data
-        private string surname = "";
+        private string surname = "N/A";
         private string id;
-        private string dob = "";
-        private string tob = "";
-        private string sex = "";
-        private string gestation = "";
-        private string weight = "";
-        private string history = "";
+        private string dob = "N/A";
+        private string tob = "N/A";
+        private string sex = "N/A";
+        private string gestation = "N/A";
+        private string weight = "N/A";
+        private string history = "N/A";
 
         public string Surname { get => surname; set => surname = value; }
         public string Id { get => id; set => id = value; }
