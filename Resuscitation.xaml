@@ -92,5 +92,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="990,15,0,0" Text="Current Time" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="24" Foreground="Gray"/>
+        <TextBlock x:Name="Time" HorizontalAlignment="Left" Height="78" Margin="1008,39,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="45"/>
     </Grid>
 </Page>

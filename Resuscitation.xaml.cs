@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Timers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,6 +28,7 @@ namespace Resuscitate
     {
         PatientData data = new PatientData();
         private Timing TimingCount;
+        DispatcherTimer Timer = new DispatcherTimer();
         private StatusList StatusList = new StatusList();
 
         public Resuscitation()
@@ -35,6 +37,10 @@ namespace Resuscitate
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            Timer.Tick += Timer_Tick;
+            Timer.Interval = new TimeSpan(0, 0, 1);
+            Timer.Start();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -58,6 +64,10 @@ namespace Resuscitate
             }
             
             base.OnNavigatedTo(e);
+        }
+        private void Timer_Tick(object sender, object e)
+        {
+            Time.Text = DateTime.Now.ToString("HH:mm");
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
