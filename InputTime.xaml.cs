@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -56,16 +57,28 @@ namespace Resuscitate
 
             // Parse minutes and seconds input
             bool isMinsParsable = Int32.TryParse(TimeMinutes.Text, out mins);
+
+            if (TimeMinutes.Text == "")
+            {
+                mins = 0;
+                isMinsParsable = true;
+            }
+
             isMinsParsable &= mins < 99;
 
             bool isSecsParsable = Int32.TryParse(TimeSeconds.Text, out secs);
+            if (TimeSeconds.Text == "")
+            {
+                secs = 0;
+                isSecsParsable = true;
+            }
             isMinsParsable &= secs < 60;
 
             // Incorrect input
             if (!isMinsParsable || !isSecsParsable)
             {
                 // Change background of SetTime to red
-                SetTime.Background.Equals("#7FFF0000");
+                SetTime.Background = new SolidColorBrush(Colors.Red);
                 return;
             }
 
