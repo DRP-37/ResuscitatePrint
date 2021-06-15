@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class Medication : Event
+    public class Medication : Event
     {
         private Timing time;
         private bool adrenaline1 = false;

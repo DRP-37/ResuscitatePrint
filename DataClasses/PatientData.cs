@@ -8,21 +8,35 @@ using Windows.UI.Popups;
 
 namespace Resuscitate.DataClasses
 {
-    class PatientData
+    public class PatientData
     {
         private FirestoreDb db;
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
         string project = "resuscitate-4c0ec";
 
         // Patient Data
-        private string name;
-        private string dob;
-        public string Name { get => name; set => name = value; }
+        private string surname = "N/A";
+        private string id;
+        private string dob = "N/A";
+        private string tob = "N/A";
+        private string sex = "N/A";
+        private string gestation = "N/A";
+        private string weight = "N/A";
+        private string history = "N/A";
+
+        public string Surname { get => surname; set => surname = value; }
+        public string Id { get => id; set => id = value; }
         public string DOB { get => dob; set => dob = value; }
+        public string Tob { get => tob; set => tob = value; }
+        public string Sex { get => sex; set => sex = value; }
+        public string Gestation { get => gestation; set => gestation = value; }
+        public string Weight { get => weight; set => weight = value; }
+        public string History { get => history; set => history = value; }
+
         private List<ApgarScore> apgars = new List<ApgarScore>();
         private List<AirwayPositioning> positionings = new List<AirwayPositioning>();
         private List<Observation> observations = new List<Observation>();
-        private InitialAssessment initialAssessment;
+        private InitialAssessment initialAssessment = new InitialAssessment(new Timing());
         private List<Reassessment> reassessments = new List<Reassessment>();
         private List<OtherProcedures> procedures = new List<OtherProcedures>();
         private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();
@@ -37,16 +51,19 @@ namespace Resuscitate.DataClasses
 
             db = FirestoreDb.Create(project);
 
-            var dialog = new MessageDialog("Connected");
-            await dialog.ShowAsync();
-
-            DocumentReference dr = db.Collection("Data").Document(name);
+            DocumentReference dr = db.Collection("Data").Document(id);
             Dictionary<string, object> data = new Dictionary<string, object>();
 
             Dictionary<string, object> list = new Dictionary<string, object>
             {
-                { "Name", name },
+                { "Surname", surname },
+                { "Id", id },
                 { "Date of Birth", dob },
+                { "Time of Birth", tob },
+                { "Sex", sex },
+                { "Gestation Period", gestation },
+                { "Estimated Weight", weight },
+                { "Medical History", history },
                 { "Initial Assessment", initialAssessment.ToString() },
                 { "Apgar Scores", listToStrings(apgars) },
                 { "Observations",  listToStrings(observations) },
@@ -62,8 +79,8 @@ namespace Resuscitate.DataClasses
             data.Add("Data", list);
             await dr.SetAsync(list);
 
-            //dialog = new MessageDialog("Data Added");
-            //await dialog.ShowAsync();
+            var dialog = new MessageDialog("Data Submitted");
+            await dialog.ShowAsync();
         }
 
         public async void sendToStorage(string fileName)
@@ -72,7 +89,7 @@ namespace Resuscitate.DataClasses
 
             var task = new FirebaseStorage("gs://resuscitate-4c0ec.appspot.com")
                 .Child("Resuscitation Recordings")
-                .Child(name)
+                .Child(id)
                 .Child(fileName)
                 .PutAsync(stream);
 
@@ -208,5 +225,11 @@ namespace Resuscitate.DataClasses
             }
         }
 
+    }
+
+    public enum Sex
+    {
+        MALE,
+        FEMALE
     }
 }

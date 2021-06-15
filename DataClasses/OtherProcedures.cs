@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class OtherProcedures : Event
+    public class OtherProcedures : Event
     {
         private Timing time;
         private ProcedureType procedureType;
@@ -38,7 +38,7 @@ namespace Resuscitate.DataClasses
         }
     }
 
-    enum ProcedureType
+    public enum ProcedureType
     {
         ChestLeft,
         ChestRight,

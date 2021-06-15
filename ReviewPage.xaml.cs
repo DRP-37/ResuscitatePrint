@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,6 +25,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ReviewPage : Page
     {
+        public PatientData patientData;
         public Timing TimingCount;
 
         public ReviewPage()
@@ -31,10 +33,19 @@ namespace Resuscitate
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+
+            var PT = (PatientTiming)e.Parameter;
+            patientData = PT.PatientData;
+            TimingCount = PT.Timing;
+
+            //var dialog = new MessageDialog(patientData.ToString());
+            //await dialog.ShowAsync();
+
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+
+
             PatientInfo.Background = MainPage.patienInformationComplete ? new SolidColorBrush(Colors.LightGreen) :
                 new SolidColorBrush(Colors.Red);
             base.OnNavigatedTo(e);
@@ -59,6 +70,8 @@ namespace Resuscitate
         {
             TimingCount.Stop();
 
+            patientData.sendToFirestore();
+
             // Send data to the firestore
             // This will be replaced with the actual patient data being passed around.
             //PatientData patientData = new PatientData();
@@ -79,7 +92,7 @@ namespace Resuscitate
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), TimingCount);
+            this.Frame.Navigate(typeof(PatientPage), new PatientTiming(TimingCount, patientData));
         }
     }
 }

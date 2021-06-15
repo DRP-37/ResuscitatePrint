@@ -11,7 +11,7 @@ namespace Resuscitate.DataClasses
         EqualAirEntry,
         UnequalAirEntry
     }
-    class IntubationAndSuction : Event
+    public class IntubationAndSuction : Event
     {
         private bool suction;
         private bool intubation;

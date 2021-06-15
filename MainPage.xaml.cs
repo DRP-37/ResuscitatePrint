@@ -23,7 +23,6 @@ namespace Resuscitate
     public sealed partial class MainPage : Page
     {
 
-        PatientData database = new PatientData();
         public static bool patienInformationComplete {get; set;}
 
         public MainPage()

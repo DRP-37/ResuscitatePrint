@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class LineInsertion : Event
+    public class LineInsertion : Event
     {
 
         private Timing time;
@@ -48,7 +48,7 @@ namespace Resuscitate.DataClasses
         }
     }
 
-    enum InsertionType
+    public enum InsertionType
     {
         UVC,
         IL

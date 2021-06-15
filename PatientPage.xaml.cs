@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -27,6 +28,8 @@ namespace Resuscitate
         private TextBox[] infoBoxes;
         private bool[] isWrittenTo;
 
+        public PatientData patientData;
+
         public PatientPage()
         {
             this.InitializeComponent();
@@ -38,6 +41,9 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            var PT = (PatientTiming)e.Parameter;
+            patientData = PT.PatientData;
+
             isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
             base.OnNavigatedTo(e);
         }
@@ -57,16 +63,16 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            /*     Set patient information in data base
-             *     patient.name = Surname.Text;
-             *     patient.id = ID.Text;
-             *     patient.dob = DateOfBirth.Text;
-             *     patient.tob = TimeOfBirth.Text;
-             *     patient.sex = Sex.Text;  // might be better to have a button 
-             *     patient.gestation = Gestation.Text;
-             *     patient.weight = EstimatedWeight.Text;
-             *     patient.history = MedicalHistory.Text;
-            */
+            //     Set patient information in data base
+            patientData.Surname = Surname.Text;
+            patientData.Id = ID.Text;
+            patientData.DOB = DateOfBirth.Text;
+            patientData.Tob = TimeOfBirth.Text;
+            patientData.Sex = Sex.Text;  // might be better to have a button 
+            patientData.Gestation = Gestation.Text;
+            patientData.Weight = EstimatedWeight.Text;
+            patientData.History = MedicalHistory.Text;
+            
             ConfirmButton.Background = new SolidColorBrush(new Windows.UI.Color() { R = 242, G = 242, B = 242}) ;
             GoBack();
         }

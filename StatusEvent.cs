@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate
 {
-    class StatusEvent
+    public class StatusEvent
     {
         public string Name { get; set; }
         public string Data { get; set; }

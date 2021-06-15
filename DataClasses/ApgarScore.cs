@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class ApgarScore : Event
+    public class ApgarScore : Event
     {
         private Timing time;
         private int colour;

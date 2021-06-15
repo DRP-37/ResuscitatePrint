@@ -24,7 +24,7 @@ namespace Resuscitate.DataClasses
         Absent,
         Present
     }
-    class Reassessment : Event
+    public class Reassessment : Event
     {
         private HeartRate hr;
         private ChestMovement movement;

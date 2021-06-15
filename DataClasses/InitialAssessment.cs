@@ -15,7 +15,7 @@ namespace Resuscitate.DataClasses
         Now,
         Delayed
     }
-    internal class InitialAssessment : Event
+    public class InitialAssessment : Event
     {
         private int colour;
         private int tone;
