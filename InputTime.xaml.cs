@@ -26,7 +26,7 @@ namespace Resuscitate
     public sealed partial class InputTime : Page
     {
 
-        public PatientData patientData = new PatientData();
+        public PatientData patientData;
         public Timing TimingCount { get; set; }
 
         public InputTime()
@@ -34,7 +34,24 @@ namespace Resuscitate
             this.InitializeComponent();
         }
 
-        private void InputLater_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                if (e.Parameter.GetType() == typeof(ReviewDataAndTiming))
+                {
+                    var RDaT = (ReviewDataAndTiming)e.Parameter;
+                    TimingCount = RDaT.Timing;
+                    patientData = RDaT.PatientData;
+                }
+                else if (e.Parameter.GetType() == typeof(PatientData))
+                {
+                    patientData = (PatientData)e.Parameter;
+                }
+            }
+        }
+
+            private void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
             TimingCount = new Timing { IsSet = false, Offset = 0};

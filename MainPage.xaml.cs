@@ -23,6 +23,7 @@ namespace Resuscitate
     public sealed partial class MainPage : Page
     {
 
+        public PatientData patientData = new PatientData();
         public static bool patienInformationComplete {get; set;}
 
         public MainPage()
@@ -36,15 +37,9 @@ namespace Resuscitate
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             // Debug testing the firestore
-            /*
-            database.Name = "Euan S-W";
-            database.DOB = "30.10.2000";
-            database.addInitialAssessment(new InitialAssessment(new Timing()));
-            database.sendToFirestore();
-            */
 
             // Go to main page
-            this.Frame.Navigate(typeof(InputTime));
+            this.Frame.Navigate(typeof(InputTime), patientData);
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)

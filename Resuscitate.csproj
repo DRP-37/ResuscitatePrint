@@ -149,6 +149,7 @@
     <Compile Include="DataClasses\PatientData.cs" />
     <Compile Include="DataClasses\ReviewDataAndTiming.cs" />
     <Compile Include="DataClasses\Reassessment.cs" />
+    <Compile Include="DataClasses\StaffData.cs" />
     <Compile Include="DataClasses\Ventillation.cs" />
     <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
