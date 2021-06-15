@@ -63,7 +63,7 @@ namespace Resuscitate
             }
         }
 
-        private void FinishButton_Click(object sender, RoutedEventArgs e)
+        private async void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             TimingCount.Stop();
 
@@ -86,6 +86,10 @@ namespace Resuscitate
                 }
 
                 this.Frame.Navigate(typeof(MainPage));
+            } else
+            {
+                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
+                await dialog.ShowAsync();
             }
         }
 
