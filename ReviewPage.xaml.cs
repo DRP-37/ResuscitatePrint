@@ -25,6 +25,7 @@ namespace Resuscitate
     public sealed partial class ReviewPage : Page
     {
         public Timing TimingCount;
+        private StatusList StatusList;
 
         public ReviewPage()
         {
@@ -34,9 +35,13 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            TimingAndReview TaR = (TimingAndReview)e.Parameter;
+            TimingCount = TaR.Timing;
+            StatusList = TaR.StatusList;
             PatientInfo.Background = MainPage.patienInformationComplete ? new SolidColorBrush(Colors.LightGreen) :
                 new SolidColorBrush(Colors.Red);
+
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             base.OnNavigatedTo(e);
         }
 
@@ -73,17 +78,22 @@ namespace Resuscitate
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(PatientPage), TimingCount);
+        }
+
+        private void StaffInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StaffPage), TimingCount);
         }
     }
 }
