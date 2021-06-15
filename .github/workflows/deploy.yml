@@ -50,7 +50,7 @@ jobs:
         Configuration: Release
    
     - name: Create archive
-      run: Compress-Archive -Path C:\DeployOutput\* -DestinationPath C:\DeployOutput\Resuscitate.zip
+      run: Compress-Archive -Path C:\DeployOutput\* -DestinationPath C:\DeployOutput\Resuscitate ${{ github.ref }}.zip
 
     - name: Create release
       id: create_release
