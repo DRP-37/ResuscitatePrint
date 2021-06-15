@@ -38,6 +38,20 @@ namespace Resuscitate
         private Ventillation ventilation;
         private StatusEvent statusEvent;
 
+        private Button[] positions;
+
+        // Airway Positioning:
+        // 0: Neutral Head Position
+        // 1: Recheck position
+        // 2: Two-person Technique
+        private int airwayProcedure = -1; 
+
+        // Position:
+        // 0: Neutral Head Position
+        // 1: Recheck Head Position and Jaw Support
+        // 2: Two-person Technique
+        private AirwayPositioning positioning;
+
         public VentilationPage()
         {
             this.InitializeComponent();
@@ -57,7 +71,10 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionMade(procedures))
+            bool ventSelection = VentilationSelectionMade(procedures);
+            List<Event> EventList = new List<Event>();
+            List<StatusEvent> StatusList = new List<StatusEvent>();
+            if (ventSelection)
             {
                 bool hasAirGiven = airGiven != null;
 
@@ -66,11 +83,7 @@ namespace Resuscitate
                     AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
                     AirGiven.Background = new SolidColorBrush(Colors.LightPink);
                     return;
-                }
-
-                List<Event> EventList = new List<Event>();
-                List<StatusEvent> StatusList = new List<StatusEvent>();
-
+                }                
                 // set data structure with ventilation procedure and time stamp of selection
                 ventilation.Time = TimingCount;
                 ventilation.Oxygen = hasAirGiven ? (float)airGiven : -1;
@@ -83,8 +96,27 @@ namespace Resuscitate
                 statusEvent.Event = ventilation;
                 StatusList.Add(statusEvent);
 
+                
+            }
+            Button airwaySelection = AirwaySelectionMade(positions);
+            if (airwaySelection != null)
+            {
+                string Time = TimingCount.ToString();
+
+                positioning.Positioning = (Positioning)airwayProcedure;
+                positioning.Time = TimingCount;
+
+                // var dialog = new MessageDialog(positioning.ToString());
+                // await dialog.ShowAsync();
+                EventList.Add(positioning);
+
+                TextBlock Text = airwaySelection.Content as TextBlock;
+                StatusList.Add(new StatusEvent("Airway Positioning", Text.Text.Replace("\n", " "), Time, positioning));
+            }
+            if (airwaySelection != null || ventSelection == true) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
             }
+            
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -129,7 +161,7 @@ namespace Resuscitate
 
         }
 
-        private bool SelectionMade(Button[] buttons)
+        private bool VentilationSelectionMade(Button[] buttons)
         {
             foreach (Button button in buttons)
             {
@@ -152,9 +184,40 @@ namespace Resuscitate
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
 
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        private void NeutralPosition_Click(object sender, RoutedEventArgs e)
         {
-            // Nothing
+            int index = Array.IndexOf(positions, sender as Button);
+            if (airwayProcedure == index)
+            {
+                positions[index].Background = new SolidColorBrush(Colors.White);
+                airwayProcedure = -1;
+            }
+            else
+            {
+                UpdateColours(positions, sender as Button);
+                airwayProcedure = index;
+            }
+        }
+
+
+        // Move to its own class later on - needed it many classes
+        private Button AirwaySelectionMade(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    return button;
+                }
+            }
+            return null;
+        }
+
+        private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
