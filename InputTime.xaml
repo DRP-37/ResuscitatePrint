@@ -26,7 +26,6 @@
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Staff&#xA;Information" FontSize="24"/>
         </Button>
         <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="28" Width="362" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="582,315,0,0" Text="(set start time as now)" TextAlignment="Left"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="28" Width="362" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="108,426,0,0" Text="Manual Input:" TextAlignment="Left"/>
-
+            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="28" Width="362" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="108,426,0,0" Text="Manual Input:" TextAlignment="Left"/>
     </Grid>
 </Page>

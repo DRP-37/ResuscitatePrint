@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +23,15 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class StaffPage : Page
     {
+        private StaffList StaffList = new StaffList();
+
         public StaffPage()
         {
             this.InitializeComponent();
+
+            StaffPosition.SelectedIndex = -1;
+            StaffGrade.SelectedIndex = -1;
+            arrivalTimePicker.Time = DateTime.Now.TimeOfDay;
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +47,31 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (StaffName.Text == null || StaffPosition.SelectedIndex < 0 
+                || StaffGrade.SelectedIndex < 0)
+            {
+                AddButton.Background = new SolidColorBrush(Colors.Red);
+                AddButton.BorderBrush = new SolidColorBrush(Colors.Red);
+                return;
+            }
+
+            AddButton.Background = new SolidColorBrush(Colors.DodgerBlue);
+            AddButton.BorderBrush = new SolidColorBrush(Colors.DodgerBlue);
+
+            string Name = StaffName.Text;
+            string Position = StaffPosition.SelectedValue.ToString();
+            string Grade = StaffGrade.SelectedValue.ToString();
+            string TimeOfArrival = arrivalTimePicker.Time.ToString().Substring(0,5);
+
+            StaffList.Members.Add(new StaffMemberData(Name, Position, Grade, TimeOfArrival));
+
+            StaffName.Text = "";
+            StaffPosition.SelectedIndex = -1;
+            StaffGrade.SelectedIndex = -1;
         }
     }
 }
