@@ -70,6 +70,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\DeployOutput\Resuscitate.zip
-        asset_name: Resuscitate.zip
+        asset_path: C:\DeployOutput\Resuscitate ${{ github.ref }}.zip
+        asset_name: Resuscitate ${{ github.ref }}.zip
         asset_content_type: application/zip
