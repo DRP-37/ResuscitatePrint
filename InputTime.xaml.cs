@@ -90,12 +90,24 @@ namespace Resuscitate
         private void TimeMinutes_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
+
+            if (textBox.Text.Length > 2)
+            {
+                textBox.Text = textBox.Text.Substring(0, 2);
+            }
+
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
         }
 
         private void TimeSeconds_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
+
+            if (textBox.Text.Length > 2)
+            {
+                textBox.Text = textBox.Text.Substring(0, 2);
+            } 
+
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
         }
 
@@ -109,7 +121,17 @@ namespace Resuscitate
             this.Frame.Navigate(typeof(PatientPage), TimingCount);
         }
 
+        private void StaffInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StaffPage), TimingCount);
+        }
+
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            // Nothing
+        }
+
+        private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
             // Nothing
         }
