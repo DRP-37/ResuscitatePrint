@@ -60,17 +60,17 @@ namespace Resuscitate
                 StatusEvents.Add(new StatusEvent("pH", values[0] + "", Time, bloodGas));
             }
             
-           /* if (values[1] != null)
+           if (values[1] != null)
             {
                 bloodGas.PCO2 = (float)values[1];
-                StatusEvents.Add(new StatusEvent("pCO2", values[1] + "", Time));
+                StatusEvents.Add(new StatusEvent("pCO2", values[1] + "", Time, bloodGas));
             }
 
             if (values[2] != null)
             {
                 bloodGas.Excess = (float)values[2];
-                StatusEvents.Add(new StatusEvent("Excess", values[2] + "", Time));
-            }*/
+                StatusEvents.Add(new StatusEvent("Excess", values[2] + "", Time, bloodGas));
+            }
 
             if (values[3] != null)
             {
