@@ -55,6 +55,9 @@ namespace Resuscitate
         public VentilationPage()
         {
             this.InitializeComponent();
+            // Airway buttons
+            positions = new Button[] { NeutralPosition, RecheckPosition, TwoPerson };
+            // Ventilation buttons
             procedures = new Button[] { InflationMask, InflationETT, VentilationMask, VentilationETT, MaskCPAP };
         }
 
@@ -64,6 +67,7 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             ventilation = new Ventillation();
+            positioning = new AirwayPositioning();
             statusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
@@ -91,13 +95,12 @@ namespace Resuscitate
                 EventList.Add(ventilation);
 
                 statusEvent.Name = ventilation.ventToString();
-                statusEvent.Data = hasAirGiven ? $"{airGiven}% Air/Oxygen Given" : "N/I";
+                statusEvent.Data = hasAirGiven ? $"{airGiven}% Air/Oxygen Given" : "(Air/Oxygen Given Not Indicated)";
                 statusEvent.Time = ventilation.Time.ToString();
                 statusEvent.Event = ventilation;
                 StatusList.Add(statusEvent);
-
-                
             }
+
             Button airwaySelection = AirwaySelectionMade(positions);
             if (airwaySelection != null)
             {

@@ -37,9 +37,6 @@
                     <Button Grid.Row="1" Grid.Column="0" x:Name="InitAssessmentButton" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="InitAssessmentButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
                         <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Initial"/><LineBreak/><Run Text="Assessment"/></TextBlock>
                     </Button>
-                    <Button Grid.Row="1" Grid.Column="1" x:Name="AirwayButton" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="AirwayButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
-                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Airway"/><LineBreak/><Run Text="Positioning"/></TextBlock>
-                    </Button>
                     <Button x:Name="CPRButton" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="CPRButton_Click" HorizontalAlignment="Stretch" Margin="8,8,8,8">
                         <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Cardiac"/><LineBreak/><Run Text="Compressions"/></TextBlock>
                     </Button>
@@ -49,9 +46,18 @@
                     <Button x:Name="ApgarButton" Grid.Row="2" Grid.Column="0" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ApgarButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
                         <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Apgar"/><LineBreak/><Run Text="Score"/></TextBlock>
                     </Button>
-                    <Button x:Name="VentilationButton" Grid.Row="2" Grid.Column="1" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="VentilationButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
-                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Ventilation"/><LineBreak/><Run Text="Support"/></TextBlock>
-                    </Button>
+                    <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="VentilationButton" Grid.Row="0" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="VentilationButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Airway"/><LineBreak/><Run Text="Positioning"/><LineBreak/><Run Text="&amp;"/><LineBreak/><Run Text="Ventilation"/><LineBreak/><Run Text="Support"/></TextBlock>
+                        </Button>
+                        <Button x:Name="IntubationButton" Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="IntubationButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Intubation"/><LineBreak/><Run Text="&amp; Su"/><Run Text="c"/><Run Text="tion"/></TextBlock>
+                        </Button>
+                    </Grid>
                     <Button x:Name="LineInsertionButton" Grid.Row="2" Grid.Column="2" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="LineInsertionButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
                         <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Line"/><LineBreak/><Run Text="Insertion"/></TextBlock>
                     </Button>
@@ -60,9 +66,6 @@
                     </Button>
                     <Button x:Name="ReassessmentButton" Grid.Row="3" Grid.Column="0" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReassessmentButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
                         <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Reassessment"/><LineBreak/><Run Text="&amp;"/><Run Text=" "/><Run Text="Observation"/></TextBlock>
-                    </Button>
-                    <Button x:Name="IntubationButton" Grid.Row="3" Grid.Column="1" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="IntubationButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
-                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Intubation"/><LineBreak/><Run Text="&amp; Su"/><Run Text="c"/><Run Text="tion"/></TextBlock>
                     </Button>
                     <Button x:Name="BloodButton" Grid.Row="3" Grid.Column="2" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BloodButton_Click"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
                         <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Blood Gas"/><LineBreak/><Run Text="Results"/></TextBlock>

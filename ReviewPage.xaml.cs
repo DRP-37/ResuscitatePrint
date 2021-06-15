@@ -55,12 +55,7 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
+            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private async void FinishButton_Click(object sender, RoutedEventArgs e)

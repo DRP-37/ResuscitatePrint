@@ -9,61 +9,61 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="BackButton" Content="Back" Margin="77,838,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
-        <Button x:Name="ConfirmButton" Content="Confirm" Margin="1040,838,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
+        <Button x:Name="BackButton" Content="Back" Margin="1072,557,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
+        <Button x:Name="ConfirmButton" Content="Confirm" Margin="1072,0,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Mode=OneWay, Path=TimingCount.Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
-        <Button x:Name="InflationMask" Margin="235,211,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
+        <Button x:Name="InflationMask" Margin="80,362,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Inflation Breaths:&#xA;via mask" FontSize="27"/>
         </Button>
-        <Button x:Name="InflationETT" Margin="882,211,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
+        <Button x:Name="InflationETT" Margin="390,360,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center"  Text="Inflation Breaths:&#xA;via ETT" FontSize="27"/>
         </Button>
-        <Button x:Name="VentilationMask" Margin="239,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
+        <Button x:Name="VentilationMask" Margin="80,482,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Ventilation Breaths:&#xA;via mask" FontSize="27"/>
         </Button>
-        <Button x:Name="VentilationETT" Margin="886,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
+        <Button x:Name="VentilationETT" Margin="390,480,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Ventilation Breaths:&#xA;via ETT" FontSize="27"/>
         </Button>
-        <Button x:Name="MaskCPAP" Margin="568,280,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
+        <Button x:Name="MaskCPAP" Margin="700,414,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Mask CPAP" FontSize="27"/>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="425,463,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="384" FontWeight="Bold" Foreground="Gray" Text="Air Or Oxygen Given:" Height="56"/>
-        <TextBlock HorizontalAlignment="Left" Margin="935,463,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="56" FontWeight="Bold" Foreground="Gray" Text="%" Height="56" RenderTransformOrigin="0.458,0.476"/>
-        <TextBox x:Name="AirGiven" HorizontalAlignment="Left" Height="67" Margin="850,452,0,0" Text="" VerticalAlignment="Top" Width="78" FontSize="36" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="AirGiven_TextChanged" MaxLength="5" TextAlignment="Center"/>
-        <Button x:Name="NeutralPosition" Margin="127,674,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="NeutralPosition_Click" Foreground="#FF494949">
+        <TextBlock HorizontalAlignment="Left" Margin="226,588,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="384" FontWeight="Bold" Foreground="Gray" Text="Air Or Oxygen Given:" Height="56"/>
+        <TextBlock HorizontalAlignment="Left" Margin="703,587,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="36" Width="56" FontWeight="Bold" Foreground="Gray" Text="%" Height="56" RenderTransformOrigin="0.458,0.476"/>
+        <TextBox x:Name="AirGiven" HorizontalAlignment="Left" Height="67" Margin="619,577,0,0" Text="" VerticalAlignment="Top" Width="78" FontSize="36" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="AirGiven_TextChanged" MaxLength="5" TextAlignment="Center"/>
+        <Button x:Name="NeutralPosition" Margin="68,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="100" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="NeutralPosition_Click" Foreground="#FF494949" UseLayoutRounding="False">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Neutral Head&#xA;Position" FontSize="27"/>
         </Button>
-        <Button x:Name="TwoPerson" Margin="484,673,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="NeutralPosition_Click" Foreground="#FF494949">
+        <Button x:Name="TwoPerson" Margin="398,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="100" Width="293" FontSize="27" Background="White" BorderBrush="Black" Click="NeutralPosition_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Two-person Technique" FontSize="27"/>
         </Button>
-        <Button x:Name="RecheckPosition" Margin="867,670,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="NeutralPosition_Click" Foreground="#FF494949">
+        <Button x:Name="RecheckPosition" Margin="725,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="100" Width="293" FontSize="27" Background="White" BorderBrush="Black" Click="NeutralPosition_Click" Foreground="#FF494949">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.381"/>
             </Button.RenderTransform>
             <TextBlock TextAlignment="Center" Text="Recheck head position&#xA; and jaw support" FontSize="27"/>
         </Button>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="350,565,0,0" Text="Airway Positioning:" TextWrapping="Wrap" VerticalAlignment="Top" Height="61" Width="534" FontSize="40" TextAlignment="Center"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="517,142,0,0" Text="Ventilation Support:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" TextAlignment="Center"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="31,81,0,0" Text="Airway Positioning:" TextWrapping="Wrap" VerticalAlignment="Top" Height="61" Width="534" FontSize="40" TextAlignment="Left"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="31,295,0,0" Text="Ventilation Support:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" TextAlignment="Center"/>
     </Grid>
 </Page>
