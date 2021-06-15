@@ -34,7 +34,7 @@ namespace Resuscitate
             this.InitializeComponent();
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
             var RDaT = (ReviewDataAndTiming)e.Parameter;
