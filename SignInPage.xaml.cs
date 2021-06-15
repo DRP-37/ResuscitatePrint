@@ -58,18 +58,19 @@ namespace Resuscitate
             FirestoreDb db = FirestoreDb.Create(project);
             CollectionReference users = db.Collection("Users");
             QuerySnapshot snapshot = await users.GetSnapshotAsync();
+            var success = false;
             foreach (DocumentSnapshot d in snapshot.Documents)
             {
                 Dictionary<string, object> dict = d.ToDictionary();
                 if ((string)dict["email"] == email && (string)dict["password"] == Encoding.UTF8.GetString(password))
                 {
+                    success = true;
                     Frame.Navigate(typeof(ReviewDocsPage));
                 }
-                else
-                {
-                    var dialog = new MessageDialog("Incorrect email or password");
-                    await dialog.ShowAsync();
-                }
+            }
+            if (!success) {
+                var dialog = new MessageDialog("Incorrect email or password");
+                await dialog.ShowAsync();
             }
         }
 
