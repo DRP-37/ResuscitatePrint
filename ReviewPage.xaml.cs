@@ -27,6 +27,7 @@ namespace Resuscitate
     {
         public PatientData patientData;
         public Timing TimingCount;
+        private StatusList StatusList;
 
         public ReviewPage()
         {
@@ -35,19 +36,20 @@ namespace Resuscitate
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-
-            var PT = (PatientTiming)e.Parameter;
-            patientData = PT.PatientData;
-            TimingCount = PT.Timing;
-
-            //var dialog = new MessageDialog(patientData.ToString());
-            //await dialog.ShowAsync();
-
             // Take value from previous screen
+            var RDaT = (ReviewDataAndTiming)e.Parameter;
+            patientData = RDaT.PatientData;
+            TimingCount = RDaT.Timing;
 
+            if (RDaT.StatusList != null)
+            {
+                StatusList = RDaT.StatusList;
+            }
 
             PatientInfo.Background = MainPage.patienInformationComplete ? new SolidColorBrush(Colors.LightGreen) :
                 new SolidColorBrush(Colors.Red);
+
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             base.OnNavigatedTo(e);
         }
 
@@ -61,11 +63,6 @@ namespace Resuscitate
             }
         }
 
-        private void Start_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             TimingCount.Stop();
@@ -77,22 +74,36 @@ namespace Resuscitate
             //PatientData patientData = new PatientData();
             //patientData.sendToFirestore();
 
+            // Clear cache stored locally
+            var frame = Window.Current.Content as Frame;
+            if (frame != null)
+            {
+                var cacheSize = ((frame)).CacheSize;
+                ((frame)).CacheSize = 0;
+                ((frame)).CacheSize = cacheSize;
+            }
+
             this.Frame.Navigate(typeof(MainPage));
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Nothing
         }
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), new PatientTiming(TimingCount, patientData));
+            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, patientData));
+        }
+
+        private void StaffInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StaffPage), TimingCount);
         }
     }
 }

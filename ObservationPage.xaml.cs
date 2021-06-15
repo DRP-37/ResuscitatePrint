@@ -64,6 +64,7 @@ namespace Resuscitate
         {
             // Set data structure
             bool invalidValues = false;
+            bool changedValue = false;
             List<Event> Events = new List<Event>();
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
             string Time = TimingCount.ToString();
@@ -73,7 +74,8 @@ namespace Resuscitate
 
             if (heartRate != null) {
                 observation.Hr = (float)heartRate;
-                StatusEvents.Add(new StatusEvent("Heart Rate", heartRate + " bpm", Time));
+                StatusEvents.Add(new StatusEvent("Heart Rate", heartRate + " bpm", Time, observation));
+                changedValue = true;
             }
 
             if (oxygenLvl != null)
@@ -85,8 +87,9 @@ namespace Resuscitate
                     OxygenLevels.Background = new SolidColorBrush(Colors.PaleVioletRed);
                 } else
                 {
+                    changedValue = true;
                     observation.OximeterOxygen = (float)oxygenLvl;
-                    StatusEvents.Add(new StatusEvent("Oxygen Level", oxygenLvl + "%", Time));
+                    StatusEvents.Add(new StatusEvent("Oxygen Level", oxygenLvl + "%", Time, observation));
                 }
             }
 
@@ -99,8 +102,9 @@ namespace Resuscitate
                     PercentOxygen.Background = new SolidColorBrush(Colors.LightPink);
                 } else
                 {
+                    changedValue = true;
                     observation.OxygenGiven = (float)oxygenPercent;
-                    StatusEvents.Add(new StatusEvent("Oxygen Percent", oxygenPercent + "%", Time));
+                    StatusEvents.Add(new StatusEvent("Oxygen Percent", oxygenPercent + "%", Time, observation));
                 }
             }
 
@@ -116,11 +120,14 @@ namespace Resuscitate
             Events.Add(observation);
             Events.Add(reassessment);
 
-            AddIfNotNull(GenerateStatusEvent("Heart Rate Range", hrs, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", responses, Time), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Chest Movement", movements, Time), StatusEvents);
+            changedValue = changedValue || AddIfNotNull(GenerateStatusEvent("Heart Rate Range", hrs, Time, reassessment), StatusEvents);
+            changedValue = changedValue || AddIfNotNull(GenerateStatusEvent("Respiratory Effort", responses, Time, reassessment), StatusEvents);
+            changedValue = changedValue || AddIfNotNull(GenerateStatusEvent("Chest Movement", movements, Time, reassessment), StatusEvents);
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            if (changedValue)
+            {
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -197,7 +204,7 @@ namespace Resuscitate
             // Nothing
         }
 
-        private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time)
+        private StatusEvent GenerateStatusEvent(string name, Button[] buttons, string time, Event Event)
         {
             Button selected = null;
 
@@ -217,7 +224,7 @@ namespace Resuscitate
             }
 
             TextBlock Text = selected.Content as TextBlock;
-            return new StatusEvent(name, Text.Text.Replace("\n", " "), time);
+            return new StatusEvent(name, Text.Text.Replace("\n", " "), time, Event);
         }
 
         private bool SelectionMade(Button[] buttons)
@@ -234,12 +241,15 @@ namespace Resuscitate
             return false;
         }
 
-        private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)
+        private bool AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)
         {
             if (Event != null)
             {
                 StatusEvents.Add(Event);
+                return true;
             }
+
+            return false;
         }
 
         private void UpdateColours(Button[] buttons, Button sender)

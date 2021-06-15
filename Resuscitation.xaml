@@ -11,88 +11,125 @@
 
     <Grid>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Path=TimingCount.Time, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
-        <Button x:Name="InitAssessmentButton" Margin="27,346,0,0"  VerticalAlignment="Top" Height="90" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="InitAssessmentButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Initial"/><LineBreak/><Run Text="Assessment"/></TextBlock>
-        </Button>
-        <Button x:Name="ApgarButton" Margin="27,460,0,0"  VerticalAlignment="Top" Height="92" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ApgarButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Apgar"/><LineBreak/><Run Text="Score"/></TextBlock>
-        </Button>
-        <Button x:Name="ReassessmentButton" Margin="27,578,0,0"  VerticalAlignment="Top" Height="91" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReassessmentButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Reassessment"/><LineBreak/><Run Text="&amp;"/><Run Text=" "/><Run Text="Observation"/></TextBlock>
-        </Button>
-        <Button x:Name="AirwayButton" Margin="228,346,0,0"  VerticalAlignment="Top" Height="90" Width="167" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="AirwayButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Airway"/><LineBreak/><Run Text="Positioning"/></TextBlock>
-        </Button>
-        <Button x:Name="VentilationButton" Margin="228,460,0,0"  VerticalAlignment="Top" Height="92" Width="167" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="VentilationButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Ventilation"/><LineBreak/><Run Text="Support"/></TextBlock>
-        </Button>
-        <Button x:Name="IntubationButton" Margin="228,578,0,0"  VerticalAlignment="Top" Height="91" Width="167" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="IntubationButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Intubation"/><LineBreak/><Run Text="&amp; Su"/><Run Text="c"/><Run Text="tion"/></TextBlock>
-        </Button>
-        <Button x:Name="CPRButton" Margin="426,346,0,0"  VerticalAlignment="Top" Height="90" Width="169" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="CPRButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Cardiac"/><LineBreak/><Run Text="Compressions"/></TextBlock>
-        </Button>
-        <Button x:Name="LineInsertionButton" Margin="427,460,0,0"  VerticalAlignment="Top" Height="92" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="LineInsertionButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Line"/><LineBreak/><Run Text="Insertion"/></TextBlock>
-        </Button>
-        <Button x:Name="BloodButton" Margin="427,578,0,0"  VerticalAlignment="Top" Height="91" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BloodButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Blood Gas"/><LineBreak/><Run Text="Results"/></TextBlock>
-        </Button>
-        <Button x:Name="MedicationButton" Margin="626,346,0,0"  VerticalAlignment="Top" Height="90" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="MedicationButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Medication"/><LineBreak/><Run Text="Given"/></TextBlock>
-        </Button>
-        <Button x:Name="OtherProceduresButton" Margin="626,459,0,0"  VerticalAlignment="Top" Height="92" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="OtherProceduresButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Drains &amp;"/><LineBreak/><Run Text="Other"/><LineBreak/><Run Text="Procedures"/></TextBlock>
-        </Button>
-        <Button x:Name="NotesButton" Margin="626,578,0,0"  VerticalAlignment="Top" Height="91" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="NotesButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Notes" FontSize="20"/>
-        </Button>
-        <Button x:Name="ReviewButton" Margin="1181,19,0,0"  VerticalAlignment="Top" Height="78" Width="168" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#330071FF" BorderBrush="#7F0071FF" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="24" Text="Review"/>
-        </Button>
-        <Grid Grid.Row="1" HorizontalAlignment="Left" Height="558" Margin="819,111,0,0" VerticalAlignment="Top" Width="529" BorderBrush="Gray">
-            <ScrollViewer  Name="MyScrollViewer"  MinZoomFactor="1" ZoomMode="Enabled" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
-                <Image Name="Algorithm"   Source="Assets/AlgoDiagram.png" Width="448"/>
-            </ScrollViewer>
-        </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="27,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="190" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1"><Run Text="A"/><Run Text="ssessments"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="228,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="197" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Breathing"/>
-        <TextBlock HorizontalAlignment="Left" Margin="427,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Circulation"/>
-        <TextBlock HorizontalAlignment="Left" Margin="626,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Drugs"/>
-
-        <Grid Padding="12" Background="{ThemeResource SystemBaseLowColor}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,111,0,0" Width="767">
+        <Grid Margin="0,111,21,12" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Name" Style="{ThemeResource CaptionTextBlockStyle}"/>
-            <TextBlock Grid.Column="1" Text="Data" Style="{ThemeResource CaptionTextBlockStyle}"/>
-            <TextBlock Grid.Column="2" Text="Time" Style="{ThemeResource CaptionTextBlockStyle}"/>
-        </Grid>
-
-        <ListView  ItemsSource="{x:Bind StatusList.Events}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="27,149,0,0" Height="162" Width="767" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate x:Name="TableDataTemplate" x:DataType="local:StatusEvent">
-                    <Grid Height="48" AutomationProperties.Name="{x:Bind Time}">
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Margin="21,0,0,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="1" Grid.Column="0" x:Name="InitAssessmentButton" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="InitAssessmentButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Initial"/><LineBreak/><Run Text="Assessment"/></TextBlock>
+                    </Button>
+                    <Button Grid.Row="1" Grid.Column="1" x:Name="AirwayButton" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="AirwayButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Airway"/><LineBreak/><Run Text="Positioning"/></TextBlock>
+                    </Button>
+                    <Button x:Name="CPRButton" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="CPRButton_Click" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Cardiac"/><LineBreak/><Run Text="Compressions"/></TextBlock>
+                    </Button>
+                    <Button x:Name="MedicationButton" Grid.Row="1" Grid.Column="3" VerticalAlignment="Stretch" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="MedicationButton_Click" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Medication"/><LineBreak/><Run Text="Given"/></TextBlock>
+                    </Button>
+                    <Button x:Name="ApgarButton" Grid.Row="2" Grid.Column="0" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ApgarButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Apgar"/><LineBreak/><Run Text="Score"/></TextBlock>
+                    </Button>
+                    <Button x:Name="VentilationButton" Grid.Row="2" Grid.Column="1" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="VentilationButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Ventilation"/><LineBreak/><Run Text="Support"/></TextBlock>
+                    </Button>
+                    <Button x:Name="LineInsertionButton" Grid.Row="2" Grid.Column="2" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="LineInsertionButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Line"/><LineBreak/><Run Text="Insertion"/></TextBlock>
+                    </Button>
+                    <Button x:Name="OtherProceduresButton" Grid.Row="2" Grid.Column="3" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="OtherProceduresButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Drains &amp;"/><LineBreak/><Run Text="Other"/><LineBreak/><Run Text="Procedures"/></TextBlock>
+                    </Button>
+                    <Button x:Name="ReassessmentButton" Grid.Row="3" Grid.Column="0" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReassessmentButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Reassessment"/><LineBreak/><Run Text="&amp;"/><Run Text=" "/><Run Text="Observation"/></TextBlock>
+                    </Button>
+                    <Button x:Name="IntubationButton" Grid.Row="3" Grid.Column="1" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="IntubationButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Intubation"/><LineBreak/><Run Text="&amp; Su"/><Run Text="c"/><Run Text="tion"/></TextBlock>
+                    </Button>
+                    <Button x:Name="BloodButton" Grid.Row="3" Grid.Column="2" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BloodButton_Click"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="20"><Run Text="Blood Gas"/><LineBreak/><Run Text="Results"/></TextBlock>
+                    </Button>
+                    <Button x:Name="NotesButton" Grid.Row="3" Grid.Column="3" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#3300FFCD" BorderBrush="#7F005645" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="NotesButton_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8,8,8,8">
+                        <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Notes" FontSize="20"/>
+                    </Button>
+                    <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="190" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" VerticalAlignment="Bottom" HorizontalAlignment="Left"><Run Text="A"/><Run Text="ssessments"/></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="197" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Breathing" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Circulation" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="20" Width="192" FontWeight="Bold" SelectionChanged="TextBlock_SelectionChanged_1" Text="Drugs" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid Grid.Row="0"  HorizontalAlignment="Stretch" Margin="21,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="StatusListTitles" Grid.Row="0" Background="{ThemeResource SystemBaseLowColor}" Margin="0,0,0,1" VerticalAlignment="Bottom" Padding="12,12,12,12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="256"/>
-                            <ColumnDefinition Width="426"/>
-                            <ColumnDefinition Width="85"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Name}" />
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{x:Bind Data}"/>
-                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="{x:Bind Time}"/>
+                        <TextBlock Grid.Column="0" Text="Name" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
+                        <TextBlock Grid.Column="1" Text="Data" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Microsoft JhengHei UI"/>
+                        <TextBlock Grid.Column="2" Text="Time" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Microsoft JhengHei UI"/>
                     </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <TextBlock HorizontalAlignment="Left" Height="30" Margin="990,15,0,0" Text="Current Time" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="24" Foreground="Gray"/>
-        <TextBlock x:Name="Time" HorizontalAlignment="Left" Height="78" Margin="1008,39,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="45"/>
+
+                    <ListView x:Name="StatusListView" Grid.Row="1" ItemsSource="{x:Bind Path=StatusList.Events}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="0" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:Name="TableDataTemplate" x:DataType="local:StatusEvent">
+                                <Grid AutomationProperties.Name="{x:Bind Path=Time}" Height="30">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" VerticalAlignment="Stretch" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Path=Name}" FontFamily="Microsoft JhengHei UI" FontSize="16" />
+                                    <TextBlock Grid.Column="1" VerticalAlignment="Stretch" Text="{x:Bind Path=Data}" FontFamily="Microsoft JhengHei UI" FontSize="16"/>
+                                    <TextBlock Grid.Column="2" VerticalAlignment="Stretch" Text="{x:Bind Path=Time}" FontFamily="Microsoft JhengHei UI" FontSize="16"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Gray" Margin="30,30,0,0">
+                <ScrollViewer  x:Name="AlgoScrollViewer" SizeChanged="AlgoScrollViewer_SizeChanged" MinZoomFactor="1" ZoomMode="Enabled" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+                    <Image x:Name="Algorithm" Source="Assets/AlgoDiagram.png" Stretch="Uniform"/>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Button x:Name="ReviewButton" Margin="0,27,35,0"  VerticalAlignment="Top" Height="78" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#330071FF" BorderBrush="#7F0071FF" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click" HorizontalAlignment="Right" Width="169">
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="24" Text="Review"/>
+        </Button>
+        <TextBlock HorizontalAlignment="Right" Height="30" Margin="0,20,255,0" Text="Current Time" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="24" Foreground="Gray"/>
+        <TextBlock x:Name="CurrTimeView" HorizontalAlignment="Right" Height="78" Margin="0,46,210,0" Text="{x:Bind CurrTime}" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" FontSize="45"/>
     </Grid>
 </Page>

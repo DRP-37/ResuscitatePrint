@@ -26,9 +26,23 @@ namespace Resuscitate.DataClasses
             StringBuilder sb = new StringBuilder();
 
             sb.Append("Timings of cardiac compressions: \n");
+
+            if (end.Count > start.Count)
+            {
+                sb.Append("- " + end[end.Count - 1]);
+            }
+
             for (int i = 0; i < start.Count; i++)
             {
-                sb.Append(start[i].ToString() + " - " + end[i].ToString() + "\n");
+                if (i < end.Count)
+                {
+                    sb.Append(start[i].ToString() + " - " + end[i].ToString() + "\n");
+                }
+            }
+
+            if (start.Count > end.Count)
+            {
+                sb.Append(start[start.Count - 1] + " -");
             }
 
             return sb.ToString();

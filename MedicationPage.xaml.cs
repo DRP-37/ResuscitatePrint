@@ -84,12 +84,26 @@ namespace Resuscitate
                 medication.Time = TimingCount;
                 medication.setData(DoseGiven);
 
-                statusEvent.Name = "Medication Given";
-                statusEvent.Data = "";
-                statusEvent.Time = medication.Time.ToString();
-                statusEvent.Event = medication;
+                List<Event> Events = new List<Event>();
+                Events.Add(medication);
 
-                Frame.Navigate(typeof(Resuscitation), TimingCount);
+                bool hasBeenSelected = false;
+                string Time = TimingCount.Time;
+                List<StatusEvent> StatusEvents = new List<StatusEvent>();
+
+                for (int i = 0; i < DoseGiven.Length; i++)
+                {
+                    if (DoseGiven[i])
+                    {
+                        StatusEvents.Add(new StatusEvent("Medication Given", NameViews[i].Text + " (Dose " + NumDoses[i] + ")", Time, medication));
+                        hasBeenSelected = true;
+                    }
+                }
+
+                if (hasBeenSelected)
+                {
+                    Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+                }
             }
         }
 

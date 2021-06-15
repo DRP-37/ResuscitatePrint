@@ -26,10 +26,12 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
-        PatientData data = new PatientData();
-        private Timing TimingCount;
-        DispatcherTimer Timer = new DispatcherTimer();
+        private PatientData data = new PatientData();
+        private DispatcherTimer Timer = new DispatcherTimer();
         private StatusList StatusList = new StatusList();
+
+        private Timing TimingCount;
+        private string CurrTime;
 
         public Resuscitation()
         {
@@ -40,11 +42,12 @@ namespace Resuscitate
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            CurrTime = DateTime.Now.ToString("HH:mm");
+
             if (e.Parameter.GetType() == typeof(EventAndTiming))
             {
                 var EAndT = (EventAndTiming)e.Parameter;
@@ -58,16 +61,23 @@ namespace Resuscitate
                 foreach (StatusEvent Event in EAndT.StatusEvents) {
                     StatusList.Events.Add(Event);
                 }
+
+                int lastItem = EAndT.StatusEvents.Count - 1;
+
+                if (lastItem > -1)
+                {
+                    StatusListView.ScrollIntoView(EAndT.StatusEvents[lastItem]);
+                }
             }
             else {
                 TimingCount = (Timing)e.Parameter;
             }
-            
+
             base.OnNavigatedTo(e);
         }
         private void Timer_Tick(object sender, object e)
         {
-            Time.Text = DateTime.Now.ToString("HH:mm");
+            CurrTimeView.Text = DateTime.Now.ToString("HH:mm");
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
@@ -137,7 +147,7 @@ namespace Resuscitate
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ReviewPage), new PatientTiming(TimingCount, data));
+            this.Frame.Navigate(typeof(ReviewPage), new ReviewDataAndTiming(TimingCount, StatusList, data));
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -148,6 +158,12 @@ namespace Resuscitate
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
             // Nothing
+        }
+
+        // Changes the image's width to fit the scroller screen
+        private void AlgoScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Algorithm.Width = AlgoScrollViewer.ViewportWidth;
         }
     }
 }

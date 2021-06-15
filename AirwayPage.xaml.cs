@@ -78,7 +78,7 @@ namespace Resuscitate
 
                 List<StatusEvent> StatusEvents = new List<StatusEvent>();
                 TextBlock Text = selection.Content as TextBlock;
-                StatusEvents.Add(new StatusEvent("Airway Positioning", Text.Text.Replace("\n", " "), Time));
+                StatusEvents.Add(new StatusEvent("Airway Positioning", Text.Text.Replace("\n", " "), Time, positioning));
 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }

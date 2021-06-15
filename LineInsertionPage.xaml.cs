@@ -71,7 +71,7 @@ namespace Resuscitate
                 Events.Add(insertion);
 
                 List<StatusEvent> StatusEvents = new List<StatusEvent>();
-                StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString()));
+                StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString(), insertion));
 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
