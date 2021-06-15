@@ -47,8 +47,8 @@ namespace Resuscitate
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             string Name = StaffName.Text;
-            string Position = StaffPosition.Text;
-            string Grade = StaffGrade.Text;
+            string Position = StaffPosition.SelectedValue.ToString();
+            string Grade = StaffGrade.SelectedValue.ToString();
             string TimeOfArrival = arrivalTimePicker.Time.ToString();
 
             StaffList.Members.Add(new StaffMemberData(Name, Position, Grade, TimeOfArrival));
