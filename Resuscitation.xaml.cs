@@ -26,7 +26,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class Resuscitation : Page
     {
-        private PatientData data = new PatientData();
+        private PatientData data;
         private DispatcherTimer Timer = new DispatcherTimer();
         private StatusList StatusList = new StatusList();
 
@@ -58,7 +58,8 @@ namespace Resuscitate
                     data.addItem(Event);
                 }
 
-                foreach (StatusEvent Event in EAndT.StatusEvents) {
+                foreach (StatusEvent Event in EAndT.StatusEvents)
+                {
                     StatusList.Events.Add(Event);
                 }
 
@@ -69,8 +70,15 @@ namespace Resuscitate
                     StatusListView.ScrollIntoView(EAndT.StatusEvents[lastItem]);
                 }
             }
-            else {
+            else if (e.Parameter.GetType() == typeof(Timing))
+            {
                 TimingCount = (Timing)e.Parameter;
+            }
+            else
+            {
+                var RDaT = (ReviewDataAndTiming)e.Parameter;
+                TimingCount = RDaT.Timing;
+                data = RDaT.PatientData;
             }
 
             base.OnNavigatedTo(e);

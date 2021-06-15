@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI;
+using Resuscitate.DataClasses;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +25,8 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class InputTime : Page
     {
+
+        public PatientData patientData;
         public Timing TimingCount { get; set; }
 
         public InputTime()
@@ -31,14 +34,31 @@ namespace Resuscitate
             this.InitializeComponent();
         }
 
-        private void InputLater_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                if (e.Parameter.GetType() == typeof(ReviewDataAndTiming))
+                {
+                    var RDaT = (ReviewDataAndTiming)e.Parameter;
+                    TimingCount = RDaT.Timing;
+                    patientData = RDaT.PatientData;
+                }
+                else if (e.Parameter.GetType() == typeof(PatientData))
+                {
+                    patientData = (PatientData)e.Parameter;
+                }
+            }
+        }
+
+            private void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
             TimingCount = new Timing { IsSet = false, Offset = 0};
             TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
@@ -48,7 +68,7 @@ namespace Resuscitate
             TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void SetTime_Click(object sender, RoutedEventArgs e)
@@ -87,7 +107,7 @@ namespace Resuscitate
             TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -131,7 +151,7 @@ namespace Resuscitate
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), TimingCount);
+            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void StaffInfo_Click(object sender, RoutedEventArgs e)

@@ -52,7 +52,7 @@ namespace Resuscitate
         {
             foreach(TextBox infoBox in infoBoxes)
             {
-                if (String.IsNullOrWhiteSpace(infoBox.Text))
+                if (string.IsNullOrWhiteSpace(infoBox.Text))
                 {
                     MainPage.patienInformationComplete = false;
                     return;
@@ -63,7 +63,7 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            //     Set patient information in data base
+            // Set patient information in database
             patientData.Surname = Surname.Text;
             patientData.Id = ID.Text;
             patientData.DOB = DateOfBirth.Text;

@@ -44,6 +44,8 @@ namespace Resuscitate.DataClasses
         private List<LineInsertion> insertions = new List<LineInsertion>();
         private List<Notes> notes = new List<Notes>();
 
+        private List<StaffData> staffPresent = new List<StaffData>();
+
         // Database Functions
         public async void sendToFirestore()
         {
@@ -74,6 +76,7 @@ namespace Resuscitate.DataClasses
                 { "Compressions",  listToStrings(compressions) },
                 { "Insertions",  listToStrings(insertions) },
                 { "Notes",  listToStrings(notes) },
+                { "Staff", staff() }
             };
 
             data.Add("Data", list);
@@ -150,6 +153,11 @@ namespace Resuscitate.DataClasses
             notes.Add(note);
         }
 
+        public void addStaffMember(StaffData staff)
+        {
+            staffPresent.Add(staff);
+        }
+
         public string[] listToStrings(IEnumerable<Event> eItems)
         {
             List<Event> items = eItems.ToList();
@@ -162,7 +170,7 @@ namespace Resuscitate.DataClasses
             string[] listOfStrings = new string[items.Count];
             for (int i = 0; i < items.Count; i++)
             {
-                if (apgars[i] == null)
+                if (items[i] == null)
                 {
                     listOfStrings[i] = "N/A";
                 }
@@ -225,11 +233,21 @@ namespace Resuscitate.DataClasses
             }
         }
 
-    }
+        private string[] staff()
+        {
+            if (staffPresent.Count == 0)
+            {
+                return new string[] { "N/A" };
+            }
 
-    public enum Sex
-    {
-        MALE,
-        FEMALE
+            var staffMembers = new string[staffPresent.Count];
+            for (int i=0; i < staffPresent.Count; i++)
+            {
+                staffMembers[i] = staffPresent[i].ToString();
+            }
+
+            return staffMembers;
+        }
+
     }
 }
