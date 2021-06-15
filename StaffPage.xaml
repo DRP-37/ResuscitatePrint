@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid>
-            <ComboBox x:Name="StaffPosition" Grid.Row="0" Header="Position" PlaceholderText="" Width="200" Margin="320,160,0,0">
+            <ComboBox x:Name="StaffPosition" Grid.Row="0" Header=" " PlaceholderText="" Width="200" Margin="320,160,0,0">
                 <x:String>Consultant</x:String>
                 <x:String>Doctor</x:String>
                 <x:String>Midwife</x:String>
@@ -18,17 +18,21 @@
                 <x:String>Nurse Practitioner</x:String>
                 <x:String>Obstetrician</x:String>
             </ComboBox>
-            <ComboBox x:Name="StaffGrade" Grid.Row="0" Header="Grade" PlaceholderText="" Width="148" Margin="519,160,0,0">
+            <ComboBox x:Name="StaffGrade" Grid.Row="0" Header=" " PlaceholderText="" Width="148" Margin="519,160,0,0">
                 <x:String>-</x:String>
                 <x:String>ST 1-3</x:String>
                 <x:String>ST 4+</x:String>
             </ComboBox>
-            <TextBox x:Name="StaffName" Text="" Grid.Row="0" TextWrapping="Wrap" Margin="121,160,0,0" Height="54.6667" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Header="Name
-"/>
-            <TimePicker x:Name="arrivalTimePicker" Grid.Row="0"  Margin="666,160,0,0" Header="Arrival time" VerticalAlignment="Top"/>
+            <TextBox x:Name="StaffName" Text="" Grid.Row="0" TextWrapping="Wrap" Margin="121,160,0,0" Height="54.6667" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Header=" "/>
+            <TimePicker x:Name="arrivalTimePicker" Grid.Row="0"  Margin="666,160,0,0" Header=" " VerticalAlignment="Top"/>
         </Grid>
         <Button x:Name="BackButton" Content="Back" Margin="67,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Margin="987,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
-        
+        <TextBlock HorizontalAlignment="Left" Margin="55,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="39" Width="426" FontWeight="Bold" Foreground="Gray" Text="Staff Information" Height="76"/>
+        <TextBlock HorizontalAlignment="Left" Margin="123,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Name" Height="39"/>
+        <TextBlock HorizontalAlignment="Left" Margin="325,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Position" Height="39"/>
+        <TextBlock HorizontalAlignment="Left" Margin="521,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Grade" Height="39"/>
+        <TextBlock HorizontalAlignment="Left" Margin="671,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Arrival Time" Height="39"/>
+
     </Grid>
 </Page>
