@@ -9,8 +9,68 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid>
-            <ComboBox x:Name="StaffPosition" Grid.Row="0" Header=" " PlaceholderText="" Width="200" Margin="320,160,0,0">
+        <Button x:Name="AddButton" Content="Add Member"  Foreground="White" Margin="1117,579,0,0" Height="38" Width="132" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="16" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="DodgerBlue" BorderBrush="DodgerBlue" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="AddButton_Click" VerticalAlignment="Top"/>
+        <Button x:Name="BackButton" Content="Back" Margin="69,614,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
+        <Button x:Name="ConfirmButton" Content="Confirm" Margin="1101,623,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
+
+        <Grid Margin="66,123,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1199" Height="377">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="StaffListTitles" Grid.Row="0" Grid.ColumnSpan="4" Background="{ThemeResource SystemBaseLowColor}" Margin="0,0,0,1" VerticalAlignment="Bottom" Padding="12,12,12,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Name" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
+                <TextBlock Grid.Column="1" Text="Position" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Microsoft JhengHei UI"/>
+                <TextBlock Grid.Column="2" Text="Grade" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Microsoft JhengHei UI"/>
+                <TextBlock Grid.Column="3" Text="Time Of Arrival" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Microsoft JhengHei UI"/>
+            </Grid>
+
+            <ListView x:Name="StaffListView" Grid.Row="1" ItemsSource="{x:Bind Path=StaffList.Members}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" RenderTransformOrigin="0.5,0.5">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" VerticalAlignment="Bottom"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="TableDataTemplate" x:DataType="local:StaffMemberData">
+                        <Grid AutomationProperties.Name="{x:Bind Path=Name}" Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Stretch" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Path=Name}" FontFamily="Microsoft JhengHei UI" FontSize="16" />
+                            <TextBlock Grid.Column="1" VerticalAlignment="Stretch" Text="{x:Bind Path=Position}" FontFamily="Microsoft JhengHei UI" FontSize="16"/>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Stretch" Text="{x:Bind Path=Grade}" FontFamily="Microsoft JhengHei UI" FontSize="16"/>
+                            <TextBlock Grid.Column="3" VerticalAlignment="Stretch" Text="{x:Bind Path=TimeOfArrival}" FontFamily="Microsoft JhengHei UI" FontSize="16"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBox x:Name="StaffName" Grid.Row="2" Grid.Column="0" Text="" Header=" " HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,0,0,0"/>
+            <ComboBox x:Name="StaffPosition" Grid.Row="2" Grid.Column="1" Header=" " PlaceholderText="" HorizontalAlignment="Stretch" Margin="5,0,0,0">
                 <x:String>Consultant</x:String>
                 <x:String>Doctor</x:String>
                 <x:String>Midwife</x:String>
@@ -18,21 +78,13 @@
                 <x:String>Nurse Practitioner</x:String>
                 <x:String>Obstetrician</x:String>
             </ComboBox>
-            <ComboBox x:Name="StaffGrade" Grid.Row="0" Header=" " PlaceholderText="" Width="148" Margin="519,160,0,0">
+            <ComboBox x:Name="StaffGrade" Grid.Row="2" Grid.Column="2" Header=" " PlaceholderText="" HorizontalAlignment="Stretch" Margin="5,0,0,0">
                 <x:String>-</x:String>
                 <x:String>ST 1-3</x:String>
                 <x:String>ST 4+</x:String>
             </ComboBox>
-            <TextBox x:Name="StaffName" Text="" Grid.Row="0" TextWrapping="Wrap" Margin="121,160,0,0" Height="54.6667" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Header=" "/>
-            <TimePicker x:Name="arrivalTimePicker" Grid.Row="0"  Margin="666,160,0,0" Header=" " VerticalAlignment="Top"/>
-        </Grid>
-        <Button x:Name="BackButton" Content="Back" Margin="67,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
-        <Button x:Name="ConfirmButton" Content="Confirm" Margin="987,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="55,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="39" Width="426" FontWeight="Bold" Foreground="Gray" Text="Staff Information" Height="76"/>
-        <TextBlock HorizontalAlignment="Left" Margin="123,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Name" Height="39"/>
-        <TextBlock HorizontalAlignment="Left" Margin="325,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Position" Height="39"/>
-        <TextBlock HorizontalAlignment="Left" Margin="521,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Grade" Height="39"/>
-        <TextBlock HorizontalAlignment="Left" Margin="671,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="22" Width="134" FontWeight="Bold" TextAlignment="Left" Foreground="Gray" Text="Arrival Time" Height="39"/>
+            <TimePicker x:Name="arrivalTimePicker" Grid.Row="2" Grid.Column="3" Header=" " HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,0,0,0" />
 
+        </Grid>
     </Grid>
 </Page>

@@ -22,6 +22,8 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class StaffPage : Page
     {
+        private StaffList StaffList = new StaffList();
+
         public StaffPage()
         {
             this.InitializeComponent();
@@ -40,6 +42,16 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            string Name = StaffName.Text;
+            string Position = StaffPosition.Text;
+            string Grade = StaffGrade.Text;
+            string TimeOfArrival = arrivalTimePicker.Time.ToString();
+
+            StaffList.Members.Add(new StaffMemberData(Name, Position, Grade, TimeOfArrival));
         }
     }
 }
