@@ -162,7 +162,7 @@ namespace Resuscitate.DataClasses
             string[] listOfStrings = new string[items.Count];
             for (int i = 0; i < items.Count; i++)
             {
-                if (apgars[i] == null)
+                if (items[i] == null)
                 {
                     listOfStrings[i] = "N/A";
                 }

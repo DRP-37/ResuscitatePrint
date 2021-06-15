@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI;
+using Resuscitate.DataClasses;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +25,8 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class InputTime : Page
     {
+
+        public PatientData patientData = new PatientData();
         public Timing TimingCount { get; set; }
 
         public InputTime()
@@ -38,7 +41,7 @@ namespace Resuscitate
             TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void Now_Click(object sender, RoutedEventArgs e)
@@ -48,7 +51,7 @@ namespace Resuscitate
             TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void SetTime_Click(object sender, RoutedEventArgs e)
@@ -87,7 +90,7 @@ namespace Resuscitate
             TimingCount.InitTiming();
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -131,7 +134,7 @@ namespace Resuscitate
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), TimingCount);
+            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, patientData));
         }
 
         private void StaffInfo_Click(object sender, RoutedEventArgs e)

@@ -67,23 +67,26 @@ namespace Resuscitate
         {
             TimingCount.Stop();
 
-            patientData.sendToFirestore();
-
-            // Send data to the firestore
-            // This will be replaced with the actual patient data being passed around.
-            //PatientData patientData = new PatientData();
-            //patientData.sendToFirestore();
-
-            // Clear cache stored locally
-            var frame = Window.Current.Content as Frame;
-            if (frame != null)
+            if (patientData.Id != null)
             {
-                var cacheSize = ((frame)).CacheSize;
-                ((frame)).CacheSize = 0;
-                ((frame)).CacheSize = cacheSize;
-            }
+                patientData.sendToFirestore();
 
-            this.Frame.Navigate(typeof(MainPage));
+                // Send data to the firestore
+                // This will be replaced with the actual patient data being passed around.
+                //PatientData patientData = new PatientData();
+                //patientData.sendToFirestore();
+
+                // Clear cache stored locally
+                var frame = Window.Current.Content as Frame;
+                if (frame != null)
+                {
+                    var cacheSize = ((frame)).CacheSize;
+                    ((frame)).CacheSize = 0;
+                    ((frame)).CacheSize = cacheSize;
+                }
+
+                this.Frame.Navigate(typeof(MainPage));
+            }
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
