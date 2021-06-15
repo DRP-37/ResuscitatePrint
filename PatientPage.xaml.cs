@@ -41,7 +41,7 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var PT = (PatientTiming)e.Parameter;
+            var PT = (ReviewDataAndTiming)e.Parameter;
             patientData = PT.PatientData;
 
             isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
