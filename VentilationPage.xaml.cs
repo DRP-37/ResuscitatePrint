@@ -33,10 +33,11 @@ namespace Resuscitate
         // 2: Ventilation Breaths: Via Mask
         // 3: Ventilation Breaths: Via ETT
         // 4: Mask CPAP
-        private int ventilationProcedure;
+        private int ventilationProcedure = -1;
 
         private Ventillation ventilation;
-        private StatusEvent statusEvent;
+        List<Event> EventList = new List<Event>();
+        List<StatusEvent> StatusList = new List<StatusEvent>();
 
         private Button[] positions;
 
@@ -68,63 +69,44 @@ namespace Resuscitate
 
             ventilation = new Ventillation();
             positioning = new AirwayPositioning();
-            statusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            bool ventSelection = VentilationSelectionMade(procedures);
-            List<Event> EventList = new List<Event>();
-            List<StatusEvent> StatusList = new List<StatusEvent>();
-            if (ventSelection)
-            {
-                bool hasAirGiven = airGiven != null;
+            AddVentilationEvents();
 
-                if (hasAirGiven && airGiven > 100)
-                {
-                    AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
-                    AirGiven.Background = new SolidColorBrush(Colors.LightPink);
-                    return;
-                }                
-                // set data structure with ventilation procedure and time stamp of selection
-                ventilation.Time = TimingCount;
-                ventilation.Oxygen = hasAirGiven ? (float)airGiven : -1;
-                ventilation.VentType = (VentillationType)ventilationProcedure;
-                EventList.Add(ventilation);
+            AddAirwayEvents();
 
-                statusEvent.Name = ventilation.ventToString();
-                statusEvent.Data = hasAirGiven ? $"{airGiven}% Air/Oxygen Given" : "(Air/Oxygen Given Not Indicated)";
-                statusEvent.Time = ventilation.Time.ToString();
-                statusEvent.Event = ventilation;
-                StatusList.Add(statusEvent);
-            }
-
-            Button airwaySelection = AirwaySelectionMade(positions);
-            if (airwaySelection != null)
-            {
-                string Time = TimingCount.ToString();
-
-                positioning.Positioning = (Positioning)airwayProcedure;
-                positioning.Time = TimingCount;
-
-                // var dialog = new MessageDialog(positioning.ToString());
-                // await dialog.ShowAsync();
-                EventList.Add(positioning);
-
-                TextBlock Text = airwaySelection.Content as TextBlock;
-                StatusList.Add(new StatusEvent("Airway Positioning", Text.Text.Replace("\n", " "), Time, positioning));
-            }
-            if (airwaySelection != null || ventSelection == true) { 
+            if (StatusList.Count > 0) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
+            } 
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddVentilationEvents();
+            AddAirwayEvents();
+
+            ResetButtons(positions);
+            airwayProcedure = -1;
+
+            ResetButtons(procedures);
+            ventilationProcedure = -1;
+        }
+
+        private void ResetButtons(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
             }
-            
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
         }
 
         private void Ventilation_Click(object sender, RoutedEventArgs e)
@@ -164,7 +146,7 @@ namespace Resuscitate
 
         }
 
-        private bool VentilationSelectionMade(Button[] buttons)
+        private Button SelectionMade(Button[] buttons)
         {
             foreach (Button button in buttons)
             {
@@ -172,10 +154,10 @@ namespace Resuscitate
 
                 if (colour.Color == Colors.LightGreen)
                 {
-                    return true;
+                    return button;
                 }
             }
-            return false;
+            return null;
         }
 
         private void UpdateColours(Button[] buttons, Button sender)
@@ -202,20 +184,62 @@ namespace Resuscitate
             }
         }
 
-
-        // Move to its own class later on - needed it many classes
-        private Button AirwaySelectionMade(Button[] buttons)
+        private bool AddVentilationEvents()
         {
-            foreach (Button button in buttons)
-            {
-                SolidColorBrush colour = button.Background as SolidColorBrush;
+            Button ventSelection = SelectionMade(procedures);
 
-                if (colour.Color == Colors.LightGreen)
-                {
-                    return button;
-                }
+            if (ventSelection == null)
+            {
+                return false;
             }
-            return null;
+
+            bool hasAirGiven = airGiven != null;
+
+            if (hasAirGiven && airGiven > 100)
+            {
+                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
+                return false;
+            }
+
+            // set data structure with ventilation procedure and time stamp of selection
+            ventilation.Time = TimingCount;
+            ventilation.Oxygen = hasAirGiven ? (float)airGiven : -1;
+            ventilation.VentType = (VentillationType)ventilationProcedure;
+            EventList.Add(ventilation);
+
+            StatusEvent statusEvent = new StatusEvent();
+            statusEvent.Name = ventilation.ventToString();
+            statusEvent.Data = hasAirGiven ? $"{airGiven}% Air/Oxygen Given" : "(Air/Oxygen Given Not Indicated)";
+            statusEvent.Time = ventilation.Time.ToString();
+            statusEvent.Event = ventilation;
+            StatusList.Add(statusEvent);
+
+            return true;
+        }
+
+        private bool AddAirwayEvents()
+        {
+            Button airwaySelection = SelectionMade(positions);
+
+            if (airwaySelection == null)
+            {
+                return false;
+            }
+
+            string Time = TimingCount.ToString();
+
+            positioning.Positioning = (Positioning)airwayProcedure;
+            positioning.Time = TimingCount;
+
+            // var dialog = new MessageDialog(positioning.ToString());
+            // await dialog.ShowAsync();
+            EventList.Add(positioning);
+
+            TextBlock Text = airwaySelection.Content as TextBlock;
+            StatusList.Add(new StatusEvent("Airway Positioning", Text.Text.Replace("\n", " "), Time, positioning));
+
+            return true;
         }
 
         private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
