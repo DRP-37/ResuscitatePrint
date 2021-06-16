@@ -111,7 +111,8 @@ namespace Resuscitate
         {
             // Create sample file with the ID of the patient; replace if exists.
             Windows.Storage.StorageFolder storageFolder =
-                Windows.Storage.ApplicationData.Current.LocalFolder;
+               await Windows.Storage.StorageFolder.GetFolderFromPathAsync
+               (Windows.ApplicationModel.Package.Current.InstalledLocation.Path);
             Windows.Storage.StorageFile sampleFile = 
                 await storageFolder.CreateFileAsync("sample.txt", Windows.Storage.CreationCollisionOption.ReplaceExisting);
             String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";

@@ -27,6 +27,12 @@ namespace Resuscitate
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Path.Text = Directory.GetCurrentDirectory();
+            base.OnNavigatedTo(e);
+        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
@@ -34,17 +40,20 @@ namespace Resuscitate
 
         private void Path_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            MainPage.exportPath = (sender as TextBox).Text;
         }
 
         private void HospitalName_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            MainPage.hospitalName = (sender as TextBox).Text;
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (String.IsNullOrWhiteSpace(Path.Text))
+            {
+                MainPage.exportPath = Directory.GetCurrentDirectory();
+            }
         }
     }
 }

@@ -15,7 +15,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="85,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="97" Width="363" Text="Hospital Name:" FontSize="48" Foreground="Gray"/>
         <TextBox x:Name="HospitalName" HorizontalAlignment="Left" Height="86" Margin="487,175,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HospitalName_TextChanged" TextAlignment="Center" MaxLength="5"/>
         <TextBlock HorizontalAlignment="Left" Margin="85,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="160" Width="465" Text="Document Export Path:" FontSize="48" Foreground="Gray"/>
-        <TextBox x:Name="Path" PlaceholderText="what even is a relative path" HorizontalAlignment="Left" Height="86" Margin="487,367,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="Path_TextChanged" TextAlignment="Center" MaxLength="5"/>
+        <TextBox x:Name="Path"  HorizontalAlignment="Left" Height="86" Margin="487,367,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="Path_TextChanged" TextAlignment="Center" MaxLength="5"/>
 
     </Grid>
 </Page>

@@ -24,6 +24,9 @@ namespace Resuscitate
     {
 
         public static bool patienInformationComplete {get; set;}
+        public static String hospitalName { get; set; }
+        public static String exportPath { get; set; }
+
 
         public MainPage()
         {
@@ -51,6 +54,12 @@ namespace Resuscitate
         {
             // Go to review page
             this.Frame.Navigate(typeof(SignInPage));
+        }
+
+        
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SettingsPage));
         }
     }
 }
