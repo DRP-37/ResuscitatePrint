@@ -69,17 +69,17 @@
             </Button.RenderTransform>
         </Button>
         <Viewbox Stretch="Fill" VerticalAlignment="Top" Width="816" Height="71" Margin="342,945,342,0"/>
-        <Button x:Name="resp0" Content="Absent" RenderTransformOrigin="0.5,0.5" Height="49" UseLayoutRounding="False" Width="223" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="306,606,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp0" Content="Absent" RenderTransformOrigin="0.5,0.5" Height="49" UseLayoutRounding="False" Width="223" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="310,606,0,0" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.277" ScaleX="0.99999999999999989" ScaleY="0.99999999999999989" SkewX="0.244"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="resp1" Content="Weak Cry/Poor Effort" RenderTransformOrigin="0.5,0.5" Height="49" UseLayoutRounding="False" Width="223" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="585,606,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp1" Content="Weak Cry/Poor Effort" RenderTransformOrigin="0.5,0.5" Height="49" UseLayoutRounding="False" Width="223" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="589,606,0,0" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.277" ScaleX="0.99999999999999989" ScaleY="0.99999999999999989" SkewX="0.244"/>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="resp2" Content="Good Respiration" RenderTransformOrigin="0.5,0.5" Height="49" UseLayoutRounding="False" Width="223" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="864,606,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp2" Content="Good Respiration" RenderTransformOrigin="0.5,0.5" Height="49" UseLayoutRounding="False" Width="223" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="868,606,0,0" VerticalAlignment="Top">
             <Button.RenderTransform>
                 <CompositeTransform Rotation="-0.277" ScaleX="0.99999999999999989" ScaleY="0.99999999999999989" SkewX="0.244"/>
             </Button.RenderTransform>
