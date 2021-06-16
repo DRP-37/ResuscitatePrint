@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Resuscitate.DataClasses;
+using Windows.Storage;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Resuscitate
@@ -24,9 +25,7 @@ namespace Resuscitate
     {
 
         public static bool patienInformationComplete {get; set;}
-        public static String hospitalName { get; set; }
-        public static String exportPath { get; set; }
-
+        public static ApplicationDataContainer AppSettings { get; set; }
 
         public MainPage()
         {
@@ -34,6 +33,7 @@ namespace Resuscitate
             Frame mainFrame = Window.Current.Content as Frame;
             mainFrame.ContentTransitions = null;
             patienInformationComplete = false;
+            AppSettings = ApplicationData.Current.LocalSettings;
         } 
 
         private void Start_Click(object sender, RoutedEventArgs e)

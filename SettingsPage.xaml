@@ -12,10 +12,15 @@
         <Button x:Name="BackButton" Content="Back" Margin="67,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Margin="987,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="30,29,0,0" Text="Settings" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="48"/>
-        <TextBlock HorizontalAlignment="Left" Margin="85,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="97" Width="363" Text="Hospital Name:" FontSize="48" Foreground="Gray"/>
-        <TextBox x:Name="HospitalName" HorizontalAlignment="Left" Height="86" Margin="487,175,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HospitalName_TextChanged" TextAlignment="Center" MaxLength="5"/>
-        <TextBlock HorizontalAlignment="Left" Margin="85,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="160" Width="465" Text="Document Export Path:" FontSize="48" Foreground="Gray"/>
-        <TextBox x:Name="Path"  HorizontalAlignment="Left" Height="86" Margin="487,367,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="Path_TextChanged" TextAlignment="Center" MaxLength="5"/>
+        <TextBlock HorizontalAlignment="Left" Margin="76,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="97" Width="363" Text="Hospital Name:" FontSize="48" Foreground="Gray"/>
+        <TextBox x:Name="HospitalName" HorizontalAlignment="Left" Height="86" Margin="485,175,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HospitalName_TextChanged" TextAlignment="Center" />
+        <TextBlock HorizontalAlignment="Left" Margin="73,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="465" Text="Document Export Path:" FontSize="35" Foreground="Gray"/>
+        <TextBox x:Name="Path"  HorizontalAlignment="Left" Height="65" Margin="483,381,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="35" BorderBrush="#FF3E3E40" InputScope="Number" IsReadOnly="True" TextAlignment="Center" MaxLength="5"/>
+        <Button x:Name="PathSelect" Content="Select" Height="65" Margin="1100,381,0,0" VerticalAlignment="Top" Width="78" Background="#B20078D7" Foreground="White" FontSize="20" Click="Button_Click">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="{ThemeResource SystemAccentColor}"/>
+            </Button.BorderBrush>
+        </Button>
 
     </Grid>
 </Page>
