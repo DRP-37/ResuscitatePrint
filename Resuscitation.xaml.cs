@@ -136,13 +136,13 @@ namespace Resuscitate
 
         private bool displayApgarNotif()
         {
-            return ((TimeView.Text.StartsWith("05:")) ||
-                   (TimeView.Text.StartsWith("10:")) || 
+            return ((TimeView.Text.StartsWith("10:")) || 
                    (TimeView.Text.StartsWith("15:")) ||
                    (TimeView.Text.StartsWith("20:"))  ||
                    (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0)) ||
-                   ((TimeView.Text.StartsWith("01:") && 
-                   (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 1, 0)) >= 0)));
+                   (TimeView.Text.StartsWith("01:")) || 
+                   ((TimeView.Text.StartsWith("05:")) ||
+                   (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
         }
 
         private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)
