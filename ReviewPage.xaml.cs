@@ -15,6 +15,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Graphics.Printing;
+using Windows.Storage;
+using System.Threading.Tasks;
+using Windows.Storage.AccessCache;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -136,6 +140,58 @@ namespace Resuscitate
                 SurvivedEvent = new StatusEvent("Survival", content.Text, TimingCount.Time, null);
                 StatusList.Events.Add(SurvivedEvent);
             }
+        }
+
+        private async void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create sample file with the ID of the patient; replace if exists.
+            StorageFolder storageFolder = await GetFileFromToken();
+            if (storageFolder == null)
+            {
+                var picker = new Windows.Storage.Pickers.FolderPicker();
+                picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+                picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+
+                picker.FileTypeFilter.Add("*");
+
+                storageFolder = await picker.PickSingleFolderAsync();
+            }
+
+            if (storageFolder ==  null)
+            {
+                // Pop Up you need to choose folder
+                return;
+            }
+
+            StorageFile sampleFile = 
+                await storageFolder.CreateFileAsync("sample.txt", CreationCollisionOption.ReplaceExisting);
+            String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
+            foreach (StatusEvent statEvent in StatusList.Events)
+            {
+                doc += statEvent.Event + " " + statEvent.Data + " " + statEvent.Time + ";\n";
+            }
+            await Windows.Storage.FileIO.WriteTextAsync(sampleFile, doc);
+
+            ExportButton.Background = new SolidColorBrush(Colors.LightGreen);
+            // DEBUG 
+            // Storage­File.Get­File­From­Application­Uri­Async. - get from URI address
+            // Directory.GetCurrentDirectory 
+            // if a path is not selected by user default to installation path of the app
+            System.Diagnostics.Debug.WriteLine(String.Format("File is located at {0}", sampleFile.Path.ToString()));
+        }
+
+        public async Task<StorageFolder> GetFileFromToken()
+        {
+            string token = "";
+            if (MainPage.AppSettings.Values.ContainsKey("exportToken"))
+            {
+                token = (String)MainPage.AppSettings.Values["exportToken"];
+            }
+
+            if (token == "") return null;
+
+            if (!StorageApplicationPermissions.FutureAccessList.ContainsItem(token)) return null;
+            return await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(token);
         }
     }
 }
