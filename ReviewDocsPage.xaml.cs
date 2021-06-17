@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using Firebase.Storage;
+using Firebase;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +16,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
+using Google.Cloud.Firestore;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,6 +33,9 @@ namespace Resuscitate
     {
 
         ExportList ExportList = new ExportList();
+        private FirestoreDb db;
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
+        string project = "resuscitate-4c0ec";
 
         public ReviewDocsPage()
         {
@@ -36,30 +48,25 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+            db = FirestoreDb.Create(project);
+
             ExportListView.MaxHeight = ((Frame)Window.Current.Content).ActualHeight - 325;
 
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
-            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            populateExportList();
+        }
+
+        private async void populateExportList()
+        {
+            Query allFiles = db.Collection("Data");
+            QuerySnapshot allFilesSnapshot = await allFiles.GetSnapshotAsync();
+            foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
+            {
+                Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
+                string id = (string)procedure["Id"];
+                string timeOfBirth = (string)procedure["Time of Birth"];
+                ExportList.Data.Add(new ExportData(id, timeOfBirth));
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -67,12 +74,18 @@ namespace Resuscitate
             Frame.Navigate(typeof(SignInPage));
         }
 
-        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (Button)sender;
             string ID = selected.Tag.ToString();
 
             // Use ID to download text file
+            DocumentReference docRef = db.Collection("Data").Document(ID);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists)
+            {
+                Dictionary<string, object> city = snapshot.ToDictionary();
+            }
         }
     }
 }
