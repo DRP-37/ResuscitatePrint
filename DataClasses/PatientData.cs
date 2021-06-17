@@ -54,37 +54,30 @@ namespace Resuscitate.DataClasses
 
             db = FirestoreDb.Create(project);
 
-            DocumentReference dr = db.Collection("Data").Document(id);
-            Dictionary<string, object> data = new Dictionary<string, object>();
-
-            Dictionary<string, object> list = new Dictionary<string, object>
+            DocumentReference docRef = db.Collection("Data").Document(id);
+            FirebaseDataStructure dst = new FirebaseDataStructure
             {
-                { "Surname", surname },
-                { "Id", id },
-                { "Date of Birth", dob },
-                { "Time of Birth", tob },
-                { "Sex", sex },
-                { "Gestation Period", gestation },
-                { "Estimated Weight", weight },
-                { "Medical History", history },
-                { "Initial Assessment", initialAssessment.ToString() },
-                { "Apgar Scores", listToStrings(apgars) },
-                { "Observations",  listToStrings(observations) },
-                { "Airway Positioning",  listToStrings(positionings) },
-                { "Reassessments",  listToStrings(reassessments) },
-                { "Other Procedures",  listToStrings(procedures) },
-                { "Intubation & Suction",  listToStrings(intubationAndSuctions) },
-                { "Compressions",  listToStrings(compressions) },
-                { "Insertions",  listToStrings(insertions) },
-                { "Notes",  listToStrings(notes) },
-                { "Staff", staff() }
+                Id = id,
+                DateOfBirth = dob,
+                Weight = weight,
+                Insertions = listToStrings(insertions),
+                Gestation = gestation,
+                InitialAssessment = initialAssessment.ToString(),
+                IntubationAndSuction = listToStrings(intubationAndSuctions),
+                AirwayPositioning = listToStrings(positionings),
+                ApgarScores = listToStrings(apgars),
+                Compressions = listToStrings(compressions),
+                MedicalHistory = history,
+                Notes = listToStrings(notes),
+                Observations = listToStrings(observations),
+                OtherProcedures = listToStrings(procedures),
+                Reassessments = listToStrings(reassessments),
+                Sex = sex,
+                Staff = staff(),
+                Surname = surname,
+                TimeOfBirth = tob
             };
-
-            data.Add("Data", list);
-            await dr.SetAsync(list);
-
-            var dialog = new MessageDialog("Data Submitted");
-            await dialog.ShowAsync();
+            await docRef.SetAsync(dst);
         }
 
         public async void sendToStorage(StorageFolder storageFolder, string fileName)
