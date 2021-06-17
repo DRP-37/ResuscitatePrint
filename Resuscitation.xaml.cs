@@ -32,6 +32,8 @@ namespace Resuscitate
         private StatusList StatusList = new StatusList();
 
         public static Stopwatch apgarTimer;
+        public static int apgarCounter;
+        public static bool[] apgarScoresCompleted;
         public static Stopwatch reassessmentTimer;
         public static Stopwatch cprTimer;
 
@@ -51,6 +53,8 @@ namespace Resuscitate
             apgarTimer = Stopwatch.StartNew();
             reassessmentTimer = Stopwatch.StartNew();
             cprTimer = new Stopwatch();
+            apgarCounter = 0;
+            apgarScoresCompleted = new bool[] { false, false, false, false, false };
 
         }
 
@@ -136,13 +140,25 @@ namespace Resuscitate
 
         private bool displayApgarNotif()
         {
-            return ((TimeView.Text.StartsWith("10:")) || 
-                   (TimeView.Text.StartsWith("15:")) ||
-                   (TimeView.Text.StartsWith("20:"))  ||
-                   (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0)) ||
-                   (TimeView.Text.StartsWith("01:")) || 
-                   ((TimeView.Text.StartsWith("05:")) ||
-                   (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
+
+            if (apgarCounter == 0)
+            {
+                return (TimeView.Text.StartsWith("01:"));
+            }
+
+            if (apgarCounter == 1)
+            {
+                return (TimeView.Text.StartsWith("05:")) || ((!apgarScoresCompleted[apgarCounter]) &&
+                    (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
+            }
+
+            if (!apgarScoresCompleted[apgarCounter])
+            {
+                return (TimeView.Text.StartsWith("" + apgarCounter * 5 + ":")) ||
+                     (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0);
+            }
+
+            return false;
         }
 
         private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)

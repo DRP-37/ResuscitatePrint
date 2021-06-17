@@ -90,7 +90,11 @@ namespace Resuscitate
             StatusEvents.Add(statusEvent);
 
             Resuscitation.apgarTimer = Stopwatch.StartNew();
-
+            if (Resuscitation.apgarCounter < 4)
+            {
+                Resuscitation.apgarScoresCompleted[Resuscitation.apgarCounter] = true;
+                Resuscitation.apgarCounter++;
+            }
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
