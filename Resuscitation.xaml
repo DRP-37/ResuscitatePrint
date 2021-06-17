@@ -10,6 +10,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <TextBlock
+  Name="Notification"
+  Margin="42,30,0,0" 
+  Width="532" Height="69" FontSize="24" FontWeight="Bold" Text ="" Foreground="#FF8196BB" HorizontalAlignment="Left" VerticalAlignment="Top" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" TextWrapping="Wrap" />
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Path=TimingCount.Time, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
         <Grid Margin="0,111,21,12" >
             <Grid.ColumnDefinitions>

@@ -1,6 +1,7 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -80,6 +81,7 @@ namespace Resuscitate
                 StartButton.Content = "Stop";
                 StartButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
 
+                Resuscitation.cprTimer = Stopwatch.StartNew();
             }
             else
             {
@@ -90,6 +92,8 @@ namespace Resuscitate
                 HeartBeating.Visibility = Visibility.Collapsed;
                 StartButton.Content = "Start";
                 StartButton.Background = new SolidColorBrush(Colors.LightGray);
+
+                Resuscitation.cprTimer.Reset();
             }
         }
 

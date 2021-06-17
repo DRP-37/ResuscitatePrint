@@ -2,6 +2,7 @@
 using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -30,6 +31,12 @@ namespace Resuscitate
         private DispatcherTimer Timer = new DispatcherTimer();
         private StatusList StatusList = new StatusList();
 
+        public static Stopwatch apgarTimer;
+        public static int apgarCounter;
+        public static bool[] apgarScoresCompleted;
+        public static Stopwatch reassessmentTimer;
+        public static Stopwatch cprTimer;
+
         private Timing TimingCount;
         private string CurrTime;
 
@@ -42,6 +49,13 @@ namespace Resuscitate
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
+
+            apgarTimer = Stopwatch.StartNew();
+            reassessmentTimer = Stopwatch.StartNew();
+            cprTimer = new Stopwatch();
+            apgarCounter = 0;
+            apgarScoresCompleted = new bool[] { false, false, false, false, false };
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -96,6 +110,55 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Nothing
+            if (displayApgarNotif()) {
+                Notification.Text = "Calculate next Apgar Score.";
+            }
+            else if (displayReassessNotif())
+            {
+                Notification.Text = reassessmentTimer.Elapsed.ToString(@"mm\:ss") 
+                    + " minutes have passed since the last reassessment.";
+            } else if (cprNotif())
+            {
+                Notification.Text = cprTimer.Elapsed.ToString(@"mm\:ss")
+                    + " seconds of CPR have passed. Please reassess.";
+            } else
+            {
+                Notification.Text = "";
+            }
+
+        }
+
+        private bool cprNotif()
+        {
+            return (TimeSpan.Compare(cprTimer.Elapsed, new TimeSpan(0, 0, 30)) >= 0);
+        }
+
+        private bool displayReassessNotif()
+        {
+            return (TimeSpan.Compare(reassessmentTimer.Elapsed, new TimeSpan(0, 2, 0)) >= 0);
+        }
+
+        private bool displayApgarNotif()
+        {
+
+            if (apgarCounter == 0)
+            {
+                return (TimeView.Text.StartsWith("01:"));
+            }
+
+            if (apgarCounter == 1)
+            {
+                return (TimeView.Text.StartsWith("05:")) || ((!apgarScoresCompleted[apgarCounter]) &&
+                    (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
+            }
+
+            if (!apgarScoresCompleted[apgarCounter])
+            {
+                return (TimeView.Text.StartsWith("" + apgarCounter * 5 + ":")) ||
+                     (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0);
+            }
+
+            return false;
         }
 
         private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)

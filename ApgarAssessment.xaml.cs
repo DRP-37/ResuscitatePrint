@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Media;
 using Resuscitate.DataClasses;
 using Windows.UI.Popups;
 using System.Collections.Generic;
+using System.Diagnostics;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
@@ -88,6 +89,12 @@ namespace Resuscitate
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
             StatusEvents.Add(statusEvent);
 
+            Resuscitation.apgarTimer = Stopwatch.StartNew();
+            if (Resuscitation.apgarCounter < 4)
+            {
+                Resuscitation.apgarScoresCompleted[Resuscitation.apgarCounter] = true;
+                Resuscitation.apgarCounter++;
+            }
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 

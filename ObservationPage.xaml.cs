@@ -1,6 +1,7 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -101,6 +102,11 @@ namespace Resuscitate
 
             if (StatusEvents.Count > 0)
             {
+                Resuscitation.reassessmentTimer = Stopwatch.StartNew();
+                if (Resuscitation.cprTimer.IsRunning)
+                {
+                    Resuscitation.cprTimer.Restart();
+                }
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
         }
