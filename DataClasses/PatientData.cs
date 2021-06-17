@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.Storage;
 using Windows.UI.Popups;
 
 namespace Resuscitate.DataClasses
@@ -86,12 +87,12 @@ namespace Resuscitate.DataClasses
             await dialog.ShowAsync();
         }
 
-        public async void sendToStorage(string fileName)
+        public async void sendToStorage(StorageFolder storageFolder, string fileName)
         {
-            var stream = File.Open(fileName, FileMode.Open);
+            var stream = await storageFolder.OpenStreamForReadAsync(fileName);
 
-            var task = new FirebaseStorage("gs://resuscitate-4c0ec.appspot.com")
-                .Child("Resuscitation Recordings")
+            var task = new FirebaseStorage("resuscitate-4c0ec.appspot.com")
+                .Child("Resuscitation Files")
                 .Child(id)
                 .Child(fileName)
                 .PutAsync(stream);
@@ -100,6 +101,9 @@ namespace Resuscitate.DataClasses
 
             var dialog = new MessageDialog("File uploaded");
             await dialog.ShowAsync();
+
+            StorageFile exportedFile = await storageFolder.GetFileAsync(fileName);
+            await exportedFile.DeleteAsync();
         }
 
         // Data Functions

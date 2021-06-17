@@ -72,6 +72,9 @@ namespace Resuscitate
             if (patientData.Id != null)
             {
                 patientData.sendToFirestore();
+                ExportButton_Click(sender, e);
+                StorageFolder storageFolder = await GetFileFromToken();
+                patientData.sendToStorage(storageFolder, $"{patientData.Id}.txt");
 
                 // Send data to the firestore
                 // This will be replaced with the actual patient data being passed around.
@@ -164,7 +167,7 @@ namespace Resuscitate
             }
 
             StorageFile sampleFile = 
-                await storageFolder.CreateFileAsync("sample.txt", CreationCollisionOption.ReplaceExisting);
+                await storageFolder.CreateFileAsync($"{patientData.Id}.txt", CreationCollisionOption.ReplaceExisting);
             String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
             foreach (StatusEvent statEvent in StatusList.Events)
             {
