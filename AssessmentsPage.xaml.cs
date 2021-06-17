@@ -40,6 +40,7 @@ namespace Resuscitate
         // New version of generating StatusEvents
         private StatusEvent CordClampingEvent;
         private StatusEvent[] TemperatureEvents;
+        private StatusEvent EstimatedWeightEvent;
         private StatusEvent ColourEvent;
         private StatusEvent ToneEvent;
         private StatusEvent BreathingEvent;
@@ -68,6 +69,7 @@ namespace Resuscitate
             // Set all selections to null (new StatusEvent generation)
             CordClampingEvent = null;
             TemperatureEvents = new StatusEvent[3];
+            EstimatedWeightEvent = null;
             ColourEvent = null;
             ToneEvent = null;
             BreathingEvent = null;
@@ -103,6 +105,7 @@ namespace Resuscitate
                 AddIfNotNull(Event, StatusEvents);
             }
 
+            AddIfNotNull(EstimatedWeightEvent, StatusEvents);
             AddIfNotNull(ColourEvent, StatusEvents);
             AddIfNotNull(HeartrateEvent, StatusEvents);
             AddIfNotNull(ToneEvent, StatusEvents);
@@ -228,6 +231,33 @@ namespace Resuscitate
             if (Event != null)
             {
                 StatusEvents.Add(Event);
+            }
+        }
+
+        private void EstimatedWeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+            double estimatedWeight;
+            double.TryParse(textBox.Text, out estimatedWeight);
+
+            TextValidity(estimatedWeight <= 9, textBox, "kg", "Estimated Weight", out EstimatedWeightEvent);
+        }
+
+        private void TextValidity(bool valid, TextBox textBox, string dataSuffix, string Name, out StatusEvent statusEvent)
+        {
+            if (!valid)
+            {
+                textBox.Background = new SolidColorBrush(Colors.LightPink);
+                textBox.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                statusEvent = null;
+            }
+            else
+            {
+                textBox.Background = new SolidColorBrush(Colors.White);
+                textBox.BorderBrush = new SolidColorBrush(Colors.Black);
+                statusEvent = new StatusEvent(Name, textBox.Text + dataSuffix, TimingCount.Time, initialAssessment);
             }
         }
     }

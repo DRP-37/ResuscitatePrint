@@ -29,13 +29,14 @@ namespace Resuscitate
         private bool[] isWrittenTo;
 
         public PatientData patientData;
+        public static double? UpdatedWeight { get; set; }
 
         public PatientPage()
         {
             this.InitializeComponent();
             infoBoxes = new TextBox[] { Surname, ID, DateOfBirth, TimeOfBirth, Sex,
                 Gestation, EstimatedWeight, MedicalHistory };
-            isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
+            this.isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
@@ -44,7 +45,14 @@ namespace Resuscitate
             var PT = (ReviewDataAndTiming)e.Parameter;
             patientData = PT.PatientData;
 
+            if (UpdatedWeight != null)
+            {
+                EstimatedWeight.Text = UpdatedWeight.ToString();
+                UpdatedWeight = null;
+            }
+
             isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
+
             base.OnNavigatedTo(e);
         }
 

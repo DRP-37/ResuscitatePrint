@@ -257,18 +257,14 @@ namespace Resuscitate
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
 
-        // Returns null if unsuccessful
-        private int? ParseInt(TextBox textBox)
-        {
-            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
-            int temp;
-            int.TryParse(textBox.Text, out temp);
-            return temp;
-        }
-
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
             // Nothing
+        }
+
+        private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
