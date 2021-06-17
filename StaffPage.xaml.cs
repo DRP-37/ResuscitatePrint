@@ -24,23 +24,44 @@ namespace Resuscitate
     public sealed partial class StaffPage : Page
     {
         private StaffList StaffList = new StaffList();
+        private List<StaffMemberData> ItemsAdded;
 
         public StaffPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ItemsAdded = new List<StaffMemberData>();
+            StaffName.Text = "";
             StaffPosition.SelectedIndex = -1;
             StaffGrade.SelectedIndex = -1;
             arrivalTimePicker.Time = DateTime.Now.TimeOfDay;
+
+            // can take a Timing or nothing I think
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            // not yet implemented ig
 
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (StaffMemberData staffData in ItemsAdded)
+            {
+                StaffList.Members.Remove(staffData);
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame.CanGoBack)
@@ -67,7 +88,9 @@ namespace Resuscitate
             string Grade = StaffGrade.SelectedValue.ToString();
             string TimeOfArrival = arrivalTimePicker.Time.ToString().Substring(0,5);
 
-            StaffList.Members.Add(new StaffMemberData(Name, Position, Grade, TimeOfArrival));
+            StaffMemberData StaffData = new StaffMemberData(Name, Position, Grade, TimeOfArrival);
+            StaffList.Members.Add(StaffData);
+            ItemsAdded.Add(StaffData);
 
             StaffName.Text = "";
             StaffPosition.SelectedIndex = -1;

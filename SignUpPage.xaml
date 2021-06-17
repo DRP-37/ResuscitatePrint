@@ -10,20 +10,14 @@
 
     <Grid>
         <TextBlock Text="Create Account" FontSize="48" TextAlignment="Center" Margin="400,149,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="92" Width="390"/>
-        <TextBlock Text="Email:"
-               TextWrapping="Wrap" Width="92"
-               TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="346,257,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
+        <TextBlock Text="Email:" TextWrapping="Wrap" Width="92" TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="346,257,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
         <TextBox x:Name="UsernameTextBox"  VerticalAlignment="Top" Margin="362,292,0,0" Height="54" HorizontalAlignment="Left" Width="493" FontSize="28"/>
+        <TextBlock Text="Password:" TextWrapping="Wrap" Width="103" TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="364,357,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
         <PasswordBox x:Name="PasswordTextBox"  VerticalAlignment="Top" Margin="362,390,0,0" Height="56" HorizontalAlignment="Left" Width="493" FontSize="28"/>
-        <Button x:Name="SignUpButton" Content="Sign Up" Background="DodgerBlue" Foreground="White"
-        Click="SignUpButton_Click" Width="156" Margin="987,632,0,0" Height="51" FontSize="24" VerticalAlignment="Top"/>
-        <Button x:Name="BackButton" Content="Back"  Foreground="White" Margin="67,632,0,0" Height="51" Width="156" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="DodgerBlue" BorderBrush="DodgerBlue" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click" VerticalAlignment="Top"/>
-        <TextBlock Text="Password:"
-            TextWrapping="Wrap" Width="103"
-            TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="364,357,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
+        <TextBlock Text="Confirm Your Password:" TextWrapping="Wrap" Width="260" TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="352,456,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
         <PasswordBox x:Name="PasswordTextBox_Copy"  VerticalAlignment="Top" Margin="362,486,0,0" Height="56" HorizontalAlignment="Left" Width="493" FontSize="28"/>
-        <TextBlock Text="Confirm Your Password:"
-            TextWrapping="Wrap" Width="260"
-            TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="352,456,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
+
+        <Button x:Name="SignUpButton" Content="Sign Up" Background="DodgerBlue" Foreground="White" Click="SignUpButton_Click" Width="156" Margin="987,632,0,0" Height="51" FontSize="24" VerticalAlignment="Top"/>
+        <Button x:Name="BackButton" Content="Back"  Foreground="White" Margin="67,632,0,0" Height="51" Width="156" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="DodgerBlue" BorderBrush="DodgerBlue" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click" VerticalAlignment="Top"/>
     </Grid>
 </Page>

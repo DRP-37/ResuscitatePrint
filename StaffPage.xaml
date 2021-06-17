@@ -71,8 +71,9 @@
 
             <TextBox x:Name="StaffName" Grid.Row="2" Grid.Column="0" PlaceholderText="Staff Name..." VerticalAlignment="Top" Margin="5,10,0,0" FontSize="16" Height="37" TextAlignment="Left"/>
             <ComboBox x:Name="StaffPosition" Grid.Row="2" Grid.Column="1" PlaceholderText="Select Position..." HorizontalAlignment="Stretch" Margin="6,10,171,0" FontSize="16" Grid.ColumnSpan="2" Height="37">
-                <x:String>Consultant</x:String>
+                <x:String>Anaesthetist</x:String>
                 <x:String>Doctor</x:String>
+                <x:String>Clinical Fellow</x:String>
                 <x:String>Midwife</x:String>
                 <x:String>Nurse</x:String>
                 <x:String>Nurse Practitioner</x:String>
@@ -80,8 +81,11 @@
             </ComboBox>
             <ComboBox x:Name="StaffGrade" Grid.Row="2" Grid.Column="2" PlaceholderText="Select Grade..." HorizontalAlignment="Stretch" Margin="5,10,0,0" FontSize="16" Height="37">
                 <x:String>-</x:String>
+                <x:String>FY 1</x:String>
+                <x:String>FY 2</x:String>
                 <x:String>ST 1-3</x:String>
                 <x:String>ST 4+</x:String>
+                <x:String>Consultant</x:String>
             </ComboBox>
             <TimePicker x:Name="arrivalTimePicker" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="8,10,0,0" FontSize="16" Height="37" />
 

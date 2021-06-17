@@ -79,6 +79,11 @@ namespace Resuscitate
                 var RDaT = (ReviewDataAndTiming)e.Parameter;
                 TimingCount = RDaT.Timing;
                 data = RDaT.PatientData;
+
+                if (RDaT.StatusList != null)
+                {
+                    this.StatusList = RDaT.StatusList;
+                }
             }
 
             base.OnNavigatedTo(e);
@@ -172,6 +177,11 @@ namespace Resuscitate
         private void AlgoScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             Algorithm.Width = AlgoScrollViewer.ViewportWidth;
+        }
+
+        private void StaffInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StaffPage), TimingCount);
         }
     }
 }

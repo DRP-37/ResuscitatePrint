@@ -77,13 +77,13 @@
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Regular&#xA;Respirations" FontSize="15"/>
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="517,379,0,0" Text="Percentage Oxygen" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="322" FontSize="36" FontWeight="Normal"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Oxygen Levels" FontSize="26"/>
+        <TextBlock HorizontalAlignment="Left" Margin="67,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" FontSize="26"><Run Text="Oxygen"/><Run Text=" Saturation"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="67,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Heart Rate" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="355,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
+        <TextBlock HorizontalAlignment="Left" Margin="387,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
         <TextBlock HorizontalAlignment="Left" Margin="738,465,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="355,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="bpm" FontSize="26"/>
-        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="277,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Center" MaxLength="5"/>
+        <TextBlock HorizontalAlignment="Left" Margin="387,527,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="bpm" FontSize="26"/>
+        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="309,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Center" MaxLength="5"/>
         <TextBox x:Name="PercentOxygen" HorizontalAlignment="Left" Height="48" Margin="655,457,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="PercentOxygen_TextChanged" MaxLength="5" TextAlignment="Center"/>
-        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="277,515,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center" MaxLength="5"/>
+        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="309,515,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" FontSize="20" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center" MaxLength="5"/>
     </Grid>
 </Page>
