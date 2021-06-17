@@ -26,8 +26,8 @@ namespace Resuscitate
     public sealed partial class LineInsertionPage : Page
     {
         public Timing TimingCount { get; set; }
-        private string tick = "\u2713";
-        private string cross = "\u2A09";
+        //private string tick = "\u2713";
+        //private string cross = "\u2A09";
 
         private LineInsertion insertion;
         private StatusEvent StatusEvent;
@@ -36,8 +36,8 @@ namespace Resuscitate
         // Airway Positioning:
         // 0: Umbilical
         // 1: Intraosseous
-        private int lineInsertion;
-        private bool isSuccessful;
+        private int? lineInsertion;
+        private bool? isSuccessful;
 
         public LineInsertionPage()
         {
@@ -52,6 +52,9 @@ namespace Resuscitate
 
             insertion = new LineInsertion();
             insertion.Time = TimingCount;
+
+            isSuccessful = null;
+            lineInsertion = null;
 
             StatusEvent = new StatusEvent();
 
@@ -98,6 +101,16 @@ namespace Resuscitate
         private void Successful_Click(object sender, RoutedEventArgs e)
         {
             Button curr = sender as Button;
+            SolidColorBrush colour = (SolidColorBrush)curr.Background;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                curr.Background = new SolidColorBrush(Colors.White);
+                isSuccessful = null;
+                StatusEvent = null;
+                return;
+            }
+
             UpdateColours(new Button[] {Successful, Unsuccessful}, curr);
             isSuccessful = curr.Equals(Successful);
 
@@ -107,8 +120,20 @@ namespace Resuscitate
         private void Insertion_Click(object sender, RoutedEventArgs e)
         {
             Button curr = sender as Button;
+            SolidColorBrush colour = (SolidColorBrush)curr.Background;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                curr.Background = new SolidColorBrush(Colors.White);
+                lineInsertion = null;
+                StatusEvent = null;
+                return;
+            }
+
             UpdateColours(insertionButtons, curr);
             lineInsertion = Array.IndexOf(insertionButtons, curr);
+
+            StatusEvent = GenerateStatusEvent();
         }
 
         private void UpdateColours(Button[] buttons, Button sender)
@@ -120,8 +145,13 @@ namespace Resuscitate
 
         private StatusEvent GenerateStatusEvent()
         {
-            string Insertion = ((TextBlock)insertionButtons[lineInsertion].Content).Text;
-            string Data = isSuccessful ? Insertion + ": Successful" : Insertion + ": Unsuccessful";
+            if (lineInsertion == null || isSuccessful == null)
+            {
+                return null;
+            }
+
+            string Insertion = ((TextBlock)insertionButtons[(int)lineInsertion].Content).Text.Replace("\n", " ");
+            string Data = (bool)isSuccessful ? Insertion + ": Successful" : Insertion + ": Unsuccessful";
 
             return new StatusEvent("Line Insertion", Data, TimingCount.Time, insertion);
         }
