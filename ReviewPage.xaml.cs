@@ -125,6 +125,12 @@ namespace Resuscitate
                 storageFolder = await picker.PickSingleFolderAsync();
             }
 
+            if (storageFolder ==  null)
+            {
+                // Pop Up you need to choose folder
+                return;
+            }
+
             StorageFile sampleFile = 
                 await storageFolder.CreateFileAsync("sample.txt", CreationCollisionOption.ReplaceExisting);
             String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
