@@ -158,6 +158,8 @@
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExportData.cs" />
+    <Compile Include="ExportList.cs" />
     <Compile Include="IntubationPage.xaml.cs">
       <DependentUpon>IntubationPage.xaml</DependentUpon>
     </Compile>

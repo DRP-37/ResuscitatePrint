@@ -22,6 +22,9 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ReviewDocsPage : Page
     {
+
+        ExportList ExportList = new ExportList();
+
         public ReviewDocsPage()
         {
             this.InitializeComponent();
@@ -31,6 +34,34 @@ namespace Resuscitate
             // this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            ExportListView.MaxHeight = ((Frame)Window.Current.Content).ActualHeight - 325;
+
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+            ExportList.Data.Add(new ExportData("1097387", "10:10"));
+        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SignInPage));
@@ -38,7 +69,10 @@ namespace Resuscitate
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
+            Button selected = (Button)sender;
+            string ID = selected.Tag.ToString();
 
+            // Use ID to download text file
         }
     }
 }

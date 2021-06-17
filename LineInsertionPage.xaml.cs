@@ -30,7 +30,7 @@ namespace Resuscitate
         private string cross = "\u2A09";
 
         private LineInsertion insertion;
-        private StatusEvent statusEvent;
+        private StatusEvent StatusEvent;
 
         private Button[] insertionButtons;
         // Airway Positioning:
@@ -53,7 +53,7 @@ namespace Resuscitate
             insertion = new LineInsertion();
             insertion.Time = TimingCount;
 
-            statusEvent = new StatusEvent();
+            StatusEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
@@ -71,7 +71,14 @@ namespace Resuscitate
                 Events.Add(insertion);
 
                 List<StatusEvent> StatusEvents = new List<StatusEvent>();
-                StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString(), insertion));
+                //StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString(), insertion));
+
+                if (StatusEvent == null)
+                {
+                    return;
+                }
+
+                StatusEvents.Add(StatusEvent);
 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
@@ -93,6 +100,8 @@ namespace Resuscitate
             Button curr = sender as Button;
             UpdateColours(new Button[] {Successful, Unsuccessful}, curr);
             isSuccessful = curr.Equals(Successful);
+
+            StatusEvent = GenerateStatusEvent();
         }
 
         private void Insertion_Click(object sender, RoutedEventArgs e)
@@ -107,6 +116,14 @@ namespace Resuscitate
             buttons[0].Background = new SolidColorBrush(Colors.White);
             buttons[1].Background = new SolidColorBrush(Colors.White);
             sender.Background = new SolidColorBrush(Colors.LightGreen);
+        }
+
+        private StatusEvent GenerateStatusEvent()
+        {
+            string Insertion = ((TextBlock)insertionButtons[lineInsertion].Content).Text;
+            string Data = isSuccessful ? Insertion + ": Successful" : Insertion + ": Unsuccessful";
+
+            return new StatusEvent("Line Insertion", Data, TimingCount.Time, insertion);
         }
 
         private bool SelectionMade(Button[] buttons)
