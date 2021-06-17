@@ -41,6 +41,14 @@ namespace Resuscitate
         private Reassessment reassessment;
         private Observation observation;
 
+        // New StatusEvent Generation
+        StatusEvent HeartrateButtonEvent;
+        StatusEvent MovementEvent;
+        StatusEvent BreathingEvent;
+        StatusEvent OxySaturationEvent;
+        StatusEvent HeartrateBpmEvent;
+        StatusEvent OxyPercentEvent;
+
         public ObservationPage()
         {
             this.InitializeComponent();
@@ -57,61 +65,24 @@ namespace Resuscitate
             reassessment = new Reassessment();
             observation = new Observation();
 
+            HeartrateButtonEvent = null;
+            MovementEvent = null;
+            BreathingEvent = null;
+            OxySaturationEvent = null;
+            HeartrateBpmEvent = null;
+            OxyPercentEvent = null;
+
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             // Set data structure
-            bool invalidValues = false;
-            bool changedValue = false;
             List<Event> Events = new List<Event>();
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            string Time = TimingCount.ToString();
 
             reassessment.Time = TimingCount;
             observation.Time = TimingCount;
-
-            if (heartRate != null) {
-                observation.Hr = (float)heartRate;
-                StatusEvents.Add(new StatusEvent("Heart Rate", heartRate + " bpm", Time, observation));
-                changedValue = true;
-            }
-
-            if (oxygenLvl != null)
-            {
-                if (oxygenLvl > 100)
-                {
-                    invalidValues = true;
-                    OxygenLevels.BorderBrush = new SolidColorBrush(Colors.Red);
-                    OxygenLevels.Background = new SolidColorBrush(Colors.PaleVioletRed);
-                } else
-                {
-                    changedValue = true;
-                    observation.OximeterOxygen = (float)oxygenLvl;
-                    StatusEvents.Add(new StatusEvent("Oxygen Level", oxygenLvl + "%", Time, observation));
-                }
-            }
-
-            if (oxygenPercent != null)
-            {
-                if (oxygenLvl > 100)
-                {
-                    invalidValues = true;
-                    PercentOxygen.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
-                    PercentOxygen.Background = new SolidColorBrush(Colors.LightPink);
-                } else
-                {
-                    changedValue = true;
-                    observation.OxygenGiven = (float)oxygenPercent;
-                    StatusEvents.Add(new StatusEvent("Oxygen Percent", oxygenPercent + "%", Time, observation));
-                }
-            }
-
-            if (invalidValues)
-            {
-                return;
-            }
 
             reassessment.Hr = (HeartRate)hr;
             reassessment.Movement = (ChestMovement)movement;
@@ -120,11 +91,15 @@ namespace Resuscitate
             Events.Add(observation);
             Events.Add(reassessment);
 
-            changedValue = changedValue || AddIfNotNull(GenerateStatusEvent("Heart Rate Range", hrs, Time, reassessment), StatusEvents);
-            changedValue = changedValue || AddIfNotNull(GenerateStatusEvent("Respiratory Effort", responses, Time, reassessment), StatusEvents);
-            changedValue = changedValue || AddIfNotNull(GenerateStatusEvent("Chest Movement", movements, Time, reassessment), StatusEvents);
+            AddIfNotNull(HeartrateButtonEvent, StatusEvents);
+            AddIfNotNull(BreathingEvent, StatusEvents);
+            AddIfNotNull(MovementEvent, StatusEvents);
 
-            if (changedValue)
+            AddIfNotNull(OxySaturationEvent, StatusEvents);
+            AddIfNotNull(HeartrateBpmEvent, StatusEvents);
+            AddIfNotNull(OxyPercentEvent, StatusEvents);
+
+            if (StatusEvents.Count > 0)
             {
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
@@ -135,68 +110,89 @@ namespace Resuscitate
             Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
+        private void ClickReassessmentButton(Button button, Button[] buttons, string EventName, out int index, out StatusEvent statusEvent)
+        {
+            SolidColorBrush colour = button.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
+                index = -1;
+                statusEvent = null;
+                return;
+            }
+
+            UpdateColours(buttons, button);
+            index = button.Name[button.Name.Length - 1] - '0';
+
+            statusEvent = GenerateStatusEvent(EventName, buttons, TimingCount.Time, reassessment);
+        }
+
         private void movement_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            int index = Array.IndexOf(movements, selected);
-
-            if (this.movement == index)
-            {
-                movements[index].Background = new SolidColorBrush(Colors.White);
-                movement = -1;
-            }
-            else
-            {
-                UpdateColours(movements, selected);
-                this.movement = index;
-            }
+            ClickReassessmentButton(selected, movements, "Chest Movement", out movement, out MovementEvent);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            int index = Array.IndexOf(hrs, selected);
-            if (this.hr == index)
-            {
-                hrs[index].Background = new SolidColorBrush(Colors.White);
-                hr = -1;
-            }
-            else
-            {
-                UpdateColours(hrs, selected);
-                this.hr = selected.Name[selected.Name.Length - 1] - '0';
-            }
+            ClickReassessmentButton(selected, hrs, "Heartrate Range", out hr, out HeartrateButtonEvent);
         }
 
         private void resp_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            int index = Array.IndexOf(responses, selected);
-            if (this.response == index)
+            ClickReassessmentButton(selected, responses, "Breathing", out response, out BreathingEvent);
+        }
+
+        private void ObservationTextValidity(bool valid, TextBox textBox, string dataSuffix, string Name, out StatusEvent statusEvent)
+        {
+            if (!valid)
             {
-                responses[index].Background = new SolidColorBrush(Colors.White);
-                response = -1;
+                textBox.Background = new SolidColorBrush(Colors.LightPink);
+                textBox.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                statusEvent = null;
             }
             else
             {
-                UpdateColours(responses, selected);
-                this.response = selected.Name[selected.Name.Length - 1] - '0';
+                textBox.Background = new SolidColorBrush(Colors.White);
+                textBox.BorderBrush = new SolidColorBrush(Colors.Black);
+                statusEvent = new StatusEvent(Name, textBox.Text + dataSuffix, TimingCount.Time, observation);
             }
         }
 
         private void OxygenLevels_TextChanged(object sender, TextChangedEventArgs e)
         {
-            oxygenLvl = ParseInt(OxygenLevels);
+            TextBox textBox = (TextBox)sender;
+
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
+            int oxygenLevel;
+            Int32.TryParse(textBox.Text, out oxygenLevel);
+
+            ObservationTextValidity(oxygenLevel <= 100, textBox, "%", "Oxygen Saturation", out OxySaturationEvent);
         }
 
         private void PercentOxygen_TextChanged(object sender, TextChangedEventArgs e)
         {
-            oxygenPercent = ParseInt(PercentOxygen);
+            TextBox textBox = (TextBox)sender;
+
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
+            int oxygenPercent;
+            Int32.TryParse(textBox.Text, out oxygenPercent);
+
+            ObservationTextValidity(oxygenPercent <= 100, textBox, "%", "Oxygen Percentage", out OxyPercentEvent);
         }
 
         private void HeartRate_TextChanged(object sender, TextChangedEventArgs e)
         {
-            heartRate = ParseInt(HeartRate);
+            TextBox textBox = (TextBox)sender;
+
+            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
+            int heartrateBpm;
+            Int32.TryParse(textBox.Text, out heartrateBpm);
+
+            ObservationTextValidity(heartrateBpm <= 300, textBox, " bpm", "Heartrate", out HeartrateBpmEvent);
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
