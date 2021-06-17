@@ -42,7 +42,7 @@
                 </Button>
                 <Button x:Name="BackButton" Grid.Row="3" Grid.Column="1" Content="Back" VerticalAlignment="Stretch" MinHeight="77" MinWidth="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="BackButton_Click" HorizontalAlignment="Stretch" Margin="10,10,10,10"/>
             </Grid>
-            
+
             <Grid x:Name="StatusListTitles" Grid.Row="0" Grid.Column="1" Background="{ThemeResource SystemBaseLowColor}" Margin="0,0,0,1" VerticalAlignment="Bottom" Padding="12,12,12,12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -84,16 +84,31 @@
 
             <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="FinishButton" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="77" MinWidth="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="FinishButton_Click" HorizontalAlignment="Stretch" Margin="10,10,10,10">
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Survived:" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="28" MinWidth="125" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <Button x:Name="SurvivedYesButton" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="30" MinWidth="50" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="White" BorderBrush="#7F000000" Click="SurvivedButton_Click" HorizontalAlignment="Stretch" Margin="52,10,50,10">
+                    <TextBlock TextAlignment="Center" Text="Yes"/>
+                </Button>
+                <Button x:Name="SurvivedNoButton" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="30" MinWidth="50" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="White" BorderBrush="#7F000000" Click="SurvivedButton_Click" HorizontalAlignment="Stretch" Margin="52,10,50,10">
+                    <TextBlock TextAlignment="Center" Text="No"/>
+                </Button>
+                <Button x:Name="FinishButton" Grid.Row="5" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="77" MinWidth="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="FinishButton_Click" HorizontalAlignment="Stretch" Margin="10,10,10,10">
                     <TextBlock TextAlignment="Center" Text="Finish"/>
+                </Button>
+                <Button x:Name="ExportButton" Grid.Row="6" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="77" MinWidth="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ExportButton_Click" HorizontalAlignment="Stretch" Margin="10,10,10,10">
+                    <TextBlock TextAlignment="Center" Text="Export"/>
                 </Button>
             </Grid>
         </Grid>

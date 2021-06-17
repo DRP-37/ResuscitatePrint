@@ -153,7 +153,7 @@
     <Compile Include="DataClasses\ReviewDataAndTiming.cs" />
     <Compile Include="DataClasses\Reassessment.cs" />
     <Compile Include="DataClasses\StaffData.cs" />
-    <Compile Include="DataClasses\Ventillation.cs" />
+    <Compile Include="DataClasses\Ventilation.cs" />
     <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
@@ -190,6 +190,9 @@
       <DependentUpon>ReviewDocsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReviewPage.xaml.cs" />
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
@@ -313,6 +316,10 @@
     <Page Include="ReviewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SignUpPage.xaml">
       <Generator>MSBuild:Compile</Generator>

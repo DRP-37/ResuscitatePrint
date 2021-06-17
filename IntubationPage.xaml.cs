@@ -31,7 +31,6 @@ namespace Resuscitate
         // True: Intubation
         // Flase: Suction
         private bool isSuccessful;
-        private int confirmation;
         // Confirmation:
         // 0: ET-CO2
         // 1: Equal Air Entry
@@ -68,13 +67,39 @@ namespace Resuscitate
                 intubationAndSuction.Time = TimingCount;
                 intubationAndSuction.Intubation = isIntubation;
                 intubationAndSuction.Suction = !isIntubation;
-                intubationAndSuction.Confirmation = (IntubationConfirmation)confirmation;
+                //intubationAndSuction.Confirmation = (IntubationConfirmation)confirmation;
                 intubationAndSuction.IntubationSuccess = isSuccessful;
 
+                List<Button> ConfirmationButtons = SelectedButtons(confirmations);
+                if (ConfirmationButtons.Count == 0)
+                {
+                    // No confirmation selected
+                    return;
+                }
+
                 statusEvent.Name = isIntubation ? "Intubation" : "Suction";
-                statusEvent.Data = isIntubation ? intubationString() : "Suction under direct vision";
+                //statusEvent.Data = isIntubation ? intubationString() : "Suction under direct vision";
                 statusEvent.Time = intubationAndSuction.Time.ToString();
                 statusEvent.Event = intubationAndSuction;
+
+                if (isIntubation && isSuccessful)
+                {
+                    statusEvent.Data = "Successful: ";
+
+                    foreach (Button button in ConfirmationButtons)
+                    {
+                        statusEvent.Data += button.Content.ToString() + ", ";
+                    }
+
+                    statusEvent.Data = statusEvent.Data.Substring(0, statusEvent.Data.Length - 2);
+
+                } else if (isIntubation)
+                {
+                    statusEvent.Data = "Unsuccessful";
+                } else
+                {
+                    statusEvent.Data = "Suction Under Direct Vision";
+                }
 
                 List<Event> Events = new List<Event>();
                 Events.Add(intubationAndSuction);
@@ -84,6 +109,23 @@ namespace Resuscitate
 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
+        }
+
+        private List<Button> SelectedButtons(Button[] buttons)
+        {
+            List<Button> Selecteds = new List<Button>();
+
+            foreach (Button button in buttons)
+            {
+                SolidColorBrush colour = button.Background as SolidColorBrush;
+
+                if (colour.Color == Colors.LightGreen)
+                {
+                    Selecteds.Add(button);
+                }
+            }
+
+            return Selecteds;
         }
 
         private string intubationString()
@@ -185,16 +227,16 @@ namespace Resuscitate
 
         private void Confirmation_Click(object sender, RoutedEventArgs e)
         {
-            int index = Array.IndexOf(confirmations, sender as Button);
-            if (confirmation == index)
+            Button selected = sender as Button;
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
             {
-                confirmations[index].Background = new SolidColorBrush(Colors.White);
-                confirmation = -1;
+                selected.Background = new SolidColorBrush(Colors.White);
             }
             else
             {
-                UpdateColours(confirmations, sender as Button);
-                confirmation = index;
+                selected.Background = new SolidColorBrush(Colors.LightGreen);
             }
         }
 

@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    public class Ventillation : Event
+    public class Ventilation : Event
     {
         private Timing time;
-        private VentillationType ventType;
+        private VentilationType ventType;
         private float oxygen;
         public Timing Time { get => time; set => time = value; }
-        public VentillationType VentType { get => ventType; set => ventType = value; }
+        public VentilationType VentType { get => ventType; set => ventType = value; }
         public float Oxygen { get => oxygen; set => oxygen = value; }
 
         override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Ventillation at: {time.ToString()}\n");
-            sb.Append($"\tVentillation type: {ventToString()}\n");
+            sb.Append($"Ventilation at: {time.ToString()}\n");
+            sb.Append($"\tVentilation type: {ventToString()}\n");
             sb.Append($"Air/Oxygen given: {oxygen}%\n");
 
             return sb.ToString();
@@ -29,23 +29,23 @@ namespace Resuscitate.DataClasses
 
         public string ventToString()
         {
-            if (ventType == VentillationType.InflationMask)
+            if (ventType == VentilationType.InflationMask)
             {
                 return "Inflation via Mask";
             }
-            else if (ventType == VentillationType.InflationETT)
+            else if (ventType == VentilationType.InflationETT)
             {
                 return "Inflation via ETT";
             }
-            else if (ventType == VentillationType.VentMask)
+            else if (ventType == VentilationType.VentMask)
             {
-                return "Ventillation via Mask";
+                return "Ventilation via Mask";
             }
-            else if (ventType == VentillationType.VentETT)
+            else if (ventType == VentilationType.VentETT)
             {
-                return "Ventillation via ETT";
+                return "Ventilation via ETT";
             }
-            else if (ventType == VentillationType.MaskCPAP)
+            else if (ventType == VentilationType.MaskCPAP)
             {
                 return "Mask CPAP";
             }
@@ -56,7 +56,7 @@ namespace Resuscitate.DataClasses
         }
     }
 
-    public enum VentillationType
+    public enum VentilationType
     {
         InflationMask,
         InflationETT,

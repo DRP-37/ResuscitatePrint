@@ -1,6 +1,7 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -35,7 +36,7 @@ namespace Resuscitate
         // 4: Mask CPAP
         private int ventilationProcedure = -1;
 
-        private Ventillation ventilation;
+        private Ventilation ventilation;
         List<Event> EventList = new List<Event>();
         List<StatusEvent> StatusList = new List<StatusEvent>();
 
@@ -67,7 +68,7 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            ventilation = new Ventillation();
+            ventilation = new Ventilation();
             positioning = new AirwayPositioning();
 
             base.OnNavigatedTo(e);
@@ -86,14 +87,24 @@ namespace Resuscitate
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            AddVentilationEvents();
-            AddAirwayEvents();
+            bool ventAdded = AddVentilationEvents();
+            bool airAdded = AddAirwayEvents();
 
-            ResetButtons(positions);
-            airwayProcedure = -1;
+            if (airAdded)
+            {
+                ResetButtons(positions);
+                airwayProcedure = -1;
+            }
 
-            ResetButtons(procedures);
-            ventilationProcedure = -1;
+            if (ventAdded)
+            {
+                ResetButtons(procedures);
+                ventilationProcedure = -1;
+
+                AirGiven.Text = "";
+                AirGiven.Background = new SolidColorBrush(Colors.White);
+                AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
+            }
         }
 
         private void ResetButtons(Button[] buttons)
@@ -143,7 +154,6 @@ namespace Resuscitate
             {
                 airGiven = temp;
             }
-
         }
 
         private Button SelectionMade(Button[] buttons)
@@ -195,7 +205,7 @@ namespace Resuscitate
 
             bool hasAirGiven = airGiven != null;
 
-            if (hasAirGiven && airGiven > 100)
+            if (!hasAirGiven || airGiven > 100)
             {
                 AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
                 AirGiven.Background = new SolidColorBrush(Colors.LightPink);
@@ -205,7 +215,7 @@ namespace Resuscitate
             // set data structure with ventilation procedure and time stamp of selection
             ventilation.Time = TimingCount;
             ventilation.Oxygen = hasAirGiven ? (float)airGiven : -1;
-            ventilation.VentType = (VentillationType)ventilationProcedure;
+            ventilation.VentType = (VentilationType)ventilationProcedure;
             EventList.Add(ventilation);
 
             StatusEvent statusEvent = new StatusEvent();

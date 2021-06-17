@@ -67,47 +67,61 @@ namespace Resuscitate
             TimingCount = new Timing { IsSet = true, Offset = 0};
             TimingCount.InitTiming();
 
+            StatusEvent timeOfBirthEvent = new StatusEvent("Time of Birth", DateTime.Now.ToString("HH:mm"), "00:00", null);
+            StatusList statusList = new StatusList();
+            statusList.Events.Add(timeOfBirthEvent);
+
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, patientData));
         }
 
         private void SetTime_Click(object sender, RoutedEventArgs e)
         {
-            int mins, secs;
+            int hours, mins;
 
             // Parse minutes and seconds input
-            bool isMinsParsable = Int32.TryParse(TimeMinutes.Text, out mins);
+            bool isHoursParsable = Int32.TryParse(TimeHours.Text, out hours);
 
+            if (TimeHours.Text == "")
+            {
+                hours = 0;
+                isHoursParsable = true;
+            }
+
+            isHoursParsable &= hours < 25;
+
+            bool isMinsParsable = Int32.TryParse(TimeMinutes.Text, out mins);
             if (TimeMinutes.Text == "")
             {
                 mins = 0;
                 isMinsParsable = true;
             }
-
-            isMinsParsable &= mins < 99;
-
-            bool isSecsParsable = Int32.TryParse(TimeSeconds.Text, out secs);
-            if (TimeSeconds.Text == "")
-            {
-                secs = 0;
-                isSecsParsable = true;
-            }
-            isMinsParsable &= secs < 60;
+            isHoursParsable &= mins < 60;
 
             // Incorrect input
-            if (!isMinsParsable || !isSecsParsable)
+            if (!isHoursParsable || !isMinsParsable)
             {
                 // Change background of SetTime to red
                 SetTime.Background = new SolidColorBrush(Colors.Red);
                 return;
             }
 
+            int CurrentHours, CurrentMinutes;
+            Int32.TryParse(DateTime.Now.ToString("HH"), out CurrentHours);
+            Int32.TryParse(DateTime.Now.ToString("mm"), out CurrentMinutes);
+
+            int OffsetMins = (CurrentHours - hours) * 60 + CurrentMinutes - mins;
+
             // Set timer
-            TimingCount = new Timing { IsSet = true, Offset = mins * 60 + secs};
+            TimingCount = new Timing { IsSet = true, Offset = OffsetMins * 60 };
             TimingCount.InitTiming();
 
+            StatusEvent timeOfBirthEvent = new StatusEvent("Time of Birth", TimeHours.Text + ":" + TimeMinutes.Text, "00:00", null);
+            StatusList statusList = new StatusList();
+            statusList.Events.Add(timeOfBirthEvent);
+
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, patientData));
+            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, patientData));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

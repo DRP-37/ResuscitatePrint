@@ -32,11 +32,13 @@ namespace Resuscitate
         private Button[] tempRegulations;
         private Button[] cordClamping;
         private int cord = -1;
-        private int temp = -1;
         private int hr = -1;
         private int respiration = -1;
         private int tone = -1;
         private int colour = -1;
+
+        // New version of generating StatusEvents
+        private StatusEvent[] TemperatureEvents;
 
         InitialAssessment initialAssessment;
 
@@ -58,6 +60,9 @@ namespace Resuscitate
 
             initialAssessment = new InitialAssessment(TimingCount);
 
+            // Set all selections to null (new StatusEvent generation)
+            TemperatureEvents = new StatusEvent[3];
+
             base.OnNavigatedTo(e);
         }
 
@@ -70,7 +75,7 @@ namespace Resuscitate
             initialAssessment.HeartRate = hr;
 
             initialAssessment.Clamping = (CordClamping)cord;
-            initialAssessment.TempReg = (TemperatureReg)temp;
+            //initialAssessment.TempReg = (TemperatureReg)temp;
 
             // Add check whether a proper selection has been made
             List<Event> Events = new List<Event>();
@@ -79,10 +84,17 @@ namespace Resuscitate
             string Time = initialAssessment.Time.ToString();
 
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
+
+            // New StatusEvent generation
+            foreach (StatusEvent Event in TemperatureEvents)
+            {
+                AddIfNotNull(Event, StatusEvents);
+            }
+
+            // Old StatusEvent generation
             AddIfNotNull(GenerateStatusEvent("Colour", colours, Time, initialAssessment), StatusEvents);
             AddIfNotNull(GenerateStatusEvent("Heart Rate", hrs, Time, initialAssessment), StatusEvents);
             AddIfNotNull(GenerateStatusEvent("Muscle", tones, Time, initialAssessment), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Temperature Regulation", tempRegulations, Time, initialAssessment), StatusEvents);
             AddIfNotNull(GenerateStatusEvent("Cord Clamping", cordClamping, Time, initialAssessment), StatusEvents);
             AddIfNotNull(GenerateStatusEvent("Respiratory Effort", respirations, Time, initialAssessment), StatusEvents);
 
@@ -183,17 +195,18 @@ namespace Resuscitate
         private void temp_Click(object sender, RoutedEventArgs e)
         {
             Button selected = sender as Button;
+            int index = Array.IndexOf(tempRegulations, selected);
             SolidColorBrush colour = selected.Background as SolidColorBrush;
 
             if (colour.Color == Colors.LightGreen)
             {
                 selected.Background = new SolidColorBrush(Colors.White);
-                this.temp = -1;
-                return;
+                TemperatureEvents[index] = null;
+            } else 
+            {
+                selected.Background = new SolidColorBrush(Colors.LightGreen);
+                TemperatureEvents[index] = new StatusEvent("Temperature Regulation", selected.Content.ToString(), TimingCount.Time, initialAssessment);
             }
-
-            changeColours(tempRegulations, selected);
-            this.temp = selected.Name[selected.Name.Length - 1] - '0';
         }
 
         private void changeColours(Button[] buttons, Button sender)

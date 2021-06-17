@@ -84,11 +84,11 @@ namespace Resuscitate
                 StatusEvents.Add(new StatusEvent("Glucose", values[4] + " mmol/l", Time, bloodGas));
             }
 
-           /* if (values[5] != null)
+           if (values[5] != null)
             {
-                bloodGas.Haemoglobin = (float)values[5];
-                StatusEvents.Add(new StatusEvent("Haemogoblin", values[5] + " g/l", Time));
-            }*/
+                //bloodGas.Haemoglobin = (float)values[5];
+                StatusEvents.Add(new StatusEvent("Haemogoblin", values[5] + " g/l", Time, bloodGas));
+            }
 
             foreach (TextBox textBox in textBoxes)
             {
@@ -118,7 +118,15 @@ namespace Resuscitate
             TextBox textBox = sender as TextBox;
             int index = Array.IndexOf(textBoxes, textBox);
 
-            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+            if (index == 2)
+            {
+                // Excess textbox also enables minus character
+                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.' || c == '-').ToArray());
+            }
+            else
+            {
+                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+            }
 
             double temp;
             bool valid = false;
