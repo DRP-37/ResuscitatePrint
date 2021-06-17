@@ -21,6 +21,7 @@ using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 using Google.Cloud.Firestore;
+using Resuscitate.DataClasses;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -64,8 +65,9 @@ namespace Resuscitate
             {
                 Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
                 string id = (string)procedure["Id"];
-                string timeOfBirth = (string)procedure["Time of Birth"];
-                ExportList.Data.Add(new ExportData(id, timeOfBirth));
+                string timeOfBirth = (string)procedure["TimeOfBirth"];
+                string dateOfBirth = (string)procedure["DateOfBirth"];
+                ExportList.Data.Add(new ExportData(id, $"{dateOfBirth} {timeOfBirth}"));
             }
         }
 
@@ -82,9 +84,12 @@ namespace Resuscitate
             // Use ID to download text file
             DocumentReference docRef = db.Collection("Data").Document(ID);
             DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            FirebaseDataStructure patient = snapshot.ConvertTo<FirebaseDataStructure>();
+
             if (snapshot.Exists)
             {
-                Dictionary<string, object> city = snapshot.ToDictionary();
+                Dictionary<string, object> patientInfo = snapshot.ToDictionary();
+                Exporter.exportFile(ID, patient.ToString());
             }
         }
     }

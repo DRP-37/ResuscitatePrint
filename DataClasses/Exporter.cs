@@ -11,7 +11,7 @@ namespace Resuscitate.DataClasses
 {
     class Exporter
     {
-        static public async void exportFile(PatientData patientData, StatusList statusList)
+        static public async void exportFile(string id, string doc)
         {
             StorageFolder storageFolder = await GetFileFromToken();
             if (storageFolder == null)
@@ -32,12 +32,8 @@ namespace Resuscitate.DataClasses
             }
 
             StorageFile sampleFile =
-                await storageFolder.CreateFileAsync($"{patientData.Id}_resuscitation.txt", CreationCollisionOption.ReplaceExisting);
-            String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
-            foreach (StatusEvent statEvent in statusList.Events)
-            {
-                doc += statEvent.Event + " " + statEvent.Data + " " + statEvent.Time + ";\n";
-            }
+                await storageFolder.CreateFileAsync($"{id}_resuscitation.txt", CreationCollisionOption.ReplaceExisting);
+            
             await FileIO.WriteTextAsync(sampleFile, doc);
 
             // DEBUG 

@@ -21,8 +21,8 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Time: " + time.ToString() + "\n");
-            sb.Append(insertionToString() + "\n");
+            sb.Append("Time: " + time.ToString() + " ");
+            sb.Append(insertionToString() + " ");
 
             if (successful)
             {

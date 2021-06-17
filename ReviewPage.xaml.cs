@@ -140,7 +140,13 @@ namespace Resuscitate
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             // Create sample file with the ID of the patient; replace if exists.
-            Exporter.exportFile(patientData, StatusList);
+            String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
+            foreach (StatusEvent statEvent in StatusList.Events)
+            {
+                doc += statEvent.Event + " " + statEvent.Data + " " + statEvent.Time + ";\n";
+            }
+
+            Exporter.exportFile(patientData.Id, doc);
             ExportButton.Background = new SolidColorBrush(Colors.LightGreen);
 
         }
