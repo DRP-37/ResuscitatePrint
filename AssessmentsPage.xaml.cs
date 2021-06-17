@@ -38,7 +38,12 @@ namespace Resuscitate
         private int colour = -1;
 
         // New version of generating StatusEvents
+        private StatusEvent CordClampingEvent;
         private StatusEvent[] TemperatureEvents;
+        private StatusEvent ColourEvent;
+        private StatusEvent ToneEvent;
+        private StatusEvent BreathingEvent;
+        private StatusEvent HeartrateEvent;
 
         InitialAssessment initialAssessment;
 
@@ -61,7 +66,12 @@ namespace Resuscitate
             initialAssessment = new InitialAssessment(TimingCount);
 
             // Set all selections to null (new StatusEvent generation)
+            CordClampingEvent = null;
             TemperatureEvents = new StatusEvent[3];
+            ColourEvent = null;
+            ToneEvent = null;
+            BreathingEvent = null;
+            HeartrateEvent = null;
 
             base.OnNavigatedTo(e);
         }
@@ -86,17 +96,22 @@ namespace Resuscitate
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
 
             // New StatusEvent generation
+            AddIfNotNull(CordClampingEvent, StatusEvents);
+
             foreach (StatusEvent Event in TemperatureEvents)
             {
                 AddIfNotNull(Event, StatusEvents);
             }
 
-            // Old StatusEvent generation
-            AddIfNotNull(GenerateStatusEvent("Colour", colours, Time, initialAssessment), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Heart Rate", hrs, Time, initialAssessment), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Muscle", tones, Time, initialAssessment), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Cord Clamping", cordClamping, Time, initialAssessment), StatusEvents);
-            AddIfNotNull(GenerateStatusEvent("Respiratory Effort", respirations, Time, initialAssessment), StatusEvents);
+            AddIfNotNull(ColourEvent, StatusEvents);
+            AddIfNotNull(HeartrateEvent, StatusEvents);
+            AddIfNotNull(ToneEvent, StatusEvents);
+            AddIfNotNull(BreathingEvent, StatusEvents);
+
+            if (StatusEvents.Count < 1)
+            {
+                return;
+            }
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
@@ -111,85 +126,54 @@ namespace Resuscitate
             // Nothing
         }
 
-        private void colour_Click(object sender, RoutedEventArgs e)
+        private void ClickButton(Button button, Button[] buttons, string EventName, out int index, out StatusEvent statusEvent)
         {
-            Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
+            SolidColorBrush colour = button.Background as SolidColorBrush;
 
             if (colour.Color == Colors.LightGreen)
             {
-                selected.Background = new SolidColorBrush(Colors.White);
-                this.colour = -1;
+                button.Background = new SolidColorBrush(Colors.White);
+                index = -1;
+                statusEvent = null;
                 return;
             }
 
-            changeColours(colours, selected);
-            this.colour = selected.Name[selected.Name.Length - 1] - '0';
+            changeColours(buttons, button);
+            index = button.Name[button.Name.Length - 1] - '0';
+
+            statusEvent = GenerateStatusEvent(EventName, buttons, TimingCount.Time, initialAssessment);
+        }
+
+        private void colour_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = sender as Button;
+
+            ClickButton(selected, colours, "Colour", out colour, out ColourEvent);
             Console.WriteLine(this.colour);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)
         {
             Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
-
-            if (colour.Color == Colors.LightGreen)
-            {
-                selected.Background = new SolidColorBrush(Colors.White);
-                this.hr = -1;
-                return;
-            }
-
-            changeColours(hrs, selected);
-            this.hr = selected.Name[selected.Name.Length - 1] - '0';
+            ClickButton(selected, hrs, "Heartrate", out hr, out HeartrateEvent);
         }
 
         private void tone_Click(object sender, RoutedEventArgs e)
         {
             Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
-
-            if (colour.Color == Colors.LightGreen)
-            {
-                selected.Background = new SolidColorBrush(Colors.White);
-                this.tone = -1;
-                return;
-            }
-
-            changeColours(tones, selected);
-            this.tone = selected.Name[selected.Name.Length - 1] - '0';
+            ClickButton(selected, tones, "Muscle Tone", out tone, out ToneEvent);
         }
 
         private void resp_Click(object sender, RoutedEventArgs e)
         {
             Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
-
-            if (colour.Color == Colors.LightGreen)
-            {
-                selected.Background = new SolidColorBrush(Colors.White);
-                this.respiration = -1;
-                return;
-            }
-
-            changeColours(respirations, selected);
-            this.respiration = selected.Name[selected.Name.Length - 1] - '0';
+            ClickButton(selected, respirations, "Breathing", out respiration, out BreathingEvent);
         }
 
         private void cord_Click(object sender, RoutedEventArgs e)
         {
             Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
-
-            if (colour.Color == Colors.LightGreen)
-            {
-                selected.Background = new SolidColorBrush(Colors.White);
-                this.cord = -1;
-                return;
-            }
-
-            changeColours(cordClamping, selected);
-            this.cord = selected.Name[selected.Name.Length - 1] - '0';
+            ClickButton(selected, cordClamping, "Cord Clamping", out cord, out CordClampingEvent);
         }
 
         private void temp_Click(object sender, RoutedEventArgs e)

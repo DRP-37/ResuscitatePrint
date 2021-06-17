@@ -62,7 +62,7 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="67,168,0,0" Text="Heartrate" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="142" FontSize="26"/>
         <TextBlock HorizontalAlignment="Left" Margin="67,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Chest Movement" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="67,313,0,0" Text="Respiratory Effort" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="264" FontSize="26"/>
+        <TextBlock HorizontalAlignment="Left" Margin="67,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="264" FontSize="26"><Run Text="Breathing"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="67,379,0,0" Text="Pulse Oximeter" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="278" FontSize="36" FontWeight="Normal"/>
         <Button x:Name="hr3" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" UseLayoutRounding="False" Width="145" d:LayoutRounding="Auto" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click" Margin="872,160,0,0">
             <Button.RenderTransform>
