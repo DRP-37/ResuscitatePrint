@@ -8,6 +8,7 @@ using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -58,7 +59,7 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             if (allowConfirmation ||
                 (SelectionMade(confirmations) && Confirmation.Visibility == Visibility.Visible)) {
@@ -71,7 +72,9 @@ namespace Resuscitate
                 intubationAndSuction.IntubationSuccess = isSuccessful;
 
                 List<Button> ConfirmationButtons = SelectedButtons(confirmations);
-                if (ConfirmationButtons.Count == 0)
+                var dialog = new MessageDialog(ConfirmationButtons.Count.ToString());
+                await dialog.ShowAsync();
+                if (ConfirmationButtons.Count == 0 && isIntubation && isSuccessful)
                 {
                     // No confirmation selected
                     return;
