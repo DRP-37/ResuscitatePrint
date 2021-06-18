@@ -399,7 +399,8 @@
       <_PackageFiles Include="bin\$(Configuration)\*\AWSSDK.Core.dll;bin\$(Configuration)\*\FirebaseAuthentication.net.dll;bin\$(Configuration)\*\FirebaseDatabase.net.dll;bin\$(Configuration)\*\FirebaseStorage.net.dll;bin\$(Configuration)\*\Google.Cloud.Firestore.dll;bin\$(Configuration)\*\IronPython.Core.dll">
         <PackagePath>tools\%(RecursiveDir)</PackagePath>
         <Visible>false</Visible>
-        <BuildAction>Content</BuildAction>
+        <BuildAction>None</BuildAction>
+        <CopyToOutputDirectory>true</CopyToOutputDirectory>
       </_PackageFiles>
     </ItemGroup>
   </Target>
