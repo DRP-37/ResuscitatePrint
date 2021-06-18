@@ -72,8 +72,6 @@ namespace Resuscitate
                 intubationAndSuction.IntubationSuccess = isSuccessful;
 
                 List<Button> ConfirmationButtons = SelectedButtons(confirmations);
-                var dialog = new MessageDialog(ConfirmationButtons.Count.ToString());
-                await dialog.ShowAsync();
                 if (ConfirmationButtons.Count == 0 && isIntubation && isSuccessful)
                 {
                     // No confirmation selected

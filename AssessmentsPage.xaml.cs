@@ -32,6 +32,7 @@ namespace Resuscitate
         private Button[] tempRegulations;
         private Button[] cordClamping;
         private int cord = -1;
+        private int temp = -1;
         private int hr = -1;
         private int respiration = -1;
         private int tone = -1;
@@ -87,7 +88,7 @@ namespace Resuscitate
             initialAssessment.HeartRate = hr;
 
             initialAssessment.Clamping = (CordClamping)cord;
-            //initialAssessment.TempReg = (TemperatureReg)temp;
+            initialAssessment.TempReg = (TemperatureReg)temp;
 
             // Add check whether a proper selection has been made
             List<Event> Events = new List<Event>();
@@ -189,10 +190,12 @@ namespace Resuscitate
             {
                 selected.Background = new SolidColorBrush(Colors.White);
                 TemperatureEvents[index] = null;
+                temp = -1;
             } else 
             {
                 selected.Background = new SolidColorBrush(Colors.LightGreen);
                 TemperatureEvents[index] = new StatusEvent("Temperature Regulation", selected.Content.ToString(), TimingCount.Time, initialAssessment);
+                temp = index;
             }
         }
 

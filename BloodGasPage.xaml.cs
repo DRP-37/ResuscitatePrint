@@ -86,7 +86,7 @@ namespace Resuscitate
 
            if (values[5] != null)
             {
-                //bloodGas.Haemoglobin = (float)values[5];
+                bloodGas.Haemoglobin = (float)values[5];
                 StatusEvents.Add(new StatusEvent("Haemogoblin", values[5] + " g/l", Time, bloodGas));
             }
 

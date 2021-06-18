@@ -83,7 +83,8 @@ namespace Resuscitate
                 }
 
                 this.Frame.Navigate(typeof(MainPage));
-            } else
+            }
+            else
             {
                 var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
                 await dialog.ShowAsync();
@@ -121,7 +122,8 @@ namespace Resuscitate
                 StatusList.Events.Remove(SurvivedEvent);
                 SurvivedEvent = null;
 
-            } else
+            }
+            else
             {
                 if (SurvivedEvent != null)
                 {
@@ -139,15 +141,23 @@ namespace Resuscitate
 
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create sample file with the ID of the patient; replace if exists.
-            String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
-            foreach (StatusEvent statEvent in StatusList.Events)
+            if (patientData.Id != null)
             {
-                doc += statEvent.Event + " " + statEvent.Data + " " + statEvent.Time + ";\n";
-            }
+                // Create sample file with the ID of the patient; replace if exists.
+                String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
+                foreach (StatusEvent statEvent in StatusList.Events)
+                {
+                    doc += statEvent.Event + " " + statEvent.Data + " " + statEvent.Time + ";\n";
+                }
 
-            Exporter.exportFile(patientData.Id, doc);
-            ExportButton.Background = new SolidColorBrush(Colors.LightGreen);
+                Exporter.exportFile(patientData.Id, doc);
+                ExportButton.Background = new SolidColorBrush(Colors.LightGreen);
+            }
+            else
+            {
+                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
+                await dialog.ShowAsync();
+            }
 
         }
     }
