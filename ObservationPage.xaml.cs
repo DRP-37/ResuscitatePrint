@@ -26,12 +26,17 @@ namespace Resuscitate
     public sealed partial class ObservationPage : Page
     {
         public Timing TimingCount { get; set; }
+        List<Event> Events = new List<Event>();
+        List<StatusEvent> StatusEvents = new List<StatusEvent>();
+
         private Button[] responses;
         private Button[] hrs;
         private Button[] movements;
+        private Button[] airways;
         private int response = -1;
         private int hr = -1;
         private int movement = -1;
+        private int airway = -1;
         // int? is implicitly set to null if undeclared
         // using it instead of int to know whether any input has been added
         // Representing as a number instead of String to catch invalid input
@@ -45,10 +50,15 @@ namespace Resuscitate
         // New StatusEvent Generation
         StatusEvent HeartrateButtonEvent;
         StatusEvent MovementEvent;
-        StatusEvent BreathingEvent;
+        StatusEvent RespirationEvent;
         StatusEvent OxySaturationEvent;
         StatusEvent HeartrateBpmEvent;
         StatusEvent OxyPercentEvent;
+
+        // Ventilation shortcut events
+        StatusEvent AirwayEvent;
+        StatusEvent BreathingEvent;
+        StatusEvent CirculationEvent;
 
         public ObservationPage()
         {
@@ -56,6 +66,7 @@ namespace Resuscitate
             responses = new Button[] { resp0, resp1, resp2, resp3 };
             hrs = new Button[] { hr0, hr1, hr2, hr3 };
             movements = new Button[] { absent, present };
+            airways = new Button[] { MaskButton, ETTButton };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -63,25 +74,13 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            reassessment = new Reassessment();
-            observation = new Observation();
-
-            HeartrateButtonEvent = null;
-            MovementEvent = null;
-            BreathingEvent = null;
-            OxySaturationEvent = null;
-            HeartrateBpmEvent = null;
-            OxyPercentEvent = null;
+            ResetEvents();
 
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            // Set data structure
-            List<Event> Events = new List<Event>();
-            List<StatusEvent> StatusEvents = new List<StatusEvent>();
-
             reassessment.Time = TimingCount;
             observation.Time = TimingCount;
 
@@ -93,12 +92,16 @@ namespace Resuscitate
             Events.Add(reassessment);
 
             AddIfNotNull(HeartrateButtonEvent, StatusEvents);
-            AddIfNotNull(BreathingEvent, StatusEvents);
+            AddIfNotNull(RespirationEvent, StatusEvents);
             AddIfNotNull(MovementEvent, StatusEvents);
 
             AddIfNotNull(OxySaturationEvent, StatusEvents);
             AddIfNotNull(HeartrateBpmEvent, StatusEvents);
             AddIfNotNull(OxyPercentEvent, StatusEvents);
+
+            AddIfNotNull(AirwayEvent, StatusEvents);
+            AddIfNotNull(BreathingEvent, StatusEvents);
+            AddIfNotNull(CirculationEvent, StatusEvents);
 
             if (StatusEvents.Count > 0)
             {
@@ -111,9 +114,82 @@ namespace Resuscitate
             }
         }
 
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            reassessment.Time = TimingCount;
+            observation.Time = TimingCount;
+
+            reassessment.Hr = (HeartRate)hr;
+            reassessment.Movement = (ChestMovement)movement;
+            reassessment.Effort = (RespiratoryEffort)response;
+
+            Events.Add(observation);
+            Events.Add(reassessment);
+
+            AddIfNotNull(HeartrateButtonEvent, StatusEvents);
+            AddIfNotNull(RespirationEvent, StatusEvents);
+            AddIfNotNull(MovementEvent, StatusEvents);
+
+            AddIfNotNull(OxySaturationEvent, StatusEvents);
+            AddIfNotNull(HeartrateBpmEvent, StatusEvents);
+            AddIfNotNull(OxyPercentEvent, StatusEvents);
+
+            AddIfNotNull(AirwayEvent, StatusEvents);
+            AddIfNotNull(BreathingEvent, StatusEvents);
+            AddIfNotNull(CirculationEvent, StatusEvents);
+
+            if (StatusEvents.Count > 0)
+            {
+                Resuscitation.reassessmentTimer = Stopwatch.StartNew();
+                if (Resuscitation.cprTimer.IsRunning)
+                {
+                    Resuscitation.cprTimer.Restart();
+                }
+            }
+
+            ResetEvents();
+
+            ResetButtons(responses);
+            ResetButtons(hrs);
+            ResetButtons(movements);
+            ResetButtons(airways);
+
+            VentilationButton.Background = new SolidColorBrush(Colors.White);
+            CPRButton.Background = new SolidColorBrush(Colors.White);
+
+            OxygenLevels.Text = "";
+            HeartRate.Text = "";
+            PercentOxygen.Text = "";
+        }
+
+        private void ResetButtons(Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
+            }
+        }
+
+        private void ResetEvents()
+        {
+            reassessment = new Reassessment();
+            observation = new Observation();
+
+            HeartrateButtonEvent = null;
+            MovementEvent = null;
+            RespirationEvent = null;
+            OxySaturationEvent = null;
+            HeartrateBpmEvent = null;
+            OxyPercentEvent = null;
+
+            AirwayEvent = null;
+            BreathingEvent = null;
+            CirculationEvent = null;
+        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private void ClickReassessmentButton(Button button, Button[] buttons, string EventName, out int index, out StatusEvent statusEvent)
@@ -149,7 +225,7 @@ namespace Resuscitate
         private void resp_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            ClickReassessmentButton(selected, responses, "Breathing", out response, out BreathingEvent);
+            ClickReassessmentButton(selected, responses, "Breathing", out response, out RespirationEvent);
         }
 
         private void ObservationTextValidity(bool valid, TextBox textBox, string dataSuffix, string Name, out StatusEvent statusEvent)
@@ -271,6 +347,48 @@ namespace Resuscitate
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AirwayManagement_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = (sender as Button);
+            ClickReassessmentButton(selected, airways, "Airway Management", out airway, out AirwayEvent);
+        }
+
+        private void Breathing_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = (sender as Button);
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                BreathingEvent = null;
+                return;
+            }
+
+            selected.Background = new SolidColorBrush(Colors.LightGreen);
+            TextBlock textBlock = (TextBlock)selected.Content;
+
+            BreathingEvent = new StatusEvent("Breathing Management", textBlock.Text.Replace("\n", " "), TimingCount.Time, reassessment);
+        }
+
+        private void Circulation_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = (sender as Button);
+            SolidColorBrush colour = selected.Background as SolidColorBrush;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                CirculationEvent = null;
+                return;
+            }
+
+            selected.Background = new SolidColorBrush(Colors.LightGreen);
+            TextBlock textBlock = (TextBlock)selected.Content;
+
+            CirculationEvent = new StatusEvent("Circulation Management", textBlock.Text.Replace("\n", " "), TimingCount.Time, reassessment);
         }
     }
 }
