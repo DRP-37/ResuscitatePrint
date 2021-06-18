@@ -387,6 +387,19 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+   <Target Name="PackTaskDependencies" BeforeTargets="GenerateNuspec">
+    <!--
+    The include needs to happen after output has been copied to build output folder
+    but before NuGet generates a nuspec. See https://github.com/NuGet/Home/issues/4704.
+    -->
+    <ItemGroup>
+      <_PackageFiles Include="bin\$(Configuration)\*\AWSSDK.Core.dll;bin\$(Configuration)\*\FirebaseAuthentication.net.dll;bin\$(Configuration)\*\FirebaseDatabase.net.dll;bin\$(Configuration)\*\FirebaseStorage.net.dll;bin\$(Configuration)\*\Google.Cloud.Firestore.dll;bin\$(Configuration)\*\IronPython.Core.dll">
+        <PackagePath>tools\%(RecursiveDir)</PackagePath>
+        <Visible>false</Visible>
+        <BuildAction>Content</BuildAction>
+      </_PackageFiles>
+    </ItemGroup>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
