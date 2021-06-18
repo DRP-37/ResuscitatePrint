@@ -400,7 +400,6 @@
         <PackagePath>tools\%(RecursiveDir)</PackagePath>
         <Visible>false</Visible>
         <BuildAction>None</BuildAction>
-        <CopyToOutputDirectory>true</CopyToOutputDirectory>
       </_PackageFiles>
     </ItemGroup>
   </Target>
