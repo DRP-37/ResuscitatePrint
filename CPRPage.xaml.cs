@@ -26,8 +26,6 @@ namespace Resuscitate
     public sealed partial class CPRPage : Page
     {
         public Timing TimingCount { get; set; }
-        DispatcherTimer Timer = new DispatcherTimer();
-        private int Count = 0;
 
         private List<StatusEvent> StatusEvents;
         private CardiacCompressions compressions;
@@ -37,10 +35,6 @@ namespace Resuscitate
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-
-            // Initialise timer
-            Timer.Tick += Timer_Tick;
-            Timer.Interval = new TimeSpan(0, 0, 1);
 
             StartButton.Background = new SolidColorBrush(Colors.LightGray);
         }
@@ -53,12 +47,9 @@ namespace Resuscitate
             compressions = new CardiacCompressions();
             StatusEvents = new List<StatusEvent>();
 
-            base.OnNavigatedTo(e);
-        }
+            SetStartStopButton();
 
-        private void Timer_Tick(object sender, object e)
-        {
-            Count++;
+            base.OnNavigatedTo(e);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -74,33 +65,47 @@ namespace Resuscitate
         {
             if (StartButton.Content.Equals("Start"))
             {
-                Timer.Start();
                 StatusEvents.Add(GenerateStatusEvent(START_EVENT, compressions));
-
-                HeartBeating.Visibility = Visibility.Visible;
-                StartButton.Content = "Stop";
-                StartButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
 
                 Resuscitation.cprTimer = Stopwatch.StartNew();
             }
             else
             {
-                Timer.Stop();
                 StatusEvents.Add(GenerateStatusEvent(!START_EVENT, compressions));
 
-                Count = 0;
+                Resuscitation.cprTimer.Stop();
+                Resuscitation.cprTimer.Reset();
+            }
+
+            SetStartStopButton();
+        }
+
+        private void SetStartStopButton()
+        {
+            if (Resuscitation.cprTimer.IsRunning)
+            {
+                HeartBeating.Visibility = Visibility.Visible;
+                StartButton.Content = "Stop";
+                StartButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
+            } else
+            {
                 HeartBeating.Visibility = Visibility.Collapsed;
                 StartButton.Content = "Start";
                 StartButton.Background = new SolidColorBrush(Colors.LightGray);
-
-                Resuscitation.cprTimer.Reset();
             }
         }
 
         // StartEvent is true when generating a CPR start event. If it is a CPR end event then it is false.
         private StatusEvent GenerateStatusEvent(bool StartEvent, Event Event)
         {
-            string Data = StartEvent ? "Started" : "Ended after " + Count + " seconds";
+            string Seconds = "-1";
+
+            if (Resuscitation.cprTimer.IsRunning) {
+                string Milieconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
+                Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
+            }
+
+            string Data = StartEvent ? "Started" : "Ended after " + Seconds + " seconds";
             return new StatusEvent("Cardiac Compressions", Data, TimingCount.Time, Event);
         }
 

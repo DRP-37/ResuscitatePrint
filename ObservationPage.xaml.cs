@@ -33,10 +33,14 @@ namespace Resuscitate
         private Button[] hrs;
         private Button[] movements;
         private Button[] airways;
+        private Button[] breaths;
+        private Button[] compressions;
         private int response = -1;
         private int hr = -1;
         private int movement = -1;
         private int airway = -1;
+        private int breath = -1;
+        private int compression = -1;
         // int? is implicitly set to null if undeclared
         // using it instead of int to know whether any input has been added
         // Representing as a number instead of String to catch invalid input
@@ -67,6 +71,8 @@ namespace Resuscitate
             hrs = new Button[] { hr0, hr1, hr2, hr3 };
             movements = new Button[] { absent, present };
             airways = new Button[] { MaskButton, ETTButton };
+            breaths = new Button[] { VentilationButton, InflationButton };
+            compressions = new Button[] { CPRButton, StopCPRButton };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -76,7 +82,22 @@ namespace Resuscitate
 
             ResetEvents();
 
+            SetCPRStopButton();
+
             base.OnNavigatedTo(e);
+        }
+
+        private void SetCPRStopButton()
+        {
+            if (Resuscitation.cprTimer.IsRunning)
+            {
+                StopCPRButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
+                ((TextBlock)StopCPRButton.Content).Text = "Stop";
+            } else
+            {
+                StopCPRButton.Background = new SolidColorBrush(Colors.White);
+                ((TextBlock)StopCPRButton.Content).Text = "Start";
+            }
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -153,9 +174,8 @@ namespace Resuscitate
             ResetButtons(hrs);
             ResetButtons(movements);
             ResetButtons(airways);
-
-            VentilationButton.Background = new SolidColorBrush(Colors.White);
-            CPRButton.Background = new SolidColorBrush(Colors.White);
+            ResetButtons(breaths);
+            ResetButtons(compressions);
 
             OxygenLevels.Text = "";
             HeartRate.Text = "";
@@ -358,22 +378,10 @@ namespace Resuscitate
         private void Breathing_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
-
-            if (colour.Color == Colors.LightGreen)
-            {
-                selected.Background = new SolidColorBrush(Colors.White);
-                BreathingEvent = null;
-                return;
-            }
-
-            selected.Background = new SolidColorBrush(Colors.LightGreen);
-            TextBlock textBlock = (TextBlock)selected.Content;
-
-            BreathingEvent = new StatusEvent("Breathing Management", textBlock.Text.Replace("\n", " "), TimingCount.Time, reassessment);
+            ClickReassessmentButton(selected, breaths, "Breathing Management", out breath, out BreathingEvent);
         }
 
-        private void Circulation_Click(object sender, RoutedEventArgs e)
+        private void OngoingCirculation_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
             SolidColorBrush colour = selected.Background as SolidColorBrush;
@@ -388,7 +396,28 @@ namespace Resuscitate
             selected.Background = new SolidColorBrush(Colors.LightGreen);
             TextBlock textBlock = (TextBlock)selected.Content;
 
-            CirculationEvent = new StatusEvent("Circulation Management", textBlock.Text.Replace("\n", " "), TimingCount.Time, reassessment);
+            CirculationEvent = new StatusEvent("Cardiac Compressions", textBlock.Text.Replace("\n", " "), TimingCount.Time, reassessment);
+        }
+
+        private void StopCirculation_Click(object sender, RoutedEventArgs e)
+        {
+            if (Resuscitation.cprTimer.IsRunning)
+            {
+                // Stop button
+                string Milieconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
+                string Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
+
+                StatusEvents.Add(new StatusEvent("Cardiac Compressions", "Ended after " + Seconds + " seconds", TimingCount.Time, reassessment));
+                Resuscitation.cprTimer.Stop();
+                Resuscitation.cprTimer.Reset();
+            } else
+            {
+                // Start button
+                Resuscitation.cprTimer = Stopwatch.StartNew();
+                StatusEvents.Add(new StatusEvent("Cardiac Compressions", "Started", TimingCount.Time, reassessment));
+            }
+
+            SetCPRStopButton();
         }
     }
 }
