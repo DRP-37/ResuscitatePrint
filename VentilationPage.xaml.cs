@@ -76,7 +76,10 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            AddVentilationEvents();
+            if (!AddVentilationEvents())
+            {
+                return;
+            }
 
             AddAirwayEvents();
 
@@ -90,21 +93,21 @@ namespace Resuscitate
             bool ventAdded = AddVentilationEvents();
             bool airAdded = AddAirwayEvents();
 
-            if (airAdded)
+            if (!ventAdded)
             {
-                ResetButtons(positions);
-                airwayProcedure = -1;
+                return;
             }
 
-            if (ventAdded)
-            {
-                ResetButtons(procedures);
-                ventilationProcedure = -1;
+            ResetButtons(positions);
+            airwayProcedure = -1;
 
-                AirGiven.Text = "";
-                AirGiven.Background = new SolidColorBrush(Colors.White);
-                AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
-            }
+            ResetButtons(procedures);
+            ventilationProcedure = -1;
+
+            AirGiven.Text = "";
+            AirGiven.Background = new SolidColorBrush(Colors.White);
+            AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
+            
         }
 
         private void ResetButtons(Button[] buttons)
@@ -194,21 +197,25 @@ namespace Resuscitate
             }
         }
 
+        // Returns false if event selection is invalid (button is selected but no air given or vice versa)
         private bool AddVentilationEvents()
         {
             Button ventSelection = SelectionMade(procedures);
 
-            if (ventSelection == null)
-            {
-                return false;
-            }
-
             bool hasAirGiven = airGiven != null;
 
-            if (!hasAirGiven || airGiven > 100)
+            if ((!hasAirGiven || airGiven > 100) && ventSelection != null)
             {
                 AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
                 AirGiven.Background = new SolidColorBrush(Colors.LightPink);
+                return false;
+            }
+
+            AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
+            AirGiven.Background = new SolidColorBrush(Colors.White);
+
+            if (hasAirGiven && ventSelection == null)
+            {
                 return false;
             }
 
