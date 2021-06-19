@@ -27,6 +27,7 @@ using Resuscitate.DataClasses;
 
 namespace Resuscitate
 {
+    
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -37,14 +38,27 @@ namespace Resuscitate
         private FirestoreDb db;
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
         string project = "resuscitate-4c0ec";
-
+        DispatcherTimer dispatcherTimer;
         public ReviewDocsPage()
         {
             this.InitializeComponent();
-
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(10000);
+            dispatcherTimer.Start();
             // This line would this page to cache everything while ignoring the reset when navigating
             //      to the main page from the review page. Use if needed:
             // this.NavigationCacheMode = NavigationCacheMode.Required;
+        }
+
+        private void DispatcherTimer_Tick(object sender, object e)
+        {
+
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        { 
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -56,6 +70,8 @@ namespace Resuscitate
 
             populateExportList();
         }
+
+
 
         private async void populateExportList()
         {
@@ -77,7 +93,9 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            dispatcherTimer.Stop()
             Frame.Navigate(typeof(SignInPage));
+
         }
 
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
