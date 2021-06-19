@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Resuscitate.DataClasses
 {
     [FirestoreData]
-    class FirebaseDataStructure
+    public class FirebaseDataStructure
     {
         [FirestoreProperty]
         public string Id { get; set; }

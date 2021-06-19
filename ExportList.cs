@@ -15,5 +15,10 @@ namespace Resuscitate
         {
             get { return this._data; }
         }
+
+        public void clearList()
+        {
+            _data = new ObservableCollection<ExportData>();
+        }
     }
 }

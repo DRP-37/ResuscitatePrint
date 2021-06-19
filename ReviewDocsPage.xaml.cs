@@ -53,7 +53,7 @@ namespace Resuscitate
 
         private void DispatcherTimer_Tick(object sender, object e)
         {
-
+            populateExportList();
         }
 
 
@@ -79,7 +79,12 @@ namespace Resuscitate
                 string id = (string)procedure["Id"];
                 string timeOfBirth = (string)procedure["TimeOfBirth"];
                 string dateOfBirth = (string)procedure["DateOfBirth"];
-                ExportList.Data.Add(new ExportData(id, $"{dateOfBirth} {timeOfBirth}"));
+                var data = new ExportData(id, $"{dateOfBirth} {timeOfBirth}");
+
+                if (!ExportList.Data.Contains(data))
+                {
+                    ExportList.Data.Add(data);
+                }
             }
         }
 

@@ -55,28 +55,7 @@ namespace Resuscitate.DataClasses
             db = FirestoreDb.Create(project);
 
             DocumentReference docRef = db.Collection("Data").Document(id);
-            FirebaseDataStructure dst = new FirebaseDataStructure
-            {
-                Id = id,
-                DateOfBirth = dob,
-                Weight = weight,
-                Insertions = listToStrings(insertions),
-                Gestation = gestation,
-                InitialAssessment = initialAssessment.ToString(),
-                IntubationAndSuction = listToStrings(intubationAndSuctions),
-                AirwayPositioning = listToStrings(positionings),
-                ApgarScores = listToStrings(apgars),
-                Compressions = listToStrings(compressions),
-                MedicalHistory = history,
-                Notes = listToStrings(notes),
-                Observations = listToStrings(observations),
-                OtherProcedures = listToStrings(procedures),
-                Reassessments = listToStrings(reassessments),
-                Sex = sex,
-                Staff = staff(),
-                Surname = surname,
-                TimeOfBirth = tob
-            };
+            FirebaseDataStructure dst = setUpDataStructure();
             await docRef.SetAsync(dst);
         }
 
@@ -244,6 +223,32 @@ namespace Resuscitate.DataClasses
             }
 
             return staffMembers;
+        }
+
+        public FirebaseDataStructure setUpDataStructure()
+        {
+            return new FirebaseDataStructure
+            {
+                Id = id,
+                DateOfBirth = dob,
+                Weight = weight,
+                Insertions = listToStrings(insertions),
+                Gestation = gestation,
+                InitialAssessment = initialAssessment.ToString(),
+                IntubationAndSuction = listToStrings(intubationAndSuctions),
+                AirwayPositioning = listToStrings(positionings),
+                ApgarScores = listToStrings(apgars),
+                Compressions = listToStrings(compressions),
+                MedicalHistory = history,
+                Notes = listToStrings(notes),
+                Observations = listToStrings(observations),
+                OtherProcedures = listToStrings(procedures),
+                Reassessments = listToStrings(reassessments),
+                Sex = sex,
+                Staff = staff(),
+                Surname = surname,
+                TimeOfBirth = tob
+            };
         }
 
     }
