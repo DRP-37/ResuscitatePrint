@@ -39,7 +39,8 @@ namespace Resuscitate
         private bool allowConfirmation = false;
 
         private IntubationAndSuction intubationAndSuction;
-        private StatusEvent statusEvent;
+
+        private StatusEvent IntubationEvent = null;
 
         public IntubationPage()
         {
@@ -54,62 +55,31 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             intubationAndSuction = new IntubationAndSuction();
-            statusEvent = new StatusEvent();
+            IntubationEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
 
-        private async void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (allowConfirmation ||
-                (SelectionMade(confirmations) && Confirmation.Visibility == Visibility.Visible)) {
-                // set data structure 
-
-                intubationAndSuction.Time = TimingCount;
-                intubationAndSuction.Intubation = isIntubation;
-                intubationAndSuction.Suction = !isIntubation;
-                //intubationAndSuction.Confirmation = (IntubationConfirmation)confirmation;
-                intubationAndSuction.IntubationSuccess = isSuccessful;
-
-                List<Button> ConfirmationButtons = SelectedButtons(confirmations);
-                if (ConfirmationButtons.Count == 0 && isIntubation && isSuccessful)
-                {
-                    // No confirmation selected
-                    return;
-                }
-
-                statusEvent.Name = isIntubation ? "Intubation" : "Suction";
-                //statusEvent.Data = isIntubation ? intubationString() : "Suction under direct vision";
-                statusEvent.Time = intubationAndSuction.Time.ToString();
-                statusEvent.Event = intubationAndSuction;
-
-                if (isIntubation && isSuccessful)
-                {
-                    statusEvent.Data = "Successful: ";
-
-                    foreach (Button button in ConfirmationButtons)
-                    {
-                        statusEvent.Data += button.Content.ToString() + ", ";
-                    }
-
-                    statusEvent.Data = statusEvent.Data.Substring(0, statusEvent.Data.Length - 2);
-
-                } else if (isIntubation)
-                {
-                    statusEvent.Data = "Unsuccessful";
-                } else
-                {
-                    statusEvent.Data = "Suction Under Direct Vision";
-                }
-
-                List<Event> Events = new List<Event>();
-                Events.Add(intubationAndSuction);
-
-                List<StatusEvent> StatusEvents = new List<StatusEvent>();
-                StatusEvents.Add(statusEvent);
-
-                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            if (IntubationEvent == null)
+            {
+                return;
             }
+
+            List<Event> Events = new List<Event>();
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+
+            intubationAndSuction.Time = TimingCount;
+            intubationAndSuction.Intubation = isIntubation;
+            intubationAndSuction.Suction = !isIntubation;
+            //intubationAndSuction.Confirmation = (IntubationConfirmation)confirmation;
+            intubationAndSuction.IntubationSuccess = isSuccessful;
+
+            Events.Add(intubationAndSuction);
+            StatusEvents.Add(IntubationEvent);
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
         private List<Button> SelectedButtons(Button[] buttons)
@@ -160,6 +130,7 @@ namespace Resuscitate
             {
                 selected.Background = new SolidColorBrush(Colors.White);
                 allowConfirmation = false;
+                IntubationEvent = null;
                 return;
             }
 
@@ -168,6 +139,9 @@ namespace Resuscitate
             Success.Visibility = Visibility.Collapsed;
             Unsuccessful.Visibility = Visibility.Collapsed;
             UpdateColours(new Button[] { Intubation, Suction }, selected);
+
+            string Data = ((TextBlock)selected.Content).Text.Replace("\n", " ");
+            IntubationEvent = new StatusEvent("Suction", Data, TimingCount.Time, intubationAndSuction);
         }
 
         private void Intubation_Click(object sender, RoutedEventArgs e)
@@ -178,6 +152,7 @@ namespace Resuscitate
             if (colour.Color != Colors.White)
             {
                 selected.Background = new SolidColorBrush(Colors.White);
+                IntubationEvent = null;
                 Success.Visibility = Visibility.Collapsed;
                 Unsuccessful.Visibility = Visibility.Collapsed;
                 return;
@@ -197,7 +172,9 @@ namespace Resuscitate
             if (colour.Color != Colors.White)
             {
                 allowConfirmation = false;
+                IntubationEvent = null;
                 selected.Background = new SolidColorBrush(Colors.White);
+                IntubationEvent = null;
                 return;
             }
 
@@ -205,6 +182,8 @@ namespace Resuscitate
             allowConfirmation = true;
             Confirmation.Visibility = Visibility.Collapsed;
             UpdateColours(new Button[] { Unsuccessful, Success }, selected);
+
+            IntubationEvent = new StatusEvent("Intubation", "Unsuccessful", TimingCount.Time, intubationAndSuction);
         }
 
         private void Success_Click(object sender, RoutedEventArgs e)
@@ -214,6 +193,7 @@ namespace Resuscitate
 
             if (colour.Color != Colors.White)
             {
+                IntubationEvent = null;
                 allowConfirmation = false;
                 Confirmation.Visibility = Visibility.Collapsed;
                 selected.Background = new SolidColorBrush(Colors.White);
@@ -234,11 +214,22 @@ namespace Resuscitate
             if (colour.Color == Colors.LightGreen)
             {
                 selected.Background = new SolidColorBrush(Colors.White);
+                IntubationEvent = null;
+                return;
             }
-            else
+            
+            selected.Background = new SolidColorBrush(Colors.LightGreen);
+
+            string Data = "Successful: ";
+
+            foreach (Button button in confirmations)
             {
-                selected.Background = new SolidColorBrush(Colors.LightGreen);
+                Data += button.Content.ToString() + ", ";
             }
+
+            Data = Data.Substring(0, Data.Length - 2);
+
+            IntubationEvent = new StatusEvent("Intubation", Data, TimingCount.Time, intubationAndSuction);
         }
 
         private bool SelectionMade(Button[] buttons)
