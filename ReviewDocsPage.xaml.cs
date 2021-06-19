@@ -61,14 +61,18 @@ namespace Resuscitate
         {
             Query allFiles = db.Collection("Data");
             QuerySnapshot allFilesSnapshot = await allFiles.GetSnapshotAsync();
-            foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
+            allFiles.Listen(snapshot =>
             {
-                Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
-                string id = (string)procedure["Id"];
-                string timeOfBirth = (string)procedure["TimeOfBirth"];
-                string dateOfBirth = (string)procedure["DateOfBirth"];
-                ExportList.Data.Add(new ExportData(id, $"{dateOfBirth} {timeOfBirth}"));
+                foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
+                {
+                    Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
+                    string id = (string)procedure["Id"];
+                    string timeOfBirth = (string)procedure["TimeOfBirth"];
+                    string dateOfBirth = (string)procedure["DateOfBirth"];
+                    ExportList.Data.Add(new ExportData(id, $"{dateOfBirth} {timeOfBirth}"));
+                }
             }
+            );
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
