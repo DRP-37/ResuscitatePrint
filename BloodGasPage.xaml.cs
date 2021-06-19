@@ -27,6 +27,8 @@ namespace Resuscitate
         public Timing TimingCount { get; set; }
         private TextBox[] textBoxes;
         private double?[] values;
+        private StatusEvent[] StatusEvents;
+        private string[] Suffixes;
 
         private BloodGas bloodGas;
 
@@ -34,7 +36,7 @@ namespace Resuscitate
         {
             this.InitializeComponent();
             textBoxes = new TextBox[] { pH, pCO2, excess, lactate, glucose, haemoglobin };
-            values = new double?[6];
+            Suffixes = new string[] { "", "", "", "", " mmol/l", " g/l" };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -43,51 +45,28 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
             bloodGas = new BloodGas();
 
+            values = new double?[6];
+            StatusEvents = new StatusEvent[6];
+
             base.OnNavigatedTo(e);
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             List<Event> Events = new List<Event>();
-            List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            string Time = TimingCount.ToString();
+            List<StatusEvent> statusEvents = new List<StatusEvent>();
 
-            bloodGas.Time = TimingCount;
-
-            if (values[0] != null)
+            foreach (StatusEvent StatusEvent in StatusEvents)
             {
-                bloodGas.PH = (float)values[0];
-                StatusEvents.Add(new StatusEvent("pH", values[0] + "", Time, bloodGas));
-            }
-            
-           if (values[1] != null)
-            {
-                bloodGas.PCO2 = (float)values[1];
-                StatusEvents.Add(new StatusEvent("pCO2", values[1] + "", Time, bloodGas));
+                if (StatusEvent != null)
+                {
+                    statusEvents.Add(StatusEvent);
+                }
             }
 
-            if (values[2] != null)
+            if (statusEvents.Count <= 0)
             {
-                bloodGas.Excess = (float)values[2];
-                StatusEvents.Add(new StatusEvent("Excess", values[2] + "", Time, bloodGas));
-            }
-
-            if (values[3] != null)
-            {
-                bloodGas.Lactate = (float)values[3];
-                StatusEvents.Add(new StatusEvent("Lactate", values[3] + "", Time, bloodGas));
-            }
-
-            if (values[4] != null)
-            {
-                bloodGas.Glucose = (float)values[4];
-                StatusEvents.Add(new StatusEvent("Glucose", values[4] + " mmol/l", Time, bloodGas));
-            }
-
-           if (values[5] != null)
-            {
-                bloodGas.Haemoglobin = (float)values[5];
-                StatusEvents.Add(new StatusEvent("Haemogoblin", values[5] + " g/l", Time, bloodGas));
+                return;
             }
 
             foreach (TextBox textBox in textBoxes)
@@ -100,7 +79,7 @@ namespace Resuscitate
                 }
             }
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, statusEvents));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -120,7 +99,7 @@ namespace Resuscitate
 
             if (index == 2)
             {
-                // Excess textbox also enables minus character
+                // Excess also enables minus character
                 textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.' || c == '-').ToArray());
             }
             else
@@ -128,35 +107,35 @@ namespace Resuscitate
                 textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             }
 
-            double temp;
+            double value;
             bool valid = false;
-            double.TryParse(textBox.Text, out temp);
+            double.TryParse(textBox.Text, out value);
 
             switch (index)
             {
                 case 0:
                     // pH - between 6 and 7, has two decimal places
-                    valid = (temp >= 6 && temp < 8) && LessThanXDecimalPlaces(2, temp);
+                    valid = (value >= 6 && value < 8) && LessThanXDecimalPlaces(2, value);
                     break;
                 case 1:
                     //pCO2 - one or two digits, has one decimal place
-                    valid = (temp < 100) && LessThanXDecimalPlaces(1, temp);
+                    valid = (value < 100) && LessThanXDecimalPlaces(1, value);
                     break;
                 case 2:
                     //excess - signed one or two digit integer part with one decimal place​
-                    valid = (temp < 100 && temp > -100) && LessThanXDecimalPlaces(1, temp);
+                    valid = (value < 100 && value > -100) && LessThanXDecimalPlaces(1, value);
                     break;
                 case 3:
                     //lactate - one or two digit integer part, one decimal place​
-                    valid = (temp < 100) && LessThanXDecimalPlaces(1, temp);
+                    valid = (value < 100) && LessThanXDecimalPlaces(1, value);
                     break;
                 case 4:
                     //glucose - one or two digit integer part and one digit decimal​
-                    valid = (temp < 100) && LessThanXDecimalPlaces(1, temp);
+                    valid = (value < 100) && LessThanXDecimalPlaces(1, value);
                     break;
                 case 5:
                     //haemoglobin - two or three digit integer ​
-                    valid = (temp > 9) && (temp < 1000);
+                    valid = (value > 9) && (value < 1000);
                     break;
                 default:
                     break;
@@ -164,15 +143,17 @@ namespace Resuscitate
 
             if (valid)
             {
-                textBoxes[index].Background = new SolidColorBrush(Colors.White);
-                textBoxes[index].BorderBrush = new SolidColorBrush(Colors.Black);
-                values[index] = temp;
+                textBox.Background = new SolidColorBrush(Colors.White);
+                textBox.BorderBrush = new SolidColorBrush(Colors.Black);
+                values[index] = value;
+                StatusEvents[index] = new StatusEvent(textBox.Tag.ToString(), value + Suffixes[index], TimingCount.Time, bloodGas);
             }
             else
             {
-                textBoxes[index].Background = new SolidColorBrush(Colors.LightPink);
-                textBoxes[index].BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
+                textBox.Background = new SolidColorBrush(Colors.LightPink);
+                textBox.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
                 values[index] = null;
+                StatusEvents[index] = null;
             }
         }
 
