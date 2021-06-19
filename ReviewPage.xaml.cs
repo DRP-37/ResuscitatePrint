@@ -115,14 +115,7 @@ namespace Resuscitate
         {
             if (patientData.Id != null)
             {
-                // Create sample file with the ID of the patient; replace if exists.
-                String doc = "Resuscitation Report for patient: " + patientData.Id + "\n";
-                foreach (StatusEvent statEvent in StatusList.Events)
-                {
-                    doc += statEvent.Event + " " + statEvent.Data + " " + statEvent.Time + ";\n";
-                }
-
-                Exporter.exportFile(patientData.Id, doc);
+                Exporter.exportFile(patientData.Id, patientData.setUpDataStructure().ToString());
                 ExportButton.Background = new SolidColorBrush(Colors.LightGreen);
             }
             else
