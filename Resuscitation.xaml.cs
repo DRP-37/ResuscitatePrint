@@ -94,6 +94,11 @@ namespace Resuscitate
                 TimingCount = RDaT.Timing;
                 data = RDaT.PatientData;
 
+                if (data.DOB == "N/A")
+                {
+                    data.DOB = DateTime.Now.ToString("dd/MM/yyyy");
+                }
+
                 if (RDaT.StatusList != null)
                 {
                     this.StatusList = RDaT.StatusList;

@@ -49,12 +49,15 @@ namespace Resuscitate
                     patientData = (PatientData)e.Parameter;
                 }
             }
+
+            TimeHours.PlaceholderText = DateTime.Now.ToString("HH");
+            TimeMinutes.PlaceholderText = DateTime.Now.ToString("mm");
         }
 
-            private void InputLater_Click(object sender, RoutedEventArgs e)
+        private void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
-            TimingCount = new Timing { IsSet = false, Offset = 0};
+            TimingCount = new Timing { IsSet = false, Offset = 0 };
             TimingCount.InitTiming();
 
             // Go to main page
@@ -64,12 +67,13 @@ namespace Resuscitate
         private void Now_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
-            TimingCount = new Timing { IsSet = true, Offset = 0};
+            TimingCount = new Timing { IsSet = true, Offset = 0 };
             TimingCount.InitTiming();
 
             StatusEvent timeOfBirthEvent = new StatusEvent("Time of Birth", DateTime.Now.ToString("HH:mm"), "00:00", null);
             StatusList statusList = new StatusList();
             statusList.Events.Add(timeOfBirthEvent);
+            patientData.Tob = DateTime.Now.ToString("HH:mm");
 
             // Go to main page
             this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, patientData));
@@ -78,6 +82,9 @@ namespace Resuscitate
         private void SetTime_Click(object sender, RoutedEventArgs e)
         {
             int hours, mins;
+
+            TimeHours.Text = TimeHours.Text == "" ? TimeHours.PlaceholderText : TimeHours.Text;
+            TimeMinutes.Text = TimeMinutes.Text == "" ? TimeMinutes.PlaceholderText : TimeMinutes.Text;
 
             // Parse minutes and seconds input
             bool isHoursParsable = Int32.TryParse(TimeHours.Text, out hours);
@@ -118,6 +125,7 @@ namespace Resuscitate
 
             StatusEvent timeOfBirthEvent = new StatusEvent("Time of Birth", TimeHours.Text + ":" + TimeMinutes.Text, "00:00", null);
             StatusList statusList = new StatusList();
+            patientData.Tob = $"{TimeHours.Text}:{TimeMinutes.Text}";
             statusList.Events.Add(timeOfBirthEvent);
 
             // Go to main page
@@ -153,7 +161,7 @@ namespace Resuscitate
             if (textBox.Text.Length > 2)
             {
                 textBox.Text = textBox.Text.Substring(0, 2);
-            } 
+            }
 
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
         }

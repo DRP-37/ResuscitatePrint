@@ -53,7 +53,17 @@ namespace Resuscitate
 
             isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
 
+            addBirthTimestamp();
+
             base.OnNavigatedTo(e);
+        }
+
+        private void addBirthTimestamp()
+        {
+            isWrittenTo[2] = true;
+            isWrittenTo[3] = true;
+            infoBoxes[2].Text = patientData.DOB;
+            infoBoxes[3].Text = patientData.Tob;
         }
 
         private void InformationComplete()
