@@ -37,7 +37,7 @@ namespace Resuscitate.DataClasses
         private List<ApgarScore> apgars = new List<ApgarScore>();
         private List<AirwayPositioning> positionings = new List<AirwayPositioning>();
         private List<Observation> observations = new List<Observation>();
-        private InitialAssessment initialAssessment = new InitialAssessment(new Timing());
+        private InitialAssessment initialAssessment = null;
         private List<Reassessment> reassessments = new List<Reassessment>();
         private List<OtherProcedures> procedures = new List<OtherProcedures>();
         private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();
@@ -53,7 +53,6 @@ namespace Resuscitate.DataClasses
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 
             db = FirestoreDb.Create(project);
-
             DocumentReference docRef = db.Collection("Data").Document(id);
             FirebaseDataStructure dst = new FirebaseDataStructure
             {
@@ -62,7 +61,7 @@ namespace Resuscitate.DataClasses
                 Weight = weight,
                 Insertions = listToStrings(insertions),
                 Gestation = gestation,
-                InitialAssessment = initialAssessment.ToString(),
+                InitialAssessment =  (initialAssessment != null) ? initialAssessment.ToString() : "N/A",
                 IntubationAndSuction = listToStrings(intubationAndSuctions),
                 AirwayPositioning = listToStrings(positionings),
                 ApgarScores = listToStrings(apgars),

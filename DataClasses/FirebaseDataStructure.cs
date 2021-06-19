@@ -58,21 +58,21 @@ namespace Resuscitate.DataClasses
             sb.Append($"Date of Birth: {DateOfBirth}\n");
             sb.Append($"Time of Birth:{TimeOfBirth}\n");
             sb.Append($"Weight: {Weight}\n");
-            sb.Append($"Surname:{Surname}\n");
-            sb.Append($"Sex:{Sex}\n");
-            sb.Append($"Gestation:{Gestation}\n");
-            sb.Append($"Medical History:{MedicalHistory}\n");
-            sb.Append($"Initial Assessment:{InitialAssessment}\n");
-            sb.Append($"Apgar Scores:\n{listOfStrings(ApgarScores)}\n");
-            sb.Append($"Intubation and Suction:\n{listOfStrings(IntubationAndSuction)}\n");
-            sb.Append($"Airway Positioning:\n{listOfStrings(AirwayPositioning)}\n");
-            sb.Append($"Compressions:\n{listOfStrings(Compressions)}\n");
-            sb.Append($"Observations:\n{listOfStrings(Observations)}\n");
-            sb.Append($"Other Procedures:\n{listOfStrings(OtherProcedures)}\n");
-            sb.Append($"Reassessments:\n{listOfStrings(Reassessments)}\n");
-            sb.Append($"Staff:\n{listOfStrings(Staff)}\n");
-            sb.Append($"Insertions:\n{listOfStrings(Insertions)}\n");
-            sb.Append($"Notes:\n{listOfStrings(Notes)}\n");
+            sb.Append($"Surname: {Surname}\n");
+            sb.Append($"Sex: {Sex}\n");
+            sb.Append($"Gestation: {Gestation}\n");
+            sb.Append($"Medical History: {MedicalHistory}\n");
+            sb.Append($"Initial Assessment: {InitialAssessment}\n");
+            sb.Append($"Apgar Scores: \n{listOfStrings(ApgarScores)}\n");
+            sb.Append($"Intubation and Suction: \n{listOfStrings(IntubationAndSuction)}\n");
+            sb.Append($"Airway Positioning: \n{listOfStrings(AirwayPositioning)}\n");
+            sb.Append($"Compressions: \n{listOfStrings(Compressions)}\n");
+            sb.Append($"Observations: \n{listOfStrings(Observations)}\n");
+            sb.Append($"Other Procedures: \n{listOfStrings(OtherProcedures)}\n");
+            sb.Append($"Reassessments: \n{listOfStrings(Reassessments)}\n");
+            sb.Append($"Staff: \n{listOfStrings(Staff)}\n");
+            sb.Append($"Insertions: \n{listOfStrings(Insertions)}\n");
+            sb.Append($"Notes: \n{listOfStrings(Notes)}\n");
 
             return sb.ToString();
         }

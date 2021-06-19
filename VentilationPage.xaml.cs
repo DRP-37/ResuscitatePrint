@@ -169,7 +169,7 @@ namespace Resuscitate
         {
             Button selected = sender as Button;
             SolidColorBrush colour = selected.Background as SolidColorBrush;
-
+            ventilation.Time = TimingCount;
             if (colour.Color == Colors.LightGreen)
             {
                 selected.Background = new SolidColorBrush(Colors.White);
