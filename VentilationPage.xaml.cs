@@ -56,6 +56,7 @@ namespace Resuscitate
         // New StatusEvent generation
         StatusEvent AirwayEvent;
         StatusEvent VentilationEvent;
+        private bool invalidAirGiven = true;
 
         public VentilationPage()
         {
@@ -85,6 +86,12 @@ namespace Resuscitate
             AddIfNotNull(AirwayEvent, StatusList);
             AddIfNotNull(VentilationEvent, StatusList);
 
+            if (SelectionMade(procedures) != null && invalidAirGiven)
+            {
+                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
+                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+
             if (StatusList.Count > 0) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
             } 
@@ -112,6 +119,13 @@ namespace Resuscitate
                 AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
 
                 ventilation = new Ventilation();
+            } else
+            {
+                if (SelectionMade(procedures) != null && invalidAirGiven)
+                {
+                    AirGiven.Background = new SolidColorBrush(Colors.LightPink);
+                    AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+                }
             }
 
             VentilationEvent = null;
@@ -190,12 +204,20 @@ namespace Resuscitate
             Button selected = SelectionMade(procedures);
             int? airGiven = CheckPercentage(textBox);
 
+            if (airGiven == null)
+            {
+                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
+                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+                invalidAirGiven = true;
+            }
+
             if (airGiven == null || selected == null)
             {
                 VentilationEvent = null;
                 return;
             }
 
+            invalidAirGiven = false;
             string Name = ((TextBlock)selected.Content).Text.Replace("\n", " ");
             VentilationEvent = new StatusEvent(Name, $"{airGiven}% Air/Oxygen Given", TimingCount.Time, ventilation);
         }
