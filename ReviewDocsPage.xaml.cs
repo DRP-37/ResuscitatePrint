@@ -89,7 +89,7 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            dispatcherTimer.Stop()
+            dispatcherTimer.Stop();
             Frame.Navigate(typeof(SignInPage));
 
         }
