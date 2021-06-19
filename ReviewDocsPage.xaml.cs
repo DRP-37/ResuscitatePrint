@@ -56,10 +56,6 @@ namespace Resuscitate
 
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        { 
-            
-        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
