@@ -96,13 +96,6 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Survived:" TextWrapping="Wrap" FontFamily="Microsoft JhengHei UI" FontSize="28" MinWidth="125" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Bottom"/>
-                <Button x:Name="SurvivedYesButton" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="30" MinWidth="50" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="White" BorderBrush="#7F000000" Click="SurvivedButton_Click" HorizontalAlignment="Stretch" Margin="52,10,50,10">
-                    <TextBlock TextAlignment="Center" Text="Yes"/>
-                </Button>
-                <Button x:Name="SurvivedNoButton" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="30" MinWidth="50" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="White" BorderBrush="#7F000000" Click="SurvivedButton_Click" HorizontalAlignment="Stretch" Margin="52,10,50,10">
-                    <TextBlock TextAlignment="Center" Text="No"/>
-                </Button>
                 <Button x:Name="ExportButton" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="77" MinWidth="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ExportButton_Click" HorizontalAlignment="Stretch" Margin="10,10,10,10">
                     <TextBlock TextAlignment="Center" Text="Export"/>
                 </Button>

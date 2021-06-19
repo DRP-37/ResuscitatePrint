@@ -14,7 +14,6 @@ namespace Resuscitate
         public readonly DispatcherTimer Timer = new DispatcherTimer();
         public bool IsSet { get; set; }
         public int Offset { get; set; }
-        private int Count { get; set; }
         public string _time { get; set; }
         public string Time 
         {
@@ -25,6 +24,9 @@ namespace Resuscitate
                 OnPropertyChanged();
             }
         }
+
+        private int Count { get; set; }
+        private int startTime;
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
@@ -38,11 +40,12 @@ namespace Resuscitate
         public void InitTiming()
         {
             Count = 0;
+            startTime = Environment.TickCount;
             Time = ToString();
 
             // Start timer
             Timer.Tick += Timer_Tick;
-            Timer.Interval = new TimeSpan(0, 0, 1);
+            Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Start();
         }
 
@@ -53,8 +56,18 @@ namespace Resuscitate
 
         private void Timer_Tick(object sender, object e)
         {
-            Count++;
-            Time = ToString();
+            //Count++;
+            //Time = ToString();
+
+            var elapsed = TimeSpan.FromMilliseconds(Environment.TickCount - startTime);
+
+            if (elapsed.TotalMinutes < 10)
+            {
+                Time = '0' + string.Format("{00}:{1:00}", (int)elapsed.TotalMinutes, elapsed.Seconds);
+            } else
+            {
+                Time = string.Format("{00}:{1:00}", (int)elapsed.TotalMinutes, elapsed.Seconds);
+            }
         }
 
         public int TotalTime()

@@ -111,34 +111,6 @@ namespace Resuscitate
             this.Frame.Navigate(typeof(StaffPage), TimingCount);
         }
 
-        private void SurvivedButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
-
-            if (colour.Color == Colors.LightGreen)
-            {
-                selected.Background = new SolidColorBrush(Colors.White);
-                StatusList.Events.Remove(SurvivedEvent);
-                SurvivedEvent = null;
-
-            }
-            else
-            {
-                if (SurvivedEvent != null)
-                {
-                    Button Opposite = selected == SurvivedYesButton ? SurvivedNoButton : SurvivedYesButton;
-                    Opposite.Background = new SolidColorBrush(Colors.White);
-                    StatusList.Events.Remove(SurvivedEvent);
-                }
-
-                selected.Background = new SolidColorBrush(Colors.LightGreen);
-                TextBlock content = (TextBlock)selected.Content;
-                SurvivedEvent = new StatusEvent("Survival", content.Text, TimingCount.Time, null);
-                StatusList.Events.Add(SurvivedEvent);
-            }
-        }
-
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             if (patientData.Id != null)
