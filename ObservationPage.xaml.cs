@@ -161,6 +161,8 @@ namespace Resuscitate
 
             if (StatusEvents.Count > 0)
             {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+
                 Resuscitation.reassessmentTimer = Stopwatch.StartNew();
                 if (Resuscitation.cprTimer.IsRunning)
                 {
