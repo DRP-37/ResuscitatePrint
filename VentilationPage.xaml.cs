@@ -39,6 +39,8 @@ namespace Resuscitate
         List<Event> EventList = new List<Event>();
         List<StatusEvent> StatusList = new List<StatusEvent>();
 
+        private bool skipTextChange = false;
+
         private Button[] positions;
 
         // Airway Positioning:
@@ -83,16 +85,17 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            AddIfNotNull(AirwayEvent, StatusList);
-            AddIfNotNull(VentilationEvent, StatusList);
-
             if (SelectionMade(procedures) != null && invalidAirGiven)
             {
                 AirGiven.Background = new SolidColorBrush(Colors.LightPink);
                 AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+                return;
             }
 
-            if (StatusList.Count > 0) { 
+            AddIfNotNull(AirwayEvent, StatusList);
+            AddIfNotNull(VentilationEvent, StatusList);
+
+            if (StatusList.Count > 0 && (AirGiven.Background as SolidColorBrush).Color != Colors.LightPink) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
             } 
         }
@@ -117,6 +120,9 @@ namespace Resuscitate
 
                 AirGiven.Background = new SolidColorBrush(Colors.White);
                 AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
+
+                skipTextChange = true;
+                AirGiven.Text = "";
 
                 ventilation = new Ventilation();
             } else
@@ -199,6 +205,12 @@ namespace Resuscitate
 
         private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (skipTextChange)
+            {
+                skipTextChange = false;
+                return;
+            }
+
             TextBox textBox = (TextBox)sender;
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             Button selected = SelectionMade(procedures);
