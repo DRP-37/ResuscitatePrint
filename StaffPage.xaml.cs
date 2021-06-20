@@ -72,9 +72,10 @@ namespace Resuscitate
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (StaffName.Text == null || StaffPosition.SelectedIndex < 0 
+            if (String.IsNullOrWhiteSpace(StaffName.Text) || StaffPosition.SelectedIndex < 0 
                 || StaffGrade.SelectedIndex < 0)
             {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                 AddButton.Background = new SolidColorBrush(Colors.Red);
                 AddButton.BorderBrush = new SolidColorBrush(Colors.Red);
                 return;

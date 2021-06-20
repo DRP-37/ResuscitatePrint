@@ -8,9 +8,15 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="AllVentilation">
         <Button x:Name="BackButton" Content="Back" Margin="1072,555,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
-        <Button x:Name="ConfirmButton" Content="Confirm" Margin="1072,464,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click" VerticalAlignment="Top"/>
+        <Button x:Name="ConfirmButton" Content="Confirm" Margin="1072,464,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click" VerticalAlignment="Top">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout OverlayInputPassThroughElement="{x:Bind AllVentilation}">
+                    <TextBlock Text="Please enter a valid percentage for the ventilation procedure."/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Mode=OneWay, Path=TimingCount.Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
         <Button x:Name="InflationMask" Margin="80,362,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="81" UseLayoutRounding="False" Width="278" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Ventilation_Click" Foreground="#FF494949">
             <TextBlock TextAlignment="Center" Text="Inflation Breaths:&#xA;via mask" FontSize="27"/>
@@ -41,6 +47,12 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="31,81,0,0" Text="Airway Positioning:" TextWrapping="Wrap" VerticalAlignment="Top" Height="61" Width="534" FontSize="40" TextAlignment="Left"/>
         <TextBlock HorizontalAlignment="Left" Margin="31,295,0,0" Text="Ventilation Support:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="40" TextAlignment="Center"/>
-        <Button x:Name="UpdateButton" Content="Update" Margin="1072,374,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="UpdateButton_Click" VerticalAlignment="Top"/>
+        <Button x:Name="UpdateButton" Content="Update" Margin="1072,374,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="UpdateButton_Click" VerticalAlignment="Top">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout OverlayInputPassThroughElement="{x:Bind AllVentilation}">
+                    <TextBlock x:Name="Notification" Text="The timeline has been updated."/>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+        </Button>
     </Grid>
 </Page>

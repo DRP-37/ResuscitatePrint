@@ -83,16 +83,18 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectionMade(procedures) != null && invalidAirGiven)
+            {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
+                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
+                return;
+            }
+
             AddIfNotNull(AirwayEvent, StatusList);
             AddIfNotNull(VentilationEvent, StatusList);
 
-            if (SelectionMade(procedures) != null && invalidAirGiven)
-            {
-                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
-                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
-            }
-
-            if (StatusList.Count > 0) { 
+            if (StatusList.Count > 0 && (AirGiven.Background as SolidColorBrush).Color != Colors.LightPink) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
             } 
         }
@@ -102,12 +104,18 @@ namespace Resuscitate
             AddIfNotNull(AirwayEvent, StatusList);
             AddIfNotNull(VentilationEvent, StatusList);
 
+            bool airwayEventAdded = false;
+
             if (AirwayEvent != null)
             {
                 ResetButtons(positions);
                 airwayProcedure = -1;
 
                 positioning = new AirwayPositioning();
+
+                Notification.Text = "The timeline has been updated. ";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+                airwayEventAdded = true;
             }
 
             if (VentilationEvent != null)
@@ -119,10 +127,39 @@ namespace Resuscitate
                 AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
 
                 ventilation = new Ventilation();
+
+                Notification.Text = "The timeline has been updated. ";
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
             } else
             {
-                if (SelectionMade(procedures) != null && invalidAirGiven)
+
+                if (SelectionMade(procedures) == null)
                 {
+                    if (airwayEventAdded)
+                    {
+                        Notification.Text = "The timeline has been updated with the selected airway procedure. \n" +
+                            "Please select ventilation procedure according to O2% given. ";
+                    }
+                    else
+                    {
+                        Notification.Text = "Please select ventilation procedure according to O2% given. ";
+                    }
+
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+                }
+                else if (SelectionMade(procedures) != null && invalidAirGiven)
+                {
+                    if (airwayEventAdded)
+                    {
+                        Notification.Text = "The timeline has been updated with the selected airway procedure. \n" +
+                            "Please enter a valid percentage for the ventilation procedure. ";
+                    }
+                    else
+                    {
+                        Notification.Text = "Please enter a valid percentage for the ventilation procedure. ";
+                    }
+
+                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                     AirGiven.Background = new SolidColorBrush(Colors.LightPink);
                     AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
                 }
@@ -199,6 +236,7 @@ namespace Resuscitate
 
         private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
         {
+       
             TextBox textBox = (TextBox)sender;
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             Button selected = SelectionMade(procedures);

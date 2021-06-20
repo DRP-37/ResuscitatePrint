@@ -55,7 +55,7 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             intubationAndSuction = new IntubationAndSuction();
-            IntubationEvent = new StatusEvent();
+            IntubationEvent = null;
 
             base.OnNavigatedTo(e);
         }
@@ -64,6 +64,7 @@ namespace Resuscitate
         {
             if (IntubationEvent == null)
             {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                 return;
             }
 

@@ -9,6 +9,7 @@ using Resuscitate.DataClasses;
 using Windows.UI.Popups;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Windows.UI.Xaml.Controls.Primitives;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
@@ -69,6 +70,7 @@ namespace Resuscitate
             if (FindSelected(tones) == -1 || FindSelected(responses) == -1 || FindSelected(hrs) == -1 
                 || FindSelected(colours) == -1 || FindSelected(respirations) == -1)
             {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
                 return;
             }
 
