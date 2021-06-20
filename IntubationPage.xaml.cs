@@ -215,22 +215,50 @@ namespace Resuscitate
             if (colour.Color == Colors.LightGreen)
             {
                 selected.Background = new SolidColorBrush(Colors.White);
-                IntubationEvent = null;
+                IntubationEvent = GenerateSuccessfulStatusEvent();
                 return;
             }
-            
+
+            // Flip colours of Equal/UnequalAir buttons
             selected.Background = new SolidColorBrush(Colors.LightGreen);
 
+            if (selected.Equals(UnequalAir))
+            {
+                EqualAir.Background = new SolidColorBrush(Colors.White);
+            }
+
+            if (selected.Equals(EqualAir))
+            {
+                UnequalAir.Background = new SolidColorBrush(Colors.White);
+            }
+
+            IntubationEvent = GenerateSuccessfulStatusEvent();
+        }
+
+        private StatusEvent GenerateSuccessfulStatusEvent()
+        {
             string Data = "Successful: ";
 
+            bool selectionMade = false;
             foreach (Button button in confirmations)
             {
-                Data += button.Content.ToString() + ", ";
+                SolidColorBrush confirmColour = button.Background as SolidColorBrush;
+
+                if (confirmColour.Color == Colors.LightGreen)
+                {
+                    Data += button.Content.ToString() + ", ";
+                    selectionMade = true;
+                }
+            }
+
+            if (!selectionMade)
+            {
+                return null;
             }
 
             Data = Data.Substring(0, Data.Length - 2);
 
-            IntubationEvent = new StatusEvent("Intubation", Data, TimingCount.Time, intubationAndSuction);
+            return new StatusEvent("Intubation", Data, TimingCount.Time, intubationAndSuction);
         }
 
         private bool SelectionMade(Button[] buttons)
