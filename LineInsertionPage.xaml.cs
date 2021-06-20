@@ -30,7 +30,7 @@ namespace Resuscitate
         //private string cross = "\u2A09";
 
         private LineInsertion insertion;
-        private StatusEvent StatusEvent;
+        private StatusEvent LineInsertionEvent;
 
         private Button[] insertionButtons;
         // Airway Positioning:
@@ -56,7 +56,7 @@ namespace Resuscitate
             isSuccessful = null;
             lineInsertion = null;
 
-            StatusEvent = new StatusEvent();
+            LineInsertionEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
@@ -66,25 +66,22 @@ namespace Resuscitate
             // set data structure with line insertion, whether it was successful
             // and time stamp of selection
             // if a selection has not been made do not allow confirm
-            if (SelectionMade(insertionButtons) && 
-                SelectionMade(new Button[] { Successful, Unsuccessful}))
+            List<Event> Events = new List<Event>();
+            Events.Add(insertion);
+
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            //StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString(), insertion));
+
+            if (LineInsertionEvent != null)
             {
-               
-                List<Event> Events = new List<Event>();
-                Events.Add(insertion);
+                StatusEvents.Add(LineInsertionEvent);
+            }
 
-                List<StatusEvent> StatusEvents = new List<StatusEvent>();
-                //StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString(), insertion));
-
-                if (StatusEvent == null)
-                {
-                    return;
-                }
-
-                StatusEvents.Add(StatusEvent);
-
+            if (StatusEvents.Count > 0)
+            {
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
+            
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -107,14 +104,14 @@ namespace Resuscitate
             {
                 curr.Background = new SolidColorBrush(Colors.White);
                 isSuccessful = null;
-                StatusEvent = null;
+                LineInsertionEvent = null;
                 return;
             }
 
             UpdateColours(new Button[] {Successful, Unsuccessful}, curr);
             isSuccessful = curr.Equals(Successful);
 
-            StatusEvent = GenerateStatusEvent();
+            LineInsertionEvent = GenerateStatusEvent();
         }
 
         private void Insertion_Click(object sender, RoutedEventArgs e)
@@ -126,14 +123,14 @@ namespace Resuscitate
             {
                 curr.Background = new SolidColorBrush(Colors.White);
                 lineInsertion = null;
-                StatusEvent = null;
+                LineInsertionEvent = null;
                 return;
             }
 
             UpdateColours(insertionButtons, curr);
             lineInsertion = Array.IndexOf(insertionButtons, curr);
 
-            StatusEvent = GenerateStatusEvent();
+            LineInsertionEvent = GenerateStatusEvent();
         }
 
         private void UpdateColours(Button[] buttons, Button sender)
@@ -151,7 +148,7 @@ namespace Resuscitate
             }
 
             string Insertion = ((TextBlock)insertionButtons[(int)lineInsertion].Content).Text.Replace("\n", " ");
-            string Data = (bool)isSuccessful ? Insertion + ": Successful" : Insertion + ": Unsuccessful";
+            string Data = Insertion + ": " + ((bool)isSuccessful ? "Successful" : "Unsuccessful");
 
             return new StatusEvent("Line Insertion", Data, TimingCount.Time, insertion);
         }

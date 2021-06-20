@@ -33,7 +33,7 @@ namespace Resuscitate
         // 2: Abdominal Drain
         private int drainProcedure;
         private OtherProcedures procedures;
-        private StatusEvent statusEvent;
+        private StatusEvent DrainEvent;
 
         public DrainsPage()
         {
@@ -50,7 +50,7 @@ namespace Resuscitate
             procedures = new OtherProcedures();
             procedures.Time = TimingCount;
 
-            statusEvent = new StatusEvent();
+            DrainEvent = new StatusEvent();
 
             base.OnNavigatedTo(e);
         }
@@ -60,18 +60,21 @@ namespace Resuscitate
             // set data structure with drainProcedure and time stamp of selection
 
             procedures.Procedure = (ProcedureType)drainProcedure;
-            statusEvent.Name = "Drain";
-            statusEvent.Data = procedures.procedureToString();
-            statusEvent.Time = procedures.Time.ToString();
-            statusEvent.Event = procedures;
 
             List<Event> Events = new List<Event>();
             Events.Add(procedures);
 
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            StatusEvents.Add(statusEvent);
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            if (DrainEvent != null)
+            {
+                StatusEvents.Add(DrainEvent);
+            }
+
+            if (StatusEvents.Count > 0)
+            {
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -87,8 +90,22 @@ namespace Resuscitate
         // Update colours and selection of procedure on click
         private void Drain_Click(object sender, RoutedEventArgs e)
         {
+            Button selected = sender as Button;
+            SolidColorBrush colour = (SolidColorBrush)selected.Background;
+
+            if (colour.Color == Colors.LightGreen)
+            {
+                selected.Background = new SolidColorBrush(Colors.White);
+                DrainEvent = null;
+                drainProcedure = -1;
+                return;
+            }
+
             UpdateColours(drains, sender as Button);
             drainProcedure = Array.IndexOf(drains, sender as Button);
+
+            string Data = ((TextBlock)selected.Content).Text.Replace("\n", " ");
+            DrainEvent = new StatusEvent("Drain", Data, TimingCount.Time, procedures);
         }
 
         private void UpdateColours(Button[] buttons, Button sender)

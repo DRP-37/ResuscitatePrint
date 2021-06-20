@@ -33,8 +33,6 @@ namespace Resuscitate
         public Timing TimingCount;
         private StatusList StatusList;
 
-        private StatusEvent SurvivedEvent;
-
         public ReviewPage()
         {
             this.InitializeComponent();
