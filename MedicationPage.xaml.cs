@@ -42,9 +42,9 @@ namespace Resuscitate
         private TextBlock[] DoseViews;
         private int[] NumDoses = new int[NUM_MEDICATIONS];
         private bool[] DoseGiven = new bool[NUM_MEDICATIONS];
+        private StatusEvent[] MedicationEvents;
 
         private Medication medication;
-        private StatusEvent statusEvent;
 
         public MedicationPage()
         {
@@ -66,7 +66,7 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
 
             medication = new Medication();
-            statusEvent = new StatusEvent();
+            MedicationEvents = new StatusEvent[NUM_MEDICATIONS];
 
             // Reset DoseGiven and buttons' colours
             foreach (Button Medication in Medications)
@@ -79,31 +79,26 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionMade(Medications))
+            medication.Time = TimingCount;
+            medication.setData(DoseGiven);
+
+            List<Event> Events = new List<Event>();
+            Events.Add(medication);
+
+            string Time = TimingCount.Time;
+            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+
+            foreach (StatusEvent Event in MedicationEvents)
             {
-                medication.Time = TimingCount;
-                medication.setData(DoseGiven);
-
-                List<Event> Events = new List<Event>();
-                Events.Add(medication);
-
-                bool hasBeenSelected = false;
-                string Time = TimingCount.Time;
-                List<StatusEvent> StatusEvents = new List<StatusEvent>();
-
-                for (int i = 0; i < DoseGiven.Length; i++)
+                if (Event != null)
                 {
-                    if (DoseGiven[i])
-                    {
-                        StatusEvents.Add(new StatusEvent("Medication Given", NameViews[i].Text + " (Dose " + NumDoses[i] + ")", Time, medication));
-                        hasBeenSelected = true;
-                    }
+                    StatusEvents.Add(Event);
                 }
+            }
 
-                if (hasBeenSelected)
-                {
-                    Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
-                }
+            if (StatusEvents.Count > 0)
+            {
+                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
             }
         }
 
@@ -138,11 +133,13 @@ namespace Resuscitate
             {
                 NumDoses[reference]++;
                 DoseGiven[reference] = true;
+                MedicationEvents[reference] = GenerateStatusEvent(reference);
                 button.Background = new SolidColorBrush(Colors.LightGreen);
             } else
             {
                 NumDoses[reference]--;
                 DoseGiven[reference] = false;
+                MedicationEvents[reference] = null;
                 button.Background = new SolidColorBrush(Colors.White);
             }
 
@@ -159,6 +156,13 @@ namespace Resuscitate
                     DoseViews[i].Text = NumDoses[i].ToString();
                 }
             }
+        }
+
+
+        // int index refers to the index of a Button in Button[] Medications
+        private StatusEvent GenerateStatusEvent(int index)
+        {
+            return new StatusEvent("Medication Given", NameViews[index].Text + " (Dose " + NumDoses[index] + ")", TimingCount.Time, medication);
         }
 
         // Move to its own class later on - needed it many classes
