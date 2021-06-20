@@ -50,7 +50,7 @@ namespace Resuscitate
             procedures = new OtherProcedures();
             procedures.Time = TimingCount;
 
-            DrainEvent = new StatusEvent();
+            DrainEvent = null;
 
             base.OnNavigatedTo(e);
         }
