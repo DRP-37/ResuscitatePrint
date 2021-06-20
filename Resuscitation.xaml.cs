@@ -61,10 +61,10 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             CurrTime = DateTime.Now.ToString("HH:mm");
-            Frame rootFrame = Window.Current.Content as Frame;
 
-            // If you have come back from the StaffPage
-            if (Frame.ForwardStack.Count > 0 && Frame.ForwardStack.ElementAt(0).SourcePageType.Name == "StaffPage")
+            // If you to specify you have come back from a page (eg StaffPage) use:
+            //   Frame.ForwardStack.Count > 0 && Frame.ForwardStack.ElementAt(0).SourcePageType.Name == "StaffPage"
+            if (Frame.ForwardStack.Count > 0)
             {
                 return;
             }
