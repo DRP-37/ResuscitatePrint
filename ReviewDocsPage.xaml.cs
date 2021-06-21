@@ -118,7 +118,8 @@ namespace Resuscitate
 
             if (alreadyApproved)
             {
-                selected.Content = "Already Approved";
+                selected.Content = "Approved";
+                selected.Background = new SolidColorBrush(Colors.DarkGray);
             }
             else
             {
@@ -171,7 +172,7 @@ namespace Resuscitate
         private void ResetButtonColors() {
             foreach (var button in selectedButtons)
             {
-                button.Background = new SolidColorBrush(Colors.White);
+                button.Background = new SolidColorBrush(Color.FromArgb(51, 188, 188, 188));
             }
         }
     }
