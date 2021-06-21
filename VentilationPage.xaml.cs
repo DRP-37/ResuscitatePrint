@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,7 +46,7 @@ namespace Resuscitate
         // 0: Neutral Head Position
         // 1: Recheck position
         // 2: Two-person Technique
-        private int airwayProcedure = -1; 
+        private int airwayProcedure = -1;
 
         // Position:
         // 0: Neutral Head Position
@@ -91,8 +92,8 @@ namespace Resuscitate
                 return;
             }
 
-            AddIfNotNull(AirwayEvent, StatusList);
-            AddIfNotNull(VentilationEvent, StatusList);
+            AddIfNotNull(AirwayEvent, StatusList, EventList);
+            AddIfNotNull(VentilationEvent, StatusList, EventList);
 
             if (StatusList.Count > 0 && (AirGiven.Background as SolidColorBrush).Color != Colors.LightPink) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
@@ -101,8 +102,8 @@ namespace Resuscitate
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            AddIfNotNull(AirwayEvent, StatusList);
-            AddIfNotNull(VentilationEvent, StatusList);
+            AddIfNotNull(AirwayEvent, StatusList, EventList);
+            AddIfNotNull(VentilationEvent, StatusList, EventList);
 
             bool airwayEventAdded = false;
 
@@ -202,6 +203,8 @@ namespace Resuscitate
             airwayProcedure = selected.Name[selected.Name.Length - 1] - '0';
 
             string Data = ((TextBlock)selected.Content).Text.Replace("\n", " ");
+            positioning.Positioning = (Positioning)airwayProcedure;
+            positioning.Time = TimingCount;
             AirwayEvent = new StatusEvent("Airway Positioning", Data, TimingCount.Time, positioning);
         }
 
@@ -229,6 +232,7 @@ namespace Resuscitate
             }
 
             string Name = ((TextBlock)selected.Content).Text.Replace("\n", " ");
+            ventilation.VentType = (VentilationType)ventilationProcedure;
             VentilationEvent = new StatusEvent(Name, $"{airGiven}% Air/Oxygen Given", TimingCount.Time, ventilation);
         }
 
@@ -237,7 +241,7 @@ namespace Resuscitate
             // Nothing
         }
 
-        private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
+        private async void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
         {
        
             TextBox textBox = (TextBox)sender;
@@ -260,6 +264,8 @@ namespace Resuscitate
 
             invalidAirGiven = false;
             string Name = ((TextBlock)selected.Content).Text.Replace("\n", " ");
+            ventilation.Oxygen = (float)airGiven;
+            ventilation.Time = TimingCount;
             VentilationEvent = new StatusEvent(Name, $"{airGiven}% Air/Oxygen Given", TimingCount.Time, ventilation);
         }
 
@@ -289,8 +295,9 @@ namespace Resuscitate
 
         private Button SelectionMade(Button[] buttons)
         {
-            foreach (Button button in buttons)
+            for (int i=0; i < buttons.Length; i++) 
             {
+                Button button = buttons[i];
                 SolidColorBrush colour = button.Background as SolidColorBrush;
 
                 if (colour.Color == Colors.LightGreen)
@@ -310,15 +317,16 @@ namespace Resuscitate
             sender.Background = new SolidColorBrush(Colors.LightGreen);
         }
 
-        private bool AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents)
+        private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents, List<Event> Events)
         {
             if (Event != null)
             {
+                if (Event.Event != null)
+                {
+                    Events.Add(Event.Event);
+                }
                 StatusEvents.Add(Event);
-                return true;
             }
-
-            return false;
         }
 
         private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)

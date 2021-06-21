@@ -8,21 +8,15 @@ namespace Resuscitate.DataClasses
 {
     public class CardiacCompressions : Event
     {
-        private List<Timing> start = new List<Timing>();
-        private List<Timing> end = new List<Timing>();
+        private Timing time;
+        private string length;
 
-        public void startedCompressions(Timing time)
-        {
-            start.Add(time);
-        }
-
-        public void stopCompressions(Timing time)
-        {
-            end.Add(time);
-        }
+        public Timing Time { get => time; set => time = value; }
+        public string Length { get => length; set => length = value; }
 
         override public string ToString()
         {
+<<<<<<< HEAD
             StringBuilder sb = new StringBuilder();
 
             sb.Append("Timings of cardiac compressions: \n");
@@ -46,6 +40,9 @@ namespace Resuscitate.DataClasses
             }
 
             return sb.ToString();
+=======
+            return $"Cardiac compression at: {time.ToString()} for {length} seconds\n";
+>>>>>>> 83df2222bb19982320f4ebf496725d7c36392872
         }
     }
 }

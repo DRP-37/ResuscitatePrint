@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Timers;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -108,7 +109,7 @@ namespace Resuscitate
 
                 if (RDaT.StatusList != null)
                 {
-                    this.StatusList = RDaT.StatusList;
+                    StatusList = RDaT.StatusList;
                 }
             }
 
@@ -143,12 +144,12 @@ namespace Resuscitate
 
         private bool cprNotif()
         {
-            return (TimeSpan.Compare(cprTimer.Elapsed, new TimeSpan(0, 0, 30)) >= 0);
+            return TimeSpan.Compare(cprTimer.Elapsed, new TimeSpan(0, 0, 30)) >= 0;
         }
 
         private bool displayReassessNotif()
         {
-            return (TimeSpan.Compare(reassessmentTimer.Elapsed, new TimeSpan(0, 2, 0)) >= 0);
+            return TimeSpan.Compare(reassessmentTimer.Elapsed, new TimeSpan(0, 2, 0)) >= 0;
         }
 
         private bool displayApgarNotif()
@@ -156,12 +157,12 @@ namespace Resuscitate
 
             if (apgarCounter == 0)
             {
-                return (TimeView.Text.StartsWith("01:"));
+                return TimeView.Text.StartsWith("01:");
             }
 
             if (apgarCounter == 1)
             {
-                return (TimeView.Text.StartsWith("05:")) || ((!apgarScoresCompleted[apgarCounter]) &&
+                return TimeView.Text.StartsWith("05:") || ((!apgarScoresCompleted[apgarCounter]) &&
                     (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
             }
 
@@ -231,7 +232,7 @@ namespace Resuscitate
 
         private void NotesButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(NotesPage), TimingCount);
+            this.Frame.Navigate(typeof(NotesPage), new ReviewDataAndTiming(TimingCount, StatusList, data));
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
@@ -257,7 +258,7 @@ namespace Resuscitate
 
         private void StaffInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), TimingCount);
+            this.Frame.Navigate(typeof(StaffPage), data);
         }
     }
 }

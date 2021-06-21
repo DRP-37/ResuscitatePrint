@@ -52,6 +52,8 @@ namespace Resuscitate.DataClasses
         public string Approved { get; set; }
         [FirestoreProperty]
         public string[] Ventilations { get; set; }
+        [FirestoreProperty]
+        public string[] Medications { get; set; }
         
 
 
@@ -73,6 +75,7 @@ namespace Resuscitate.DataClasses
             sb.Append($"Airway Positioning:\n{listOfStrings(AirwayPositioning)}\n");
             sb.Append($"Compressions:\n{listOfStrings(Compressions)}\n");
             sb.Append($"Observations:\n{listOfStrings(Observations)}\n");
+            sb.Append($"Medications:\n{listOfStrings(Medications)}\n");
             sb.Append($"Other Procedures:\n{listOfStrings(OtherProcedures)}\n");
             sb.Append($"Reassessments:\n{listOfStrings(Reassessments)}\n");
             sb.Append($"Staff:\n{listOfStrings(Staff)}\n");

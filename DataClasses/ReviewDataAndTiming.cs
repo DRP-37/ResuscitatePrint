@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate.DataClasses
 {
-    class ReviewDataAndTiming
+    public class ReviewDataAndTiming
     {
         public ReviewDataAndTiming(Timing t, StatusList s, PatientData pd)
         {

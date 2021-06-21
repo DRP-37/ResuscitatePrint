@@ -96,13 +96,15 @@ namespace Resuscitate
         }
 
         // StartEvent is true when generating a CPR start event. If it is a CPR end event then it is false.
-        private StatusEvent GenerateStatusEvent(bool StartEvent, Event Event)
+        private StatusEvent GenerateStatusEvent(bool StartEvent, CardiacCompressions Event)
         {
             string Seconds = "-1";
 
             if (Resuscitation.cprTimer.IsRunning) {
                 string Milieconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
                 Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
+                Event.Time = TimingCount;
+                Event.Length = Seconds;
             }
 
             string Data = StartEvent ? "Started" : "Ended after " + Seconds + " seconds";

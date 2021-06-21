@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,10 @@ namespace Resuscitate
     public sealed partial class NotesPage : Page
     {
         public Timing TimingCount { get; set; }
-        private String userInput;
+        public ReviewDataAndTiming RDaT;
+        public PatientData patientData;
+        public StatusList statusList;
+        private Notes userInput;
         private AudioRecorder _audioRecorder;
         private bool isRecording = false;
 
@@ -39,16 +43,18 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
-
-            base.OnNavigatedTo(e);
+            RDaT = (ReviewDataAndTiming)e.Parameter;
+            TimingCount = RDaT.Timing;
+            patientData = RDaT.PatientData;
+            statusList = RDaT.StatusList;
         }
-
+        
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            ConfirmButton.Background = new SolidColorBrush(new Windows.UI.Color() { R = 242, G = 242, B = 242 });
-            userInput = UserNotes.Text;
-            Frame.Navigate(typeof(Resuscitation), TimingCount);
+            ConfirmButton.Background = new SolidColorBrush(new Color() { R = 242, G = 242, B = 242 });
+            userInput = new Notes(UserNotes.Text);
+            patientData.addNote(userInput);
+            Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, patientData));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

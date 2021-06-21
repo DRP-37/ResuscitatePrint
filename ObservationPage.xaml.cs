@@ -102,8 +102,16 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             reassessment.Time = TimingCount.Time;
             observation.Time = TimingCount.Time;
+=======
+            reassessment.Time = TimingCount;
+            observation.Time = TimingCount;
+            observation.OximeterOxygen = OxygenLevels.Text;
+            observation.Hr = HeartRate.Text;
+            observation.OxygenGiven = PercentOxygen.Text;
+>>>>>>> 83df2222bb19982320f4ebf496725d7c36392872
 
             reassessment.Hr = (HeartRate)hr;
             reassessment.Movement = (ChestMovement)movement;
