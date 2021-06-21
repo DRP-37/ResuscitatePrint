@@ -48,6 +48,8 @@ namespace Resuscitate.DataClasses
         public string Surname { get; set; }
         [FirestoreProperty]
         public string TimeOfBirth { get; set; }
+        [FirestoreProperty]
+        public string[] Ventillations { get; set; }
         
 
         public override string ToString()
@@ -72,6 +74,7 @@ namespace Resuscitate.DataClasses
             sb.Append($"Reassessments:\n{listOfStrings(Reassessments)}\n");
             sb.Append($"Staff:\n{listOfStrings(Staff)}\n");
             sb.Append($"Insertions:\n{listOfStrings(Insertions)}\n");
+            sb.Append($"Ventillations:\n{listOfStrings(Ventillations)}\n");
             sb.Append($"Notes:\n{listOfStrings(Notes)}\n");
 
             return sb.ToString();

@@ -12,8 +12,10 @@ namespace Resuscitate.DataClasses
     public class PatientData
     {
         private FirestoreDb db;
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
-        string project = "resuscitate-4c0ec";
+        //string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab";
+        //string project = "resuscitate-4c0ec";
+        string project = "resuscitate2-47110";
 
         // Patient Data
         private string surname = "N/A";
@@ -43,6 +45,7 @@ namespace Resuscitate.DataClasses
         private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();
         private List<CardiacCompressions> compressions = new List<CardiacCompressions>();
         private List<LineInsertion> insertions = new List<LineInsertion>();
+        private List<Ventilation> ventilations = new List<Ventilation>();
         private List<Notes> notes = new List<Notes>();
 
         private List<StaffData> staffPresent = new List<StaffData>();
@@ -122,6 +125,11 @@ namespace Resuscitate.DataClasses
         public void addInsertions(LineInsertion ins)
         {
             insertions.Add(ins);
+        }
+
+        public void addVentillation(Ventilation ven)
+        {
+            ventilations.Add(ven);
         }
 
         public void addNote(Notes note)
@@ -207,6 +215,10 @@ namespace Resuscitate.DataClasses
             {
                 addReassessment((Reassessment)item);
             }
+            else if (item.GetType() == typeof(Ventilation))
+            {
+                addVentillation((Ventilation)item);
+            }
         }
 
         private string[] staff()
@@ -247,7 +259,8 @@ namespace Resuscitate.DataClasses
                 Sex = sex,
                 Staff = staff(),
                 Surname = surname,
-                TimeOfBirth = tob
+                TimeOfBirth = tob,
+                Ventillations = listToStrings(ventilations)
             };
         }
 
