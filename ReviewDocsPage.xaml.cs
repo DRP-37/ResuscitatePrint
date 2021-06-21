@@ -21,6 +21,7 @@ using Google.Cloud.Firestore;
 using Resuscitate.DataClasses;
 using Windows.UI;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -59,7 +60,7 @@ namespace Resuscitate
        
 
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             db = FirestoreDb.Create(project);
@@ -81,19 +82,24 @@ namespace Resuscitate
         {
             Query allFiles = db.Collection("Data");
             QuerySnapshot allFilesSnapshot = await allFiles.GetSnapshotAsync();
-            foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
-                string id = (string)procedure["Id"];
-                string timeOfBirth = (string)procedure["TimeOfBirth"];
-                string dateOfBirth = (string)procedure["DateOfBirth"];
-                var data = new ExportData(id, $"{dateOfBirth} {timeOfBirth}");
-
-                if (!ExportList.Data.Contains(data))
+                foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
                 {
-                    ExportList.Data.Add(data);
+                    Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
+                    string id = (string)procedure["Id"];
+                    string timeOfBirth = (string)procedure["TimeOfBirth"];
+                    string dateOfBirth = (string)procedure["DateOfBirth"];
+                    var data = new ExportData(id, $"{dateOfBirth} {timeOfBirth}");
+
+                    if (!ExportList.Data.Contains(data))
+                    {
+                        ExportList.Data.Add(data);
+                    }
                 }
-            }
+            });
+            
+            
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
