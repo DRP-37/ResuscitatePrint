@@ -50,7 +50,7 @@ namespace Resuscitate.DataClasses
         public string TimeOfBirth { get; set; }
         [FirestoreProperty]
         public string Approved { get; set; }
-        public string[] Ventillations { get; set; }
+        public string[] Ventilations { get; set; }
         
 
 

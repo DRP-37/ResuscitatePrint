@@ -128,7 +128,7 @@ namespace Resuscitate.DataClasses
             insertions.Add(ins);
         }
 
-        public void addVentillation(Ventilation ven)
+        public void addVentilation(Ventilation ven)
         {
             ventilations.Add(ven);
         }
@@ -218,7 +218,7 @@ namespace Resuscitate.DataClasses
             }
             else if (item.GetType() == typeof(Ventilation))
             {
-                addVentillation((Ventilation)item);
+                addVentilation((Ventilation)item);
             }
         }
 
@@ -261,11 +261,8 @@ namespace Resuscitate.DataClasses
                 Staff = staff(),
                 Surname = surname,
                 TimeOfBirth = tob,
-<<<<<<< HEAD
-                Approved = approved
-=======
-                Ventillations = listToStrings(ventilations)
->>>>>>> 2f326b2f2082fba7d46133e150e441f75dfb140c
+                Approved = approved,
+                Ventilations = listToStrings(ventilations)
             };
         }
 
