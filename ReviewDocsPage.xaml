@@ -61,11 +61,12 @@
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Path=ID}" FontFamily="Microsoft JhengHei UI" FontSize="22" />
                                 <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{x:Bind Path=TimeOfBirth}" FontFamily="Microsoft JhengHei UI" FontSize="22"/>
                                 <Button x:Name="ApproveButton" Grid.Column="3" Tag="{x:Bind Path=ID}" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="22" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="ApproveButton_Click" VerticalAlignment="Center">
-                                    <TextBlock TextAlignment="Center" Text="Export" FontSize="20"/>
+                                    <TextBlock TextAlignment="Center" Text="Approve" FontSize="20"/>
                                 </Button>
                                 <Button x:Name="ExportButton" Grid.Column="4" Tag="{x:Bind Path=ID}" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="22" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="ExportButton_Click" VerticalAlignment="Center">
                                     <TextBlock TextAlignment="Center" Text="Export" FontSize="20"/>
@@ -78,6 +79,6 @@
         </Grid>
         <Button x:Name="BackButton" Content="Sign Out" Margin="55,0,0,54" VerticalAlignment="Bottom" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="BackButton_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="39" Width="473" FontWeight="Bold" Foreground="Gray" Text="Export Documentation" Height="76"/>
-        <Button x:Name="Confirm_Button" Content="Confirm Approvals" Margin="1195,869,0,0" VerticalAlignment="Top" Height="77" Width="173" Background="#33BCBCBC" BorderBrush="#7F000000" Click="Confirm_Button_Click"/>
+        <Button x:Name="Confirm_Button" Content="Confirm Approvals" Margin="1175,869,0,0" VerticalAlignment="Top" Height="86" Width="200" Background="#FF3CC82F" BorderBrush="#7F000000" Click="Confirm_Button_Click" FontSize="20" FontWeight="Bold"/>
     </Grid>
 </Page>

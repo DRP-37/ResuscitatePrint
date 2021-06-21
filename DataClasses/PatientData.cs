@@ -11,9 +11,11 @@ namespace Resuscitate.DataClasses
 {
     public class PatientData
     {
+        public static IDisposable returnedEvents;
+
         private FirestoreDb db;
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
-        string project = "resuscitate-4c0ec";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json";
+        string project = "resuscitate2-47110";
 
         // Patient Data
         private string surname = "N/A";
@@ -64,7 +66,7 @@ namespace Resuscitate.DataClasses
         {
             var stream = await storageFolder.OpenStreamForReadAsync(fileName);
 
-            var task = new FirebaseStorage("resuscitate-4c0ec.appspot.com")
+            var task = new FirebaseStorage("resuscitate2-47110.appspot.com")
                 .Child("Resuscitation Files")
                 .Child(id)
                 .Child(fileName)

@@ -11,9 +11,6 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
@@ -23,6 +20,7 @@ using FireSharp.Interfaces;
 using Google.Cloud.Firestore;
 using Resuscitate.DataClasses;
 using Windows.UI;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,19 +32,23 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ReviewDocsPage : Page
     {
-
+        
         ExportList ExportList = new ExportList();
         List<String> Approved = new List<string>();
         List<Button> selectedButtons = new List<Button>();
         private FirestoreDb db;
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
-        string project = "resuscitate-4c0ec";
+        CollectionReference collection;
+        FirestoreChangeListener listener;
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json";
+        string project = "resuscitate2-47110";
+
         DispatcherTimer dispatcherTimer;
         public ReviewDocsPage()
         {
+           
+            
             this.InitializeComponent();
             dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(10000);
             dispatcherTimer.Start();
             // This line would this page to cache everything while ignoring the reset when navigating
@@ -54,20 +56,23 @@ namespace Resuscitate
             // this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        private void DispatcherTimer_Tick(object sender, object e)
-        {
-            populateExportList();
-        }
+       
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             db = FirestoreDb.Create(project);
-
+            populateExportList();
+            collection = db.Collection("Data");
+            listener = collection.Listen(snapshot =>
+            {
+                populateExportList();
+            });
+            
             ExportListView.MaxHeight = ((Frame)Window.Current.Content).ActualHeight - 325;
 
-            populateExportList();
+            
         }
 
 
@@ -111,7 +116,7 @@ namespace Resuscitate
             }
             else
             {
-                if (selected.Background == new SolidColorBrush(Colors.White))
+                if (selected.Background == new SolidColorBrush(Color.FromArgb(51, 188, 188, 188)))
                 {
                     selectedButtons.Add(selected);
                     selected.Background = new SolidColorBrush(Colors.LightGreen);
@@ -120,7 +125,7 @@ namespace Resuscitate
                 else
                 {
                     selectedButtons.Remove(selected);
-                    selected.Background = new SolidColorBrush(Colors.White);
+                    selected.Background = new SolidColorBrush(Color.FromArgb(51, 188, 188, 188));
                     Approved.Remove(ID);
                 }
             }
@@ -151,6 +156,7 @@ namespace Resuscitate
             {
                 docRef = db.Collection("Data").Document(id);
                 await docRef.UpdateAsync("Approved", "True");
+                ResetButtonColors();
             }
         }
 

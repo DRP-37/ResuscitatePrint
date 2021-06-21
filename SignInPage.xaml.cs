@@ -28,8 +28,8 @@ namespace Resuscitate
         private SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
 
         private FirestoreDb db;
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
-        string project = "resuscitate-4c0ec";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json";
+        string project = "resuscitate2-47110";
 
         public SignInPage()
         {
@@ -50,7 +50,7 @@ namespace Resuscitate
             var password = sha1.ComputeHash(Encoding.ASCII.GetBytes(PasswordTextBox.Password));
 
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb db = FirestoreDb.Create(project);
+            db = FirestoreDb.Create(project);
             CollectionReference users = db.Collection("Users");
             QuerySnapshot snapshot = await users.GetSnapshotAsync();
             var success = false;
