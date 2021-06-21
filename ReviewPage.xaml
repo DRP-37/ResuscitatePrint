@@ -102,6 +102,9 @@
                 <Button x:Name="FinishButton" Grid.Row="5" Grid.Column="1" VerticalAlignment="Stretch" MinHeight="77" MinWidth="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="FinishButton_Click" HorizontalAlignment="Stretch" Margin="10,10,10,10">
                     <TextBlock TextAlignment="Center" Text="Finish"/>
                 </Button>
+                <Button x:Name="button" Grid.Column="1" Margin="0,9,0,0" Grid.Row="3" VerticalAlignment="Top" Height="149" Width="180" HorizontalAlignment="Center" Background="#33BCBCBC" BorderBrush="#7F000000" FontSize="20" FontWeight="Normal" Click="TranscribeButton_Clicked">
+                    <TextBlock TextWrapping="WrapWholeWords" HorizontalAlignment="Center" TextAlignment="Center" FontSize="24" Margin="0,-32,0,-36" Width="143" FontWeight="Bold" FontFamily="Microsoft JhengHei">Transcribe Audio Recordings</TextBlock>
+                </Button>
             </Grid>
         </Grid>
     </Grid>

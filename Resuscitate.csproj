@@ -211,6 +211,9 @@
     <Compile Include="StatusEvent.cs" />
     <Compile Include="StatusList.cs" />
     <Compile Include="Timing.cs" />
+    <Compile Include="TranscriptionPage.xaml.cs">
+      <DependentUpon>TranscriptionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentilationPage.xaml.cs">
       <DependentUpon>VentilationPage.xaml</DependentUpon>
     </Compile>
@@ -337,6 +340,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StaffPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TranscriptionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

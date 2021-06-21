@@ -123,5 +123,10 @@ namespace Resuscitate
             }
 
         }
+
+        private void TranscribeButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
