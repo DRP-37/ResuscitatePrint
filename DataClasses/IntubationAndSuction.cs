@@ -17,18 +17,18 @@ namespace Resuscitate.DataClasses
         private bool intubation;
         private bool intubationSuccess;
         private IntubationConfirmation confirmation;
-        private Timing time;
+        private string time;
 
         public bool Suction { get => suction; set => suction = value; }
         public bool Intubation { get => intubation; set => intubation = value; }
         public bool IntubationSuccess { get => intubationSuccess; set => intubationSuccess = value; }
         public IntubationConfirmation Confirmation { get => confirmation; set => confirmation = value; }
-        internal Timing Time { get => time; set => time = value; }
+        internal string Time { get => time; set => time = value; }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Intubation and Suction at " + Time.ToString() + ":\n");
+            sb.Append("Intubation and Suction at " + Time + ":\n");
             if (Suction){
                 sb.Append("\tSuction under direct vision\n");
             }

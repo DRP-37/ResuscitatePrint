@@ -65,7 +65,7 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            initialAssessment = new InitialAssessment(TimingCount);
+            initialAssessment = new InitialAssessment(TimingCount.Time);
 
             // Set all selections to null (new StatusEvent generation)
             CordClampingEvent = null;
@@ -81,6 +81,7 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            initialAssessment.Time = TimingCount.Time;
             // Set data structure
             initialAssessment.Colour = colour;
             initialAssessment.Tone = tone;
@@ -94,7 +95,7 @@ namespace Resuscitate
             List<Event> Events = new List<Event>();
             Events.Add(initialAssessment);
 
-            string Time = initialAssessment.Time.ToString();
+            string Time = initialAssessment.Time;
 
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
 
@@ -153,7 +154,6 @@ namespace Resuscitate
             Button selected = sender as Button;
 
             ClickButton(selected, colours, "Colour", out colour, out ColourEvent);
-            Console.WriteLine(this.colour);
         }
 
         private void hr_Click(object sender, RoutedEventArgs e)

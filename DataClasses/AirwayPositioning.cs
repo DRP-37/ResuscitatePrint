@@ -8,10 +8,10 @@ namespace Resuscitate.DataClasses
 {
     public class AirwayPositioning : Event
     {
-        private Timing time;
+        private string time;
         private Positioning pos;
 
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
         public Positioning Positioning { get => pos; set => pos = value; }
 
 
@@ -19,7 +19,7 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Timing: " + time.ToString() + ", Position: " + positionToString());
+            sb.Append("Timing: " + Time + ", Position: " + positionToString());
 
             return sb.ToString();
         }

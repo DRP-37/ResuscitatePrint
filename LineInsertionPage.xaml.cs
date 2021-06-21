@@ -51,7 +51,7 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             insertion = new LineInsertion();
-            insertion.Time = TimingCount;
+            insertion.Time = TimingCount.Time;
 
             isSuccessful = null;
             lineInsertion = null;
@@ -70,7 +70,7 @@ namespace Resuscitate
             Events.Add(insertion);
 
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            //StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time.ToString(), insertion));
+            //StatusEvents.Add(new StatusEvent(insertion.insertionToString(), insertion.Successful ? "Successful" : "Unsuccessful", insertion.Time, insertion));
 
             if (LineInsertionEvent != null)
             {

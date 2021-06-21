@@ -8,14 +8,14 @@ namespace Resuscitate.DataClasses
 {
     public class ApgarScore : Event
     {
-        private Timing time;
+        private string time;
         private int colour;
         private int hr;
         private int response;
         private int tone;
         private int respiration;
 
-        internal Timing Time { get => time; set => time = value; }
+        internal string Time { get => time; set => time = value; }
         public int Colour { get => colour; set => colour = value; }
         public int Hr { get => hr; set => hr = value; }
         public int Response { get => response; set => response = value; }
@@ -26,7 +26,7 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Time: " + Time.ToString() + '\n');
+            sb.Append("Time: " + Time + '\n');
             sb.Append("Colour: " + Colour.ToString() + '\n');
             sb.Append("Heart Rate: " + Hr.ToString() + '\n');
             sb.Append("Response to Stimulation: " + Response.ToString() + '\n');

@@ -9,11 +9,11 @@ namespace Resuscitate.DataClasses
     public class LineInsertion : Event
     {
 
-        private Timing time;
+        private string time;
         private InsertionType insertionType;
         private bool successful;
 
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
         public InsertionType Insertion { get => insertionType; set => insertionType = value; }
         public bool Successful { get => successful; set => successful = value; }
 
@@ -21,7 +21,7 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Time: " + time.ToString() + " ");
+            sb.Append("Time: " + Time + " ");
             sb.Append(insertionToString() + " ");
 
             if (successful)

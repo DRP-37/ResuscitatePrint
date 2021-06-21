@@ -8,10 +8,10 @@ namespace Resuscitate.DataClasses
 {
     public class Ventilation : Event
     {
-        private Timing time;
+        private string time;
         private VentilationType ventType;
         private float oxygen;
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
         public VentilationType VentType { get => ventType; set => ventType = value; }
         public float Oxygen { get => oxygen; set => oxygen = value; }
 
@@ -19,7 +19,7 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Ventilation at: {time.ToString()}\n");
+            sb.Append($"Ventilation at: {Time}\n");
             sb.Append($"\tVentilation type: {ventToString()}\n");
             sb.Append($"Air/Oxygen given: {oxygen}%\n");
 

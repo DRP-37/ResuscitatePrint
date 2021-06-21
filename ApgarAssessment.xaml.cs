@@ -57,7 +57,7 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             score = new ApgarScore();
-            score.Time = TimingCount;
+            score.Time = TimingCount.Time;
 
             statusEvent = new StatusEvent();
 
@@ -82,7 +82,7 @@ namespace Resuscitate
 
             statusEvent.Name = "Apgar Score";
             statusEvent.Data = score.totalScore().ToString();
-            statusEvent.Time = score.Time.ToString();
+            statusEvent.Time = score.Time;
             statusEvent.Event = score;
 
             List<Event> Events = new List<Event>();

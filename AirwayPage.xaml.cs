@@ -68,7 +68,7 @@ namespace Resuscitate
                 string Time = TimingCount.ToString();
 
                 positioning.Positioning = (Positioning)airwayProcedure;
-                positioning.Time = TimingCount;
+                positioning.Time = TimingCount.Time;
 
                 // var dialog = new MessageDialog(positioning.ToString());
                 // await dialog.ShowAsync();

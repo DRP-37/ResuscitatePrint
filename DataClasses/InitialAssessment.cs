@@ -23,18 +23,18 @@ namespace Resuscitate.DataClasses
         private int heartRate;
         private TemperatureReg tempreg;
         private CordClamping clamping;
-        private Timing time;
+        private string time;
 
         
         public TemperatureReg TempReg { get => tempreg; set => tempreg = value; }
         public CordClamping Clamping { get => clamping; set => clamping = value; }
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
         public int Colour { get => colour; set => colour = value; }
         public int Tone { get => tone; set => tone = value; }
         public int RespEffort { get => respEffort; set => respEffort = value; }
         public int HeartRate { get => heartRate; set => heartRate = value; }
 
-        public InitialAssessment(Timing t)
+        public InitialAssessment(string t)
         {
             this.Time = t;
         }
@@ -43,7 +43,7 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Initial Assessment at " + Time.ToString() + "\n");
+            sb.Append("Initial Assessment at " + Time + "\n");
             try
             {
                 sb.Append('\t' + "Colour: "+ Colour.ToString() + '\n');
@@ -54,7 +54,7 @@ namespace Resuscitate.DataClasses
                 sb.Append('\t' + CordClampToString(Clamping));
                 if (Clamping == CordClamping.Now)
                 {
-                    sb.Append(" " + Time.ToString() + '\n');
+                    sb.Append(" " + Time + '\n');
                 }
                 else
                 {

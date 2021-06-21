@@ -36,7 +36,7 @@ namespace Resuscitate.DataClasses
             {
                 if (i < end.Count)
                 {
-                    sb.Append(start[i].ToString() + " - " + end[i].ToString() + "\n");
+                    sb.Append(start[i].Time + " - " + end[i].Time + "\n");
                 }
             }
 

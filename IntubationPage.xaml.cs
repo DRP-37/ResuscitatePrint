@@ -71,7 +71,7 @@ namespace Resuscitate
             List<Event> Events = new List<Event>();
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
 
-            intubationAndSuction.Time = TimingCount;
+            intubationAndSuction.Time = TimingCount.Time;
             intubationAndSuction.Intubation = isIntubation;
             intubationAndSuction.Suction = !isIntubation;
             //intubationAndSuction.Confirmation = (IntubationConfirmation)confirmation;

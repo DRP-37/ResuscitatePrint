@@ -40,7 +40,7 @@ namespace Resuscitate.DataClasses
         private List<ApgarScore> apgars = new List<ApgarScore>();
         private List<AirwayPositioning> positionings = new List<AirwayPositioning>();
         private List<Observation> observations = new List<Observation>();
-        private InitialAssessment initialAssessment = new InitialAssessment(new Timing());
+        private InitialAssessment initialAssessment = new InitialAssessment("");
         private List<Reassessment> reassessments = new List<Reassessment>();
         private List<OtherProcedures> procedures = new List<OtherProcedures>();
         private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();

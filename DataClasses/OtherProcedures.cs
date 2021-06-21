@@ -8,17 +8,17 @@ namespace Resuscitate.DataClasses
 {
     public class OtherProcedures : Event
     {
-        private Timing time;
+        private string time;
         private ProcedureType procedureType;
 
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
         public ProcedureType Procedure { get => procedureType; set => procedureType = value; }
 
         override public String ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("Time: " + time.ToString() + ", Procedure: " + procedureToString());
+            sb.Append("Time: " + Time + ", Procedure: " + procedureToString());
 
             return sb.ToString();
         }

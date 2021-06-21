@@ -79,7 +79,7 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            medication.Time = TimingCount;
+            medication.Time = TimingCount.Time;
             medication.setData(DoseGiven);
 
             List<Event> Events = new List<Event>();

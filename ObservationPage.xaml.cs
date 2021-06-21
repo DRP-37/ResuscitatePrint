@@ -102,8 +102,8 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            reassessment.Time = TimingCount;
-            observation.Time = TimingCount;
+            reassessment.Time = TimingCount.Time;
+            observation.Time = TimingCount.Time;
 
             reassessment.Hr = (HeartRate)hr;
             reassessment.Movement = (ChestMovement)movement;
@@ -137,8 +137,8 @@ namespace Resuscitate
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            reassessment.Time = TimingCount;
-            observation.Time = TimingCount;
+            reassessment.Time = TimingCount.Time;
+            observation.Time = TimingCount.Time;
 
             reassessment.Hr = (HeartRate)hr;
             reassessment.Movement = (ChestMovement)movement;

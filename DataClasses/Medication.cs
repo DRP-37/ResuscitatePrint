@@ -8,7 +8,7 @@ namespace Resuscitate.DataClasses
 {
     public class Medication : Event
     {
-        private Timing time;
+        private string time;
         private bool adrenaline1 = false;
         private bool adrenaline3 = false;
         private bool nahco = false;
@@ -18,7 +18,7 @@ namespace Resuscitate.DataClasses
         private bool surfactant120 = false;
         private bool surfactant240 = false;
 
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
         public bool Adrenaline1 { get => adrenaline1; set => adrenaline1 = value; }
         public bool Adrenaline3 { get => adrenaline3; set => adrenaline3 = value; }
         public bool Nahco { get => nahco; set => nahco = value; }
@@ -44,7 +44,7 @@ namespace Resuscitate.DataClasses
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"At time: {time}, medications administered:");
+            sb.Append($"At time: {Time}, medications administered:");
 
             if (adrenaline1)
             {

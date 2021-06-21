@@ -48,7 +48,7 @@ namespace Resuscitate
             TimingCount = (Timing)e.Parameter;
 
             procedures = new OtherProcedures();
-            procedures.Time = TimingCount;
+            procedures.Time = TimingCount.Time;
 
             DrainEvent = null;
 

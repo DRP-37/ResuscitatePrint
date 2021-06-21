@@ -29,22 +29,22 @@ namespace Resuscitate.DataClasses
         private HeartRate hr;
         private ChestMovement movement;
         private RespiratoryEffort effort;
-        private Timing time;
+        private string time;
 
         public HeartRate Hr { get => hr; set => hr = value; }
         public ChestMovement Movement { get => movement; set => movement = value; }
         public RespiratoryEffort Effort { get => effort; set => effort = value; }
-        public Timing Time { get => time; set => time = value; }
+        public string Time { get => time; set => time = value; }
 
 
 
         public override String ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Reassessment at " + Time.ToString() + " :\n");
+            sb.Append("Reassessment at " + Time + " :\n");
             sb.Append('\t' + "Heart Rate (bpm): " + HeartRateToString() + '\n');
             sb.Append('\t' + "Chest Movement: " + Movement.ToString() + '\n');
             sb.Append('\t' + "Respiratory Effor: " + RespEffortToString() + "\n");
-            sb.Append('\t' + "Timespan: " + Time.ToString());
+            sb.Append('\t' + "Timespan: " + Time);
 
             return sb.ToString();
         }
