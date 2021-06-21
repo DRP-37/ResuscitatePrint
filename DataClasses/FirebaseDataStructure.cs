@@ -50,6 +50,7 @@ namespace Resuscitate.DataClasses
         public string TimeOfBirth { get; set; }
         [FirestoreProperty]
         public string Approved { get; set; }
+        [FirestoreProperty]
         public string[] Ventilations { get; set; }
         
 
@@ -84,12 +85,16 @@ namespace Resuscitate.DataClasses
 
         public string listOfStrings(string[] list)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (string s in list)
-            {
-                sb.Append($"\t{s}\n");
+            if (list == null) {
+                return "N/A";
+            } else {
+                StringBuilder sb = new StringBuilder();
+                foreach (string s in list)
+                {
+                    sb.Append($"\t{s}\n");
+                }
+                return sb.ToString();
             }
-            return sb.ToString();
         }
     }
 }

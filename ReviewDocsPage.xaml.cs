@@ -57,10 +57,10 @@ namespace Resuscitate
             // this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-       
 
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             db = FirestoreDb.Create(project);
@@ -70,10 +70,10 @@ namespace Resuscitate
             {
                 populateExportList();
             });
-            
+
             ExportListView.MaxHeight = ((Frame)Window.Current.Content).ActualHeight - 325;
 
-            
+
         }
 
 
@@ -122,8 +122,9 @@ namespace Resuscitate
             }
             else
             {
-                if (selected.Background == new SolidColorBrush(Color.FromArgb(51, 188, 188, 188)))
+                if (!selectedButtons.Contains(selected))
                 {
+                    
                     selectedButtons.Add(selected);
                     selected.Background = new SolidColorBrush(Colors.LightGreen);
                     Approved.Add(ID);
@@ -141,6 +142,7 @@ namespace Resuscitate
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (Button)sender;
+
             string ID = selected.Tag.ToString();
 
             // Use ID to download text file
@@ -150,7 +152,7 @@ namespace Resuscitate
 
             if (snapshot.Exists)
             {
-                Dictionary<string, object> patientInfo = snapshot.ToDictionary();
+                //Dictionary<string, object> patientInfo = snapshot.ToDictionary();
                 Exporter.exportFile(ID, patient.ToString());
             }
         }
