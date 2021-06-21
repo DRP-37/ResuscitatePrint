@@ -26,6 +26,7 @@ namespace Resuscitate.DataClasses
         private string gestation = "N/A";
         private string weight = "N/A";
         private string history = "N/A";
+        private string approved = "False";
 
         public string Surname { get => surname; set => surname = value; }
         public string Id { get => id; set => id = value; }
@@ -66,7 +67,7 @@ namespace Resuscitate.DataClasses
         {
             var stream = await storageFolder.OpenStreamForReadAsync(fileName);
 
-            var task = new FirebaseStorage("resuscitate-4c0ec.appspot.com")
+            var task = new FirebaseStorage("resuscitate2-47110.appspot.com")
                 .Child("Resuscitation Files")
                 .Child(id)
                 .Child(fileName)
@@ -260,7 +261,8 @@ namespace Resuscitate.DataClasses
                 Staff = staff(),
                 Surname = surname,
                 TimeOfBirth = tob,
-                Ventillations = listToStrings(ventilations)
+                Ventilations = listToStrings(ventilations),
+                Approved = approved
             };
         }
 

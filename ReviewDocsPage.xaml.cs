@@ -21,6 +21,7 @@ using Google.Cloud.Firestore;
 using Resuscitate.DataClasses;
 using Windows.UI;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -56,7 +57,7 @@ namespace Resuscitate
             // this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-       
+
 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -69,10 +70,10 @@ namespace Resuscitate
             {
                 populateExportList();
             });
-            
+
             ExportListView.MaxHeight = ((Frame)Window.Current.Content).ActualHeight - 325;
 
-            
+
         }
 
 
@@ -81,19 +82,24 @@ namespace Resuscitate
         {
             Query allFiles = db.Collection("Data");
             QuerySnapshot allFilesSnapshot = await allFiles.GetSnapshotAsync();
-            foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
-                string id = (string)procedure["Id"];
-                string timeOfBirth = (string)procedure["TimeOfBirth"];
-                string dateOfBirth = (string)procedure["DateOfBirth"];
-                var data = new ExportData(id, $"{dateOfBirth} {timeOfBirth}");
-
-                if (!ExportList.Data.Contains(data))
+                foreach (DocumentSnapshot documentSnapshot in allFilesSnapshot.Documents)
                 {
-                    ExportList.Data.Add(data);
+                    Dictionary<string, object> procedure = documentSnapshot.ToDictionary();
+                    string id = (string)procedure["Id"];
+                    string timeOfBirth = (string)procedure["TimeOfBirth"];
+                    string dateOfBirth = (string)procedure["DateOfBirth"];
+                    var data = new ExportData(id, $"{dateOfBirth} {timeOfBirth}");
+
+                    if (!ExportList.Data.Contains(data))
+                    {
+                        ExportList.Data.Add(data);
+                    }
                 }
-            }
+            });
+            
+            
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -112,12 +118,14 @@ namespace Resuscitate
 
             if (alreadyApproved)
             {
-                selected.Content = "Already Approved";
+                selected.Content = "Approved";
+                selected.Background = new SolidColorBrush(Colors.DarkGray);
             }
             else
             {
-                if (selected.Background == new SolidColorBrush(Color.FromArgb(51, 188, 188, 188)))
+                if (!selectedButtons.Contains(selected))
                 {
+                    
                     selectedButtons.Add(selected);
                     selected.Background = new SolidColorBrush(Colors.LightGreen);
                     Approved.Add(ID);
@@ -135,6 +143,7 @@ namespace Resuscitate
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (Button)sender;
+
             string ID = selected.Tag.ToString();
 
             // Use ID to download text file
@@ -144,7 +153,7 @@ namespace Resuscitate
 
             if (snapshot.Exists)
             {
-                Dictionary<string, object> patientInfo = snapshot.ToDictionary();
+                //Dictionary<string, object> patientInfo = snapshot.ToDictionary();
                 Exporter.exportFile(ID, patient.ToString());
             }
         }
@@ -163,7 +172,7 @@ namespace Resuscitate
         private void ResetButtonColors() {
             foreach (var button in selectedButtons)
             {
-                button.Background = new SolidColorBrush(Colors.White);
+                button.Background = new SolidColorBrush(Color.FromArgb(51, 188, 188, 188));
             }
         }
     }

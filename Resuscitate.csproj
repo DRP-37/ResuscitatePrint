@@ -431,7 +431,9 @@
   <ItemGroup>
     <None Include=".github\workflows\deploy.yml" />
     <None Include=".gitignore" />
-    <None Include="resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json" />
+    <Content Include="resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
