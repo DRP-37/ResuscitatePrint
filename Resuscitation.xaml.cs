@@ -231,7 +231,7 @@ namespace Resuscitate
 
         private void NotesButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(NotesPage), TimingCount);
+            this.Frame.Navigate(typeof(NotesPage), new ReviewDataAndTiming(TimingCount, StatusList, data));
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
