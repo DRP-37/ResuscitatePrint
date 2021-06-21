@@ -22,6 +22,7 @@ using FireSharp.Response;
 using FireSharp.Interfaces;
 using Google.Cloud.Firestore;
 using Resuscitate.DataClasses;
+using Windows.UI;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,6 +36,8 @@ namespace Resuscitate
     {
 
         ExportList ExportList = new ExportList();
+        List<String> Approved = new List<string>();
+        List<Button> selectedButtons = new List<Button>();
         private FirestoreDb db;
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
         string project = "resuscitate-4c0ec";
@@ -94,6 +97,35 @@ namespace Resuscitate
             Frame.Navigate(typeof(SignInPage));
 
         }
+        private async void ApproveButton_Click(object sender, RoutedEventArgs e) {
+            Button selected = (Button)sender;
+            string ID = selected.Tag.ToString();
+            DocumentReference docRef = db.Collection("Data").Document(ID);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            FirebaseDataStructure patient = snapshot.ConvertTo<FirebaseDataStructure>();
+            bool alreadyApproved = (patient.Approved == "True");
+
+            if (alreadyApproved)
+            {
+                selected.Content = "Already Approved";
+            }
+            else
+            {
+                if (selected.Background == new SolidColorBrush(Colors.White))
+                {
+                    selectedButtons.Add(selected);
+                    selected.Background = new SolidColorBrush(Colors.LightGreen);
+                    Approved.Add(ID);
+                }
+                else
+                {
+                    selectedButtons.Remove(selected);
+                    selected.Background = new SolidColorBrush(Colors.White);
+                    Approved.Remove(ID);
+                }
+            }
+            
+        }
 
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
@@ -109,6 +141,23 @@ namespace Resuscitate
             {
                 Dictionary<string, object> patientInfo = snapshot.ToDictionary();
                 Exporter.exportFile(ID, patient.ToString());
+            }
+        }
+
+        private async void Confirm_Button_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentReference docRef;
+            foreach (var id in Approved)
+            {
+                docRef = db.Collection("Data").Document(id);
+                await docRef.UpdateAsync("Approved", "True");
+            }
+        }
+
+        private void ResetButtonColors() {
+            foreach (var button in selectedButtons)
+            {
+                button.Background = new SolidColorBrush(Colors.White);
             }
         }
     }

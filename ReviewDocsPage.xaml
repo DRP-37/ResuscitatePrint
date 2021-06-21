@@ -28,18 +28,20 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid x:Name="ExportListTitles" Grid.Row="0" Grid.ColumnSpan="4" Background="{ThemeResource SystemBaseLowColor}" VerticalAlignment="Bottom" Padding="0,12,0,12" Margin="-1,0,0,0">
+                <Grid x:Name="ExportListTitles" Grid.Row="0" Grid.ColumnSpan="5" Background="{ThemeResource SystemBaseLowColor}" VerticalAlignment="Bottom" Padding="0,12,0,12" Margin="-1,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="ID" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" FontFamily="Microsoft JhengHei UI" Margin="10,0,0,0"/>
                     <TextBlock Grid.Column="1" Text="Time of Birth" Style="{ThemeResource CaptionTextBlockStyle}" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" Margin="10,0,0,0"/>
+                    <TextBlock Grid.Column="3" Text="Approve?" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" FontFamily="Microsoft JhengHei UI" Margin="10,0,0,0"/>
                 </Grid>
 
-                <ListView x:Name="ExportListView" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{x:Bind Path=ExportList.Data}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" RenderTransformOrigin="0.5,0.5" Margin="10,0,0,0" MaxHeight="500">
+                <ListView x:Name="ExportListView" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{x:Bind Path=ExportList.Data}" IsMultiSelectCheckBoxEnabled="False" SelectionMode="None" RenderTransformOrigin="0.5,0.5" Margin="10,0,0,0" MaxHeight="500">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <ItemsStackPanel VerticalAlignment="Center"/>
@@ -62,7 +64,10 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Path=ID}" FontFamily="Microsoft JhengHei UI" FontSize="22" />
                                 <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{x:Bind Path=TimeOfBirth}" FontFamily="Microsoft JhengHei UI" FontSize="22"/>
-                                <Button x:Name="ExportButton" Grid.Column="3" Tag="{x:Bind Path=ID}" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="22" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="ExportButton_Click" VerticalAlignment="Center">
+                                <Button x:Name="ApproveButton" Grid.Column="3" Tag="{x:Bind Path=ID}" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="22" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="ApproveButton_Click" VerticalAlignment="Center">
+                                    <TextBlock TextAlignment="Center" Text="Export" FontSize="20"/>
+                                </Button>
+                                <Button x:Name="ExportButton" Grid.Column="4" Tag="{x:Bind Path=ID}" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="22" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="ExportButton_Click" VerticalAlignment="Center">
                                     <TextBlock TextAlignment="Center" Text="Export" FontSize="20"/>
                                 </Button>
                             </Grid>
@@ -73,5 +78,6 @@
         </Grid>
         <Button x:Name="BackButton" Content="Sign Out" Margin="55,0,0,54" VerticalAlignment="Bottom" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="BackButton_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="39" Width="473" FontWeight="Bold" Foreground="Gray" Text="Export Documentation" Height="76"/>
+        <Button x:Name="Confirm_Button" Content="Confirm Approvals" Margin="1195,869,0,0" VerticalAlignment="Top" Height="77" Width="173" Background="#33BCBCBC" BorderBrush="#7F000000" Click="Confirm_Button_Click"/>
     </Grid>
 </Page>

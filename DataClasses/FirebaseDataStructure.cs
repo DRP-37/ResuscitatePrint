@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Globalization;
 namespace Resuscitate.DataClasses
 {
     [FirestoreData]
@@ -48,7 +48,8 @@ namespace Resuscitate.DataClasses
         public string Surname { get; set; }
         [FirestoreProperty]
         public string TimeOfBirth { get; set; }
-        
+        [FirestoreProperty]
+        public string Approved { get; set; }
 
         public override string ToString()
         {
@@ -73,7 +74,7 @@ namespace Resuscitate.DataClasses
             sb.Append($"Staff:\n{listOfStrings(Staff)}\n");
             sb.Append($"Insertions:\n{listOfStrings(Insertions)}\n");
             sb.Append($"Notes:\n{listOfStrings(Notes)}\n");
-
+            sb.Append($"Approved: \n{Approved}");
             return sb.ToString();
         }
 

@@ -24,6 +24,7 @@ namespace Resuscitate.DataClasses
         private string gestation = "N/A";
         private string weight = "N/A";
         private string history = "N/A";
+        private string approved = "False";
 
         public string Surname { get => surname; set => surname = value; }
         public string Id { get => id; set => id = value; }
@@ -44,7 +45,6 @@ namespace Resuscitate.DataClasses
         private List<CardiacCompressions> compressions = new List<CardiacCompressions>();
         private List<LineInsertion> insertions = new List<LineInsertion>();
         private List<Notes> notes = new List<Notes>();
-
         private List<StaffData> staffPresent = new List<StaffData>();
 
         // Database Functions
@@ -57,6 +57,7 @@ namespace Resuscitate.DataClasses
             DocumentReference docRef = db.Collection("Data").Document(id);
             FirebaseDataStructure dst = setUpDataStructure();
             await docRef.SetAsync(dst);
+            await docRef.UpdateAsync("Approved", true);
         }
 
         public async void sendToStorage(StorageFolder storageFolder, string fileName)
@@ -247,7 +248,8 @@ namespace Resuscitate.DataClasses
                 Sex = sex,
                 Staff = staff(),
                 Surname = surname,
-                TimeOfBirth = tob
+                TimeOfBirth = tob,
+                Approved = approved
             };
         }
 
