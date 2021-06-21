@@ -137,8 +137,11 @@ namespace Resuscitate
                 {
                     if (airwayEventAdded)
                     {
-                        Notification.Text = "The timeline has been updated with the selected airway procedure. \n" +
-                            "Please select ventilation procedure according to O2% given. ";
+                        if (!String.IsNullOrWhiteSpace(AirGiven.Text))
+                        {
+                            Notification.Text = "The timeline has been updated with the selected airway procedure. \n" +
+                                "Please select ventilation procedure according to O2% given. ";
+                        }
                     }
                     else
                     {
