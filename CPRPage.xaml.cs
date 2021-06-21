@@ -103,7 +103,7 @@ namespace Resuscitate
             if (Resuscitation.cprTimer.IsRunning) {
                 string Milieconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
                 Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
-                Event.Time = TimingCount;
+                Event.Time = TimingCount.Time;
                 Event.Length = Seconds;
             }
 
