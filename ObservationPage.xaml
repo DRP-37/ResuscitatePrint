@@ -81,25 +81,25 @@
                 <TextBlock HorizontalAlignment="Left" Margin="60,8,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="26" FontFamily="Microsoft JhengHei UI" Height="Auto"><Run Text="Heart"/><Run Text=" Rate"/></TextBlock>
                 <TextBlock Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" MinHeight="36" Text="Chest Movement" FontSize="26" FontFamily="Microsoft JhengHei UI" Margin="60,0,0,0" Height="Auto"/>
                 <TextBlock Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="26" FontFamily="Microsoft JhengHei UI" Margin="60,0,0,0" VerticalAlignment="Center" Text="Breathing" Height="Auto"/>
-                <TextBlock Grid.Row="4" HorizontalAlignment="Left" Text="Pulse Oximeter" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="36" FontWeight="Normal" FontFamily="Microsoft JhengHei UI" Margin="40,0,0,20" Width="Auto" Height="Auto"/>
+                <TextBlock Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Text="Pulse Oximeter" TextWrapping="Wrap" VerticalAlignment="Bottom" FontSize="36" FontWeight="Normal" FontFamily="Microsoft JhengHei UI" Margin="40,0,0,20" Width="Auto" Height="Auto"/>
                 <TextBlock Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="26" FontFamily="Microsoft JhengHei UI" Margin="60,0,0,0" Height="Auto"><Run Text="Oxygen"/><Run Text=" Saturation"/></TextBlock>
                 <TextBlock Grid.Row="6" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Text="Heart Rate" FontSize="26" FontFamily="Microsoft JhengHei UI" Margin="60,0,0,0"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="36" Width="60" Text="%" FontSize="30" FontFamily="Microsoft JhengHei UI" Margin="78,0,0,0"/>
-                <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="36" Width="60" Text="%" FontSize="30" FontFamily="Microsoft JhengHei UI" Margin="78,0,0,0"/>
-                <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="52" Width="75" Text="bpm" FontSize="30" FontFamily="Microsoft JhengHei UI" Margin="78,0,0,0"/>
-                <TextBox x:Name="OxygenLevels" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Height="48" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Left" FontFamily="Microsoft JhengHei UI"/>
-                <TextBox x:Name="PercentOxygen" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="48" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="PercentOxygen_TextChanged" MaxLength="5" TextAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
-                <TextBox x:Name="HeartRate" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Height="48" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
+                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="36" Width="60" Text="%" FontSize="30" FontFamily="Microsoft JhengHei UI" Margin="93,0,0,0"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="36" Width="60" Text="%" FontSize="30" FontFamily="Microsoft JhengHei UI" Margin="93,0,0,0"/>
+                <TextBlock Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="52" Width="75" Text="bpm" FontSize="30" FontFamily="Microsoft JhengHei UI" Margin="94,0,0,0"/>
+                <TextBox x:Name="OxygenLevels" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Height="48" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Left" FontFamily="Microsoft JhengHei UI" Margin="16,0,0,0"/>
+                <TextBox x:Name="PercentOxygen" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="48" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="PercentOxygen_TextChanged" MaxLength="5" TextAlignment="Center" FontFamily="Microsoft JhengHei UI" Margin="16,0,0,0"/>
+                <TextBox x:Name="HeartRate" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Height="48" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center" FontFamily="Microsoft JhengHei UI" Margin="16,0,0,0"/>
                 <TextBlock Grid.Row="3" HorizontalAlignment="Left" Margin="60,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="26" FontFamily="Microsoft JhengHei UI" Text="Oxygen Percentage" Height="Auto"/>
                 <Border Grid.Row="3" Grid.RowSpan="4" Grid.Column="2" Grid.ColumnSpan="3" BorderThickness="4,4,4,4" BorderBrush="#99000000" CornerRadius="45" FocusVisualPrimaryBrush="#99000000" FocusVisualSecondaryBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,20" >
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="25,0,24,10">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="25,20,24,25">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="3*"/>
-                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="4*"/>
-                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="3*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="4*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -115,13 +115,13 @@
                             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="via ETT" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
                         </Button>
                         <Button x:Name="VentilationButton" Grid.Row="3" RenderTransformOrigin="0.5,0.5" MinHeight="58" FontSize="19" Background="White" BorderBrush="Black" Click="Breathing_Click" VerticalAlignment="Stretch" FontFamily="Microsoft JhengHei UI" Margin="10,0,10,0" HorizontalAlignment="Stretch">
-                            <TextBlock TextAlignment="Center" Text="Ventilation&#xA;Breaths" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
+                            <TextBlock TextAlignment="Center" Text="Ventilation Breaths" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
                         </Button>
                         <Button x:Name="CPRButton" Grid.Row="5" RenderTransformOrigin="0.5,0.5" FontSize="19" Background="White" BorderBrush="Black" Click="OngoingCirculation_Click" VerticalAlignment="Stretch" FontFamily="Microsoft JhengHei UI" Margin="10,0,10,0" HorizontalAlignment="Stretch">
                             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI" Text="Ongoing"/>
                         </Button>
                         <Button x:Name="InflationButton" Grid.Row="3" Grid.Column="1" RenderTransformOrigin="0.5,0.5"  MinHeight="58" FontSize="19" Background="White" BorderBrush="Black" Click="Breathing_Click" VerticalAlignment="Stretch" FontFamily="Microsoft JhengHei UI" HorizontalAlignment="Stretch" Margin="10,0,10,0">
-                            <TextBlock TextAlignment="Center" Text="Inflation&#xA;Breaths" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
+                            <TextBlock TextAlignment="Center" Text="Inflation Breaths" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
                         </Button>
                         <Button x:Name="StopCPRButton" Grid.Row="5" Grid.Column="1" RenderTransformOrigin="0.5,0.5" FontSize="19" Background="White" BorderBrush="Black" Click="StopCirculation_Click" VerticalAlignment="Stretch" FontFamily="Microsoft JhengHei UI" HorizontalAlignment="Stretch" Margin="10,0,10,0" Width="Auto">
                             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI" Text="Stop"/>
