@@ -204,7 +204,7 @@ namespace Resuscitate
 
             string Data = ((TextBlock)selected.Content).Text.Replace("\n", " ");
             positioning.Positioning = (Positioning)airwayProcedure;
-            positioning.Time = TimingCount;
+            positioning.Time = TimingCount.Time;
             AirwayEvent = new StatusEvent("Airway Positioning", Data, TimingCount.Time, positioning);
         }
 
@@ -265,7 +265,7 @@ namespace Resuscitate
             invalidAirGiven = false;
             string Name = ((TextBlock)selected.Content).Text.Replace("\n", " ");
             ventilation.Oxygen = (float)airGiven;
-            ventilation.Time = TimingCount;
+            ventilation.Time = TimingCount.Time;
             VentilationEvent = new StatusEvent(Name, $"{airGiven}% Air/Oxygen Given", TimingCount.Time, ventilation);
         }
 
