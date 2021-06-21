@@ -76,7 +76,7 @@ namespace Resuscitate.DataClasses
             sb.Append($"Reassessments:\n{listOfStrings(Reassessments)}\n");
             sb.Append($"Staff:\n{listOfStrings(Staff)}\n");
             sb.Append($"Insertions:\n{listOfStrings(Insertions)}\n");
-            sb.Append($"Ventillations:\n{listOfStrings(Ventilations)}\n");
+            sb.Append($"Ventilations:\n{listOfStrings(Ventilations)}\n");
             sb.Append($"Notes:\n{listOfStrings(Notes)}\n");
             sb.Append($"Approved: \n{Approved}");
             return sb.ToString();
