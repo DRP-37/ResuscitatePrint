@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resuscitate.DataClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Resuscitate
     {
         private StaffList StaffList = new StaffList();
         private List<StaffMemberData> ItemsAdded;
+        private PatientData patientData;
 
         public StaffPage()
         {
@@ -34,6 +36,7 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            patientData = (PatientData)e.Parameter;
             ItemsAdded = new List<StaffMemberData>();
             StaffName.Text = "";
             StaffPosition.SelectedIndex = -1;
@@ -90,6 +93,7 @@ namespace Resuscitate
             string TimeOfArrival = arrivalTimePicker.Time.ToString().Substring(0,5);
 
             StaffMemberData StaffData = new StaffMemberData(Name, Position, Grade, TimeOfArrival);
+            patientData.addStaffMember(StaffData);
             StaffList.Members.Add(StaffData);
             ItemsAdded.Add(StaffData);
 

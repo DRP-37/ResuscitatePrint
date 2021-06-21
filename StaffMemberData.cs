@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate
 {
-    class StaffMemberData
+    public class StaffMemberData
     {
         public string Name { get; set; }
         public string Position { get; set; }
@@ -19,6 +19,11 @@ namespace Resuscitate
             this.Position = Position;
             this.Grade = Grade;
             this.TimeOfArrival = TimeOfArrival;
+        }
+
+        override public string ToString()
+        {
+            return $"Name: {Position} {Name}, Grade: {Grade}, Time of Entry: {TimeOfArrival}";
         }
     }
 }

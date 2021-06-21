@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Resuscitate
 {
-    class StatusList
+    public class StatusList
     {
         private ObservableCollection<StatusEvent> _events = new ObservableCollection<StatusEvent>();
 

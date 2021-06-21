@@ -106,7 +106,7 @@ namespace Resuscitate
 
         private void StaffInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), TimingCount);
+            this.Frame.Navigate(typeof(StaffPage), patientData);
         }
 
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
