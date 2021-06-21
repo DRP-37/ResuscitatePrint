@@ -47,6 +47,7 @@ namespace Resuscitate.DataClasses
         private List<CardiacCompressions> compressions = new List<CardiacCompressions>();
         private List<LineInsertion> insertions = new List<LineInsertion>();
         private List<Ventilation> ventilations = new List<Ventilation>();
+        private List<Medication> medications = new List<Medication>();
         private List<Notes> notes = new List<Notes>();
 
         private List<StaffData> staffPresent = new List<StaffData>();
@@ -142,6 +143,10 @@ namespace Resuscitate.DataClasses
         {
             staffPresent.Add(staff);
         }
+        public void addMedication(Medication med)
+        {
+            medications.Add(med);
+        }
 
         public string[] listToStrings(IEnumerable<Event> eItems)
         {
@@ -220,6 +225,10 @@ namespace Resuscitate.DataClasses
             {
                 addVentillation((Ventilation)item);
             }
+            else if (item.GetType() == typeof(Medication))
+            {
+                addMedication((Medication)item);
+            }
         }
 
         private string[] staff()
@@ -247,12 +256,12 @@ namespace Resuscitate.DataClasses
                 Weight = weight,
                 Insertions = listToStrings(insertions),
                 Gestation = gestation,
+                MedicalHistory = history,
                 InitialAssessment = initialAssessment.ToString(),
                 IntubationAndSuction = listToStrings(intubationAndSuctions),
                 AirwayPositioning = listToStrings(positionings),
                 ApgarScores = listToStrings(apgars),
                 Compressions = listToStrings(compressions),
-                MedicalHistory = history,
                 Notes = listToStrings(notes),
                 Observations = listToStrings(observations),
                 OtherProcedures = listToStrings(procedures),
@@ -262,7 +271,8 @@ namespace Resuscitate.DataClasses
                 Surname = surname,
                 TimeOfBirth = tob,
                 Ventilations = listToStrings(ventilations),
-                Approved = approved
+                Approved = approved,
+                Medications = listToStrings(medications)
             };
         }
 
