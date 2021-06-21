@@ -260,7 +260,7 @@ namespace Resuscitate.DataClasses
                 Staff = staff(),
                 Surname = surname,
                 TimeOfBirth = tob,
-                Ventillations = listToStrings(ventilations)
+                Ventilations = listToStrings(ventilations)
             };
         }
 
