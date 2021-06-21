@@ -11,10 +11,10 @@ namespace Resuscitate.DataClasses
 {
     public class PatientData
     {
-        public static IDisposable returnedEvents;
-
         private FirestoreDb db;
+        //string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json";
+        //string project = "resuscitate-4c0ec";
         string project = "resuscitate2-47110";
 
         // Patient Data
@@ -26,7 +26,6 @@ namespace Resuscitate.DataClasses
         private string gestation = "N/A";
         private string weight = "N/A";
         private string history = "N/A";
-        private string approved = "False";
 
         public string Surname { get => surname; set => surname = value; }
         public string Id { get => id; set => id = value; }
@@ -48,6 +47,7 @@ namespace Resuscitate.DataClasses
         private List<LineInsertion> insertions = new List<LineInsertion>();
         private List<Ventilation> ventilations = new List<Ventilation>();
         private List<Notes> notes = new List<Notes>();
+
         private List<StaffData> staffPresent = new List<StaffData>();
 
         // Database Functions
@@ -60,14 +60,13 @@ namespace Resuscitate.DataClasses
             DocumentReference docRef = db.Collection("Data").Document(id);
             FirebaseDataStructure dst = setUpDataStructure();
             await docRef.SetAsync(dst);
-            await docRef.UpdateAsync("Approved", true);
         }
 
         public async void sendToStorage(StorageFolder storageFolder, string fileName)
         {
             var stream = await storageFolder.OpenStreamForReadAsync(fileName);
 
-            var task = new FirebaseStorage("resuscitate2-47110.appspot.com")
+            var task = new FirebaseStorage("resuscitate-4c0ec.appspot.com")
                 .Child("Resuscitation Files")
                 .Child(id)
                 .Child(fileName)
@@ -128,7 +127,7 @@ namespace Resuscitate.DataClasses
             insertions.Add(ins);
         }
 
-        public void addVentilation(Ventilation ven)
+        public void addVentillation(Ventilation ven)
         {
             ventilations.Add(ven);
         }
@@ -218,7 +217,7 @@ namespace Resuscitate.DataClasses
             }
             else if (item.GetType() == typeof(Ventilation))
             {
-                addVentilation((Ventilation)item);
+                addVentillation((Ventilation)item);
             }
         }
 
@@ -261,8 +260,7 @@ namespace Resuscitate.DataClasses
                 Staff = staff(),
                 Surname = surname,
                 TimeOfBirth = tob,
-                Approved = approved,
-                Ventilations = listToStrings(ventilations)
+                Ventillations = listToStrings(ventilations)
             };
         }
 

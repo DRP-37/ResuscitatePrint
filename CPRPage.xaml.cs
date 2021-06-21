@@ -86,7 +86,7 @@ namespace Resuscitate
             {
                 HeartBeating.Visibility = Visibility.Visible;
                 StartButton.Content = "Stop";
-                StartButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
+                StartButton.Background = ConverHexColour("#FFDB4325");
             } else
             {
                 HeartBeating.Visibility = Visibility.Collapsed;
@@ -117,6 +117,20 @@ namespace Resuscitate
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
             // Nothing
+        }
+
+        private SolidColorBrush ConverHexColour(string hexColour)
+        {
+            hexColour = hexColour.Replace("#", string.Empty);
+            // from #RRGGBB string
+            var s = (byte)System.Convert.ToUInt32(hexColour.Substring(0, 2), 16);
+            var r = (byte)System.Convert.ToUInt32(hexColour.Substring(2, 2), 16);
+            var g = (byte)System.Convert.ToUInt32(hexColour.Substring(4, 2), 16);
+            var b = (byte)System.Convert.ToUInt32(hexColour.Substring(6, 2), 16);
+            //get the color
+            Color color = Color.FromArgb(s, r, g, b);
+            // create the solidColorbrush
+            return new SolidColorBrush(color);
         }
     }
 }

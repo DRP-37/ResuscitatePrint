@@ -53,7 +53,7 @@ namespace Resuscitate
             }
 
             PatientInfo.Background = MainPage.patienInformationComplete ? new SolidColorBrush(Colors.LightGreen) :
-                new SolidColorBrush(Colors.Red);
+                ConverHexColour("#FFDB4325");
 
             base.OnNavigatedTo(e);
         }
@@ -121,7 +121,20 @@ namespace Resuscitate
                 var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
                 await dialog.ShowAsync();
             }
+        }
 
+        private SolidColorBrush ConverHexColour(string hexColour)
+        {
+            hexColour = hexColour.Replace("#", string.Empty);
+            // from #RRGGBB string
+            var s = (byte)System.Convert.ToUInt32(hexColour.Substring(0, 2), 16);
+            var r = (byte)System.Convert.ToUInt32(hexColour.Substring(2, 2), 16);
+            var g = (byte)System.Convert.ToUInt32(hexColour.Substring(4, 2), 16);
+            var b = (byte)System.Convert.ToUInt32(hexColour.Substring(6, 2), 16);
+            //get the color
+            Color color = Color.FromArgb(s, r, g, b);
+            // create the solidColorbrush
+            return new SolidColorBrush(color);
         }
     }
 }

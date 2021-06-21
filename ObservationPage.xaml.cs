@@ -91,7 +91,7 @@ namespace Resuscitate
         {
             if (Resuscitation.cprTimer.IsRunning)
             {
-                StopCPRButton.Background = new SolidColorBrush(Colors.MediumVioletRed);
+                StopCPRButton.Background = ConverHexColour("#FFDB4325");
                 ((TextBlock)StopCPRButton.Content).Text = "Stop";
             } else
             {
@@ -241,7 +241,7 @@ namespace Resuscitate
         private void hr_Click(object sender, RoutedEventArgs e)
         {
             Button selected = (sender as Button);
-            ClickReassessmentButton(selected, hrs, "Heartrate Range", out hr, out HeartrateButtonEvent);
+            ClickReassessmentButton(selected, hrs, "Heart Rate Range", out hr, out HeartrateButtonEvent);
         }
 
         private void resp_Click(object sender, RoutedEventArgs e)
@@ -296,7 +296,7 @@ namespace Resuscitate
             int heartrateBpm;
             Int32.TryParse(textBox.Text, out heartrateBpm);
 
-            ObservationTextValidity(heartrateBpm <= 300, textBox, " bpm", "Heartrate", out HeartrateBpmEvent);
+            ObservationTextValidity(heartrateBpm <= 300, textBox, " bpm", "Heart Rate", out HeartrateBpmEvent);
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
@@ -412,14 +412,32 @@ namespace Resuscitate
                 StatusEvents.Add(new StatusEvent("Cardiac Compressions", "Ended after " + Seconds + " seconds", TimingCount.Time, reassessment));
                 Resuscitation.cprTimer.Stop();
                 Resuscitation.cprTimer.Reset();
+
+                CPRButton.Background = new SolidColorBrush(Colors.White);
             } else
             {
                 // Start button
                 Resuscitation.cprTimer = Stopwatch.StartNew();
                 StatusEvents.Add(new StatusEvent("Cardiac Compressions", "Started", TimingCount.Time, reassessment));
+
+                CPRButton.Background = ConverHexColour("#FFDB4325");
             }
 
             SetCPRStopButton();
+        }
+
+        private SolidColorBrush ConverHexColour(string hexColour)
+        {
+            hexColour = hexColour.Replace("#", string.Empty);
+            // from #RRGGBB string
+            var s = (byte)System.Convert.ToUInt32(hexColour.Substring(0, 2), 16);
+            var r = (byte)System.Convert.ToUInt32(hexColour.Substring(2, 2), 16);
+            var g = (byte)System.Convert.ToUInt32(hexColour.Substring(4, 2), 16);
+            var b = (byte)System.Convert.ToUInt32(hexColour.Substring(6, 2), 16);
+            //get the color
+            Color color = Color.FromArgb(s, r, g, b);
+            // create the solidColorbrush
+            return new SolidColorBrush(color);
         }
     }
 }

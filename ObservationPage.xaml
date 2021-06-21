@@ -9,81 +9,81 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="AllObservations">
-        <Button x:Name="BackButton" Content="Back" Margin="1081,544,0,0"  VerticalAlignment="Top" Height="78" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
-        <Button x:Name="ConfirmButton" Margin="1081,446,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="20" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click" VerticalAlignment="Top">
-            <TextBlock TextWrapping="WrapWholeWords" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Margin="0,-32,0,-36" Width="143" FontWeight="Bold">Confirm and Go Back</TextBlock>
+        <Button x:Name="BackButton" Content="Back" Margin="1081,544,0,0"  VerticalAlignment="Top" Height="78" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
+        <Button x:Name="ConfirmButton" Margin="1081,446,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="20" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click" VerticalAlignment="Top">
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20" Margin="0,-32,0,-36" Width="143" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" VerticalAlignment="Center">Confirm and Go Back</TextBlock>
         </Button>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Mode=OneWay, Path=TimingCount.Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
-        <Button x:Name="hr0" Margin="333,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="&lt;60 bpm" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
-        </Button>
-        <Button x:Name="hr1" Margin="513,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="60 to 80 bpm" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
-        </Button>
-        <Button x:Name="hr2" Margin="693,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="19.5" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click">
-            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="80 to 100 bpm" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
-        </Button>
-        <Button x:Name="absent" Margin="333,183,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="328" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="movement_Click">
+        <Button x:Name="hr0" Margin="333,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Absent" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="present"  Margin="696,182,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="326" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="movement_Click">
+        <Button x:Name="hr1" Margin="513,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click" FontFamily="Microsoft JhengHei UI">
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"><Run Text="&lt;6"/><Run Text="0 bpm"/></TextBlock>
+        </Button>
+        <Button x:Name="hr2" Margin="693,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="19.5" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click" FontFamily="Microsoft JhengHei UI">
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"><Run Text="6"/><Run Text="0 to 100 bpm"/></TextBlock>
+        </Button>
+        <Button x:Name="absent" Margin="333,183,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="328" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="movement_Click" FontFamily="Microsoft JhengHei UI">
+            <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Absent" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
+        </Button>
+        <Button x:Name="present"  Margin="696,182,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="326" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="movement_Click" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Present" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="resp0" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="333,259,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp0" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="333,259,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="No Effort" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="resp1" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="516,259,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp1" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="516,259,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Gasping" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="resp2" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="697,259,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp2" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="697,259,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Weak Effort" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="70,122,0,0" Text="Heartrate" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="142" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="70,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Chest Movement" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="70,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="264" FontSize="26"><Run Text="Breathing"/><LineBreak/><Run/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="66,383,0,0" Text="Pulse Oximeter" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="278" FontSize="36" FontWeight="Normal"/>
-        <Button x:Name="hr3" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click" Margin="875,114,0,0">
+        <TextBlock HorizontalAlignment="Left" Margin="70,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="142" FontSize="26" FontFamily="Microsoft JhengHei UI"><Run Text="Heart"/><Run Text=" Rate"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="70,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Chest Movement" FontSize="26" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="70,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="264" FontSize="26" FontFamily="Microsoft JhengHei UI"><Run Text="Breathing"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="66,423,0,0" Text="Pulse Oximeter" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="278" FontSize="36" FontWeight="Normal" FontFamily="Microsoft JhengHei UI"/>
+        <Button x:Name="hr3" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="51" Width="145" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="hr_Click" Margin="875,114,0,0" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="&gt;100 bpm" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="resp3" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="15" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="874,259,0,0" VerticalAlignment="Top">
+        <Button x:Name="resp3" RenderTransformOrigin="0.5,0.5" Height="50" Width="148" FontSize="15" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="resp_Click" Margin="874,259,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Regular&#xA;Respirations" FontSize="15" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="96,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" FontSize="26"><Run Text="Oxygen"/><Run Text=" Saturation"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="96,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Heart Rate" FontSize="26"/>
-        <TextBlock HorizontalAlignment="Left" Margin="416,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="30"/>
-        <TextBlock HorizontalAlignment="Left" Margin="413,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="30"/>
-        <TextBlock HorizontalAlignment="Left" Margin="416,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="75" Text="bpm" FontSize="30"/>
-        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="338,434,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Left"/>
-        <TextBox x:Name="PercentOxygen" HorizontalAlignment="Left" Height="48" Margin="338,327,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="PercentOxygen_TextChanged" MaxLength="5" TextAlignment="Center"/>
-        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="338,492,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" Margin="71,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="231" FontSize="26"><Run Text="Oxygen"/><Run Text=" "/><Run Text="Percentage"/></TextBlock>
-        <Border BorderThickness="4,4,4,4" BorderBrush="#99000000" CornerRadius="45" Margin="513,325,0,0" FocusVisualPrimaryBrush="#99000000" FocusVisualSecondaryBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="507"/>
-        <TextBlock HorizontalAlignment="Left" Margin="547,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="336" FontSize="26" Text="Airway Management"/>
-        <TextBlock HorizontalAlignment="Left" Margin="543,431,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="336" FontSize="26" Text="Breathing"/>
-        <TextBlock HorizontalAlignment="Left" Margin="547,532,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="336" FontSize="26" Text="Cardiac Compressions"/>
-        <Button x:Name="MaskButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="AirwayManagement_Click" Margin="590,373,0,0" VerticalAlignment="Top">
+        <TextBlock HorizontalAlignment="Left" Margin="96,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" FontSize="26" FontFamily="Microsoft JhengHei UI"><Run Text="Oxygen"/><Run Text=" Saturation"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="96,558,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="216" Text="Heart Rate" FontSize="26" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="412,484,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="30" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="409,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="60" Text="%" FontSize="30" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="412,558,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="75" Text="bpm" FontSize="30" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="OxygenLevels" HorizontalAlignment="Left" Height="48" Margin="334,0,0,0" Text="" VerticalAlignment="Center" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="OxygenLevels_TextChanged" TextAlignment="Left" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="PercentOxygen" HorizontalAlignment="Left" Height="48" Margin="334,339,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="PercentOxygen_TextChanged" MaxLength="5" TextAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="HeartRate" HorizontalAlignment="Left" Height="48" Margin="334,546,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="NumberFullWidth" TextChanged="HeartRate_TextChanged" TextAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="71,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="231" FontSize="26" FontFamily="Microsoft JhengHei UI"><Run Text="Oxygen"/><Run Text=" "/><Run Text="Percentage"/></TextBlock>
+        <Border BorderThickness="4,4,4,4" BorderBrush="#99000000" CornerRadius="45" Margin="513,321,0,0" FocusVisualPrimaryBrush="#99000000" FocusVisualSecondaryBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="323" Width="507"/>
+        <TextBlock HorizontalAlignment="Left" Margin="547,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="336" FontSize="26" Text="Airway Management" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="543,431,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="336" FontSize="26" Text="Breathing" FontFamily="Microsoft JhengHei UI"/>
+        <TextBlock HorizontalAlignment="Left" Margin="547,532,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="336" FontSize="26" Text="Cardiac Compressions" FontFamily="Microsoft JhengHei UI"/>
+        <Button x:Name="MaskButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="20" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="AirwayManagement_Click" Margin="590,373,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="via Mask" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="ETTButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="AirwayManagement_Click" Margin="802,373,0,0" VerticalAlignment="Top">
+        <Button x:Name="ETTButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="AirwayManagement_Click" Margin="802,373,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="via ETT" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="VentilationButton" RenderTransformOrigin="0.5,0.5" Height="58" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Breathing_Click" Margin="590,473,0,0" VerticalAlignment="Top">
+        <Button x:Name="VentilationButton" RenderTransformOrigin="0.5,0.5" Height="58" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Breathing_Click" Margin="590,473,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" Text="Ventilation&#xA;Breaths" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="CPRButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="OngoingCirculation_Click" Margin="590,572,0,0" VerticalAlignment="Top">
+        <Button x:Name="CPRButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="OngoingCirculation_Click" Margin="590,572,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI" Text="Ongoing"/>
         </Button>
-        <Button x:Name="UpdateButton" Content="Confirm" Margin="1081,350,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="UpdateButton_Click" VerticalAlignment="Top">
+        <Button x:Name="UpdateButton" Content="Confirm" Margin="1081,350,0,0" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="UpdateButton_Click" VerticalAlignment="Top">
             <FlyoutBase.AttachedFlyout>
                 <Flyout OverlayInputPassThroughElement="{x:Bind AllObservations}">
                     <TextBlock x:Name="Notification" Text="The timeline has been updated."/>
                 </Flyout>
             </FlyoutBase.AttachedFlyout>
         </Button>
-        <Button x:Name="InflationButton" RenderTransformOrigin="0.5,0.5" Height="64" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Breathing_Click" Margin="802,472,0,0" VerticalAlignment="Top">
+        <Button x:Name="InflationButton" RenderTransformOrigin="0.5,0.5" Height="64" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Breathing_Click" Margin="802,472,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" Text="Inflation&#xA;Breaths" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI"/>
         </Button>
-        <Button x:Name="StopCPRButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="StopCirculation_Click" Margin="802,572,0,0" VerticalAlignment="Top">
+        <Button x:Name="StopCPRButton" RenderTransformOrigin="0.5,0.5" Height="50" Width="180" FontSize="19" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="StopCirculation_Click" Margin="802,572,0,0" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI">
             <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" FontSize="18" FontFamily="Microsoft JhengHei UI" Text="Stop"/>
         </Button>
     </Grid>

@@ -159,7 +159,7 @@ namespace Resuscitate
         private void hr_Click(object sender, RoutedEventArgs e)
         {
             Button selected = sender as Button;
-            ClickButton(selected, hrs, "Heartrate", out hr, out HeartrateEvent);
+            ClickButton(selected, hrs, "Heart Rate", out hr, out HeartrateEvent);
         }
 
         private void tone_Click(object sender, RoutedEventArgs e)

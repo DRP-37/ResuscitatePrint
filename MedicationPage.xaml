@@ -30,7 +30,7 @@
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Center">
                 <TextBlock x:Name="ADR1View" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Adrenaline 1 in 10,000 (0.1 ml/kg) IV" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" Height="38" VerticalAlignment="Top"/>
-                <Button x:Name="ADR1Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="ADR1Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -39,7 +39,7 @@
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Center">
                 <TextBlock x:Name="ADR2View" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Adrenaline 1 in 10,000 (0.3 ml/kg) IV" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" Height="38" VerticalAlignment="Top"/>
-                <Button x:Name="ADR2Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="ADR2Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -48,7 +48,7 @@
             </Grid>
             <Grid Grid.Row="3" VerticalAlignment="Center">
                 <TextBlock x:Name="SodBicarbView" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Sodium Bicarbonate 4.2% (2 to 4 mls/kg) IV" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" Height="38" VerticalAlignment="Top"/>
-                <Button x:Name="SodBicarbButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="SodBicarbButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -57,7 +57,7 @@
             </Grid>
             <Grid Grid.Row="4" VerticalAlignment="Center">
                 <TextBlock x:Name="DextroseView" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Dextrose (2.5mls/kg) IV" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" VerticalAlignment="Top"/>
-                <Button x:Name="DextroseButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="DextroseButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -66,7 +66,7 @@
             </Grid>
             <Grid Grid.Row="5" VerticalAlignment="Center">
                 <TextBlock x:Name="CellTransfusionView" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Red cell transfusion" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" VerticalAlignment="Top"/>
-                <Button x:Name="CellTransfusionButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="CellTransfusionButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -75,7 +75,7 @@
             </Grid>
             <Grid Grid.Row="6" VerticalAlignment="Center">
                 <TextBlock x:Name="ADRviaETTView" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Adrenaline via ETT" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" VerticalAlignment="Top"/>
-                <Button x:Name="ADRviaETTButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="ADRviaETTButton" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -84,7 +84,7 @@
             </Grid>
             <Grid Grid.Row="7" VerticalAlignment="Center">
                 <TextBlock x:Name="Surfactant120View" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Surfactant via ETT 120mg" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" VerticalAlignment="Top"/>
-                <Button x:Name="Surfactant120Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="Surfactant120Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
@@ -93,7 +93,7 @@
             </Grid>
             <Grid Grid.Row="8" VerticalAlignment="Center">
                 <TextBlock x:Name="Surfactant240View" HorizontalAlignment="Left" Margin="81,0,0,0" Text="Surfactant via ETT 240mg" TextWrapping="Wrap" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="30" Width="646" VerticalAlignment="Top"/>
-                <Button x:Name="Surfactant240Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right">
+                <Button x:Name="Surfactant240Button" Content="Dose given" Margin="0,0,53,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" Width="180" d:LayoutRounding="Auto" FontSize="24" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DoseGiven_Click" Foreground="#FF494949" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <Button.RenderTransform>
                         <CompositeTransform Rotation="-0.334" SkewX="0" SkewY="-0.102"/>
                     </Button.RenderTransform>
