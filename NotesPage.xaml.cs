@@ -66,26 +66,8 @@ namespace Resuscitate
             ConfirmButton.Background = new SolidColorBrush(Colors.LightGreen);
         }
 
-        private async void PlayButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Temporary button to showcase it works - we could have the audio recording 
-            // Moved to the review page
-            await this._audioRecorder.PlayFromDisk(Dispatcher);
-        }
+    
 
-        private void RecordButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (!isRecording)
-            {
-                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Microphone.png"));
-                this._audioRecorder.Record();
-                isRecording = true;
-            } else
-            {
-                RecordImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/MicrophoneOff.png"));
-                this._audioRecorder.StopRecording();
-                isRecording = false;
-            }
-        }
+        
     }
 }
