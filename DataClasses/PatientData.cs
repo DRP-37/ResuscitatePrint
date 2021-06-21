@@ -46,6 +46,7 @@ namespace Resuscitate.DataClasses
         private List<IntubationAndSuction> intubationAndSuctions = new List<IntubationAndSuction>();
         private List<CardiacCompressions> compressions = new List<CardiacCompressions>();
         private List<LineInsertion> insertions = new List<LineInsertion>();
+        private List<Ventilation> ventilations = new List<Ventilation>();
         private List<Notes> notes = new List<Notes>();
         private List<StaffData> staffPresent = new List<StaffData>();
 
@@ -125,6 +126,11 @@ namespace Resuscitate.DataClasses
         public void addInsertions(LineInsertion ins)
         {
             insertions.Add(ins);
+        }
+
+        public void addVentillation(Ventilation ven)
+        {
+            ventilations.Add(ven);
         }
 
         public void addNote(Notes note)
@@ -210,6 +216,10 @@ namespace Resuscitate.DataClasses
             {
                 addReassessment((Reassessment)item);
             }
+            else if (item.GetType() == typeof(Ventilation))
+            {
+                addVentillation((Ventilation)item);
+            }
         }
 
         private string[] staff()
@@ -251,7 +261,11 @@ namespace Resuscitate.DataClasses
                 Staff = staff(),
                 Surname = surname,
                 TimeOfBirth = tob,
+<<<<<<< HEAD
                 Approved = approved
+=======
+                Ventillations = listToStrings(ventilations)
+>>>>>>> 2f326b2f2082fba7d46133e150e441f75dfb140c
             };
         }
 
