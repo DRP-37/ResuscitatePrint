@@ -258,7 +258,7 @@ namespace Resuscitate
 
         private void StaffInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), TimingCount);
+            this.Frame.Navigate(typeof(StaffPage), data);
         }
     }
 }

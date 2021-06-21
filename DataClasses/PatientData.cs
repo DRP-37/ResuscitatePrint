@@ -50,7 +50,7 @@ namespace Resuscitate.DataClasses
         private List<Medication> medications = new List<Medication>();
         private List<Notes> notes = new List<Notes>();
 
-        private List<StaffData> staffPresent = new List<StaffData>();
+        private List<StaffMemberData> staffPresent = new List<StaffMemberData>();
 
         // Database Functions
         public async void sendToFirestore()
@@ -139,10 +139,11 @@ namespace Resuscitate.DataClasses
             notes.Add(note);
         }
 
-        public void addStaffMember(StaffData staff)
+        public void addStaffMember(StaffMemberData staff)
         {
             staffPresent.Add(staff);
         }
+
         public void addMedication(Medication med)
         {
             medications.Add(med);
