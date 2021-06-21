@@ -104,6 +104,9 @@ namespace Resuscitate
         {
             reassessment.Time = TimingCount;
             observation.Time = TimingCount;
+            observation.OximeterOxygen = OxygenLevels.Text;
+            observation.Hr = HeartRate.Text;
+            observation.OxygenGiven = PercentOxygen.Text;
 
             reassessment.Hr = (HeartRate)hr;
             reassessment.Movement = (ChestMovement)movement;
