@@ -12,9 +12,7 @@ namespace Resuscitate.DataClasses
     public class PatientData
     {
         private FirestoreDb db;
-        //string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate-4c0ec-firebase-adminsdk-71nk1-71d3a47982.json";
         string path = AppDomain.CurrentDomain.BaseDirectory + @"resuscitate2-47110-firebase-adminsdk-or0ak-c2c668d7ab.json";
-        //string project = "resuscitate-4c0ec";
         string project = "resuscitate2-47110";
 
         // Patient Data
