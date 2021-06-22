@@ -9,18 +9,18 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="BackButton" Content="Back" Margin="67,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
-        <Button x:Name="ConfirmButton" Content="Confirm" Margin="987,632,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="30,29,0,0" Text="Settings" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="48"/>
-        <TextBlock HorizontalAlignment="Left" Margin="76,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="97" Width="363" Text="Hospital Name:" FontSize="48" Foreground="Gray"/>
-        <TextBox x:Name="HospitalName" HorizontalAlignment="Left" Height="86" Margin="485,175,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HospitalName_TextChanged" TextAlignment="Center" />
-        <TextBlock HorizontalAlignment="Left" Margin="73,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="465" Text="Document Export Path:" FontSize="35" Foreground="Gray"/>
-        <TextBox x:Name="Path"  HorizontalAlignment="Left" Height="65" Margin="483,381,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="35" BorderBrush="#FF3E3E40" InputScope="Number" IsReadOnly="True" TextAlignment="Center" MaxLength="5"/>
-        <Button x:Name="PathSelect" Content="Browse" Height="65" Margin="1098,381,0,0" VerticalAlignment="Top" Width="85" Background="#B20078D7" Foreground="White" FontSize="20" Click="Button_Click">
+        <Button x:Name="BackButton" Content="Back" Margin="81,0,0,60"  VerticalAlignment="Bottom" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
+        <Button x:Name="ConfirmButton" Content="Confirm"  VerticalAlignment="Bottom" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click" HorizontalAlignment="Right" Margin="0,0,81,60"/>
+        <TextBlock HorizontalAlignment="Left" Margin="105,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Hospital Name:" FontSize="48" Foreground="Gray" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="HospitalName" HorizontalAlignment="Left" Height="77" Margin="563,195,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="700" FontSize="48" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="HospitalName_TextChanged" TextAlignment="Left" Text="" />
+        <TextBlock HorizontalAlignment="Left" Margin="105,377,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Document Export Path:" FontSize="35" Foreground="Gray" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="Path"  HorizontalAlignment="Left" Height="65" Margin="563,373,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="617" FontSize="35" BorderBrush="#FF3E3E40" InputScope="Number" IsReadOnly="True" TextAlignment="Center" MaxLength="5" FontFamily="Microsoft JhengHei UI"/>
+        <Button x:Name="PathSelect" Content="Browse" Height="65" Margin="1178,373,0,0" VerticalAlignment="Top" Width="85" Background="#B20078D7" Foreground="White" FontSize="20" Click="Button_Click" FontFamily="Microsoft JhengHei UI">
             <Button.BorderBrush>
                 <SolidColorBrush Color="{ThemeResource SystemAccentColor}"/>
             </Button.BorderBrush>
         </Button>
+        <TextBlock HorizontalAlignment="Left" Margin="55,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="72" FontWeight="Bold" Foreground="Black" Text="Settings"/>
 
     </Grid>
 </Page>

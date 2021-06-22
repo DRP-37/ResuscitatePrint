@@ -9,7 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="30,29,0,0" Text="Review" TextWrapping="Wrap" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="48"/>
         <TextBox x:Name="TimeView" HorizontalAlignment="Center" IsTabStop="False" Margin="0,10,0,0" Text="{x:Bind Mode=OneWay, Path=TimingCount.Time}" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="227" TextChanged="TimeView_TextChanged" FontSize="72" BorderBrush="#00000000" TextAlignment="Center" IsReadOnly="True" ManipulationMode="System" FocusVisualPrimaryBrush="#00000000" SelectionHighlightColor="#00E81123" Foreground="#01000000" FocusVisualSecondaryBrush="Transparent" BorderThickness="0,0,0,0"/>
 
         <Grid Grid.Row="0" Margin="0,112,0,30">
@@ -104,5 +103,6 @@
                 </Button>
             </Grid>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="55,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="72" FontWeight="Bold" Foreground="Black" Text="Review"/>
     </Grid>
 </Page>

@@ -35,6 +35,6 @@
                 </Button>
             </Grid>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="42,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="72" LineHeight="0" Height="104" Text="Drains"/>
+        <TextBlock HorizontalAlignment="Left" Margin="55,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="72" FontWeight="Bold" Foreground="Black" Text="Drains"/>
     </Grid>
 </Page>

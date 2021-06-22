@@ -20,24 +20,23 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="1">
-                <Button x:Name="Umbilical" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Insertion_Click" Foreground="#FF494949" Margin="252,0,0,0">
+                <Button x:Name="Umbilical" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Insertion_Click" Foreground="#FF494949" Margin="300,0,0,0">
                     <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Umbilical vein&#xA;catheter insertion" FontSize="27" FontFamily="Microsoft JhengHei UI"/>
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button x:Name="Intraosseous" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Insertion_Click" Foreground="#FF494949" HorizontalAlignment="Right" Margin="0,0,252,0">
+                <Button x:Name="Intraosseous" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Insertion_Click" Foreground="#FF494949" HorizontalAlignment="Right" Margin="0,0,300,0">
                     <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Intraosseous line&#xA;insertion" FontSize="27" FontFamily="Microsoft JhengHei UI"/>
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Button x:Name="Successful" Content="Successful" VerticalAlignment="Center" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Successful_Click" Foreground="#FF494949" Margin="252,0,0,0" FontFamily="Microsoft JhengHei UI">
-                </Button>
+                <Button x:Name="Successful" Content="Successful" Height="89" Width="293" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Successful_Click" Foreground="#FF494949" Margin="300,0,0,0" FontFamily="Microsoft JhengHei UI"/>
             </Grid>
             <Grid Grid.Row="2">
-                <Button x:Name="Unsuccessful" Content="Unsuccessful" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Successful_Click" Foreground="#FF494949" HorizontalAlignment="Right" Margin="0,0,252,0" FontFamily="Microsoft JhengHei UI">
+                <Button x:Name="Unsuccessful" Content="Unsuccessful" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="27" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Successful_Click" Foreground="#FF494949" HorizontalAlignment="Right" Margin="0,0,300,0" FontFamily="Microsoft JhengHei UI">
                 </Button>
             </Grid>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="42,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="72" LineHeight="0" Height="98" Text="Line Insertion"/>
+        <TextBlock HorizontalAlignment="Left" Margin="55,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="72" FontWeight="Bold" Foreground="Black" Text="Line Insertion"/>
     </Grid>
 </Page>

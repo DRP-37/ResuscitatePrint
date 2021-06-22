@@ -9,26 +9,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="Login" FontSize="48" TextAlignment="Center" Margin="505,146,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="92" Width="195"/>
+        <TextBlock Text="Login" FontSize="48" TextAlignment="Center" Margin="0,146,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock Text="Enter your email and password below"
-               TextWrapping="Wrap" Width="535"
-               TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="341,218,0,0" HorizontalAlignment="Left" Height="37"/>
-        <TextBox x:Name="UsernameTextBox"  VerticalAlignment="Top" Margin="358,314,0,0" Height="54" HorizontalAlignment="Left" Width="493" FontSize="28"/>
-        <PasswordBox x:Name="PasswordTextBox"  VerticalAlignment="Top" Margin="358,401,0,0" Height="56" HorizontalAlignment="Left" Width="493" FontSize="28"/>
-        <Button x:Name="LoginButton" Content="Log In" Background="DodgerBlue" Foreground="White"
-        Click="LoginButton_Click" Width="156" Margin="987,632,0,0" Height="51" FontSize="24" VerticalAlignment="Top"/>
+               TextWrapping="Wrap"
+               TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="0,218,0,0" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="UsernameTextBox"  VerticalAlignment="Top" Margin="0,298,0,0" Height="54" HorizontalAlignment="Center" Width="493" FontSize="28" FontFamily="Microsoft JhengHei UI"/>
+        <PasswordBox x:Name="PasswordTextBox"  VerticalAlignment="Top" Margin="0,401,0,0" Height="56" HorizontalAlignment="Center" Width="493" FontSize="28" FontFamily="Microsoft JhengHei UI"/>
+        <Button x:Name="LoginButton" Content="Log In" Background="#FF24BAA3" Foreground="White"
+        Click="LoginButton_Click" Width="156" Margin="0,575,380,0" Height="51" FontSize="24" VerticalAlignment="Top" BorderBrush="#FF24BAA3" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock Text="Don't have an account?"  VerticalAlignment="Top"
-                TextAlignment="Center" FontSize="22" Width="345" Height="35" Margin="440,466,0,0" HorizontalAlignment="Left"/>
+                TextAlignment="Center" FontSize="22" Width="345" Height="35" Margin="0,466,0,0" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock x:Name="RegisterButtonTextBlock"  VerticalAlignment="Top" Text="Sign Up"
                PointerPressed="RegisterButtonTextBlock_PointerPressed"
-               Foreground="DodgerBlue"
-               TextAlignment="Center" FontSize="22" Width="154" Margin="543,500,0,0" HorizontalAlignment="Left" Height="35"/>
-        <Button x:Name="BackButton" Content="Back"  Foreground="White" Margin="67,632,0,0" Height="51" Width="156" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="DodgerBlue" BorderBrush="DodgerBlue" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click" VerticalAlignment="Top"/>
+               Foreground="#FF24BAA3"
+               TextAlignment="Center" FontSize="22" Width="154" Margin="0,500,0,0" HorizontalAlignment="Center" Height="35" FontFamily="Microsoft JhengHei UI"/>
+        <Button x:Name="BackButton" Content="Back"  Foreground="White" Margin="380,575,0,0" Height="51" Width="156" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#FF24BAA3" BorderBrush="#FF24BAA3" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click" VerticalAlignment="Top"/>
         <TextBlock Text="Email:"
-            TextWrapping="Wrap" Width="92"
-            TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="342,282,0,0" HorizontalAlignment="Left" Height="37" RenderTransformOrigin="0.411,0.581"/>
+            TextWrapping="Wrap"
+            TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="514,264,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.411,0.581" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock Text="Password:"
-            TextWrapping="Wrap" Width="112"
-            TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="354,370,0,0" HorizontalAlignment="Left" Height="38" RenderTransformOrigin="0.411,0.581"/>
+            TextWrapping="Wrap"
+            TextAlignment="Center" FontSize="22"  VerticalAlignment="Top" Margin="514,371,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.411,0.581" FontFamily="Microsoft JhengHei UI"/>
     </Grid>
 </Page>

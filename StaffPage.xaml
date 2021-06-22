@@ -9,10 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="AllStaff">
-        <Button x:Name="BackButton" Content="Back" Margin="69,614,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
-        <Button x:Name="ConfirmButton" Content="Confirm" Margin="1101,623,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click"/>
+        <Button x:Name="BackButton" Content="Back" Margin="81,0,0,60"  VerticalAlignment="Bottom" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="BackButton_Click"/>
+        <Button x:Name="ConfirmButton" Content="Confirm"  VerticalAlignment="Bottom" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ConfirmButton_Click" HorizontalAlignment="Right" Margin="0,0,81,60"/>
 
-        <Grid Margin="66,123,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1199" Height="456">
+        <Grid Margin="66,123,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1199" Height="456">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="Auto"/>
@@ -89,7 +89,7 @@
             </ComboBox>
             <TimePicker x:Name="arrivalTimePicker" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="8,10,0,0" FontSize="16" Height="37" />
 
-            <Button x:Name="AddButton" Content="Add Member" Grid.Row="3" Grid.Column="3" Foreground="White" Height="38" Width="132" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="16" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="DodgerBlue" BorderBrush="DodgerBlue" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="AddButton_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,10,0">
+            <Button x:Name="AddButton" Content="Add Member" Grid.Row="3" Grid.Column="3" Foreground="White" Height="38" Width="132" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="16" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#FF24BAA3" BorderBrush="#FF24BAA3" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="AddButton_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,10,0">
                 <FlyoutBase.AttachedFlyout>
                     <Flyout OverlayInputPassThroughElement="{x:Bind AllStaff}">
                         <TextBlock x:Name="Notification" Text="Please fill out all fields."/>
@@ -97,5 +97,6 @@
                 </FlyoutBase.AttachedFlyout>
             </Button>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="55,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="39" Width="426" FontWeight="Bold" Foreground="Gray" Height="76"><Run Text="Staff"/><Run Text=" Information"/></TextBlock>
     </Grid>
 </Page>

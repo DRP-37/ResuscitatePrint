@@ -20,6 +20,6 @@
             <Image x:Name="HeartBeating" Grid.Row="0" HorizontalAlignment="Center" Height="260" VerticalAlignment="Bottom" Width="258" Source="/Assets/heart90bpm.gif" Visibility="Collapsed"/>
             <Button x:Name="StartButton" Grid.Row="1" Content="Start" VerticalAlignment="Top" Height="117" Width="259" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="StartButton_Click" HorizontalAlignment="Center" Margin="0,30,0,0"/>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="42,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Microsoft JhengHei UI" FontSize="72" LineHeight="0" Height="198"><Run Text="Cardiac"/><LineBreak/><Run Text="Compressions"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="55,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="72" FontWeight="Bold" Foreground="Black"><Run Text="Cardi"/><Run Text="a"/><Run Text="c"/><LineBreak/><Run Text="Compressions"/></TextBlock>
     </Grid>
 </Page>
