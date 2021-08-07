@@ -190,11 +190,6 @@ namespace Resuscitate
             this.Frame.Navigate(typeof(ObservationPage), TimingCount);
         }
 
-        private void AirwayButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(AirwayPage), TimingCount);
-        }
-
         private void VentilationButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(VentilationPage), TimingCount);

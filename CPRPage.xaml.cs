@@ -25,18 +25,18 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class CPRPage : Page
     {
-        public Timing TimingCount { get; set; }
+        private static readonly Color SELECTED_COLOUR = InputUtils.DEFAULT_CPR_SELECTED_COLOUR;
+        private static readonly Color UNSELECTED_COLOUR = InputUtils.DEFAULT_CPR_UNSELECTED_COLOUR;
 
+        private Timing TimingCount;
         private List<StatusEvent> StatusEvents;
-        private CardiacCompressions compressions;
-        private static bool START_EVENT = true;
 
         public CPRPage()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
-            StartButton.Background = new SolidColorBrush(Colors.LightGray);
+            StartButton.Background = new SolidColorBrush(UNSELECTED_COLOUR);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -44,71 +44,77 @@ namespace Resuscitate
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            compressions = new CardiacCompressions();
             StatusEvents = new List<StatusEvent>();
-
-            SetStartStopButton();
+            UpdateStartStopButton(Resuscitation.cprTimer.IsRunning);
 
             base.OnNavigatedTo(e);
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool IsStarting = StartButton.Content.Equals("Start");
+
+            AddStatusEvent(IsStarting);
+            UpdateStartStopButton(IsStarting);
+
+            if (IsStarting)
+            {
+                Resuscitation.cprTimer = Stopwatch.StartNew();
+
+            } else
+            {
+                Resuscitation.cprTimer.Stop();
+                Resuscitation.cprTimer.Reset();
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             List<Event> Events = new List<Event>();
-            Events.Add(compressions);
-            
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateStartStopButton(bool HasStarted)
         {
-            if (StartButton.Content.Equals("Start"))
+            if (HasStarted)
             {
-                StatusEvents.Add(GenerateStatusEvent(START_EVENT, compressions));
-
-                Resuscitation.cprTimer = Stopwatch.StartNew();
-            }
-            else
-            {
-                StatusEvents.Add(GenerateStatusEvent(!START_EVENT, compressions));
-
-                Resuscitation.cprTimer.Stop();
-                Resuscitation.cprTimer.Reset();
-            }
-
-            SetStartStopButton();
-        }
-
-        private void SetStartStopButton()
-        {
-            if (Resuscitation.cprTimer.IsRunning)
-            {
+                // Set to be stopped when clicked
                 HeartBeating.Visibility = Visibility.Visible;
                 StartButton.Content = "Stop";
-                StartButton.Background = ConverHexColour("#FFDB4325");
+                StartButton.Background = new SolidColorBrush(SELECTED_COLOUR);
             } else
             {
+                // Set to be started when clicked
                 HeartBeating.Visibility = Visibility.Collapsed;
                 StartButton.Content = "Start";
-                StartButton.Background = new SolidColorBrush(Colors.LightGray);
+                StartButton.Background = new SolidColorBrush(UNSELECTED_COLOUR);
             }
         }
 
         // StartEvent is true when generating a CPR start event. If it is a CPR end event then it is false.
-        private StatusEvent GenerateStatusEvent(bool StartEvent, CardiacCompressions Event)
+        private void AddStatusEvent(bool IsStartEvent)
         {
-            string Seconds = "-1";
+            string Data;
 
-            if (Resuscitation.cprTimer.IsRunning) {
-                string Milieconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
-                Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
-                Event.Time = TimingCount.Time;
-                Event.Length = Seconds;
+            if (IsStartEvent)
+            {
+                Data = "Started";
+
+            }
+            else
+            {
+                string Miliseconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
+                string Seconds = "0";
+
+                if (Miliseconds.Length > 3) { 
+                    Seconds = Miliseconds.Substring(0, Miliseconds.Length - 3);
+                }
+
+                Data = "Ended after " + Seconds + " seconds";
             }
 
-            string Data = StartEvent ? "Started" : "Ended after " + Seconds + " seconds";
-            return new StatusEvent("Cardiac Compressions", Data, TimingCount.Time, Event);
+            StatusEvents.Add(new StatusEvent("Cardiac Compressions", Data, TimingCount.Time));
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
@@ -119,20 +125,6 @@ namespace Resuscitate
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
             // Nothing
-        }
-
-        private SolidColorBrush ConverHexColour(string hexColour)
-        {
-            hexColour = hexColour.Replace("#", string.Empty);
-            // from #RRGGBB string
-            var s = (byte)System.Convert.ToUInt32(hexColour.Substring(0, 2), 16);
-            var r = (byte)System.Convert.ToUInt32(hexColour.Substring(2, 2), 16);
-            var g = (byte)System.Convert.ToUInt32(hexColour.Substring(4, 2), 16);
-            var b = (byte)System.Convert.ToUInt32(hexColour.Substring(6, 2), 16);
-            //get the color
-            Color color = Color.FromArgb(s, r, g, b);
-            // create the solidColorbrush
-            return new SolidColorBrush(color);
         }
     }
 }

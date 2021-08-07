@@ -1,17 +1,10 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -19,14 +12,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class StaffPage : Page
     {
+        private static readonly Color READY_FOR_INPUT_COLOUR = Colors.DodgerBlue;
+        private static readonly Color INCORRECT_INPUT_COLOUR = Colors.Red;
+
         private StaffList StaffList = new StaffList();
         private List<StaffMemberData> ItemsAdded;
-        private PatientData patientData;
+        private PatientData PatientData;
 
         public StaffPage()
         {
@@ -36,14 +29,15 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            patientData = (PatientData)e.Parameter;
+            PatientData = (PatientData)e.Parameter;
             ItemsAdded = new List<StaffMemberData>();
+
             StaffName.Text = "";
             StaffPosition.SelectedIndex = -1;
             StaffGrade.SelectedIndex = -1;
             arrivalTimePicker.Time = DateTime.Now.TimeOfDay;
 
-            // can take a Timing or nothing I think
+            // TODO: can take a Timing or nothing I think
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -56,6 +50,31 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(StaffName.Text) || StaffPosition.SelectedIndex < 0 
+                || StaffGrade.SelectedIndex < 0)
+            {
+                FlyoutBase.ShowAttachedFlyout((FrameworkElement) sender);
+
+                AddButton.Background = new SolidColorBrush(INCORRECT_INPUT_COLOUR);
+                AddButton.BorderBrush = new SolidColorBrush(INCORRECT_INPUT_COLOUR);
+                return;
+            }
+
+            AddButton.Background = new SolidColorBrush(READY_FOR_INPUT_COLOUR);
+            AddButton.BorderBrush = new SolidColorBrush(READY_FOR_INPUT_COLOUR);
+
+            StaffMemberData StaffData = GetStaffData();
+            PatientData.addStaffMember(StaffData);
+            StaffList.Members.Add(StaffData);
+            ItemsAdded.Add(StaffData);
+
+            StaffName.Text = "";
+            StaffPosition.SelectedIndex = -1;
+            StaffGrade.SelectedIndex = -1;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -73,33 +92,14 @@ namespace Resuscitate
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private StaffMemberData GetStaffData()
         {
-            if (String.IsNullOrWhiteSpace(StaffName.Text) || StaffPosition.SelectedIndex < 0 
-                || StaffGrade.SelectedIndex < 0)
-            {
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-                AddButton.Background = new SolidColorBrush(Colors.Red);
-                AddButton.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
-
-            AddButton.Background = new SolidColorBrush(Colors.DodgerBlue);
-            AddButton.BorderBrush = new SolidColorBrush(Colors.DodgerBlue);
-
             string Name = StaffName.Text;
             string Position = StaffPosition.SelectedValue.ToString();
             string Grade = StaffGrade.SelectedValue.ToString();
-            string TimeOfArrival = arrivalTimePicker.Time.ToString().Substring(0,5);
+            string TimeOfArrival = arrivalTimePicker.Time.ToString().Substring(0, 5);
 
-            StaffMemberData StaffData = new StaffMemberData(Name, Position, Grade, TimeOfArrival);
-            patientData.addStaffMember(StaffData);
-            StaffList.Members.Add(StaffData);
-            ItemsAdded.Add(StaffData);
-
-            StaffName.Text = "";
-            StaffPosition.SelectedIndex = -1;
-            StaffGrade.SelectedIndex = -1;
+            return new StaffMemberData(Name, Position, Grade, TimeOfArrival);
         }
     }
 }

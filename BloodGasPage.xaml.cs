@@ -1,18 +1,10 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,23 +12,28 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class BloodGasPage : Page
     {
-        public Timing TimingCount { get; set; }
-        private TextBox[] textBoxes;
-        private double?[] values;
+        // Default TextBox colours
+        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOR = InputUtils.DEFAULT_INCORRECT_INPUT_BACKGROUND;
+
+        private const int PH_INDEX = 0;
+        private const int PCO2_INDEX = 1;
+        private const int EXCESS_INDEX = 2;
+        private const int LACTATE_INDEX = 3;
+        private const int GLUCOSE_INDEX = 4;
+        private const int HAEMOGLOBIN_INDEX = 5;
+
+        private Timing TimingCount;
         private StatusEvent[] StatusEvents;
         private string[] Suffixes;
 
-        private BloodGas bloodGas;
+        private TextBox[] BloodGasViews;
 
         public BloodGasPage()
         {
             this.InitializeComponent();
-            textBoxes = new TextBox[] { pH, pCO2, excess, lactate, glucose, haemoglobin };
+            BloodGasViews = new TextBox[] { pH, pCO2, excess, lactate, glucose, haemoglobin };
             Suffixes = new string[] { "", "", "", "", " mmol/l", " g/l" };
         }
 
@@ -44,9 +41,7 @@ namespace Resuscitate
         {
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
-            bloodGas = new BloodGas();
 
-            values = new double?[6];
             StatusEvents = new StatusEvent[6];
 
             base.OnNavigatedTo(e);
@@ -57,11 +52,11 @@ namespace Resuscitate
             List<Event> Events = new List<Event>();
             List<StatusEvent> statusEvents = new List<StatusEvent>();
 
-            foreach (StatusEvent StatusEvent in StatusEvents)
+            foreach (StatusEvent statusEvent in StatusEvents)
             {
-                if (StatusEvent != null)
+                if (statusEvent != null)
                 {
-                    statusEvents.Add(StatusEvent);
+                    statusEvents.Add(statusEvent);
                 }
             }
 
@@ -70,17 +65,75 @@ namespace Resuscitate
                 return;
             }
 
-            foreach (TextBox textBox in textBoxes)
+            foreach (TextBox textBox in BloodGasViews)
             {
                 SolidColorBrush colour = textBox.Background as SolidColorBrush;
 
-                if (colour.Color == Colors.LightPink && !String.IsNullOrWhiteSpace(textBox.Text))
+                if (colour.Color == INCORRECT_INPUT_BACKGROUND_COLOR && !String.IsNullOrWhiteSpace(textBox.Text))
                 {
+                    // TODO: flyout here?
                     return;
                 }
             }
 
             Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, statusEvents));
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            int index = Array.IndexOf(BloodGasViews, textBox);
+
+            // Disallow input of incorrect characters
+            if (index == EXCESS_INDEX)
+            {
+                // Excess also enables minus character
+                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.' || c == '-').ToArray());
+            } else
+            {
+                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+            }
+
+            double value;
+            bool valid = double.TryParse(textBox.Text, out value) && CheckRangeValidity(value, index);
+
+            StatusEvents[index] = valid ? new StatusEvent(textBox.Tag.ToString(), value + Suffixes[index], TimingCount.Time) : null;
+
+            InputUtils.UpdateValidColours(textBox, valid);
+        }
+
+        private bool CheckRangeValidity(double value, int index)
+        {
+            switch (index)
+            {
+                case PH_INDEX:
+                    // pH - between 6 and 7, has two decimal places
+                    return (value >= 6 && value < 8) && LessThanXDecimalPlaces(2, value);
+                case PCO2_INDEX:
+                    //pCO2 - one or two digits, has one decimal place
+                    return (value < 100) && LessThanXDecimalPlaces(1, value);
+                case EXCESS_INDEX:
+                    //excess - signed one or two digit integer part with one decimal place​
+                    return (value < 100 && value > -100) && LessThanXDecimalPlaces(1, value);
+                case LACTATE_INDEX:
+                    //lactate - one or two digit integer part, one decimal place​
+                    return (value < 100) && LessThanXDecimalPlaces(1, value);
+                case GLUCOSE_INDEX:
+                    //glucose - one or two digit integer part and one digit decimal​
+                    return (value < 100) && LessThanXDecimalPlaces(1, value);
+                case HAEMOGLOBIN_INDEX:
+                    //haemoglobin - two or three digit integer ​
+                    return (value > 9) && (value < 1000);
+            }
+
+            return false;
+        }
+
+        private bool LessThanXDecimalPlaces(int x, double number)
+        { 
+            double decimalPlaces = Math.Pow(10, x);
+            double value = number * decimalPlaces;
+            return value == (int) value;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -90,79 +143,7 @@ namespace Resuscitate
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            int index = Array.IndexOf(textBoxes, textBox);
-
-            if (index == 2)
-            {
-                // Excess also enables minus character
-                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.' || c == '-').ToArray());
-            }
-            else
-            {
-                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
-            }
-
-            double value;
-            bool valid = false;
-            double.TryParse(textBox.Text, out value);
-
-            switch (index)
-            {
-                case 0:
-                    // pH - between 6 and 7, has two decimal places
-                    valid = (value >= 6 && value < 8) && LessThanXDecimalPlaces(2, value);
-                    break;
-                case 1:
-                    //pCO2 - one or two digits, has one decimal place
-                    valid = (value < 100) && LessThanXDecimalPlaces(1, value);
-                    break;
-                case 2:
-                    //excess - signed one or two digit integer part with one decimal place​
-                    valid = (value < 100 && value > -100) && LessThanXDecimalPlaces(1, value);
-                    break;
-                case 3:
-                    //lactate - one or two digit integer part, one decimal place​
-                    valid = (value < 100) && LessThanXDecimalPlaces(1, value);
-                    break;
-                case 4:
-                    //glucose - one or two digit integer part and one digit decimal​
-                    valid = (value < 100) && LessThanXDecimalPlaces(1, value);
-                    break;
-                case 5:
-                    //haemoglobin - two or three digit integer ​
-                    valid = (value > 9) && (value < 1000);
-                    break;
-                default:
-                    break;
-            }
-
-            if (valid)
-            {
-                textBox.Background = new SolidColorBrush(Colors.White);
-                textBox.BorderBrush = new SolidColorBrush(Colors.Black);
-                values[index] = value;
-                StatusEvents[index] = new StatusEvent(textBox.Tag.ToString(), value + Suffixes[index], TimingCount.Time, bloodGas);
-            }
-            else
-            {
-                textBox.Background = new SolidColorBrush(Colors.LightPink);
-                textBox.BorderBrush = new SolidColorBrush(Colors.PaleVioletRed);
-                values[index] = null;
-                StatusEvents[index] = null;
-            }
-        }
-
-        private bool LessThanXDecimalPlaces(int x, double number)
-        { 
-            double decimalPlaces = Math.Pow(10, x);
-            double value = number * decimalPlaces;
-            return value == (int) value;
+            // Nothing
         }
     }
 }

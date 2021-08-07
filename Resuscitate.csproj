@@ -119,9 +119,6 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AirwayPage.xaml.cs">
-      <DependentUpon>AirwayPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ApgarAssessment.xaml.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -133,6 +130,7 @@
     <Compile Include="BloodGasPage.xaml.cs">
       <DependentUpon>BloodGasPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputUtils.cs" />
     <Compile Include="CPRPage.xaml.cs">
       <DependentUpon>CPRPage.xaml</DependentUpon>
     </Compile>
@@ -306,10 +304,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AirwayPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ApgarAssessment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

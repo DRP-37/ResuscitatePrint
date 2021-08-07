@@ -1,18 +1,8 @@
 ﻿using Resuscitate.DataClasses;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -25,6 +15,18 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class PatientPage : Page
     {
+        private static readonly Color CONFIRM_ENABLED_COLOR = new Color() { R = 242, G = 242, B = 242 };
+        private static readonly Color CONFIRM_UPDATABLE_COLOR = Colors.LightGreen;
+
+        private const int SURNAME_INDEX = 0;
+        private const int ID_INDEX = 1;
+        private const int DATE_BIRTH_INDEX = 2;
+        private const int TIME_BIRTH_INDEX = 3;
+        private const int SEX_INDEX = 4;
+        private const int GESTATION_INDEX = 5;
+        private const int EST_WEIGHT_INDEX = 6;
+        private const int MED_HISTORY_INDEX = 7;
+
         private TextBox[] infoBoxes;
         private bool[] isWrittenTo;
 
@@ -35,7 +37,7 @@ namespace Resuscitate
         {
             this.InitializeComponent();
             infoBoxes = new TextBox[] { Surname, ID, DateOfBirth, TimeOfBirth, Sex,
-                Gestation, EstimatedWeight, MedicalHistory };
+                                        Gestation, EstimatedWeight, MedicalHistory };
             this.isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
@@ -45,8 +47,7 @@ namespace Resuscitate
             var PT = (ReviewDataAndTiming)e.Parameter;
             patientData = PT.PatientData;
 
-            if (UpdatedWeight != null)
-            {
+            if (UpdatedWeight != null) {
                 EstimatedWeight.Text = UpdatedWeight.ToString();
                 UpdatedWeight = null;
             }
@@ -60,10 +61,11 @@ namespace Resuscitate
 
         private void addBirthTimestamp()
         {
-            isWrittenTo[2] = true;
-            isWrittenTo[3] = true;
-            infoBoxes[2].Text = patientData.DOB;
-            infoBoxes[3].Text = patientData.Tob;
+            isWrittenTo[DATE_BIRTH_INDEX] = true;
+            infoBoxes[DATE_BIRTH_INDEX].Text = patientData.DOB;
+
+            isWrittenTo[TIME_BIRTH_INDEX] = true;
+            infoBoxes[TIME_BIRTH_INDEX].Text = patientData.Tob;
         }
 
         private void InformationComplete()
@@ -72,11 +74,12 @@ namespace Resuscitate
             {
                 if (string.IsNullOrWhiteSpace(infoBox.Text))
                 {
-                    MainPage.patienInformationComplete = false;
+                    MainPage.IsPatientDataComplete = false;
                     return;
                 }
             }
-            MainPage.patienInformationComplete = true;
+
+            MainPage.IsPatientDataComplete = true;
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -91,7 +94,7 @@ namespace Resuscitate
             patientData.Weight = EstimatedWeight.Text;
             patientData.History = MedicalHistory.Text;
             
-            ConfirmButton.Background = new SolidColorBrush(new Windows.UI.Color() { R = 242, G = 242, B = 242}) ;
+            ConfirmButton.Background = new SolidColorBrush(CONFIRM_ENABLED_COLOR) ;
             GoBack();
         }
 
@@ -108,6 +111,14 @@ namespace Resuscitate
             GoBack();
         }
 
+        private void MedicalHistory_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int index = Array.IndexOf(infoBoxes, sender as TextBox);
+            isWrittenTo[index] = true;
+
+            ConfirmButton.Background = new SolidColorBrush(CONFIRM_UPDATABLE_COLOR);
+        }
+
         private void GoBack()
         {
             InformationComplete();
@@ -117,13 +128,6 @@ namespace Resuscitate
             {
                 rootFrame.GoBack();
             }
-        }
-
-        private void MedicalHistory_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            int index = Array.IndexOf(infoBoxes, sender as TextBox);
-            isWrittenTo[index] = true;
-            ConfirmButton.Background = new SolidColorBrush(Colors.LightGreen);
         }
     }
 }

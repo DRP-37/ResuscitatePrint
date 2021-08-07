@@ -28,6 +28,14 @@ namespace Resuscitate
         private int Count { get; set; }
         private int startTime;
 
+        public Timing(bool isSet, int offset)
+        {
+            this.IsSet = isSet;
+            this.Offset = offset;
+        }
+
+        public Timing(bool isSet) : this(isSet, 0) { }
+
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

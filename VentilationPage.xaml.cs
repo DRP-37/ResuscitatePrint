@@ -1,19 +1,12 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -21,60 +14,38 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class VentilationPage : Page
     {
-        public Timing TimingCount { get; set; }
-        private Button[] procedures;
-        // Ventilation Support:
-        // 0: Inflation Breaths: Via Mask
-        // 1: Inflation Breaths: Via ETT
-        // 2: Ventilation Breaths: Via Mask
-        // 3: Ventilation Breaths: Via ETT
-        // 4: Mask CPAP
-        private int ventilationProcedure = -1;
+        private const int MAX_PERCENTAGE = 100;
 
-        private Ventilation ventilation;
-        List<Event> EventList = new List<Event>();
+        // Default colours
+        private static readonly Color CORRECT_INPUT_BACKGROUND_COLOR = InputUtils.DEFAULT_CORRECT_INPUT_BACKGROUND;
+        private static readonly Color CORRECT_INPUT_BORDER_COLOR = InputUtils.DEFAULT_CORRECT_INPUT_BORDER;
+        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOR = InputUtils.DEFAULT_INCORRECT_INPUT_BACKGROUND;
+        private static readonly Color INCORRECT_INPUT_BORDER_COLOR = InputUtils.DEFAULT_INCORRECT_INPUT_BORDER;
+
+        private Timing TimingCount;
+
+        private Button[] AirwayPositions;
+        private Button[] Ventilations;
+
         List<StatusEvent> StatusList = new List<StatusEvent>();
 
-        private Button[] positions;
-
-        // Airway Positioning:
-        // 0: Neutral Head Position
-        // 1: Recheck position
-        // 2: Two-person Technique
-        private int airwayProcedure = -1;
-
-        // Position:
-        // 0: Neutral Head Position
-        // 1: Recheck Head Position and Jaw Support
-        // 2: Two-person Technique
-        private AirwayPositioning positioning;
-
-        // New StatusEvent generation
         StatusEvent AirwayEvent;
         StatusEvent VentilationEvent;
-        private bool invalidAirGiven = true;
 
         public VentilationPage()
         {
             this.InitializeComponent();
-            // Airway buttons
-            positions = new Button[] { NeutralPosition, RecheckPosition, TwoPerson };
-            // Ventilation buttons
-            procedures = new Button[] { InflationMask, InflationETT, VentilationMask, VentilationETT, MaskCPAP };
+
+            AirwayPositions = new Button[] { NeutralPosition, RecheckPosition, TwoPerson };
+            Ventilations = new Button[] { InflationMask, InflationETT, VentilationMask, VentilationETT, MaskCPAP };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
-
-            ventilation = new Ventilation();
-            positioning = new AirwayPositioning();
 
             AirwayEvent = null;
             VentilationEvent = null;
@@ -84,146 +55,77 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionMade(procedures) != null && invalidAirGiven)
-            {
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
-                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
-                return;
-            }
+            List<Event> EventList = new List<Event>();
 
-            AddIfNotNull(AirwayEvent, StatusList, EventList);
-            AddIfNotNull(VentilationEvent, StatusList, EventList);
+            GenerateUpdateFlyout((FrameworkElement) sender);
 
-            if (StatusList.Count > 0 && (AirGiven.Background as SolidColorBrush).Color != Colors.LightPink) { 
+            bool canReturn = UpdateStatusEventsAndColours();
+
+            if (StatusList.Count > 0 && canReturn) { 
                 Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
             } 
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            AddIfNotNull(AirwayEvent, StatusList, EventList);
-            AddIfNotNull(VentilationEvent, StatusList, EventList);
+            GenerateUpdateFlyout((FrameworkElement) sender);
 
-            bool airwayEventAdded = false;
+            UpdateStatusEventsAndColours();
+        }
 
+        /* Returns true if returning to Resuscitate page is possible */
+        private bool UpdateStatusEventsAndColours()
+        {
             if (AirwayEvent != null)
             {
-                ResetButtons(positions);
-                airwayProcedure = -1;
+                InputUtils.ResetButtons(AirwayPositions);
 
-                positioning = new AirwayPositioning();
-
-                Notification.Text = "The timeline has been updated. ";
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-                airwayEventAdded = true;
+                StatusList.Add(AirwayEvent);
+                AirwayEvent = null;
             }
 
             if (VentilationEvent != null)
             {
-                ResetButtons(procedures);
-                ventilationProcedure = -1;
+                InputUtils.ResetButtons(Ventilations);
+                InputUtils.ResetTextBoxColour(AirGiven);
 
-                AirGiven.Background = new SolidColorBrush(Colors.White);
-                AirGiven.BorderBrush = new SolidColorBrush(Colors.Black);
-
-                ventilation = new Ventilation();
-
-                Notification.Text = "The timeline has been updated. ";
-                FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-            } else
-            {
-
-                if (SelectionMade(procedures) == null)
-                {
-                    if (airwayEventAdded)
-                    {
-                        if (!String.IsNullOrWhiteSpace(AirGiven.Text))
-                        {
-                            Notification.Text = "The timeline has been updated with the selected airway procedure. \n" +
-                                "Please select ventilation procedure according to O2% given. ";
-                        }
-                    }
-                    else
-                    {
-                        Notification.Text = "Please select ventilation procedure according to O2% given. ";
-                    }
-
-                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-                }
-                else if (SelectionMade(procedures) != null && invalidAirGiven)
-                {
-                    if (airwayEventAdded)
-                    {
-                        Notification.Text = "The timeline has been updated with the selected airway procedure. \n" +
-                            "Please enter a valid percentage for the ventilation procedure. ";
-                    }
-                    else
-                    {
-                        Notification.Text = "Please enter a valid percentage for the ventilation procedure. ";
-                    }
-
-                    FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-                    AirGiven.Background = new SolidColorBrush(Colors.LightPink);
-                    AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
-                }
+                StatusList.Add(VentilationEvent);
+                VentilationEvent = null;
             }
 
-            VentilationEvent = null;
-            AirwayEvent = null;
-        }
-
-        private void ResetButtons(Button[] buttons)
-        {
-            foreach (Button button in buttons)
+            if (InputUtils.SelectionMade(Ventilations) != null && !IsValidAirGiven())
             {
-                button.Background = new SolidColorBrush(Colors.White);
+                InputUtils.SetInvalidTextBoxColour(AirGiven);
+                return false;
             }
-        }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
+            return true;
         }
 
         private void NeutralPosition_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
+            Button selected = InputUtils.ClickWithDefaults((Button)sender, AirwayPositions);
 
-            if (colour.Color == Colors.LightGreen)
+            if (selected == null)
             {
-                selected.Background = new SolidColorBrush(Colors.White);
-                airwayProcedure = -1;
                 AirwayEvent = null;
                 return;
             }
 
-            UpdateColours(positions, selected);
-            airwayProcedure = selected.Name[selected.Name.Length - 1] - '0';
-
-            string Data = ((TextBlock)selected.Content).Text.Replace("\n", " ");
-            positioning.Positioning = (Positioning)airwayProcedure;
-            positioning.Time = TimingCount.Time;
-            AirwayEvent = new StatusEvent("Airway Positioning", Data, TimingCount.Time, positioning);
+            AirwayEvent = new StatusEvent("Airway Positioning", (TextBlock)selected.Content, TimingCount.Time);
         }
 
         private void Ventilation_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = sender as Button;
-            SolidColorBrush colour = selected.Background as SolidColorBrush;
+            Button selected = InputUtils.ClickWithDefaults((Button)sender, Ventilations);
 
-            if (colour.Color == Colors.LightGreen)
+            if (selected == null)
             {
-                selected.Background = new SolidColorBrush(Colors.White);
-                ventilationProcedure = -1;
                 VentilationEvent = null;
                 return;
             }
 
-            UpdateColours(procedures, selected);
-            ventilationProcedure = selected.Name[selected.Name.Length - 1] - '0';
-            int? airGiven = CheckPercentage(AirGiven);
+            int? airGiven = ParsePercentage(AirGiven);
 
             if (airGiven == null)
             {
@@ -231,30 +133,31 @@ namespace Resuscitate
                 return;
             }
 
-            string Name = ((TextBlock)selected.Content).Text.Replace("\n", " ");
-            ventilation.VentType = (VentilationType)ventilationProcedure;
-            VentilationEvent = new StatusEvent(Name, $"{airGiven}% Air/Oxygen Given", TimingCount.Time, ventilation);
+            VentilationEvent = new StatusEvent((TextBlock)selected.Content, $"{airGiven}% Air/Oxygen Given", TimingCount.Time);
         }
 
-        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            // Nothing
+            List<Event> EventList = new List<Event>();
+
+            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
         }
 
-        private async void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
+        private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)
         {
-       
-            TextBox textBox = (TextBox)sender;
+
+            TextBox textBox = (TextBox) sender;
+
+            // Only accept valid characters
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
-            Button selected = SelectionMade(procedures);
-            int? airGiven = CheckPercentage(textBox);
 
-            if (airGiven == null)
-            {
-                AirGiven.Background = new SolidColorBrush(Colors.LightPink);
-                AirGiven.BorderBrush = new SolidColorBrush(Colors.Red);
-                invalidAirGiven = true;
-            }
+            int? airGiven = ParsePercentage(textBox);
+
+            InputUtils.UpdateValidColours(textBox, IsValidOrEmptyAirGiven(airGiven));
+
+            // Check if a ventilation button is pressed and airGiven is valid,
+            //   If so, make a VentilationEvent
+            Button selected = InputUtils.SelectionMade(Ventilations);
 
             if (airGiven == null || selected == null)
             {
@@ -262,76 +165,91 @@ namespace Resuscitate
                 return;
             }
 
-            invalidAirGiven = false;
-            string Name = ((TextBlock)selected.Content).Text.Replace("\n", " ");
-            ventilation.Oxygen = (float)airGiven;
-            ventilation.Time = TimingCount.Time;
-            VentilationEvent = new StatusEvent(Name, $"{airGiven}% Air/Oxygen Given", TimingCount.Time, ventilation);
+            VentilationEvent = new StatusEvent((TextBlock)selected.Content, $"{airGiven}% Air/Oxygen Given", TimingCount.Time);
         }
 
-        private int? CheckPercentage(TextBox textBox)
+        private bool IsValidOrEmptyAirGiven(int? airGiven)
+        {
+            if (AirGiven.Text == "")
+            {
+                return true;
+            }
+
+            return airGiven != null ? airGiven <= MAX_PERCENTAGE : false;
+        }
+
+        private bool IsValidAirGiven()
+        {
+            return ParsePercentage(AirGiven) != null;
+        }
+
+        private int? ParsePercentage(TextBox textBox)
         {
             if (textBox.Text == "")
             {
-                textBox.BorderBrush = new SolidColorBrush(Colors.Black);
-                textBox.Background = new SolidColorBrush(Colors.White);
                 return null;
             }
 
             int airGiven;
             bool parsed = Int32.TryParse(textBox.Text, out airGiven);
 
-            if (!parsed || airGiven > 100)
+            if (!parsed || airGiven > MAX_PERCENTAGE)
             {
-                textBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                textBox.Background = new SolidColorBrush(Colors.LightPink);
                 return null;
             }
 
-            textBox.BorderBrush = new SolidColorBrush(Colors.Black);
-            textBox.Background = new SolidColorBrush(Colors.White);
             return airGiven;
         }
 
-        private Button SelectionMade(Button[] buttons)
+        // Returns true if Successful Flyout was generated or none was generated
+        // Returns false if Unsuccessful Flyout was generated
+        private void GenerateUpdateFlyout(FrameworkElement sender)
         {
-            for (int i=0; i < buttons.Length; i++) 
+            if (VentilationEvent != null && AirwayEvent != null)
             {
-                Button button = buttons[i];
-                SolidColorBrush colour = button.Background as SolidColorBrush;
-
-                if (colour.Color == Colors.LightGreen)
-                {
-                    return button;
-                }
+                Notification.Text = "The timeline has been updated. ";
+                FlyoutBase.ShowAttachedFlyout(sender);
+                return;
             }
-            return null;
+
+            bool isVentilationSelected = InputUtils.SelectionMade(Ventilations) != null;
+            bool isValidAirGiven = IsValidAirGiven();
+
+            bool showFlyout = false;
+            Notification.Text = "";
+
+            if (AirwayEvent != null)
+            {
+                Notification.Text = "The timeline has been updated with the selected airway procedure.\n";
+            }
+
+            if (!isVentilationSelected && isValidAirGiven)
+            {
+                Notification.Text += "Please select ventilation procedure according to O2% given. ";
+                showFlyout = true;
+            }
+
+            if (isVentilationSelected && !isValidAirGiven)
+            {
+                Notification.Text += "Please enter a valid percentage for the ventilation procedure. ";
+
+                showFlyout = true;
+            }
+
+            if (showFlyout)
+            {
+                FlyoutBase.ShowAttachedFlyout(sender);
+            }
         }
 
-        private void UpdateColours(Button[] buttons, Button sender)
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-            foreach (Button button in buttons)
-            {
-                button.Background = new SolidColorBrush(Colors.White);
-            }
-            sender.Background = new SolidColorBrush(Colors.LightGreen);
-        }
-
-        private void AddIfNotNull(StatusEvent Event, List<StatusEvent> StatusEvents, List<Event> Events)
-        {
-            if (Event != null)
-            {
-                if (Event.Event != null)
-                {
-                    Events.Add(Event.Event);
-                }
-                StatusEvents.Add(Event);
-            }
+            // Nothing
         }
 
         private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {
-
+            // Nothing
         }
     }
 }

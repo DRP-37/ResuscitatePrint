@@ -1,36 +1,25 @@
 ﻿using Resuscitate.DataClasses;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.Graphics.Printing;
-using Windows.Storage;
-using System.Threading.Tasks;
-using Windows.Storage.AccessCache;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class ReviewPage : Page
     {
-        public PatientData patientData;
-        public Timing TimingCount;
+        private static readonly Color PATIENT_DATA_COMPLETE = InputUtils.DEFAULT_SELECTED_COLOUR;
+        private static readonly Color PATIENT_DATA_INCOMPLETE = InputUtils.ConvertHexColour("#FFDB4325");
+
+        private static readonly Color EXPORT_COMPLETE_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
+
+        private PatientData PatientData;
+        private Timing TimingCount;
         private StatusList StatusList;
 
         public ReviewPage()
@@ -44,7 +33,7 @@ namespace Resuscitate
         {
             // Take value from previous screen
             var RDaT = (ReviewDataAndTiming)e.Parameter;
-            patientData = RDaT.PatientData;
+            PatientData = RDaT.PatientData;
             TimingCount = RDaT.Timing;
 
             if (RDaT.StatusList != null)
@@ -52,41 +41,62 @@ namespace Resuscitate
                 StatusList = RDaT.StatusList;
             }
 
-            PatientInfo.Background = MainPage.patienInformationComplete ? new SolidColorBrush(Colors.LightGreen) :
-                ConverHexColour("#FFDB4325");
+            PatientInfo.Background = MainPage.IsPatientDataComplete ? new SolidColorBrush(PATIENT_DATA_COMPLETE) :
+                new SolidColorBrush(PATIENT_DATA_INCOMPLETE);
 
             base.OnNavigatedTo(e);
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private async void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             TimingCount.Stop();
 
-            if (patientData.Id != null)
+            if (PatientData.Id == null)
             {
-                patientData.sendToFirestore();
+                // TODO: Make this a flyout
+                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
+                await dialog.ShowAsync();
 
-                // Clear cache stored locally
-                var frame = Window.Current.Content as Frame;
-                if (frame != null)
-                {
-                    var cacheSize = ((frame)).CacheSize;
-                    ((frame)).CacheSize = 0;
-                    ((frame)).CacheSize = cacheSize;
-                }
-
-                this.Frame.Navigate(typeof(MainPage));
+                return;
             }
-            else
+                
+            // Clear cache stored locally
+            var frame = Window.Current.Content as Frame;
+            if (frame != null)
+            {
+                var cacheSize = ((frame)).CacheSize;
+                ((frame)).CacheSize = 0;
+                ((frame)).CacheSize = cacheSize;
+            }
+
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void PatientInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, PatientData));
+        }
+
+        private void StaffInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(StaffPage), PatientData);
+        }
+
+        private async void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PatientData.Id == null)
             {
                 var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
                 await dialog.ShowAsync();
             }
+
+            // Exporter.exportFile(PatientData.Id, PatientData.setUpDataStructure().ToString());
+            ExportButton.Background = new SolidColorBrush(EXPORT_COMPLETE_COLOUR);
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
@@ -97,44 +107,6 @@ namespace Resuscitate
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Nothing
-        }
-
-        private void PatientInfo_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, patientData));
-        }
-
-        private void StaffInfo_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(StaffPage), patientData);
-        }
-
-        private async void ExportButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (patientData.Id != null)
-            {
-                Exporter.exportFile(patientData.Id, patientData.setUpDataStructure().ToString());
-                ExportButton.Background = new SolidColorBrush(Colors.LightGreen);
-            }
-            else
-            {
-                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
-                await dialog.ShowAsync();
-            }
-        }
-
-        private SolidColorBrush ConverHexColour(string hexColour)
-        {
-            hexColour = hexColour.Replace("#", string.Empty);
-            // from #RRGGBB string
-            var s = (byte)System.Convert.ToUInt32(hexColour.Substring(0, 2), 16);
-            var r = (byte)System.Convert.ToUInt32(hexColour.Substring(2, 2), 16);
-            var g = (byte)System.Convert.ToUInt32(hexColour.Substring(4, 2), 16);
-            var b = (byte)System.Convert.ToUInt32(hexColour.Substring(6, 2), 16);
-            //get the color
-            Color color = Color.FromArgb(s, r, g, b);
-            // create the solidColorbrush
-            return new SolidColorBrush(color);
         }
     }
 }

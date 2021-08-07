@@ -1,34 +1,22 @@
 ﻿using Resuscitate.DataClasses;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class NotesPage : Page
     {
-        public Timing TimingCount { get; set; }
-        public ReviewDataAndTiming RDaT;
-        public PatientData patientData;
-        public StatusList statusList;
+        private static readonly Color CONFIRMATION_READY_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
+        private static readonly Color CONFIRMATION_NOT_READY_COLOUR = new Color() { R = 242, G = 242, B = 242 };
+
+        private Timing TimingCount;
+        private PatientData patientData;
+        private StatusList statusList;
+
         private Notes userInput;
         private AudioRecorder _audioRecorder;
         private bool isRecording = false;
@@ -43,7 +31,7 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            RDaT = (ReviewDataAndTiming)e.Parameter;
+            ReviewDataAndTiming RDaT = (ReviewDataAndTiming)e.Parameter;
             TimingCount = RDaT.Timing;
             patientData = RDaT.PatientData;
             statusList = RDaT.StatusList;
@@ -51,9 +39,10 @@ namespace Resuscitate
         
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            ConfirmButton.Background = new SolidColorBrush(new Color() { R = 242, G = 242, B = 242 });
+            ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_NOT_READY_COLOUR);
             userInput = new Notes(UserNotes.Text);
             patientData.addNote(userInput);
+
             Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, patientData));
         }
 
@@ -62,18 +51,14 @@ namespace Resuscitate
             Frame.Navigate(typeof(Resuscitation), TimingCount);
         }
 
-        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void UserNotes_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ConfirmButton.Background = new SolidColorBrush(Colors.LightGreen);
+            ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_READY_COLOUR);
         }
 
-    
-
-        
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Nothing
+        }
     }
 }

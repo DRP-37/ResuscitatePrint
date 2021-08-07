@@ -1,17 +1,9 @@
 ﻿using Resuscitate.DataClasses;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -19,14 +11,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MedicationPage : Page
     {
-        private static int NUM_MEDICATIONS = 8;
-        
-        public Timing TimingCount { get; set; }
+        private const int NUM_MEDICATIONS = 8;
+
+        private static readonly Color SELECTED_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
+        private static readonly Color UNSELECTED_COLOUR = InputUtils.DEFAULT_UNSELECTED_COLOUR;
+
+        private Timing TimingCount;
         private TextBlock[] NameViews;
 
         // Doses:
@@ -41,10 +33,7 @@ namespace Resuscitate
         private Button[] Medications;
         private TextBlock[] DoseViews;
         private int[] NumDoses = new int[NUM_MEDICATIONS];
-        private bool[] DoseGiven = new bool[NUM_MEDICATIONS];
         private StatusEvent[] MedicationEvents;
-
-        private Medication medication;
 
         public MedicationPage()
         {
@@ -54,38 +43,30 @@ namespace Resuscitate
                 CellTransfusionButton, ADRviaETTButton, Surfactant120Button, Surfactant240Button };
             DoseViews = new TextBlock[] { ADR1Dose, ADR2Dose, SodBicarbDose, DextroseDose,
                 CellTransfusionDose, ADRviaETTDose, Surfactant120Dose, Surfactant240Dose };
-            NameViews = new TextBlock[] { ADR1View, ADR2View, SodBicarbView, DextroseView, 
+            NameViews = new TextBlock[] { ADR1View, ADR2View, SodBicarbView, DextroseView,
                 CellTransfusionView, ADRviaETTView, Surfactant120View, Surfactant240View};
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            base.OnNavigatedTo(e);
-
-            medication = new Medication();
             MedicationEvents = new StatusEvent[NUM_MEDICATIONS];
 
             // Reset DoseGiven and buttons' colours
             foreach (Button Medication in Medications)
             {
-                Medication.Background = new SolidColorBrush(Colors.White);
+                Medication.Background = new SolidColorBrush(UNSELECTED_COLOUR);
             }
-
-            DoseGiven = new bool[NUM_MEDICATIONS];
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            medication.Time = TimingCount.Time;
-            medication.setData(DoseGiven);
-
             List<Event> Events = new List<Event>();
-            Events.Add(medication);
 
-            string Time = TimingCount.Time;
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
 
             foreach (StatusEvent Event in MedicationEvents)
@@ -102,55 +83,46 @@ namespace Resuscitate
             }
         }
 
+        private void DoseGiven_Click(object sender, RoutedEventArgs e)
+        {
+            Button selected = (Button)sender;
+
+            int selectedIndex = Array.IndexOf(Medications, selected);
+
+            SolidColorBrush Colour = selected.Background as SolidColorBrush;
+
+            if (Colour.Color == UNSELECTED_COLOUR)
+            {
+                NumDoses[selectedIndex]++;
+                MedicationEvents[selectedIndex] = GenerateStatusEvent(selectedIndex);
+                selected.Background = new SolidColorBrush(SELECTED_COLOUR);
+            }
+            else {
+                NumDoses[selectedIndex]--;
+                MedicationEvents[selectedIndex] = null;
+                selected.Background = new SolidColorBrush(UNSELECTED_COLOUR);
+            }
+
+            DoseViews[selectedIndex].Text = NumDoses[selectedIndex].ToString();
+        }
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Resuscitation), TimingCount);
             ResetDoses();
         }
 
-        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
+        // int index refers to the index of a Button in Button[] Medications
+        private StatusEvent GenerateStatusEvent(int index)
         {
-
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DoseGiven_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-
-            if (button == null)
-                return;
-
-            int reference = Array.IndexOf(Medications, button);
-
-            SolidColorBrush Colour = button.Background as SolidColorBrush;
-
-            if (Colour.Color == Colors.White)
-            {
-                NumDoses[reference]++;
-                DoseGiven[reference] = true;
-                MedicationEvents[reference] = GenerateStatusEvent(reference);
-                button.Background = new SolidColorBrush(Colors.LightGreen);
-            } else
-            {
-                NumDoses[reference]--;
-                DoseGiven[reference] = false;
-                MedicationEvents[reference] = null;
-                button.Background = new SolidColorBrush(Colors.White);
-            }
-
-            DoseViews[reference].Text = NumDoses[reference].ToString();
+            return new StatusEvent("Medication Given", NameViews[index].Text + " (Dose " + NumDoses[index] + ")", TimingCount.Time);
         }
 
         private void ResetDoses()
         {
             for (int i = 0; i < NUM_MEDICATIONS; i++)
             {
-                if (DoseGiven[i])
+                if (MedicationEvents[i] != null)
                 {
                     NumDoses[i]--;
                     DoseViews[i].Text = NumDoses[i].ToString();
@@ -158,26 +130,14 @@ namespace Resuscitate
             }
         }
 
-
-        // int index refers to the index of a Button in Button[] Medications
-        private StatusEvent GenerateStatusEvent(int index)
+        private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-            return new StatusEvent("Medication Given", NameViews[index].Text + " (Dose " + NumDoses[index] + ")", TimingCount.Time, medication);
+            // Nothing
         }
 
-        // Move to its own class later on - needed it many classes
-        private bool SelectionMade(Button[] buttons)
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            foreach (Button button in buttons)
-            {
-                SolidColorBrush colour = button.Background as SolidColorBrush;
-
-                if (colour.Color == Colors.LightGreen)
-                {
-                    return true;
-                }
-            }
-            return false;
+            // Nothing
         }
     }
 }
