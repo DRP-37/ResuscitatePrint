@@ -20,7 +20,7 @@ namespace Resuscitate
 
         private PatientData data;
         private DispatcherTimer Timer = new DispatcherTimer();
-        private StatusList StatusList = new StatusList();
+        private StatusList StatusList;
 
         private Timing TimingCount;
         private string CurrTime;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using Windows.UI.Xaml.Controls;
 
 namespace Resuscitate
 {
@@ -39,6 +41,23 @@ namespace Resuscitate
             {
                 Events.Add(statusEvent);
             }
+        }
+
+        public void ExportAsTextFile(string patientId, Button exportButton, TextBlock flyout)
+        {
+            new TextFileExport().ExportStatusList(patientId, this, exportButton, flyout);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder("List of Events:\n\n");
+
+            foreach (StatusEvent statusEvent in Events)
+            {
+                sb.AppendLine(statusEvent.ToString());
+            }
+
+            return sb.ToString();
         }
 
         private class TimeAscending : Comparer<StatusEvent>

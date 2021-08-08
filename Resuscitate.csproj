@@ -130,6 +130,7 @@
     <Compile Include="BloodGasPage.xaml.cs">
       <DependentUpon>BloodGasPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Export.cs" />
     <Compile Include="InputUtils.cs" />
     <Compile Include="CPRPage.xaml.cs">
       <DependentUpon>CPRPage.xaml</DependentUpon>
@@ -208,6 +209,7 @@
     </Compile>
     <Compile Include="StatusEvent.cs" />
     <Compile Include="StatusList.cs" />
+    <Compile Include="TextFileExport.cs" />
     <Compile Include="Timing.cs" />
     <Compile Include="VentilationPage.xaml.cs">
       <DependentUpon>VentilationPage.xaml</DependentUpon>

@@ -22,6 +22,8 @@ namespace Resuscitate
         private Timing TimingCount;
         private StatusList StatusList;
 
+        private bool exported = false;
+
         public ReviewPage()
         {
             this.InitializeComponent();
@@ -47,19 +49,36 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private async void FinishButton_Click(object sender, RoutedEventArgs e)
+        private async void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PatientData.Id == null)
+            {
+                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
+                await dialog.ShowAsync();
+                return;
+            }
+
+            StatusList.ExportAsTextFile(PatientData.Id, ExportButton, Notification);
+
+            // bool exported cannot be set here, since ExportAsTextFile is async, the message popup and colour change can happen
+            //    at any time, not necessarily before this line. It is updated when 'Finish' is clicked
+        }
+
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (((SolidColorBrush) ExportButton.Background).Color != EXPORT_COMPLETE_COLOUR)
+            {
+                ShowCancelMessage();
+                return;
+            }
+
+            FinishAndLeavePage();
+        }
+
+        private void FinishAndLeavePage()
         {
             TimingCount.Stop();
 
-            if (PatientData.Id == null)
-            {
-                // TODO: Make this a flyout
-                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
-                await dialog.ShowAsync();
-
-                return;
-            }
-                
             // Clear cache stored locally
             var frame = Window.Current.Content as Frame;
             if (frame != null)
@@ -72,6 +91,39 @@ namespace Resuscitate
             this.Frame.Navigate(typeof(MainPage));
         }
 
+        private async void ShowCancelMessage()
+        {
+            // Create the message dialog and set its content
+            var messageDialog = new MessageDialog("You haven't exported this procedure.\nAre you sure you want to leave without exporting?");
+
+            // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
+            messageDialog.Commands.Add(new UICommand("Continue",
+                new UICommandInvokedHandler(this.CommandInvokedHandler)));
+            messageDialog.Commands.Add(new UICommand("Cancel",
+                new UICommandInvokedHandler(this.CommandInvokedHandler)));
+
+            // Set the command that will be invoked by default
+            messageDialog.DefaultCommandIndex = 1;
+
+            // Set the command to be invoked when escape is pressed
+            messageDialog.CancelCommandIndex = 1;
+
+            // Show the message dialog
+            await messageDialog.ShowAsync();
+        }
+
+        private void CommandInvokedHandler(IUICommand command)
+        {
+            switch (command.Label)
+            {
+                case "Continue":
+                    FinishAndLeavePage();
+                    break;
+                case "Cancel":
+                    break;
+            }
+        }
+
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, PatientData));
@@ -80,18 +132,6 @@ namespace Resuscitate
         private void StaffInfo_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(StaffPage), PatientData);
-        }
-
-        private async void ExportButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (PatientData.Id == null)
-            {
-                var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
-                await dialog.ShowAsync();
-            }
-
-            // Exporter.exportFile(PatientData.Id, PatientData.setUpDataStructure().ToString());
-            ExportButton.Background = new SolidColorBrush(EXPORT_COMPLETE_COLOUR);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

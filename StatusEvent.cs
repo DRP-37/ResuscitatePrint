@@ -35,7 +35,6 @@ namespace Resuscitate
 
         public StatusEvent(TextBox NameBox, TextBox DataBox, string Time) : this(NameBox, DataBox.Text.Replace("\n", " "), Time) { }
 
-
         /* Static Constructors */
 
         public static StatusEvent FromTextBlockButtons(string name, Button[] buttons, string Time)
@@ -50,6 +49,12 @@ namespace Resuscitate
             return new StatusEvent(name, (TextBlock) selected.Content, Time);
         }
 
+        /* Methods */
+
+        public override string ToString()
+        {
+            return Time + " " + Name + ":\t" + Data;
+        }
 
         /* Static Utils */
 
