@@ -72,7 +72,7 @@ namespace Resuscitate
 
             if (Resuscitation.apgarCounter < 4)
             {
-                Resuscitation.apgarScoresCompleted[Resuscitation.apgarCounter] = true;
+                Resuscitation.apgarChecksCompleted[Resuscitation.apgarCounter] = true;
                 Resuscitation.apgarCounter++;
             }
 

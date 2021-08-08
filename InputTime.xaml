@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="InputLater" Content="Input Later" Margin="825,447,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="InputLater_Click"/>
+        <Button x:Name="InputLater" Content="Input Later" Margin="825,447,0,0"  VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="InputLater_Click" Visibility="Collapsed"/>
         <Button x:Name="Now" Content="Now" Margin="247,178,0,0" VerticalAlignment="Top" CornerRadius="75" Height="171" Width="335" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="36" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#7F24BAA3" BorderBrush="#FF24BAA3" Click="Now_Click"/>
         <Button x:Name="BackButton" Content="Back" Margin="62,565,0,0" VerticalAlignment="Top" Height="77" Width="163" FontWeight="Bold" FontFamily="Microsoft JhengHei UI" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" Click="BackButton_Click"/>
         <TextBox x:Name="TimeHours" HorizontalAlignment="Left" Margin="285,431,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" FontFamily="Microsoft JhengHei UI" FontSize="64" TextChanged="TimeMinutes_TextChanged" Width="91" BorderBrush="#66000000" BorderThickness="0,0,0,5" SelectionHighlightColor="#00E81123" TextAlignment="Right" MaxLength="2" PlaceholderText="00"/>

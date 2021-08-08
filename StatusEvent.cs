@@ -10,9 +10,9 @@ namespace Resuscitate
 {
     public class StatusEvent
     {
-        public string Name { get; set; }
-        public string Data { get; set; }
-        public string Time { get; set; }
+        public string Name { get; }
+        public string Data { get; }
+        public string Time { get; }
 
         public StatusEvent(string Name, string Data, string Time)
         {

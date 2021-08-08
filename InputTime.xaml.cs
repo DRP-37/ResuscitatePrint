@@ -49,6 +49,7 @@ namespace Resuscitate
             TimeMinutes.PlaceholderText = DateTime.Now.ToString("mm");
         }
 
+        /* Currently collapsed */
         private void InputLater_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
@@ -65,8 +66,12 @@ namespace Resuscitate
             TimingCount = new Timing(IS_SET);
             TimingCount.InitTiming();
 
+            string timeOfBirth = DateTime.Now.ToString("HH:mm");
+
             // Initialise StatusList and first StatusEvent
-            StatusList statusList = InitialiseStatusList(DateTime.Now.ToString("HH:mm"));
+            StatusList statusList = StatusList.fromTimeOfBirth(timeOfBirth);
+
+            PatientData.Tob = timeOfBirth;
 
             // Go to main page
             this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, PatientData));
@@ -89,7 +94,12 @@ namespace Resuscitate
             TimingCount = new Timing(IS_SET, offsetMins * 60);
             TimingCount.InitTiming();
 
-            StatusList statusList = InitialiseStatusList($"{TimeHours.Text}:{TimeMinutes.Text}");
+            string timeOfBirth = $"{TimeHours.Text}:{TimeMinutes.Text}";
+
+            // Initialise StatusList and first StatusEvent
+            StatusList statusList = StatusList.fromTimeOfBirth(timeOfBirth);
+
+            PatientData.Tob = timeOfBirth;
 
             // Go to main page
             this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, PatientData));
@@ -123,17 +133,6 @@ namespace Resuscitate
         private void TimeSeconds_TextChanged(object sender, TextChangedEventArgs e)
         {
             TimeTextChanged((TextBox) sender);
-        }
-
-        private StatusList InitialiseStatusList(string timeOfBirth)
-        {
-            StatusList statusList = new StatusList();
-            StatusEvent timeOfBirthEvent = new StatusEvent("Time of Birth", timeOfBirth, "00:00");
-            statusList.Events.Add(timeOfBirthEvent);
-
-            PatientData.Tob = timeOfBirth;
-
-            return statusList;
         }
 
         private int? GetOffsetMinsFromInput()

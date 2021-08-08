@@ -1,10 +1,7 @@
 ﻿
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Resuscitate
 {
@@ -15,6 +12,41 @@ namespace Resuscitate
         public ObservableCollection<StatusEvent> Events
         {
             get { return this._events; }
+        }
+
+        private StatusList() { }
+
+        // Static constructor
+        public static StatusList fromTimeOfBirth(string timeOfBirth)
+        {
+            StatusList statusList = new StatusList();
+            StatusEvent timeOfBirthEvent = new StatusEvent("Time of Birth", timeOfBirth, "00:00");
+            statusList.Events.Add(timeOfBirthEvent);
+
+            return statusList;
+        }
+
+        public StatusEvent LastItem()
+        {
+            return Events.Last();
+        }
+
+        public void AddAll(List<StatusEvent> statusEvents)
+        {
+            statusEvents.Sort(new TimeAscending());
+
+            foreach (StatusEvent statusEvent in statusEvents)
+            {
+                Events.Add(statusEvent);
+            }
+        }
+
+        private class TimeAscending : Comparer<StatusEvent>
+        {
+            public override int Compare(StatusEvent x, StatusEvent y)
+            {
+                return x.Time.CompareTo(y.Time);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Resuscitate
     {
         public static ApplicationDataContainer AppSettings { get; set; }
 
-        // TODO: get rid of this
+        // TODO: get rid of this why is this here wut
         public static bool IsPatientDataComplete { get; set; } = false;
 
         public MainPage()
@@ -26,12 +26,14 @@ namespace Resuscitate
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: This should not be created here bruh
             PatientData PatientData = new PatientData();
 
             // Go to main page
             this.Frame.Navigate(typeof(InputTime), PatientData);
         }
 
+        /* Currently collapsed */
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
             // Go to review page

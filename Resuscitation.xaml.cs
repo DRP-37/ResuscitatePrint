@@ -1,42 +1,26 @@
-﻿using Amazon.Runtime.Internal.Util;
-using Resuscitate.DataClasses;
+﻿using Resuscitate.DataClasses;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Timers;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Resuscitation : Page
     {
+        // Global Variables
+        public static Stopwatch reassessmentTimer;
+        public static Stopwatch cprTimer;
+        public static Stopwatch apgarTimer;
+        public static int apgarCounter;
+        public static bool[] apgarChecksCompleted;
+
         private PatientData data;
         private DispatcherTimer Timer = new DispatcherTimer();
         private StatusList StatusList = new StatusList();
-
-        public static Stopwatch apgarTimer;
-        public static int apgarCounter;
-        public static bool[] apgarScoresCompleted;
-        public static Stopwatch reassessmentTimer;
-        public static Stopwatch cprTimer;
 
         private Timing TimingCount;
         private string CurrTime;
@@ -55,7 +39,7 @@ namespace Resuscitate
             reassessmentTimer = Stopwatch.StartNew();
             cprTimer = new Stopwatch();
             apgarCounter = 0;
-            apgarScoresCompleted = new bool[] { false, false, false, false, false };
+            apgarChecksCompleted = new bool[] { false, false, false, false, false };
 
         }
 
@@ -63,13 +47,14 @@ namespace Resuscitate
         {
             CurrTime = DateTime.Now.ToString("HH:mm");
 
-            // If you to specify you have come back from a page (eg StaffPage) use:
+            // If you want to specify you have come back from a page (eg StaffPage) use:
             //   Frame.ForwardStack.Count > 0 && Frame.ForwardStack.ElementAt(0).SourcePageType.Name == "StaffPage"
             if (Frame.ForwardStack.Count > 0)
             {
                 return;
             }
 
+            // Parameter checks
             if (e.Parameter.GetType() == typeof(EventAndTiming))
             {
                 var EAndT = (EventAndTiming)e.Parameter;
@@ -80,23 +65,14 @@ namespace Resuscitate
                     data.addItem(Event);
                 }
 
-                foreach (StatusEvent Event in EAndT.StatusEvents)
-                {
-                    StatusList.Events.Add(Event);
-                }
+                StatusList.AddAll(EAndT.StatusEvents);
+                StatusListView.ScrollIntoView(StatusList.LastItem());
 
-                int lastItem = EAndT.StatusEvents.Count - 1;
-
-                if (lastItem > -1)
-                {
-                    StatusListView.ScrollIntoView(EAndT.StatusEvents[lastItem]);
-                }
-            }
-            else if (e.Parameter.GetType() == typeof(Timing))
+            } else if (e.Parameter.GetType() == typeof(Timing))
             {
                 TimingCount = (Timing)e.Parameter;
-            }
-            else
+
+            } else if (e.Parameter.GetType() == typeof(ReviewDataAndTiming))
             {
                 var RDaT = (ReviewDataAndTiming)e.Parameter;
                 TimingCount = RDaT.Timing;
@@ -154,7 +130,6 @@ namespace Resuscitate
 
         private bool displayApgarNotif()
         {
-
             if (apgarCounter == 0)
             {
                 return TimeView.Text.StartsWith("01:");
@@ -162,11 +137,11 @@ namespace Resuscitate
 
             if (apgarCounter == 1)
             {
-                return TimeView.Text.StartsWith("05:") || ((!apgarScoresCompleted[apgarCounter]) &&
+                return TimeView.Text.StartsWith("05:") || ((!apgarChecksCompleted[apgarCounter]) &&
                     (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
             }
 
-            if (!apgarScoresCompleted[apgarCounter])
+            if (!apgarChecksCompleted[apgarCounter])
             {
                 return (TimeView.Text.StartsWith("" + apgarCounter * 5 + ":")) ||
                      (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0);
@@ -235,14 +210,9 @@ namespace Resuscitate
             this.Frame.Navigate(typeof(ReviewPage), new ReviewDataAndTiming(TimingCount, StatusList, data));
         }
 
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        private void StaffInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            // Nothing
-        }
-
-        private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
-        {
-            // Nothing
+            this.Frame.Navigate(typeof(StaffPage), data);
         }
 
         // Changes the image's width to fit the scroller screen
@@ -251,9 +221,14 @@ namespace Resuscitate
             Algorithm.Width = AlgoScrollViewer.ViewportWidth;
         }
 
-        private void StaffInfoButton_Click(object sender, RoutedEventArgs e)
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), data);
+            // Nothing
+        }
+
+        private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
+        {
+            // Nothing
         }
     }
 }

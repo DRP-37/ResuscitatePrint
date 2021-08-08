@@ -15,7 +15,7 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class PatientPage : Page
     {
-        private static readonly Color CONFIRM_ENABLED_COLOR = new Color() { R = 242, G = 242, B = 242 };
+        private static readonly Color UNCHANGED_COLOR = InputUtils.ConvertHexColour("#FFF2F2F2");
         private static readonly Color CONFIRM_UPDATABLE_COLOR = Colors.LightGreen;
 
         private const int SURNAME_INDEX = 0;
@@ -56,6 +56,9 @@ namespace Resuscitate
 
             addBirthTimestamp();
 
+            // Make sure confirm button's background is unselected
+            ConfirmButton.Background = new SolidColorBrush(UNCHANGED_COLOR);
+
             base.OnNavigatedTo(e);
         }
 
@@ -94,7 +97,6 @@ namespace Resuscitate
             patientData.Weight = EstimatedWeight.Text;
             patientData.History = MedicalHistory.Text;
             
-            ConfirmButton.Background = new SolidColorBrush(CONFIRM_ENABLED_COLOR) ;
             GoBack();
         }
 
