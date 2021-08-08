@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      SigningCertificate: ResuscitatePrint_TemporaryKey.pfx
+      SigningCertificate: Resuscitate_TemporaryKey.pfx
       Solution_Path: Resuscitate.sln
       UWP_Project_Path: Resuscitate.csproj
       UWP_Project_Directory: .\
