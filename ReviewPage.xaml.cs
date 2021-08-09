@@ -13,8 +13,12 @@ namespace Resuscitate
 {
     public sealed partial class ReviewPage : Page
     {
+        public static readonly Color COMPLETE_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
+
         private static readonly Color PATIENT_DATA_COMPLETE = InputUtils.DEFAULT_SELECTED_COLOUR;
         private static readonly Color PATIENT_DATA_INCOMPLETE = InputUtils.ConvertHexColour("#FFDB4325");
+
+        private static bool Exported = false;
 
         private ResuscitationData ResusData;
         private Timing TimingCount;
@@ -37,6 +41,11 @@ namespace Resuscitate
             PatientInfo.Background = PatientData.isComplete ? new SolidColorBrush(PATIENT_DATA_COMPLETE) :
                 new SolidColorBrush(PATIENT_DATA_INCOMPLETE);
 
+            if (Exported)
+            {
+                ExportButton.Background = new SolidColorBrush(COMPLETE_COLOUR);
+            }
+
             ResusData.SaveLocally();
 
             base.OnNavigatedTo(e);
@@ -56,13 +65,20 @@ namespace Resuscitate
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((SolidColorBrush) ExportButton.Background).Color != Export.COMPLETE_COLOUR)
+            if (!Exported)
             {
                 ShowCancelMessage();
                 return;
             }
 
             FinishAndLeavePage();
+        }
+
+        internal static void SetSuccessfulExported(Button exportButton)
+        {
+            Exported = true;
+
+            exportButton.Background = new SolidColorBrush(COMPLETE_COLOUR);
         }
 
         private void FinishAndLeavePage()

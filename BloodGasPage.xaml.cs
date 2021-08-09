@@ -93,8 +93,9 @@ namespace Resuscitate
                 textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             }
 
-            double value;
-            bool valid = double.TryParse(textBox.Text, out value) && CheckRangeValidity(value, index);
+            double value = -1;
+            bool valid = !string.IsNullOrWhiteSpace(textBox.Text) 
+                && double.TryParse(textBox.Text, out value) && CheckRangeValidity(value, index);
 
             StatusEvents[index] = valid ? new StatusEvent(textBox.Tag.ToString(), value + Suffixes[index], TimingCount.Time) : null;
 

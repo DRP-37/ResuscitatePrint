@@ -47,7 +47,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="115,411,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Colour" FontSize="26" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,351,0,0" Text="Other Observations" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36" FontWeight="Normal" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock HorizontalAlignment="Left" Margin="67,289,0,0" Text="Estimated Weight" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="28" FontWeight="Normal" FontFamily="Microsoft JhengHei UI"/>
-        <TextBox x:Name="EstimatedWeight" HorizontalAlignment="Left" Height="48" Margin="402,279,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="EstimatedWeight_TextChanged" TextAlignment="Left" FontFamily="Microsoft JhengHei UI"/>
+        <TextBox x:Name="EstimatedWeight" HorizontalAlignment="Left" Height="45" Margin="402,282,0,0" Text="" VerticalAlignment="Top" Width="73" FontSize="30" BorderBrush="#FF3E3E40" InputScope="Number" TextChanged="EstimatedWeight_TextChanged" TextAlignment="Left" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock HorizontalAlignment="Left" Margin="480,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56" Width="60" Text="kg" FontSize="30" FontFamily="Microsoft JhengHei UI"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft JhengHei UI" FontSize="72" FontWeight="Bold" Foreground="Black" Text="Assessment"/>
     </Grid>

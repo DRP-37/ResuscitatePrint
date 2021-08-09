@@ -11,7 +11,7 @@ namespace Resuscitate.DataClasses
 {
     class TextFileExport : Export
     {
-        public async override void ExportStatusList(string patientId, ExportData data, Button exportButton, TextBlock flyout)
+        public async override void ExportResusData(string patientId, ExportData data, Button exportButton, TextBlock flyout)
         {
             StorageFile file;
             bool fromFolder = false;
@@ -62,14 +62,15 @@ namespace Resuscitate.DataClasses
             if (status == Windows.Storage.Provider.FileUpdateStatus.Complete)
             {
                 flyout.Text = "File " + file.Name + " was saved to\n" + getFolderPath(file);
-                
+
+                ReviewPage.SetSuccessfulExported(exportButton);
+
             } else
             {
                 flyout.Text = "File " + file.Name + " couldn't be saved.";
             }
 
             FlyoutBase.ShowAttachedFlyout(exportButton);
-            exportButton.Background = new SolidColorBrush(COMPLETE_COLOUR);
         }
 
         static private async Task<StorageFolder> GetFileFromToken()

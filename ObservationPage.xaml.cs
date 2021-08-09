@@ -210,7 +210,7 @@ namespace Resuscitate
             int oxygenLevel;
             Int32.TryParse(textBox.Text, out oxygenLevel);
 
-            bool valid = oxygenLevel <= MAX_PERCENTAGE;
+            bool valid = !string.IsNullOrWhiteSpace(textBox.Text) && oxygenLevel <= MAX_PERCENTAGE;
 
             InputUtils.UpdateValidColours(textBox, valid);
 
@@ -225,7 +225,7 @@ namespace Resuscitate
             int oxygenPercent;
             Int32.TryParse(textBox.Text, out oxygenPercent);
 
-            bool valid = oxygenPercent <= MAX_PERCENTAGE;
+            bool valid = !string.IsNullOrWhiteSpace(textBox.Text) && oxygenPercent <= MAX_PERCENTAGE;
 
             InputUtils.UpdateValidColours(textBox, valid);
 
@@ -240,7 +240,7 @@ namespace Resuscitate
             int heartrateBpm;
             Int32.TryParse(textBox.Text, out heartrateBpm);
 
-            bool valid = heartrateBpm <= MAX_BPM;
+            bool valid = !string.IsNullOrWhiteSpace(textBox.Text) && heartrateBpm <= MAX_BPM;
 
             InputUtils.UpdateValidColours(textBox, valid);
 

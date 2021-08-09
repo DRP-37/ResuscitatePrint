@@ -20,7 +20,7 @@ namespace Resuscitate.DataClasses
 
         public void ExportAsTextFile(Button exportButton, TextBlock flyout)
         {
-            new TextFileExport().ExportStatusList(ID, this, exportButton, flyout);
+            new TextFileExport().ExportResusData(ID, this, exportButton, flyout);
         }
 
         override public string ToString()

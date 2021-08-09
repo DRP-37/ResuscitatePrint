@@ -28,7 +28,6 @@ namespace Resuscitate
         // StatusEvents
         private StatusEvent CordClampingEvent;
         private StatusEvent[] TemperatureEvents;
-        private StatusEvent EstimatedWeightEvent;
         private StatusEvent ColourEvent;
         private StatusEvent ToneEvent;
         private StatusEvent BreathingEvent;
@@ -55,7 +54,6 @@ namespace Resuscitate
             // Set all selections to null (new StatusEvent generation)
             CordClampingEvent = null;
             TemperatureEvents = new StatusEvent[3];
-            EstimatedWeightEvent = null;
             ColourEvent = null;
             ToneEvent = null;
             BreathingEvent = null;
@@ -66,7 +64,7 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (EstimatedWeightEvent != null)
+            if (IsValidEstWeight())
             {
                 ResusData.PatientData.Weight = EstimatedWeight.Text;
             }
@@ -81,7 +79,6 @@ namespace Resuscitate
                 StatusEvent.MaybeAdd(Event, statusEvents);
             }
 
-            StatusEvent.MaybeAdd(EstimatedWeightEvent, statusEvents);
             StatusEvent.MaybeAdd(ColourEvent, statusEvents);
             StatusEvent.MaybeAdd(HeartrateEvent, statusEvents);
             StatusEvent.MaybeAdd(ToneEvent, statusEvents);
@@ -149,20 +146,17 @@ namespace Resuscitate
             TextBox estWeightView = (TextBox) sender;
 
             estWeightView.Text = new String(estWeightView.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+
+            InputUtils.UpdateValidColours(estWeightView, IsValidEstWeight());
+        }
+
+        private bool IsValidEstWeight()
+        {
             double estimatedWeight;
-            double.TryParse(estWeightView.Text, out estimatedWeight);
+            double.TryParse(EstimatedWeight.Text, out estimatedWeight);
 
-            bool valid = estimatedWeight <= MAX_ALLOWED_EST_WEIGHT;
-
-            InputUtils.UpdateValidColours(estWeightView, valid);
-
-            if (valid)
-            {
-                EstimatedWeightEvent = new StatusEvent("Esimated Weight", estWeightView.Text + "kg", TimingCount.Time);
-            } else
-            {
-                EstimatedWeightEvent = null;
-            }
+            return !string.IsNullOrWhiteSpace(EstimatedWeight.Text)
+                && estimatedWeight <= MAX_ALLOWED_EST_WEIGHT;
         }
 
         private StatusEvent ClickAndGenerateEvent(Button button, Button[] buttons, string EventName)
