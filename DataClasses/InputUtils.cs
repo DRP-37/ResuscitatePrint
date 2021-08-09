@@ -155,7 +155,7 @@ namespace Resuscitate.DataClasses
         public static void UpdateValidColours(TextBox inputBox, bool validInput, 
             Color correctBackground, Color correctBorder, Color incorrectBackground, Color incorrectBorder)
         {
-            if (validInput)
+            if (validInput || string.IsNullOrWhiteSpace(inputBox.Text))
             {
                 inputBox.Background = new SolidColorBrush(correctBackground);
                 inputBox.BorderBrush = new SolidColorBrush(correctBorder);

@@ -83,11 +83,17 @@ namespace Resuscitate
 
                 Success.Visibility = Visibility.Collapsed;
                 Unsuccessful.Visibility = Visibility.Collapsed;
+                Confirmation.Visibility = Visibility.Collapsed;
                 return;
             }
 
             Success.Visibility = Visibility.Visible;
             Unsuccessful.Visibility = Visibility.Visible;
+
+            if (InputUtils.SelectionMade(Successes) != null)
+            {
+                Confirmation.Visibility = Visibility.Visible;
+            }
         }
 
         private void Unsuccessful_Click(object sender, RoutedEventArgs e)

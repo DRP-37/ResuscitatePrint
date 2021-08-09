@@ -85,8 +85,11 @@ namespace Resuscitate
                     + " minutes have passed since the last reassessment.";
             } else if (cprNotif())
             {
-                Notification.Text = ((TimeSpan) ResusData.CPRElapsed()).ToString(@"mm\:ss")
-                    + " seconds of CPR have passed. Please reassess.";
+                TimeSpan elapsed = ResusData.LastReassessmentTime < ResusData.CPRStartTime ?
+                    (TimeSpan) ResusData.CPRElapsed() : ResusData.ReassessmentElapsed();
+
+                Notification.Text = elapsed.ToString(@"mm\:ss")
+                    + " seconds of CPR have passed since the last reasessment. Please reassess.";
             } else
             {
                 Notification.Text = "";
@@ -101,7 +104,16 @@ namespace Resuscitate
                 return false;
             }
 
-            return TimeSpan.Compare((TimeSpan) ResusData.CPRElapsed(), new TimeSpan(0, 0, 30)) >= 0;
+            int CPRStartTime = ResusData.CPRStartTime;
+            int ReassessStartTime = ResusData.LastReassessmentTime;
+
+            if (ReassessStartTime < CPRStartTime)
+            {
+                return TimeSpan.Compare((TimeSpan) ResusData.CPRElapsed(), new TimeSpan(0, 0, 30)) >= 0;
+            } else
+            {
+                return TimeSpan.Compare((TimeSpan)ResusData.ReassessmentElapsed(), new TimeSpan(0, 0, 30)) >= 0;
+            }
         }
 
         private bool displayReassessNotif()
