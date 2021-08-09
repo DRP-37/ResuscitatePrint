@@ -17,11 +17,8 @@ namespace Resuscitate
     {
         private const int MAX_PERCENTAGE = 100;
 
-        // Default colours
-        private static readonly Color CORRECT_INPUT_BACKGROUND_COLOR = InputUtils.DEFAULT_CORRECT_INPUT_BACKGROUND;
-        private static readonly Color CORRECT_INPUT_BORDER_COLOR = InputUtils.DEFAULT_CORRECT_INPUT_BORDER;
-        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOR = InputUtils.DEFAULT_INCORRECT_INPUT_BACKGROUND;
-        private static readonly Color INCORRECT_INPUT_BORDER_COLOR = InputUtils.DEFAULT_INCORRECT_INPUT_BORDER;
+        private const bool IS_RETURNING = true;
+        private const bool IS_NOT_RETURNING = false;
 
         private Timing TimingCount;
 
@@ -54,7 +51,7 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            GenerateUpdateFlyout((FrameworkElement) sender);
+            GenerateUpdateFlyout((FrameworkElement) sender, ConfirmFlyout, IS_RETURNING);
 
             bool canReturn = UpdateStatusEventsAndColours();
 
@@ -65,7 +62,7 @@ namespace Resuscitate
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            GenerateUpdateFlyout((FrameworkElement) sender);
+            GenerateUpdateFlyout((FrameworkElement) sender, UpdateFlyout, IS_NOT_RETURNING);
 
             UpdateStatusEventsAndColours();
         }
@@ -198,11 +195,11 @@ namespace Resuscitate
 
         // Returns true if Successful Flyout was generated or none was generated
         // Returns false if Unsuccessful Flyout was generated
-        private void GenerateUpdateFlyout(FrameworkElement sender)
+        private void GenerateUpdateFlyout(FrameworkElement sender, TextBlock flyout, bool isReturning)
         {
-            if (VentilationEvent != null && AirwayEvent != null)
+            if (VentilationEvent != null && AirwayEvent != null && !isReturning)
             {
-                Notification.Text = "The timeline has been updated. ";
+                flyout.Text = "The timeline has been updated.";
                 FlyoutBase.ShowAttachedFlyout(sender);
                 return;
             }
@@ -211,23 +208,22 @@ namespace Resuscitate
             bool isValidAirGiven = IsValidAirGiven();
 
             bool showFlyout = false;
-            Notification.Text = "";
+            flyout.Text = "";
 
             if (AirwayEvent != null)
             {
-                Notification.Text = "The timeline has been updated with the selected airway procedure.\n";
+                flyout.Text = "The timeline has been updated with the selected airway procedure.\n";
             }
 
-            if (!isVentilationSelected && isValidAirGiven)
+            if (!isVentilationSelected && isValidAirGiven && !isReturning)
             {
-                Notification.Text += "Please select ventilation procedure according to O2% given. ";
+                flyout.Text += "Please select ventilation procedure according to O2% given.";
                 showFlyout = true;
             }
 
             if (isVentilationSelected && !isValidAirGiven)
             {
-                Notification.Text += "Please enter a valid percentage for the ventilation procedure. ";
-
+                flyout.Text += "Please enter a valid percentage for the ventilation procedure.";
                 showFlyout = true;
             }
 

@@ -8,9 +8,11 @@ namespace Resuscitate.DataClasses
     class InputUtils
     {
         // Default button colours
-        public static readonly Color DEFAULT_SELECTED_COLOUR = Colors.LightGreen;
+        public static readonly Color DEFAULT_SELECTED_COLOUR = ConvertHexColour("#9923E8CA");
         public static readonly Color DEFAULT_UNSELECTED_COLOUR = Colors.White;
+
         public static readonly Color DEFAULT_INCORRECT_BUTTON_COLOUR = Colors.Red;
+        public static readonly Color DEFAULT_NAVIGATION_BUTTON_COLOUR = ConvertHexColour("#FFF2F2F2");
 
         public static readonly Color DEFAULT_ADD_COLOUR = ConvertHexColour("#FF24BAA3");
         public static readonly Color DEFAULT_INCORRECT_ADD_COLOUR = Colors.Red;

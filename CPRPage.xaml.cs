@@ -34,7 +34,6 @@ namespace Resuscitate
         public CPRPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             StartButton.Background = new SolidColorBrush(UNSELECTED_COLOUR);
         }

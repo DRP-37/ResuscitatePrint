@@ -68,6 +68,7 @@ namespace Resuscitate
 
             Success.Visibility = Visibility.Collapsed;
             Unsuccessful.Visibility = Visibility.Collapsed;
+            Confirmation.Visibility = Visibility.Collapsed;
 
             IntubationEvent = new StatusEvent("Suction", (TextBlock) selected.Content, TimingCount.Time);
         }
@@ -172,7 +173,7 @@ namespace Resuscitate
             {
                 SolidColorBrush confirmColour = button.Background as SolidColorBrush;
 
-                if (confirmColour.Color == Colors.LightGreen)
+                if (confirmColour.Color == SELECTED_COLOUR)
                 {
                     data += button.Content.ToString() + ", ";
                     selectionMade = true;

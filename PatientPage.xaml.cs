@@ -12,8 +12,8 @@ namespace Resuscitate
 {
     public sealed partial class PatientPage : Page
     {
-        private static readonly Color UNCHANGED_COLOR = InputUtils.ConvertHexColour("#FFF2F2F2");
-        private static readonly Color CONFIRM_UPDATABLE_COLOR = Colors.LightGreen;
+        private static readonly Color UNCHANGED_COLOR = InputUtils.DEFAULT_NAVIGATION_BUTTON_COLOUR;
+        private static readonly Color CONFIRM_UPDATABLE_COLOR = InputUtils.DEFAULT_SELECTED_COLOUR;
 
         private ResuscitationData ResusData;
 
@@ -23,7 +23,6 @@ namespace Resuscitate
         public PatientPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             InfoViews = new TextBox[] { Surname, ID, DateOfBirth, TimeOfBirth, Sex,
                                         Gestation, EstimatedWeight, MedicalHistory };
@@ -42,7 +41,6 @@ namespace Resuscitate
             PreviousText = new string[] { Surname.Text, ID.Text, DateOfBirth.Text, TimeOfBirth.Text, Sex.Text,
                                                 Gestation.Text, EstimatedWeight.Text, MedicalHistory.Text };
 
-            // Make sure confirm button's background is unselected
             ConfirmButton.Background = new SolidColorBrush(UNCHANGED_COLOR);
 
             base.OnNavigatedTo(e);

@@ -56,7 +56,7 @@ namespace Resuscitate
             Movements = new Button[] { absent, present };
             Airways = new Button[] { MaskButton, ETTButton };
             Breathings = new Button[] { VentilationButton, InflationButton };
-            Compressions = new Button[] { CPRButton, StopCPRButton };
+            Compressions = new Button[] { CPRButton };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

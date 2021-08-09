@@ -11,7 +11,7 @@ namespace Resuscitate
     public sealed partial class NotesPage : Page
     {
         private static readonly Color CONFIRMATION_READY_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
-        private static readonly Color CONFIRMATION_NOT_READY_COLOUR = new Color() { R = 242, G = 242, B = 242 };
+        private static readonly Color CONFIRMATION_NOT_READY_COLOUR = InputUtils.DEFAULT_NAVIGATION_BUTTON_COLOUR;
 
         private ResuscitationData ResusData;
         private Timing TimingCount;
@@ -24,7 +24,6 @@ namespace Resuscitate
         public NotesPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
             //this._audioRecorder = new AudioRecorder();
         }
@@ -53,7 +52,13 @@ namespace Resuscitate
 
         private void UserNotes_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_READY_COLOUR);
+            if (string.IsNullOrWhiteSpace(((TextBox) sender).Text))
+            {
+                ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_NOT_READY_COLOUR);
+            } else
+            {
+                ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_READY_COLOUR);
+            }
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
