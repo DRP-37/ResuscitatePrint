@@ -30,8 +30,7 @@ namespace Resuscitate
         /* Currently collapsed */
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            // Go to review page
-            this.Frame.Navigate(typeof(SignInPage));
+
         }
         
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
