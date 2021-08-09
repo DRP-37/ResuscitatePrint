@@ -1,18 +1,8 @@
 ﻿using Resuscitate.DataClasses;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,16 +10,15 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class CPRPage : Page
     {
         private static readonly Color SELECTED_COLOUR = InputUtils.DEFAULT_CPR_SELECTED_COLOUR;
         private static readonly Color UNSELECTED_COLOUR = InputUtils.DEFAULT_CPR_UNSELECTED_COLOUR;
 
+        private ResuscitationData ResusData;
         private Timing TimingCount;
-        private List<StatusEvent> StatusEvents;
+
+        private List<StatusEvent> CPREvents;
 
         public CPRPage()
         {
@@ -41,10 +30,11 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            ResusData = (ResuscitationData)e.Parameter;
+            TimingCount = ResusData.TimingCount;
 
-            StatusEvents = new List<StatusEvent>();
-            UpdateStartStopButton(Resuscitation.cprTimer.IsRunning);
+            CPREvents = new List<StatusEvent>();
+            UpdateStartStopButton(ResusData.CPRIsRunning());
 
             base.OnNavigatedTo(e);
         }
@@ -58,18 +48,19 @@ namespace Resuscitate
 
             if (IsStarting)
             {
-                Resuscitation.cprTimer = Stopwatch.StartNew();
+                ResusData.StartNewCPRTimer();
 
             } else
             {
-                Resuscitation.cprTimer.Stop();
-                Resuscitation.cprTimer.Reset();
+                ResusData.StopCPRTimer();
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
+            ResusData.StatusList.AddAll(CPREvents);
+
+            Frame.Navigate(typeof(Resuscitation), ResusData);
         }
 
         private void UpdateStartStopButton(bool HasStarted)
@@ -98,10 +89,9 @@ namespace Resuscitate
             {
                 Data = "Started";
 
-            }
-            else
+            } else
             {
-                string Miliseconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
+                string Miliseconds = ResusData.CPRElapsedMiliseconds().ToString();
                 string Seconds = "0";
 
                 if (Miliseconds.Length > 3) { 
@@ -111,7 +101,7 @@ namespace Resuscitate
                 Data = "Ended after " + Seconds + " seconds";
             }
 
-            StatusEvents.Add(new StatusEvent("Cardiac Compressions", Data, TimingCount.Time));
+            CPREvents.Add(new StatusEvent("Cardiac Compressions", Data, TimingCount.Time));
         }
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)

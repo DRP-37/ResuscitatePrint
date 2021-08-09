@@ -19,7 +19,8 @@ namespace Resuscitate
     /// </summary>
     public sealed partial class ApgarAssessment : Page
     {
-        private Timing TimingCount { get; set; }
+        private ResuscitationData ResusData;
+        private Timing TimingCount;
 
         private Button[] Colours;
         private Button[] HeartRates;
@@ -41,14 +42,15 @@ namespace Resuscitate
             Responses = new Button[] { response0, response1, response2 };
             Tones = new Button[] { tone0, tone1, tone2 };
             Respirations = new Button[] { resp0, resp1, resp2 };
-
-            ScoreCount = 0;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            ResusData = (ResuscitationData)e.Parameter;
+            TimingCount = ResusData.TimingCount;
+
+            ScoreCount = 0;
 
             base.OnNavigatedTo(e);
         }
@@ -62,11 +64,8 @@ namespace Resuscitate
                 return;
             }
 
-            List<StatusEvent> StatusEvents = new List<StatusEvent>();
-            StatusEvents.Add(new StatusEvent("Apgar Score", ScoreCount.ToString(), LastTime));
-
             // Set timer to check times between apgar score checks (Maybe move to new class if time)
-            Resuscitation.apgarTimer = Stopwatch.StartNew();
+            ResusData.StartNewApgarTimer();
 
             if (Resuscitation.apgarCounter < 4)
             {
@@ -74,7 +73,12 @@ namespace Resuscitate
                 Resuscitation.apgarCounter++;
             }
 
-            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
+            List<StatusEvent> statusEvents = new List<StatusEvent>();
+            statusEvents.Add(new StatusEvent("Apgar Score", ScoreCount.ToString(), LastTime));
+
+            ResusData.StatusList.AddAll(statusEvents);
+
+            Frame.Navigate(typeof(Resuscitation), ResusData);
         }
 
         private bool AllSectonsSelected()

@@ -21,6 +21,11 @@ namespace Resuscitate.DataClasses
         /* Number of doses for each medication. If empty, it hasn't been set by visiting MedicationPage yet */
         public List<int> MedicationDoses { get; }
 
+        /* Stopwatch data (is -1 if not running) */
+        public int LastApgarTime { get; set; } = -1;
+        public int LastReassessmentTime { get; set; } = -1;
+        public int CPRStartTime { get; set; } = -1;
+
         public ResuscitationData(Timing timing, PatientData patient, StaffList staff, string timeOfBirth)
         {
             this.IsComplete = true;
@@ -30,6 +35,10 @@ namespace Resuscitate.DataClasses
             this.StaffList = staff;
             this.StatusList = StatusList.fromTimeOfBirth(timeOfBirth);
             this.MedicationDoses = new List<int>();
+
+            /* 'Start' Stopwatches */
+            this.LastReassessmentTime = Environment.TickCount;
+            this.LastApgarTime = Environment.TickCount;
 
             PatientData.Tob = timeOfBirth;
             PatientData.DOB = DateTime.Now.ToString("dd/MM/yyyy");
@@ -46,7 +55,7 @@ namespace Resuscitate.DataClasses
 
         [JsonConstructor]
         private ResuscitationData(bool isComplete, Timing timingCount, PatientData patientData, StaffList staffList,
-            StatusList statusList, List<int> medicationDoses)
+            StatusList statusList, List<int> medicationDoses, int lastReassessmentTime, int lastApgarTime, int cPRStartTime)
         {
             this.IsComplete = isComplete;
             this.TimingCount = timingCount;
@@ -54,7 +63,65 @@ namespace Resuscitate.DataClasses
             this.StaffList = staffList;
             this.StatusList = statusList;
             this.MedicationDoses = medicationDoses;
+
+            this.LastReassessmentTime = lastReassessmentTime;
+            this.LastApgarTime = lastApgarTime;
+            this.CPRStartTime = cPRStartTime;
         }
+
+        /* TIMER FUNCTIONS */
+
+        public void StartNewReassessmentTimer()
+        {
+            LastReassessmentTime = Environment.TickCount;
+        }
+
+        public void StartNewApgarTimer()
+        {
+            LastApgarTime = Environment.TickCount;
+        }
+
+        public void StartNewCPRTimer()
+        {
+            CPRStartTime = Environment.TickCount;
+        }
+
+        public void StopCPRTimer()
+        {
+            CPRStartTime = -1;
+        }
+
+        public bool CPRIsRunning()
+        {
+            return CPRStartTime > -1;
+        }
+
+        public TimeSpan ReassessmentElapsed()
+        {
+            return TimeSpan.FromMilliseconds(Environment.TickCount - LastReassessmentTime);
+        }
+
+        public TimeSpan ApgarElapsed()
+        {
+            return TimeSpan.FromMilliseconds(Environment.TickCount - LastApgarTime);
+        }
+
+        public TimeSpan? CPRElapsed()
+        {
+            if (CPRStartTime <= 0)
+            {
+                return null;
+            }
+
+            return TimeSpan.FromMilliseconds(Environment.TickCount - CPRStartTime);
+        }
+
+        public long CPRElapsedMiliseconds()
+        {
+            return Environment.TickCount - CPRStartTime;
+        }
+
+        /* STORAGE FUNCTIONS */
 
         public static LocalObjectStorageHelper GenerateStorageHelper()
         {

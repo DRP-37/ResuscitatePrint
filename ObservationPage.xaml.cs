@@ -68,7 +68,7 @@ namespace Resuscitate
             TimingCount = ResusData.TimingCount;
 
             ResetEvents();
-            SetCPRStopButton(Resuscitation.cprTimer.IsRunning);
+            SetCPRStopButton(ResusData.CPRIsRunning());
 
             base.OnNavigatedTo(e);
         }
@@ -91,12 +91,7 @@ namespace Resuscitate
 
             if (eventAdded)
             {
-                Resuscitation.reassessmentTimer = Stopwatch.StartNew();
-
-                if (Resuscitation.cprTimer.IsRunning) {
-                    Resuscitation.cprTimer.Restart();
-                }
-
+                ResusData.StartNewReassessmentTimer();
                 Frame.Navigate(typeof(Resuscitation), ResusData);
             }
         }
@@ -108,12 +103,7 @@ namespace Resuscitate
             if (eventAdded)
             {
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement) sender);
-
-                Resuscitation.reassessmentTimer = Stopwatch.StartNew();
-
-                if (Resuscitation.cprTimer.IsRunning) {
-                    Resuscitation.cprTimer.Restart();
-                }
+                ResusData.StartNewReassessmentTimer();
             }
 
             ResusData.SaveLocally();
@@ -167,12 +157,12 @@ namespace Resuscitate
 
         private void StopCirculation_Click(object sender, RoutedEventArgs e)
         {
-            bool hasStarted = Resuscitation.cprTimer.IsRunning;
+            bool hasStarted = ResusData.CPRIsRunning();
 
             if (hasStarted)
             {
                 // Stop button
-                string Milieconds = Resuscitation.cprTimer.ElapsedMilliseconds.ToString();
+                string Milieconds = ResusData.CPRElapsedMiliseconds().ToString();
                 string Seconds = "0";
 
                 if (Milieconds.Length > 3)
@@ -182,13 +172,12 @@ namespace Resuscitate
 
                 CPREvents.Add(new StatusEvent("Cardiac Compressions", "Ended after " + Seconds + " seconds", TimingCount.Time));
 
-                Resuscitation.cprTimer.Stop();
-                Resuscitation.cprTimer.Reset();
+                ResusData.StopCPRTimer();
 
             } else
             {
                 // Start button
-                Resuscitation.cprTimer = Stopwatch.StartNew();
+                ResusData.StartNewCPRTimer();
                 CPREvents.Add(new StatusEvent("Cardiac Compressions", "Started", TimingCount.Time));
             }
 

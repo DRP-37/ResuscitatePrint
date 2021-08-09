@@ -14,15 +14,12 @@ namespace Resuscitate
         /* Global Variables */
 
         // Notification Timers
-        public static Stopwatch reassessmentTimer;
-        public static Stopwatch cprTimer;
         public static Stopwatch apgarTimer;
         public static int apgarCounter;
         public static bool[] apgarChecksCompleted;
 
         /* Private Variables */
         private string CurrTime;
-        private DispatcherTimer CurrentTimer = new DispatcherTimer();
 
         private ResuscitationData ResusData;
 
@@ -35,19 +32,9 @@ namespace Resuscitate
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
-            // Initialise Timer for Current Timestamp
-            CurrentTimer.Tick += Timer_Tick;
-            CurrentTimer.Interval = new TimeSpan(0, 0, 1);
-            CurrentTimer.Start();
-
-            // Notification Timers
-            reassessmentTimer = Stopwatch.StartNew();
-            apgarTimer = Stopwatch.StartNew();
+            // Apgar Notification Handling
             apgarCounter = 0;
             apgarChecksCompleted = new bool[] { false, false, false, false, false };
-
-            // Create CPR Timer
-            cprTimer = new Stopwatch();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -85,22 +72,20 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private void Timer_Tick(object sender, object e)
-        {
-            CurrTimeView.Text = DateTime.Now.ToString("HH:mm");
-        }
-
+        /* Runs every second */
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
+            CurrTimeView.Text = DateTime.Now.ToString("HH:mm");
+
             if (displayApgarNotif()) {
                 Notification.Text = "Calculate next Apgar Score.";
             } else if (displayReassessNotif())
             {
-                Notification.Text = reassessmentTimer.Elapsed.ToString(@"mm\:ss") 
+                Notification.Text = ResusData.ReassessmentElapsed().ToString(@"mm\:ss") 
                     + " minutes have passed since the last reassessment.";
             } else if (cprNotif())
             {
-                Notification.Text = cprTimer.Elapsed.ToString(@"mm\:ss")
+                Notification.Text = ((TimeSpan) ResusData.CPRElapsed()).ToString(@"mm\:ss")
                     + " seconds of CPR have passed. Please reassess.";
             } else
             {
@@ -111,12 +96,22 @@ namespace Resuscitate
 
         private bool cprNotif()
         {
-            return TimeSpan.Compare(cprTimer.Elapsed, new TimeSpan(0, 0, 30)) >= 0;
+            if (!ResusData.CPRIsRunning())
+            {
+                return false;
+            }
+
+            return TimeSpan.Compare((TimeSpan) ResusData.CPRElapsed(), new TimeSpan(0, 0, 30)) >= 0;
         }
 
         private bool displayReassessNotif()
         {
-            return TimeSpan.Compare(reassessmentTimer.Elapsed, new TimeSpan(0, 2, 0)) >= 0;
+            if (ResusData.LastReassessmentTime <= 0)
+            {
+                return false;
+            }
+
+            return TimeSpan.Compare(ResusData.ReassessmentElapsed(), new TimeSpan(0, 2, 0)) >= 0;
         }
 
         private bool displayApgarNotif()
@@ -129,13 +124,13 @@ namespace Resuscitate
             if (apgarCounter == 1)
             {
                 return TimeView.Text.StartsWith("05:") || ((!apgarChecksCompleted[apgarCounter]) &&
-                    (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 4, 0)) >= 0));
+                    (TimeSpan.Compare(ResusData.ApgarElapsed(), new TimeSpan(0, 4, 0)) >= 0));
             }
 
             if (!apgarChecksCompleted[apgarCounter])
             {
                 return TimeView.Text.StartsWith("" + apgarCounter * 5 + ":") ||
-                     (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0);
+                     (TimeSpan.Compare(ResusData.ApgarElapsed(), new TimeSpan(0, 5, 0)) >= 0);
             }
 
             return false;
@@ -148,7 +143,7 @@ namespace Resuscitate
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ApgarAssessment), TimingCount);
+            this.Frame.Navigate(typeof(ApgarAssessment), ResusData);
         }
 
         private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
@@ -168,7 +163,7 @@ namespace Resuscitate
 
         private void CPRButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(CPRPage), TimingCount);
+            this.Frame.Navigate(typeof(CPRPage), ResusData);
         }
 
         private void LineInsertionButton_Click(object sender, RoutedEventArgs e)

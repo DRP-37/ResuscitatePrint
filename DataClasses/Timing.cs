@@ -72,16 +72,20 @@ namespace Resuscitate.DataClasses
 
         private void Timer_Tick(object sender, object e)
         {
-            var elapsed = TimeSpan.FromMilliseconds(Environment.TickCount - StartTime);
+            TimeSpan elapsed = TimeSpan.FromMilliseconds(Environment.TickCount - StartTime);
 
             if (elapsed.TotalMinutes < 10)
             {
-                Time = '0' + string.Format("{00}:{1:00}", (int)elapsed.TotalMinutes, elapsed.Seconds);
-            }
-            else
+                Time = '0' + string.Format("{00}:{1:00}", (int) elapsed.TotalMinutes, elapsed.Seconds);
+            } else
             {
-                Time = string.Format("{00}:{1:00}", (int)elapsed.TotalMinutes, elapsed.Seconds);
+                Time = string.Format("{00}:{1:00}", (int) elapsed.TotalMinutes, elapsed.Seconds);
             }
+        }
+
+        public TimeSpan Elapsed()
+        {
+            return TimeSpan.FromMilliseconds(Environment.TickCount - StartTime);
         }
 
         public override string ToString()
