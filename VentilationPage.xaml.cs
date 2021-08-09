@@ -54,14 +54,12 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> EventList = new List<Event>();
-
             GenerateUpdateFlyout((FrameworkElement) sender);
 
             bool canReturn = UpdateStatusEventsAndColours();
 
             if (StatusList.Count > 0 && canReturn) { 
-                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
+                Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusList));
             } 
         }
 
@@ -137,9 +135,7 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> EventList = new List<Event>();
-
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, EventList, StatusList));
+            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusList));
         }
 
         private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)

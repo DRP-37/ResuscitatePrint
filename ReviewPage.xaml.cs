@@ -16,13 +16,10 @@ namespace Resuscitate
         private static readonly Color PATIENT_DATA_COMPLETE = InputUtils.DEFAULT_SELECTED_COLOUR;
         private static readonly Color PATIENT_DATA_INCOMPLETE = InputUtils.ConvertHexColour("#FFDB4325");
 
-        private static readonly Color EXPORT_COMPLETE_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
-
-        private PatientData PatientData;
+        private ResuscitationData ResusData;
         private Timing TimingCount;
+        private PatientData PatientData;
         private StatusList StatusList;
-
-        private bool exported = false;
 
         public ReviewPage()
         {
@@ -34,16 +31,12 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            var RDaT = (ReviewDataAndTiming)e.Parameter;
-            PatientData = RDaT.PatientData;
-            TimingCount = RDaT.Timing;
+            ResusData = (ResuscitationData)e.Parameter;
+            TimingCount = ResusData.TimingCount;
+            PatientData = ResusData.PatientData;
+            StatusList = ResusData.StatusList;
 
-            if (RDaT.StatusList != null)
-            {
-                StatusList = RDaT.StatusList;
-            }
-
-            PatientInfo.Background = MainPage.IsPatientDataComplete ? new SolidColorBrush(PATIENT_DATA_COMPLETE) :
+            PatientInfo.Background = PatientData.isComplete ? new SolidColorBrush(PATIENT_DATA_COMPLETE) :
                 new SolidColorBrush(PATIENT_DATA_INCOMPLETE);
 
             base.OnNavigatedTo(e);
@@ -51,22 +44,19 @@ namespace Resuscitate
 
         private async void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PatientData.Id == null)
+            if (PatientData.Id == null || string.IsNullOrWhiteSpace(PatientData.Id))
             {
                 var dialog = new MessageDialog("Patient ID must be filled out in the \"Patient Information\" menu");
                 await dialog.ShowAsync();
                 return;
             }
 
-            StatusList.ExportAsTextFile(PatientData.Id, ExportButton, Notification);
-
-            // bool exported cannot be set here, since ExportAsTextFile is async, the message popup and colour change can happen
-            //    at any time, not necessarily before this line. It is updated when 'Finish' is clicked
+            new ExportData(PatientData, ResusData.StaffList, StatusList).ExportAsTextFile(ExportButton, Notification);
         }
 
         private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
-            if (((SolidColorBrush) ExportButton.Background).Color != EXPORT_COMPLETE_COLOUR)
+            if (((SolidColorBrush) ExportButton.Background).Color != Export.COMPLETE_COLOUR)
             {
                 ShowCancelMessage();
                 return;
@@ -126,17 +116,17 @@ namespace Resuscitate
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, PatientData));
+            this.Frame.Navigate(typeof(PatientPage), ResusData);
         }
 
         private void StaffInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), PatientData);
+            this.Frame.Navigate(typeof(StaffPage), ResusData);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Resuscitation), TimingCount);
+            this.Frame.Navigate(typeof(Resuscitation), ResusData);
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)

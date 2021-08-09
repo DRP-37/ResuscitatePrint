@@ -70,9 +70,7 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> Events = new List<Event>();
-
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
         }
 
         private void UpdateStartStopButton(bool HasStarted)

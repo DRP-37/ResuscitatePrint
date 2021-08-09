@@ -10,51 +10,37 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PatientPage : Page
     {
         private static readonly Color UNCHANGED_COLOR = InputUtils.ConvertHexColour("#FFF2F2F2");
         private static readonly Color CONFIRM_UPDATABLE_COLOR = Colors.LightGreen;
 
-        private const int SURNAME_INDEX = 0;
-        private const int ID_INDEX = 1;
-        private const int DATE_BIRTH_INDEX = 2;
-        private const int TIME_BIRTH_INDEX = 3;
-        private const int SEX_INDEX = 4;
-        private const int GESTATION_INDEX = 5;
-        private const int EST_WEIGHT_INDEX = 6;
-        private const int MED_HISTORY_INDEX = 7;
+        private ResuscitationData ResusData;
 
-        private TextBox[] infoBoxes;
-        private bool[] isWrittenTo;
-
-        public PatientData patientData;
-        public static double? UpdatedWeight { get; set; }
+        private TextBox[] InfoViews;
+        private string[] PreviousText;
 
         public PatientPage()
         {
             this.InitializeComponent();
-            infoBoxes = new TextBox[] { Surname, ID, DateOfBirth, TimeOfBirth, Sex,
-                                        Gestation, EstimatedWeight, MedicalHistory };
-            this.isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
+
+            InfoViews = new TextBox[] { Surname, ID, DateOfBirth, TimeOfBirth, Sex,
+                                        Gestation, EstimatedWeight, MedicalHistory };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var PT = (ReviewDataAndTiming)e.Parameter;
-            patientData = PT.PatientData;
-
-            if (UpdatedWeight != null) {
-                EstimatedWeight.Text = UpdatedWeight.ToString();
-                UpdatedWeight = null;
+            // Can take a ResuscitationData parameter with PatientData
+            if (e.Parameter.GetType() == typeof(ResuscitationData))
+            {
+                this.ResusData = (ResuscitationData)e.Parameter;
             }
 
-            isWrittenTo = new bool[] { false, false, false, false, false, false, false, false };
+            UpdateInfoViews();
 
-            addBirthTimestamp();
+            PreviousText = new string[] { Surname.Text, ID.Text, DateOfBirth.Text, TimeOfBirth.Text, Sex.Text,
+                                                Gestation.Text, EstimatedWeight.Text, MedicalHistory.Text };
 
             // Make sure confirm button's background is unselected
             ConfirmButton.Background = new SolidColorBrush(UNCHANGED_COLOR);
@@ -62,73 +48,74 @@ namespace Resuscitate
             base.OnNavigatedTo(e);
         }
 
-        private void addBirthTimestamp()
-        {
-            isWrittenTo[DATE_BIRTH_INDEX] = true;
-            infoBoxes[DATE_BIRTH_INDEX].Text = patientData.DOB;
-
-            isWrittenTo[TIME_BIRTH_INDEX] = true;
-            infoBoxes[TIME_BIRTH_INDEX].Text = patientData.Tob;
-        }
-
-        private void InformationComplete()
-        {
-            foreach(TextBox infoBox in infoBoxes)
-            {
-                if (string.IsNullOrWhiteSpace(infoBox.Text))
-                {
-                    MainPage.IsPatientDataComplete = false;
-                    return;
-                }
-            }
-
-            MainPage.IsPatientDataComplete = true;
-        }
-
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             // Set patient information in database
-            patientData.Surname = Surname.Text;
-            patientData.Id = ID.Text;
-            patientData.DOB = DateOfBirth.Text;
-            patientData.Tob = TimeOfBirth.Text;
-            patientData.Sex = Sex.Text;  // might be better to have a button 
-            patientData.Gestation = Gestation.Text;
-            patientData.Weight = EstimatedWeight.Text;
-            patientData.History = MedicalHistory.Text;
+            ResusData.PatientData.Surname = Surname.Text;
+            ResusData.PatientData.Id = ID.Text;
+            ResusData.PatientData.DOB = DateOfBirth.Text;
+            ResusData.PatientData.Tob = TimeOfBirth.Text;
+            ResusData.PatientData.Sex = Sex.Text;  // might be better to have a button 
+            ResusData.PatientData.Gestation = Gestation.Text;
+            ResusData.PatientData.Weight = EstimatedWeight.Text;
+            ResusData.PatientData.History = MedicalHistory.Text;
             
             GoBack();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < infoBoxes.Length; i++)
+            for (int i = 0; i < InfoViews.Length; i++)
             {
-                if (isWrittenTo[i])
-                {
-                    infoBoxes[i].Text = "";
-                }
+                InfoViews[i].Text = PreviousText[i];
             }
 
             GoBack();
         }
 
+        // All InfoViews TextBoxes use this
         private void MedicalHistory_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int index = Array.IndexOf(infoBoxes, sender as TextBox);
-            isWrittenTo[index] = true;
-
             ConfirmButton.Background = new SolidColorBrush(CONFIRM_UPDATABLE_COLOR);
+        }
+
+        // Only call after PatientData has been set
+        private void UpdateInfoViews()
+        {
+            Surname.Text = ResusData.PatientData.Surname;
+            ID.Text = ResusData.PatientData.Id;
+            DateOfBirth.Text = ResusData.PatientData.DOB;
+            TimeOfBirth.Text = ResusData.PatientData.Tob;
+            Sex.Text = ResusData.PatientData.Sex;
+            Gestation.Text = ResusData.PatientData.Gestation;
+            EstimatedWeight.Text = ResusData.PatientData.Weight;
+            MedicalHistory.Text = ResusData.PatientData.History;
+        }
+
+        private void InformationComplete()
+        {
+            foreach (TextBox infoBox in InfoViews)
+            {
+                if (string.IsNullOrWhiteSpace(infoBox.Text))
+                {
+                    ResusData.PatientData.isComplete = false;
+                    return;
+                }
+            }
+
+            ResusData.PatientData.isComplete = true;
         }
 
         private void GoBack()
         {
             InformationComplete();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame.CanGoBack)
             {
-                rootFrame.GoBack();
+                PageStackEntry prevStackEntry = rootFrame.BackStack[rootFrame.BackStackDepth - 1];
+                this.Frame.Navigate(prevStackEntry.SourcePageType, ResusData);
             }
         }
     }

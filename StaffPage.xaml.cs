@@ -14,12 +14,12 @@ namespace Resuscitate
 {
     public sealed partial class StaffPage : Page
     {
-        private static readonly Color READY_FOR_INPUT_COLOUR = Colors.DodgerBlue;
-        private static readonly Color INCORRECT_INPUT_COLOUR = Colors.Red;
+        private static readonly Color READY_FOR_INPUT_COLOUR = InputUtils.DEFAULT_ADD_COLOUR;
+        private static readonly Color INCORRECT_INPUT_COLOUR = InputUtils.DEFAULT_INCORRECT_ADD_COLOUR;
 
-        private StaffList StaffList = new StaffList();
+        private ResuscitationData ResusData;
+        private StaffList StaffList;
         private List<StaffMemberData> ItemsAdded;
-        private PatientData PatientData;
 
         public StaffPage()
         {
@@ -29,26 +29,26 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            PatientData = (PatientData)e.Parameter;
+            // Always takes a ResuscitationData
+            ResusData = (ResuscitationData)e.Parameter;
+            StaffList = ResusData.StaffList;
+
             ItemsAdded = new List<StaffMemberData>();
 
             StaffName.Text = "";
             StaffPosition.SelectedIndex = -1;
             StaffGrade.SelectedIndex = -1;
             arrivalTimePicker.Time = DateTime.Now.TimeOfDay;
-
-            // TODO: can take a Timing or nothing I think
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            // not yet implemented ig
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame.CanGoBack)
             {
-                rootFrame.GoBack();
+                PageStackEntry prevStackEntry = rootFrame.BackStack[rootFrame.BackStackDepth - 1];
+                this.Frame.Navigate(prevStackEntry.SourcePageType, ResusData);
             }
         }
 
@@ -67,10 +67,9 @@ namespace Resuscitate
             AddButton.Background = new SolidColorBrush(READY_FOR_INPUT_COLOUR);
             AddButton.BorderBrush = new SolidColorBrush(READY_FOR_INPUT_COLOUR);
 
-            StaffMemberData StaffData = GetStaffData();
-            PatientData.addStaffMember(StaffData);
-            StaffList.Members.Add(StaffData);
+            StaffMemberData StaffData = GenerateStaffData();
             ItemsAdded.Add(StaffData);
+            StaffList.Members.Add(StaffData);
 
             StaffName.Text = "";
             StaffPosition.SelectedIndex = -1;
@@ -88,11 +87,12 @@ namespace Resuscitate
 
             if (rootFrame.CanGoBack)
             {
-                rootFrame.GoBack();
+                PageStackEntry prevStackEntry = rootFrame.BackStack[rootFrame.BackStackDepth - 1];
+                this.Frame.Navigate(prevStackEntry.SourcePageType, ResusData);
             }
         }
 
-        private StaffMemberData GetStaffData()
+        private StaffMemberData GenerateStaffData()
         {
             string Name = StaffName.Text;
             string Position = StaffPosition.SelectedValue.ToString();

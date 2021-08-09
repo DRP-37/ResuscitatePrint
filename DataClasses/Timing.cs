@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
-using Windows.UI.Xaml;
 using System.Runtime.CompilerServices;
+using Windows.UI.Xaml;
 
-namespace Resuscitate
+namespace Resuscitate.DataClasses
 {
     public class Timing : INotifyPropertyChanged
     {
@@ -15,7 +11,7 @@ namespace Resuscitate
         public bool IsSet { get; set; }
         public int Offset { get; set; }
         public string _time { get; set; }
-        public string Time 
+        public string Time
         {
             get { return _time; }
             set
@@ -30,8 +26,8 @@ namespace Resuscitate
 
         public Timing(bool isSet, int offset)
         {
-            this.IsSet = isSet;
-            this.Offset = offset;
+            IsSet = isSet;
+            Offset = offset;
         }
 
         public Timing(bool isSet) : this(isSet, 0) { }
@@ -41,7 +37,7 @@ namespace Resuscitate
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             // Raise the PropertyChanged event, passing the name of the property whose value has changed.
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         }
 
@@ -72,7 +68,8 @@ namespace Resuscitate
             if (elapsed.TotalMinutes < 10)
             {
                 Time = '0' + string.Format("{00}:{1:00}", (int)elapsed.TotalMinutes, elapsed.Seconds);
-            } else
+            }
+            else
             {
                 Time = string.Format("{00}:{1:00}", (int)elapsed.TotalMinutes, elapsed.Seconds);
             }

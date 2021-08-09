@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Resuscitate
+﻿namespace Resuscitate.DataClasses
 {
     public class StaffMemberData
     {
@@ -23,7 +17,7 @@ namespace Resuscitate
 
         override public string ToString()
         {
-            return $"Name: {Position} {Name}, Grade: {Grade}, Time of Entry: {TimeOfArrival}";
+            return $"Arrival Time: {TimeOfArrival}\tName: {Name}, Position: {Position}, Grade: {Grade}";
         }
     }
 }

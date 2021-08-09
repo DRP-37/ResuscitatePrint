@@ -15,66 +15,45 @@ namespace Resuscitate
 
     public sealed partial class InputTime : Page
     {
-        public PatientData PatientData;
-
         private const bool IS_SET = true;
         private const bool NOT_SET = false;
 
-        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOUR = Colors.Red;
+        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOUR = InputUtils.DEFAULT_INCORRECT_BUTTON_COLOUR;
 
-        private Timing TimingCount;
+        // This ResuscitationData is never complete. It only contains a PatientData and StaffList
+        private ResuscitationData MockData;
 
         public InputTime()
         {
             this.InitializeComponent();
+
+            this.MockData = new ResuscitationData(new PatientData(), new StaffList());
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter != null)
             {
-                if (e.Parameter.GetType() == typeof(ReviewDataAndTiming))
-                {
-                    var RDaT = (ReviewDataAndTiming)e.Parameter;
-                    TimingCount = RDaT.Timing;
-                    PatientData = RDaT.PatientData;
-                }
-                else if (e.Parameter.GetType() == typeof(PatientData))
-                {
-                    PatientData = (PatientData)e.Parameter;
-                }
+                MockData = (ResuscitationData)e.Parameter;
             }
 
             TimeHours.PlaceholderText = DateTime.Now.ToString("HH");
             TimeMinutes.PlaceholderText = DateTime.Now.ToString("mm");
         }
 
-        /* Currently collapsed */
-        private void InputLater_Click(object sender, RoutedEventArgs e)
-        {
-            // Set timer
-            TimingCount = new Timing(NOT_SET);
-            TimingCount.InitTiming();
-
-            // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, null, PatientData));
-        }
-
         private void Now_Click(object sender, RoutedEventArgs e)
         {
             // Set timer
-            TimingCount = new Timing(IS_SET);
-            TimingCount.InitTiming();
+            Timing timingCount = new Timing(IS_SET);
+            timingCount.InitTiming();
 
             string timeOfBirth = DateTime.Now.ToString("HH:mm");
 
-            // Initialise StatusList and first StatusEvent
-            StatusList statusList = StatusList.fromTimeOfBirth(timeOfBirth);
-
-            PatientData.Tob = timeOfBirth;
+            MockData.PatientData.Tob = timeOfBirth;
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, PatientData));
+            this.Frame.Navigate(typeof(Resuscitation), 
+                new ResuscitationData(timingCount, MockData.PatientData, MockData.StaffList, timeOfBirth));
         }
 
         private void SetTime_Click(object sender, RoutedEventArgs e)
@@ -91,28 +70,38 @@ namespace Resuscitate
             int offsetMins = (int) maybeOffsetMins;
 
             // Set timer
-            TimingCount = new Timing(IS_SET, offsetMins * 60);
-            TimingCount.InitTiming();
+            Timing timingCount = new Timing(IS_SET, offsetMins * 60);
+            timingCount.InitTiming();
 
             string timeOfBirth = $"{TimeHours.Text}:{TimeMinutes.Text}";
 
-            // Initialise StatusList and first StatusEvent
-            StatusList statusList = StatusList.fromTimeOfBirth(timeOfBirth);
-
-            PatientData.Tob = timeOfBirth;
+            MockData.PatientData.Tob = timeOfBirth;
 
             // Go to main page
-            this.Frame.Navigate(typeof(Resuscitation), new ReviewDataAndTiming(TimingCount, statusList, PatientData));
+            this.Frame.Navigate(typeof(Resuscitation),
+                new ResuscitationData(timingCount, MockData.PatientData, MockData.StaffList, timeOfBirth));
+        }
+
+        /* Currently collapsed */
+        private void InputLater_Click(object sender, RoutedEventArgs e)
+        {
+            // Set timer
+            Timing timingCount = new Timing(NOT_SET);
+            timingCount.InitTiming();
+
+            // Go to main page
+            this.Frame.Navigate(typeof(Resuscitation),
+                new ResuscitationData(timingCount, MockData.PatientData, MockData.StaffList, "Unknown"));
         }
 
         private void PatientInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(PatientPage), new ReviewDataAndTiming(TimingCount, null, PatientData));
+            this.Frame.Navigate(typeof(PatientPage), MockData);
         }
 
         private void StaffInfo_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), PatientData);
+            this.Frame.Navigate(typeof(StaffPage), MockData);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

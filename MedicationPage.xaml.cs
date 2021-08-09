@@ -65,8 +65,6 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> Events = new List<Event>();
-
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
 
             foreach (StatusEvent Event in MedicationEvents)
@@ -79,7 +77,7 @@ namespace Resuscitate
 
             if (StatusEvents.Count > 0)
             {
-                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+                Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
             }
         }
 

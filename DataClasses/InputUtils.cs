@@ -3,13 +3,17 @@ using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Resuscitate
+namespace Resuscitate.DataClasses
 {
     class InputUtils
     {
         // Default button colours
         public static readonly Color DEFAULT_SELECTED_COLOUR = Colors.LightGreen;
         public static readonly Color DEFAULT_UNSELECTED_COLOUR = Colors.White;
+        public static readonly Color DEFAULT_INCORRECT_BUTTON_COLOUR = Colors.Red;
+
+        public static readonly Color DEFAULT_ADD_COLOUR = ConvertHexColour("#FF24BAA3");
+        public static readonly Color DEFAULT_INCORRECT_ADD_COLOUR = Colors.Red;
 
         public static readonly Color DEFAULT_CPR_SELECTED_COLOUR = ConvertHexColour("#FFDB4325");
         public static readonly Color DEFAULT_CPR_UNSELECTED_COLOUR = Colors.LightGray;

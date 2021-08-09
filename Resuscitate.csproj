@@ -128,41 +128,25 @@
     <Compile Include="AssessmentsPage.xaml.cs">
       <DependentUpon>AssessmentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AudioRecorder.cs" />
+    <Compile Include="Unused\AudioRecorder.cs" />
     <Compile Include="BloodGasPage.xaml.cs">
       <DependentUpon>BloodGasPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Export.cs" />
-    <Compile Include="InputUtils.cs" />
+    <Compile Include="DataClasses\Export.cs" />
+    <Compile Include="DataClasses\InputUtils.cs" />
     <Compile Include="CPRPage.xaml.cs">
       <DependentUpon>CPRPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataClasses\AirwayPositioning.cs" />
-    <Compile Include="DataClasses\ApgarScore.cs" />
-    <Compile Include="DataClasses\BloodGas.cs" />
-    <Compile Include="DataClasses\CardiacCompressions.cs" />
-    <Compile Include="DataClasses\FirebaseDataStructure.cs" />
-    <Compile Include="DataClasses\Event.cs" />
-    <Compile Include="DataClasses\EventAndTiming.cs" />
-    <Compile Include="DataClasses\Exporter.cs" />
-    <Compile Include="DataClasses\InitialAssessment.cs" />
-    <Compile Include="DataClasses\IntubationAndSuction.cs" />
-    <Compile Include="DataClasses\LineInsertion.cs" />
-    <Compile Include="DataClasses\Medication.cs" />
+    <Compile Include="DataClasses\ResuscitationData.cs" />
+    <Compile Include="DataClasses\StaffList.cs" />
+    <Compile Include="DataClasses\TimingAndEvents.cs" />
     <Compile Include="DataClasses\Notes.cs" />
-    <Compile Include="DataClasses\Observation.cs" />
-    <Compile Include="DataClasses\OtherProcedures.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
-    <Compile Include="DataClasses\ReviewDataAndTiming.cs" />
-    <Compile Include="DataClasses\Reassessment.cs" />
-    <Compile Include="DataClasses\StaffData.cs" />
-    <Compile Include="DataClasses\Ventilation.cs" />
-    <Compile Include="DBTest.cs" />
     <Compile Include="DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExportData.cs" />
-    <Compile Include="ExportList.cs" />
+    <Compile Include="DataClasses\ExportData.cs" />
+    <Compile Include="Unused\ExportList.cs" />
     <Compile Include="IntubationPage.xaml.cs">
       <DependentUpon>IntubationPage.xaml</DependentUpon>
     </Compile>
@@ -191,28 +175,27 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReviewDocsPage.xaml.cs">
+    <Compile Include="Unused\ReviewDocsPage.xaml.cs">
       <DependentUpon>ReviewDocsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReviewPage.xaml.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SignUpPage.xaml.cs">
+    <Compile Include="Unused\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SignInPage.xaml.cs">
+    <Compile Include="Unused\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StaffList.cs" />
-    <Compile Include="StaffMemberData.cs" />
+    <Compile Include="DataClasses\StaffMemberData.cs" />
     <Compile Include="StaffPage.xaml.cs">
       <DependentUpon>StaffPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatusEvent.cs" />
-    <Compile Include="StatusList.cs" />
-    <Compile Include="TextFileExport.cs" />
-    <Compile Include="Timing.cs" />
+    <Compile Include="DataClasses\StatusEvent.cs" />
+    <Compile Include="DataClasses\StatusList.cs" />
+    <Compile Include="DataClasses\TextFileExport.cs" />
+    <Compile Include="DataClasses\Timing.cs" />
     <Compile Include="VentilationPage.xaml.cs">
       <DependentUpon>VentilationPage.xaml</DependentUpon>
     </Compile>
@@ -364,7 +347,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReviewDocsPage.xaml">
+    <Page Include="Unused\ReviewDocsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -376,11 +359,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SignUpPage.xaml">
+    <Page Include="Unused\SignUpPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SignInPage.xaml">
+    <Page Include="Unused\SignInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

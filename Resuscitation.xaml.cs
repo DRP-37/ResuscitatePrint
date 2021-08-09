@@ -11,36 +11,43 @@ namespace Resuscitate
 {
     public sealed partial class Resuscitation : Page
     {
-        // Global Variables
+        /* Global Variables */
+
+        // Notification Timers
         public static Stopwatch reassessmentTimer;
         public static Stopwatch cprTimer;
         public static Stopwatch apgarTimer;
         public static int apgarCounter;
         public static bool[] apgarChecksCompleted;
 
-        private PatientData data;
-        private DispatcherTimer Timer = new DispatcherTimer();
-        private StatusList StatusList;
+        /* Private Variables */
+        private string CurrTime;
+        private DispatcherTimer CurrentTimer = new DispatcherTimer();
+
+        private ResuscitationData ResusData;
 
         private Timing TimingCount;
-        private string CurrTime;
+        private StatusList StatusList;
 
         public Resuscitation()
         {
             // Initialise
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-            Timer.Tick += Timer_Tick;
-            Timer.Interval = new TimeSpan(0, 0, 1);
-            Timer.Start();
 
-            apgarTimer = Stopwatch.StartNew();
+            // Initialise Timer for Current Timestamp
+            CurrentTimer.Tick += Timer_Tick;
+            CurrentTimer.Interval = new TimeSpan(0, 0, 1);
+            CurrentTimer.Start();
+
+            // Notification Timers
             reassessmentTimer = Stopwatch.StartNew();
-            cprTimer = new Stopwatch();
+            apgarTimer = Stopwatch.StartNew();
             apgarCounter = 0;
             apgarChecksCompleted = new bool[] { false, false, false, false, false };
 
+            // Create CPR Timer
+            cprTimer = new Stopwatch();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -49,45 +56,29 @@ namespace Resuscitate
 
             // If you want to specify you have come back from a page (eg StaffPage) use:
             //   Frame.ForwardStack.Count > 0 && Frame.ForwardStack.ElementAt(0).SourcePageType.Name == "StaffPage"
+
+            // TODO: This is a quickfix to say if something hasn't specifically navigated here (GoBack was used) the
+            //    parameter it gives should not be used
             if (Frame.ForwardStack.Count > 0)
             {
                 return;
             }
 
-            // Parameter checks
-            if (e.Parameter.GetType() == typeof(EventAndTiming))
+            // Should only take ResuscitateData or TimingAndEvents
+            if (e.Parameter.GetType() == typeof(ResuscitationData))
             {
-                var EAndT = (EventAndTiming)e.Parameter;
-                TimingCount = EAndT.Timing;
+                ResusData = (ResuscitationData)e.Parameter;
+                TimingCount = ResusData.TimingCount;
+                StatusList = ResusData.StatusList;
 
-                foreach (Event Event in EAndT.MedicalEvents)
-                {
-                    data.addItem(Event);
-                }
-
-                StatusList.AddAll(EAndT.StatusEvents);
-                StatusListView.ScrollIntoView(StatusList.LastItem());
-
-            } else if (e.Parameter.GetType() == typeof(Timing))
+            } else if (e.Parameter.GetType() == typeof(TimingAndEvents))
             {
-                TimingCount = (Timing)e.Parameter;
-
-            } else if (e.Parameter.GetType() == typeof(ReviewDataAndTiming))
-            {
-                var RDaT = (ReviewDataAndTiming)e.Parameter;
-                TimingCount = RDaT.Timing;
-                data = RDaT.PatientData;
-
-                if (data.DOB == "N/A")
-                {
-                    data.DOB = DateTime.Now.ToString("dd/MM/yyyy");
-                }
-
-                if (RDaT.StatusList != null)
-                {
-                    StatusList = RDaT.StatusList;
-                }
+                TimingAndEvents data = (TimingAndEvents)e.Parameter;
+                TimingCount = data.Timing;
+                StatusList.AddAll(data.StatusEvents);
             }
+
+            StatusListView.ScrollIntoView(StatusList.LastItem());
 
             base.OnNavigatedTo(e);
         }
@@ -99,11 +90,9 @@ namespace Resuscitate
 
         private void TimeView_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Nothing
             if (displayApgarNotif()) {
                 Notification.Text = "Calculate next Apgar Score.";
-            }
-            else if (displayReassessNotif())
+            } else if (displayReassessNotif())
             {
                 Notification.Text = reassessmentTimer.Elapsed.ToString(@"mm\:ss") 
                     + " minutes have passed since the last reassessment.";
@@ -143,7 +132,7 @@ namespace Resuscitate
 
             if (!apgarChecksCompleted[apgarCounter])
             {
-                return (TimeView.Text.StartsWith("" + apgarCounter * 5 + ":")) ||
+                return TimeView.Text.StartsWith("" + apgarCounter * 5 + ":") ||
                      (TimeSpan.Compare(apgarTimer.Elapsed, new TimeSpan(0, 5, 0)) >= 0);
             }
 
@@ -152,7 +141,7 @@ namespace Resuscitate
 
         private void InitAssessmentButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AssessmentsPage), TimingCount);
+            this.Frame.Navigate(typeof(AssessmentsPage), ResusData);
         }
 
         private void ApgarButton_Click(object sender, RoutedEventArgs e)
@@ -202,17 +191,17 @@ namespace Resuscitate
 
         private void NotesButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(NotesPage), new ReviewDataAndTiming(TimingCount, StatusList, data));
+            this.Frame.Navigate(typeof(NotesPage), ResusData);
         }
 
         private void ReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ReviewPage), new ReviewDataAndTiming(TimingCount, StatusList, data));
+            this.Frame.Navigate(typeof(ReviewPage), ResusData);
         }
 
         private void StaffInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StaffPage), data);
+            this.Frame.Navigate(typeof(StaffPage), ResusData);
         }
 
         // Changes the image's width to fit the scroller screen

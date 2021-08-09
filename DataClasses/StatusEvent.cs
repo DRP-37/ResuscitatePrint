@@ -1,15 +1,14 @@
-﻿using Resuscitate.DataClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
-namespace Resuscitate
+namespace Resuscitate.DataClasses
 {
     public class StatusEvent
     {
+        // Current longest name is Ventilation Breaths: via mask (29 chars)
+        private const int MAX_NAME_LEN = 35;
+
         public string Name { get; }
         public string Data { get; }
         public string Time { get; }
@@ -46,14 +45,14 @@ namespace Resuscitate
                 return null;
             }
 
-            return new StatusEvent(name, (TextBlock) selected.Content, Time);
+            return new StatusEvent(name, (TextBlock)selected.Content, Time);
         }
 
         /* Methods */
 
         public override string ToString()
         {
-            return Time + " " + Name + ":\t" + Data;
+            return Time + " " + Name + ":" + new string(' ', MAX_NAME_LEN - Name.Length) + Data;
         }
 
         /* Static Utils */

@@ -43,12 +43,10 @@ namespace Resuscitate
                 return;
             }
 
-            List<Event> Events = new List<Event>();
-
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
 
             StatusEvents.Add(DrainEvent);
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
         }
 
         // Update colours and selection of procedure on click

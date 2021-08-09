@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Resuscitate"
+    xmlns:local1="using:Resuscitate.DataClasses"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -52,7 +53,7 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:Name="TableDataTemplate" x:DataType="local:StaffMemberData">
+                    <DataTemplate x:Name="TableDataTemplate" x:DataType="local1:StaffMemberData">
                         <Grid AutomationProperties.Name="{x:Bind Path=Name}" Height="30">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>

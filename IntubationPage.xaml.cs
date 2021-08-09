@@ -50,12 +50,10 @@ namespace Resuscitate
                 return;
             }
 
-            List<Event> Events = new List<Event>();
-
             List<StatusEvent> StatusEvents = new List<StatusEvent>();
             StatusEvents.Add(IntubationEvent);
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
         }
 
         private void Suction_Click(object sender, RoutedEventArgs e)

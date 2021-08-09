@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -17,6 +15,7 @@ namespace Resuscitate
     {
         private const int MAX_ALLOWED_EST_WEIGHT = 9;
 
+        private ResuscitationData ResusData;
         private Timing TimingCount;
 
         private Button[] Colours;
@@ -50,7 +49,8 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            ResusData = (ResuscitationData)e.Parameter;
+            TimingCount = ResusData.TimingCount;
 
             // Set all selections to null (new StatusEvent generation)
             CordClampingEvent = null;
@@ -66,30 +66,35 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> Events = new List<Event>();
+            if (EstimatedWeightEvent != null)
+            {
+                ResusData.PatientData.Weight = EstimatedWeight.Text;
+            }
 
-            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            List<StatusEvent> statusEvents = new List<StatusEvent>();
 
             // Add all generated StatusEvents
-            StatusEvent.MaybeAdd(CordClampingEvent, StatusEvents);
+            StatusEvent.MaybeAdd(CordClampingEvent, statusEvents);
 
             foreach (StatusEvent Event in TemperatureEvents)
             {
-                StatusEvent.MaybeAdd(Event, StatusEvents);
+                StatusEvent.MaybeAdd(Event, statusEvents);
             }
 
-            StatusEvent.MaybeAdd(EstimatedWeightEvent, StatusEvents);
-            StatusEvent.MaybeAdd(ColourEvent, StatusEvents);
-            StatusEvent.MaybeAdd(HeartrateEvent, StatusEvents);
-            StatusEvent.MaybeAdd(ToneEvent, StatusEvents);
-            StatusEvent.MaybeAdd(BreathingEvent, StatusEvents);
+            StatusEvent.MaybeAdd(EstimatedWeightEvent, statusEvents);
+            StatusEvent.MaybeAdd(ColourEvent, statusEvents);
+            StatusEvent.MaybeAdd(HeartrateEvent, statusEvents);
+            StatusEvent.MaybeAdd(ToneEvent, statusEvents);
+            StatusEvent.MaybeAdd(BreathingEvent, statusEvents);
 
-            if (StatusEvents.Count < 1)
+            if (statusEvents.Count < 1)
             {
                 return;
             }
 
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            ResusData.StatusList.AddAll(statusEvents);
+
+            Frame.Navigate(typeof(Resuscitation), ResusData);
         }
 
         private void colour_Click(object sender, RoutedEventArgs e)

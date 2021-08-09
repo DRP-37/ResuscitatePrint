@@ -85,8 +85,6 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> Events = new List<Event>();
-
             UpdateStatusEventsList();
 
             if (StatusEvents.Count > 0)
@@ -97,7 +95,7 @@ namespace Resuscitate
                     Resuscitation.cprTimer.Restart();
                 }
 
-                Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+                Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
             }
         }
 
@@ -195,9 +193,7 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> Events = new List<Event>();
-
-            Frame.Navigate(typeof(Resuscitation), new EventAndTiming(TimingCount, Events, StatusEvents));
+            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
         }
 
         private void OxygenLevels_TextChanged(object sender, TextChangedEventArgs e)

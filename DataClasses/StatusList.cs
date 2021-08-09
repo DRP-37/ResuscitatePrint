@@ -1,11 +1,9 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using Windows.UI.Xaml.Controls;
 
-namespace Resuscitate
+namespace Resuscitate.DataClasses
 {
     public class StatusList
     {
@@ -13,7 +11,7 @@ namespace Resuscitate
 
         public ObservableCollection<StatusEvent> Events
         {
-            get { return this._events; }
+            get { return _events; }
         }
 
         private StatusList() { }
@@ -41,11 +39,6 @@ namespace Resuscitate
             {
                 Events.Add(statusEvent);
             }
-        }
-
-        public void ExportAsTextFile(string patientId, Button exportButton, TextBlock flyout)
-        {
-            new TextFileExport().ExportStatusList(patientId, this, exportButton, flyout);
         }
 
         public override string ToString()
