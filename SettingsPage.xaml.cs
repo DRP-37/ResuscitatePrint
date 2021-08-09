@@ -28,7 +28,7 @@ namespace Resuscitate
 
             if (MainPage.AppSettings.Values.ContainsKey("hospitalName"))
             {
-                HospitalName.Text = ((String)MainPage.AppSettings.Values["hospitalName"]);
+                HospitalName.Text = (String)MainPage.AppSettings.Values["hospitalName"];
             }
             base.OnNavigatedTo(e);
         }
@@ -49,7 +49,6 @@ namespace Resuscitate
             MainPage.AppSettings.Values["hospitalName"] = HospitalName.Text;
             MainPage.AppSettings.Values["exportPath"] = Path.Text;
 
-
             // Create a token for the storage folder to be able to access it
             // multiple times
             if (storageFolder != null)
@@ -57,6 +56,7 @@ namespace Resuscitate
                 string token = Guid.NewGuid().ToString();
                 StorageApplicationPermissions.FutureAccessList.AddOrReplace(token, storageFolder);
                 MainPage.AppSettings.Values["exportToken"] = token;
+
             } else if (storageFolder == null && String.IsNullOrWhiteSpace(Path.Text))
             {
                 MainPage.AppSettings.Values["exportToken"] = "";

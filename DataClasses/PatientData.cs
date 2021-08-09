@@ -41,7 +41,7 @@ namespace Resuscitate.DataClasses
             sb.Append("Gestation Period:\t");
             AppendToBuilder(Gestation, sb);
             sb.Append("Est. Weight:\t\t");
-            AppendToBuilder(Weight + " kg", sb);
+            AppendToBuilder(Weight + "kg", sb);
             sb.Append("\nMedical History:\n");
             AppendToBuilder(History, sb);
 

@@ -128,6 +128,7 @@
     <Compile Include="AssessmentsPage.xaml.cs">
       <DependentUpon>AssessmentsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataClasses\Medication.cs" />
     <Compile Include="Unused\AudioRecorder.cs" />
     <Compile Include="BloodGasPage.xaml.cs">
       <DependentUpon>BloodGasPage.xaml</DependentUpon>

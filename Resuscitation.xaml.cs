@@ -181,7 +181,7 @@ namespace Resuscitate
 
         private void MedicationButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MedicationPage), TimingCount);
+            this.Frame.Navigate(typeof(MedicationPage), ResusData);
         }
 
         private void OtherProceduresButton_Click(object sender, RoutedEventArgs e)
