@@ -20,15 +20,14 @@ namespace Resuscitate
         private const bool IS_RETURNING = true;
         private const bool IS_NOT_RETURNING = false;
 
+        private ResuscitationData ResusData;
         private Timing TimingCount;
 
         private Button[] AirwayPositions;
         private Button[] Ventilations;
 
-        List<StatusEvent> StatusList = new List<StatusEvent>();
-
-        StatusEvent AirwayEvent;
-        StatusEvent VentilationEvent;
+        private StatusEvent AirwayEvent;
+        private StatusEvent VentilationEvent;
 
         public VentilationPage()
         {
@@ -41,7 +40,8 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            ResusData = (ResuscitationData)e.Parameter;
+            TimingCount = ResusData.TimingCount;
 
             AirwayEvent = null;
             VentilationEvent = null;
@@ -55,8 +55,8 @@ namespace Resuscitate
 
             bool canReturn = UpdateStatusEventsAndColours();
 
-            if (StatusList.Count > 0 && canReturn) { 
-                Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusList));
+            if (canReturn) { 
+                Frame.Navigate(typeof(Resuscitation), ResusData);
             } 
         }
 
@@ -64,17 +64,21 @@ namespace Resuscitate
         {
             GenerateUpdateFlyout((FrameworkElement) sender, UpdateFlyout, IS_NOT_RETURNING);
 
+            ResusData.SaveLocally();
+
             UpdateStatusEventsAndColours();
         }
 
         /* Returns true if returning to Resuscitate page is possible */
         private bool UpdateStatusEventsAndColours()
         {
+            List<StatusEvent> statusList = new List<StatusEvent>();
+
             if (AirwayEvent != null)
             {
                 InputUtils.ResetButtons(AirwayPositions);
 
-                StatusList.Add(AirwayEvent);
+                statusList.Add(AirwayEvent);
                 AirwayEvent = null;
             }
 
@@ -83,7 +87,7 @@ namespace Resuscitate
                 InputUtils.ResetButtons(Ventilations);
                 InputUtils.ResetTextBoxColour(AirGiven);
 
-                StatusList.Add(VentilationEvent);
+                statusList.Add(VentilationEvent);
                 VentilationEvent = null;
             }
 
@@ -93,7 +97,9 @@ namespace Resuscitate
                 return false;
             }
 
-            return true;
+            ResusData.StatusList.AddAll(statusList);
+
+            return statusList.Count > 0;
         }
 
         private void NeutralPosition_Click(object sender, RoutedEventArgs e)
@@ -132,7 +138,7 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusList));
+            Frame.Navigate(typeof(Resuscitation), ResusData);
         }
 
         private void AirGiven_TextChanged(object sender, TextChangedEventArgs e)

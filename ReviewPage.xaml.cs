@@ -37,6 +37,8 @@ namespace Resuscitate
             PatientInfo.Background = PatientData.isComplete ? new SolidColorBrush(PATIENT_DATA_COMPLETE) :
                 new SolidColorBrush(PATIENT_DATA_INCOMPLETE);
 
+            ResusData.SaveLocally();
+
             base.OnNavigatedTo(e);
         }
 
@@ -66,6 +68,8 @@ namespace Resuscitate
         private void FinishAndLeavePage()
         {
             TimingCount.Stop();
+
+            MainPage.AppSettings.Values[ResuscitationData.HAS_STORE_KEY] = false;
 
             // Clear cache stored locally
             var frame = Window.Current.Content as Frame;

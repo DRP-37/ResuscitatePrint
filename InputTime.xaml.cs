@@ -35,6 +35,8 @@ namespace Resuscitate
             if (e.Parameter != null)
             {
                 MockData = (ResuscitationData)e.Parameter;
+
+                MockData.SaveLocally();
             }
 
             TimeHours.PlaceholderText = DateTime.Now.ToString("HH");

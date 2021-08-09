@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
@@ -13,6 +14,7 @@ namespace Resuscitate.DataClasses
         public string Data { get; }
         public string Time { get; }
 
+        [JsonConstructor]
         public StatusEvent(string Name, string Data, string Time)
         {
             this.Name = Name;

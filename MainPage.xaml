@@ -12,8 +12,8 @@
         <Button x:Name="StartButton" Margin="0,278,0,0"  VerticalAlignment="Top" Height="125" Width="248" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="Start_Click" HorizontalAlignment="Center">
             <TextBlock TextAlignment="Center"><Run Text="Perform"/><LineBreak/><Run Text="Resuscitation"/></TextBlock>
         </Button>
-        <Button x:Name="ReviewButton" Height="125" Width="248" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReviewButton_Click" HorizontalAlignment="Center" Margin="0,432,0,0" VerticalAlignment="Top" Visibility="Collapsed">
-            <TextBlock TextAlignment="Center"><Run Text="Review"/><LineBreak/><Run Text="Resuscitation"/></TextBlock>
+        <Button x:Name="ReturnButton" Height="125" Width="248" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="ReturnButton_Click" HorizontalAlignment="Center" Margin="0,432,0,0" VerticalAlignment="Top">
+            <TextBlock TextAlignment="Center"><Run Text="Return to"/><LineBreak/><Run Text="Resuscitation"/></TextBlock>
         </Button>
         <Button x:Name="SettingsButton" Margin="51,33,0,0"  VerticalAlignment="Top" Height="80" Width="248" FontWeight="Bold" FontFamily="Microsoft JhengHei" FontSize="24" BorderThickness="2,2,2,2" RequestedTheme="Default" Background="#33BCBCBC" BorderBrush="#7F000000" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False" Click="SettingsButton_Click">
             <TextBlock TextAlignment="Center"><Run Text="Settings"/></TextBlock>

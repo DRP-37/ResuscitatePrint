@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
@@ -7,6 +8,8 @@ namespace Resuscitate.DataClasses
 {
     public class Timing : INotifyPropertyChanged
     {
+        private const string ZERO_TIME = "00:00";
+
         public readonly DispatcherTimer Timer = new DispatcherTimer();
         public bool IsSet { get; set; }
         public int Offset { get; set; }
@@ -21,16 +24,29 @@ namespace Resuscitate.DataClasses
             }
         }
 
-        private int Count { get; set; }
-        private int startTime;
+        /* Environment.TickCount of when the object was created */
+        public int StartTime { get; }
 
         public Timing(bool isSet, int offset)
         {
-            IsSet = isSet;
-            Offset = offset;
+            this.IsSet = isSet;
+            this.Offset = offset;
+            this.StartTime = Environment.TickCount;
+            this.Time = ZERO_TIME;
         }
 
         public Timing(bool isSet) : this(isSet, 0) { }
+
+        [JsonConstructor]
+        private Timing(bool isSet, int offset, int startTime)
+        {
+            this.IsSet = isSet;
+            this.Offset = offset;
+            this.StartTime = startTime;
+            this.Time = ZERO_TIME;
+
+            InitTiming();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
@@ -41,12 +57,8 @@ namespace Resuscitate.DataClasses
 
         }
 
-        public void InitTiming()
+        public void InitTiming(int? startTime = null)
         {
-            Count = 0;
-            startTime = Environment.TickCount;
-            Time = ToString();
-
             // Start timer
             Timer.Tick += Timer_Tick;
             Timer.Interval = TimeSpan.FromSeconds(1);
@@ -60,10 +72,7 @@ namespace Resuscitate.DataClasses
 
         private void Timer_Tick(object sender, object e)
         {
-            //Count++;
-            //Time = ToString();
-
-            var elapsed = TimeSpan.FromMilliseconds(Environment.TickCount - startTime);
+            var elapsed = TimeSpan.FromMilliseconds(Environment.TickCount - StartTime);
 
             if (elapsed.TotalMinutes < 10)
             {
@@ -75,23 +84,9 @@ namespace Resuscitate.DataClasses
             }
         }
 
-        public int TotalTime()
-        {
-            return Offset + Count;
-        }
-
         public override string ToString()
         {
-            string minsStr, secsStr;
-
-            int AllSeconds = Count + Offset;
-            int mins = AllSeconds / 60;
-            int secs = AllSeconds % 60;
-
-            minsStr = mins < 10 ? "0" + mins.ToString() : mins.ToString();
-            secsStr = secs < 10 ? "0" + secs.ToString() : secs.ToString();
-
-            return minsStr + ":" + secsStr;
+            return Time;
         }
     }
 }

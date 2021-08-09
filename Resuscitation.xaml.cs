@@ -78,6 +78,8 @@ namespace Resuscitate
                 StatusList.AddAll(data.StatusEvents);
             }
 
+            ResusData.SaveLocally();
+
             StatusListView.ScrollIntoView(StatusList.LastItem());
 
             base.OnNavigatedTo(e);
@@ -151,12 +153,12 @@ namespace Resuscitate
 
         private void ReassessmentButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ObservationPage), TimingCount);
+            this.Frame.Navigate(typeof(ObservationPage), ResusData);
         }
 
         private void VentilationButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(VentilationPage), TimingCount);
+            this.Frame.Navigate(typeof(VentilationPage), ResusData);
         }
 
         private void IntubationButton_Click(object sender, RoutedEventArgs e)

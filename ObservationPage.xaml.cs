@@ -24,8 +24,9 @@ namespace Resuscitate
         private static readonly Color CPR_SELECTED_COLOUR = InputUtils.DEFAULT_CPR_SELECTED_COLOUR;
         private static readonly Color CPR_UNSELECTED_COLOUR = Colors.White;
 
+        private ResuscitationData ResusData;
         private Timing TimingCount;
-        private List<StatusEvent> StatusEvents;
+
 
         private Button[] Responses;
         private Button[] HeartRates;
@@ -46,6 +47,7 @@ namespace Resuscitate
         private StatusEvent AirwayEvent;
         private StatusEvent BreathingEvent;
         private StatusEvent CirculationEvent;
+        private List<StatusEvent> CPREvents = new List<StatusEvent>();
 
         public ObservationPage()
         {
@@ -62,9 +64,9 @@ namespace Resuscitate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Take value from previous screen
-            TimingCount = (Timing)e.Parameter;
+            ResusData = (ResuscitationData)e.Parameter;
+            TimingCount = ResusData.TimingCount;
 
-            StatusEvents = new List<StatusEvent>();
             ResetEvents();
             SetCPRStopButton(Resuscitation.cprTimer.IsRunning);
 
@@ -85,9 +87,9 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateStatusEventsList();
+            bool eventAdded = UpdateStatusList();
 
-            if (StatusEvents.Count > 0)
+            if (eventAdded)
             {
                 Resuscitation.reassessmentTimer = Stopwatch.StartNew();
 
@@ -95,15 +97,15 @@ namespace Resuscitate
                     Resuscitation.cprTimer.Restart();
                 }
 
-                Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
+                Frame.Navigate(typeof(Resuscitation), ResusData);
             }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateStatusEventsList();
+            bool eventAdded = UpdateStatusList();
 
-            if (StatusEvents.Count > 0)
+            if (eventAdded)
             {
                 FlyoutBase.ShowAttachedFlyout((FrameworkElement) sender);
 
@@ -113,6 +115,8 @@ namespace Resuscitate
                     Resuscitation.cprTimer.Restart();
                 }
             }
+
+            ResusData.SaveLocally();
 
             ResetEvents();
             ResetAllButtonsAndFields();
@@ -176,7 +180,7 @@ namespace Resuscitate
                     Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
                 }
 
-                StatusEvents.Add(new StatusEvent("Cardiac Compressions", "Ended after " + Seconds + " seconds", TimingCount.Time));
+                CPREvents.Add(new StatusEvent("Cardiac Compressions", "Ended after " + Seconds + " seconds", TimingCount.Time));
 
                 Resuscitation.cprTimer.Stop();
                 Resuscitation.cprTimer.Reset();
@@ -185,7 +189,7 @@ namespace Resuscitate
             {
                 // Start button
                 Resuscitation.cprTimer = Stopwatch.StartNew();
-                StatusEvents.Add(new StatusEvent("Cardiac Compressions", "Started", TimingCount.Time));
+                CPREvents.Add(new StatusEvent("Cardiac Compressions", "Started", TimingCount.Time));
             }
 
             SetCPRStopButton(!hasStarted);
@@ -193,7 +197,9 @@ namespace Resuscitate
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
+            ResusData.StatusList.AddAll(CPREvents);
+
+            Frame.Navigate(typeof(Resuscitation), ResusData);
         }
 
         private void OxygenLevels_TextChanged(object sender, TextChangedEventArgs e)
@@ -241,18 +247,30 @@ namespace Resuscitate
             HeartrateBpmEvent = valid ? new StatusEvent("Heart Rate", textBox.Text + " bpm", TimingCount.Time) : null;
         }
 
-        private void UpdateStatusEventsList()
+        // Returns true if one or more StatusEvents were added
+        private bool UpdateStatusList()
         {
-            StatusEvent.MaybeAdd(HeartrateButtonEvent, StatusEvents);
-            StatusEvent.MaybeAdd(RespirationEvent, StatusEvents);
-            StatusEvent.MaybeAdd(MovementEvent, StatusEvents);
-            StatusEvent.MaybeAdd(OxySaturationEvent, StatusEvents);
-            StatusEvent.MaybeAdd(HeartrateBpmEvent, StatusEvents);
-            StatusEvent.MaybeAdd(OxyPercentEvent, StatusEvents);
+            List<StatusEvent> statusEvents = new List<StatusEvent>();
 
-            StatusEvent.MaybeAdd(AirwayEvent, StatusEvents);
-            StatusEvent.MaybeAdd(BreathingEvent, StatusEvents);
-            StatusEvent.MaybeAdd(CirculationEvent, StatusEvents);
+            StatusEvent.MaybeAdd(HeartrateButtonEvent, statusEvents);
+            StatusEvent.MaybeAdd(RespirationEvent, statusEvents);
+            StatusEvent.MaybeAdd(MovementEvent, statusEvents);
+            StatusEvent.MaybeAdd(OxySaturationEvent, statusEvents);
+            StatusEvent.MaybeAdd(HeartrateBpmEvent, statusEvents);
+            StatusEvent.MaybeAdd(OxyPercentEvent, statusEvents);
+
+            StatusEvent.MaybeAdd(AirwayEvent, statusEvents);
+            StatusEvent.MaybeAdd(BreathingEvent, statusEvents);
+            StatusEvent.MaybeAdd(CirculationEvent, statusEvents);
+
+            foreach (StatusEvent statusEvent in CPREvents)
+            {
+                statusEvents.Add(statusEvent);
+            }
+
+            ResusData.StatusList.AddAll(statusEvents);
+
+            return statusEvents.Count > 0;
         }
 
         private void ResetEvents()
@@ -267,6 +285,8 @@ namespace Resuscitate
             AirwayEvent = null;
             BreathingEvent = null;
             CirculationEvent = null;
+
+            CPREvents = new List<StatusEvent>();
         }
 
         private void ResetAllButtonsAndFields()
@@ -281,6 +301,8 @@ namespace Resuscitate
             OxygenLevels.Text = "";
             HeartRate.Text = "";
             PercentOxygen.Text = "";
+
+            // CPR button unaffected
         }
 
         private StatusEvent ClickReassessmentButton(Button sender, Button[] buttons, string EventName)
