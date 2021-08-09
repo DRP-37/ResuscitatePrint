@@ -20,15 +20,17 @@ namespace Resuscitate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            ApplicationDataContainer AppSettings = ApplicationData.Current.LocalSettings;
+
             // Load settings
-            if (MainPage.AppSettings.Values.ContainsKey("exportPath"))
+            if (AppSettings.Values.ContainsKey("exportPath"))
             {
-                Path.Text = (String)MainPage.AppSettings.Values["exportPath"];
+                Path.Text = (string) AppSettings.Values["exportPath"];
             }
 
-            if (MainPage.AppSettings.Values.ContainsKey("hospitalName"))
+            if (AppSettings.Values.ContainsKey("hospitalName"))
             {
-                HospitalName.Text = (String)MainPage.AppSettings.Values["hospitalName"];
+                HospitalName.Text = (string) AppSettings.Values["hospitalName"];
             }
             base.OnNavigatedTo(e);
         }
@@ -45,9 +47,11 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            ApplicationDataContainer AppSettings = ApplicationData.Current.LocalSettings;
+
             // Store in app settings
-            MainPage.AppSettings.Values["hospitalName"] = HospitalName.Text;
-            MainPage.AppSettings.Values["exportPath"] = Path.Text;
+            AppSettings.Values["hospitalName"] = HospitalName.Text;
+            AppSettings.Values["exportPath"] = Path.Text;
 
             // Create a token for the storage folder to be able to access it
             // multiple times
@@ -55,11 +59,11 @@ namespace Resuscitate
             {
                 string token = Guid.NewGuid().ToString();
                 StorageApplicationPermissions.FutureAccessList.AddOrReplace(token, storageFolder);
-                MainPage.AppSettings.Values["exportToken"] = token;
+                AppSettings.Values["exportToken"] = token;
 
             } else if (storageFolder == null && String.IsNullOrWhiteSpace(Path.Text))
             {
-                MainPage.AppSettings.Values["exportToken"] = "";
+                AppSettings.Values["exportToken"] = "";
             }
 
             Frame.Navigate(typeof(MainPage));

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Windows.Storage;
 
 namespace Resuscitate.DataClasses
 {
@@ -130,10 +131,12 @@ namespace Resuscitate.DataClasses
 
         public async void SaveLocally()
         {
+            ApplicationDataContainer AppSettings = ApplicationData.Current.LocalSettings;
+
             var storageHelper = GenerateStorageHelper();
 
             await storageHelper.SaveFileAsync(STORAGE_KEY, this);
-            MainPage.AppSettings.Values[HAS_STORE_KEY] = true;
+            AppSettings.Values[HAS_STORE_KEY] = true;
         }
 
         /* Used for storage of ResuscitationData */

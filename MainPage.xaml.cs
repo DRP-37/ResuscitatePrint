@@ -13,9 +13,6 @@ namespace Resuscitate
     public sealed partial class MainPage : Page
     {
         private const string HAS_STORE_KEY = ResuscitationData.HAS_STORE_KEY;
-        private static readonly Color INACTIVE_BUTTON_COLOUR = Colors.LightGray;
-
-        public static ApplicationDataContainer AppSettings { get; set; }
 
         private bool HasLocalStore;
         private static ResuscitationData StoredData;
@@ -24,7 +21,7 @@ namespace Resuscitate
         {
             this.InitializeComponent();
 
-            AppSettings = ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer AppSettings = ApplicationData.Current.LocalSettings;
 
             loadStorage();
             HasLocalStore = AppSettings.Values[HAS_STORE_KEY] != null && (bool) AppSettings.Values[HAS_STORE_KEY];

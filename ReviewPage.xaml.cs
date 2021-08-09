@@ -1,5 +1,6 @@
 ﻿using Resuscitate.DataClasses;
 using System;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -85,7 +86,8 @@ namespace Resuscitate
         {
             TimingCount.Stop();
 
-            MainPage.AppSettings.Values[ResuscitationData.HAS_STORE_KEY] = false;
+            ApplicationDataContainer AppSettings = ApplicationData.Current.LocalSettings;
+            AppSettings.Values[ResuscitationData.HAS_STORE_KEY] = false;
 
             // Clear cache stored locally
             var frame = Window.Current.Content as Frame;

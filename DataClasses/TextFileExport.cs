@@ -75,10 +75,12 @@ namespace Resuscitate.DataClasses
 
         static private async Task<StorageFolder> GetFileFromToken()
         {
+            ApplicationDataContainer AppSettings = ApplicationData.Current.LocalSettings;
+
             string token = "";
-            if (MainPage.AppSettings.Values.ContainsKey("exportToken"))
+            if (AppSettings.Values.ContainsKey("exportToken"))
             {
-                token = (String)MainPage.AppSettings.Values["exportToken"];
+                token = (string) AppSettings.Values["exportToken"];
             }
 
             if (token == "") return null;
