@@ -17,11 +17,11 @@ namespace Resuscitate.DataClasses
         public string Weight { get; set; } = "";
         public string History { get; set; } = "";
 
-        private List<Notes> notes = new List<Notes>();
+        public List<Notes> Notes { get; } = new List<Notes>();
 
         public void addNote(Notes note)
         {
-            notes.Add(note);
+            Notes.Add(note);
         }
 
         override public string ToString()
@@ -45,10 +45,10 @@ namespace Resuscitate.DataClasses
             sb.Append("\nMedical History:\n");
             AppendToBuilder(History, sb);
 
-            for (int i = 0; i < notes.Count; i++)
+            for (int i = 0; i < Notes.Count; i++)
             {
                 sb.AppendLine($"\nNote {i + 1}:");
-                sb.AppendLine(notes[i].ToString());
+                sb.AppendLine(Notes[i].ToString());
             }
 
             return sb.ToString();

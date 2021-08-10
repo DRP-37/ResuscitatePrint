@@ -64,11 +64,6 @@ namespace Resuscitate
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsValidEstWeight())
-            {
-                ResusData.PatientData.Weight = EstimatedWeight.Text;
-            }
-
             List<StatusEvent> statusEvents = new List<StatusEvent>();
 
             // Add all generated StatusEvents
@@ -84,7 +79,14 @@ namespace Resuscitate
             StatusEvent.MaybeAdd(ToneEvent, statusEvents);
             StatusEvent.MaybeAdd(BreathingEvent, statusEvents);
 
-            if (statusEvents.Count < 1)
+            bool validWeight = IsValidEstWeight();
+
+            if (validWeight)
+            {
+                ResusData.PatientData.Weight = EstimatedWeight.Text;
+            }
+
+            if (statusEvents.Count <= 0 && !validWeight)
             {
                 return;
             }
