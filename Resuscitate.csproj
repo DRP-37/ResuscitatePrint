@@ -141,7 +141,7 @@
     <Compile Include="DataClasses\ResuscitationData.cs" />
     <Compile Include="DataClasses\StaffList.cs" />
     <Compile Include="DataClasses\TimingAndEvents.cs" />
-    <Compile Include="DataClasses\Notes.cs" />
+    <Compile Include="DataClasses\Note.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
     <Compile Include="Pages\DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>

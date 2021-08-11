@@ -2,6 +2,7 @@
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
@@ -16,7 +17,7 @@ namespace Resuscitate.Pages
         private Timing TimingCount;
         private PatientData PatientData;
 
-        private Notes note;
+        private Note note;
         //private AudioRecorder _audioRecorder;
         //private bool isRecording = false;
 
@@ -35,13 +36,13 @@ namespace Resuscitate.Pages
             PatientData = ResusData.PatientData;
         }
         
-        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        private void AddNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_NOT_READY_COLOUR);
-            note = new Notes(UserNotes.Text);
-            PatientData.addNote(note);
+            PatientData.addNote(new Note(UserNotes.Text));
 
-            Frame.Navigate(typeof(Resuscitation), ResusData);
+            UserNotes.Text = "";
+
+            FlyoutBase.ShowAttachedFlyout((FrameworkElement) sender);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -51,12 +52,15 @@ namespace Resuscitate.Pages
 
         private void UserNotes_TextChanged(object sender, TextChangedEventArgs e)
         {
+            /* If a note is able to be submitted, enable button */
             if (string.IsNullOrWhiteSpace(((TextBox) sender).Text))
             {
-                ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_NOT_READY_COLOUR);
+                AddNoteButton.IsEnabled = false;
+                AddNoteButton.Background = new SolidColorBrush(CONFIRMATION_NOT_READY_COLOUR);
             } else
             {
-                ConfirmButton.Background = new SolidColorBrush(CONFIRMATION_READY_COLOUR);
+                AddNoteButton.IsEnabled = true;
+                AddNoteButton.Background = new SolidColorBrush(CONFIRMATION_READY_COLOUR);
             }
         }
 

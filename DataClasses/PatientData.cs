@@ -17,9 +17,9 @@ namespace Resuscitate.DataClasses
         public string Weight { get; set; } = "";
         public string History { get; set; } = "";
 
-        public List<Notes> Notes { get; } = new List<Notes>();
+        public List<Note> Notes { get; } = new List<Note>();
 
-        public void addNote(Notes note)
+        public void addNote(Note note)
         {
             Notes.Add(note);
         }
