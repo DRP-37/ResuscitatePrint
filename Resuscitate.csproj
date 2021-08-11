@@ -121,21 +121,21 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ApgarAssessment.xaml.cs" />
+    <Compile Include="Pages\ApgarAssessment.xaml.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AssessmentsPage.xaml.cs">
+    <Compile Include="Pages\AssessmentsPage.xaml.cs">
       <DependentUpon>AssessmentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\Medication.cs" />
     <Compile Include="Unused\AudioRecorder.cs" />
-    <Compile Include="BloodGasPage.xaml.cs">
+    <Compile Include="Pages\BloodGasPage.xaml.cs">
       <DependentUpon>BloodGasPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\Export.cs" />
     <Compile Include="DataClasses\InputUtils.cs" />
-    <Compile Include="CPRPage.xaml.cs">
+    <Compile Include="Pages\CPRPage.xaml.cs">
       <DependentUpon>CPRPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\ResuscitationData.cs" />
@@ -143,52 +143,52 @@
     <Compile Include="DataClasses\TimingAndEvents.cs" />
     <Compile Include="DataClasses\Notes.cs" />
     <Compile Include="DataClasses\PatientData.cs" />
-    <Compile Include="DrainsPage.xaml.cs">
+    <Compile Include="Pages\DrainsPage.xaml.cs">
       <DependentUpon>DrainsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\ExportData.cs" />
     <Compile Include="Unused\ExportList.cs" />
-    <Compile Include="IntubationPage.xaml.cs">
+    <Compile Include="Pages\IntubationPage.xaml.cs">
       <DependentUpon>IntubationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LineInsertionPage.xaml.cs">
+    <Compile Include="Pages\LineInsertionPage.xaml.cs">
       <DependentUpon>LineInsertionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MedicationPage.xaml.cs">
+    <Compile Include="Pages\MedicationPage.xaml.cs">
       <DependentUpon>MedicationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NotesPage.xaml.cs">
+    <Compile Include="Pages\NotesPage.xaml.cs">
       <DependentUpon>NotesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ObservationPage.xaml.cs">
+    <Compile Include="Pages\ObservationPage.xaml.cs">
       <DependentUpon>ObservationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PatientPage.xaml.cs">
+    <Compile Include="Pages\PatientPage.xaml.cs">
       <DependentUpon>PatientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resuscitation.xaml.cs">
+    <Compile Include="Pages\Resuscitation.xaml.cs">
       <DependentUpon>Resuscitation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InputTime.xaml.cs">
+    <Compile Include="Pages\InputTime.xaml.cs">
       <DependentUpon>InputTime.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReviewPage.xaml.cs" />
-    <Compile Include="SettingsPage.xaml.cs">
+    <Compile Include="Pages\ReviewPage.xaml.cs" />
+    <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\StaffMemberData.cs" />
-    <Compile Include="StaffPage.xaml.cs">
+    <Compile Include="Pages\StaffPage.xaml.cs">
       <DependentUpon>StaffPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataClasses\StatusEvent.cs" />
     <Compile Include="DataClasses\StatusList.cs" />
     <Compile Include="DataClasses\TextFileExport.cs" />
     <Compile Include="DataClasses\Timing.cs" />
-    <Compile Include="VentilationPage.xaml.cs">
+    <Compile Include="Pages\VentilationPage.xaml.cs">
       <DependentUpon>VentilationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -268,97 +268,97 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ApgarAssessment.xaml">
+    <Page Include="Pages\ApgarAssessment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AssessmentsPage.xaml">
+    <Page Include="Pages\AssessmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BloodGasPage.xaml">
+    <Page Include="Pages\BloodGasPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CPRPage.xaml">
+    <Page Include="Pages\CPRPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DrainsPage.xaml">
+    <Page Include="Pages\DrainsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IntubationPage.xaml">
+    <Page Include="Pages\IntubationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LineInsertionPage.xaml">
+    <Page Include="Pages\LineInsertionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MedicationPage.xaml">
+    <Page Include="Pages\MedicationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NotesPage.xaml">
+    <Page Include="Pages\NotesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ObservationPage.xaml">
+    <Page Include="Pages\ObservationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PatientPage.xaml">
+    <Page Include="Pages\PatientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resuscitation.xaml">
+    <Page Include="Pages\Resuscitation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InputTime.xaml">
+    <Page Include="Pages\InputTime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReviewPage.xaml">
+    <Page Include="Pages\ReviewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingsPage.xaml">
+    <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StaffPage.xaml">
+    <Page Include="Pages\StaffPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VentilationPage.xaml">
+    <Page Include="Pages\VentilationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.Core">
-      <Version>3.7.0.31</Version>
+      <Version>3.7.2.2</Version>
     </PackageReference>
     <PackageReference Include="IronPython">
       <Version>2.7.11</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.10</Version>
+      <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp">
       <Version>7.0.2</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestAdapter">
-      <Version>2.2.4</Version>
+      <Version>2.2.5</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestFramework">
-      <Version>2.2.4</Version>
+      <Version>2.2.5</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
