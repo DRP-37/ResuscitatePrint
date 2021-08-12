@@ -13,10 +13,10 @@ namespace Resuscitate.Pages
 
     public sealed partial class InputTime : Page
     {
+        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOUR = InputUtils.DEFAULT_INCORRECT_BUTTON_COLOUR;
+
         private const bool IS_SET = true;
         private const bool NOT_SET = false;
-
-        private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOUR = InputUtils.DEFAULT_INCORRECT_BUTTON_COLOUR;
 
         // This ResuscitationData is never complete. It only contains a PatientData and StaffList
         private ResuscitationData MockData;

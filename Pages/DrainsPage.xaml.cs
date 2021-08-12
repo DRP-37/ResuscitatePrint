@@ -8,10 +8,10 @@ namespace Resuscitate.Pages
 {
     public sealed partial class DrainsPage : Page
     {
+        private readonly Button[] Drains;
+
         private Timing TimingCount;
         private StatusEvent DrainEvent;
-
-        private Button[] Drains;
 
         public DrainsPage()
         {
@@ -37,14 +37,13 @@ namespace Resuscitate.Pages
                 return;
             }
 
-            List<StatusEvent> StatusEvents = new List<StatusEvent>();
+            List<StatusEvent> StatusEvents = new List<StatusEvent> { DrainEvent };
 
-            StatusEvents.Add(DrainEvent);
             Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, StatusEvents));
         }
 
         // Update colours and selection of procedure on click
-        private void Drain_Click(object sender, RoutedEventArgs e)
+        private void DrainButton_Click(object sender, RoutedEventArgs e)
         {
             Button selected = InputUtils.ClickWithDefaults((Button) sender, Drains);
 

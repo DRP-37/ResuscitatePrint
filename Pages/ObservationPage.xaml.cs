@@ -21,16 +21,15 @@ namespace Resuscitate.Pages
         private static readonly Color CPR_SELECTED_COLOUR = InputUtils.DEFAULT_CPR_SELECTED_COLOUR;
         private static readonly Color CPR_UNSELECTED_COLOUR = Colors.White;
 
+        private readonly Button[] Responses;
+        private readonly Button[] HeartRates;
+        private readonly Button[] Movements;
+        private readonly Button[] Airways;
+        private readonly Button[] Breathings;
+        private readonly Button[] Compressions;
+
         private ResuscitationData ResusData;
         private Timing TimingCount;
-
-
-        private Button[] Responses;
-        private Button[] HeartRates;
-        private Button[] Movements;
-        private Button[] Airways;
-        private Button[] Breathings;
-        private Button[] Compressions;
 
         // Observation events
         private StatusEvent HeartrateButtonEvent;
@@ -50,9 +49,9 @@ namespace Resuscitate.Pages
         {
             this.InitializeComponent();
 
-            Responses = new Button[] { resp0, resp1, resp2, resp3 };
-            HeartRates = new Button[] { hr0, hr1, hr2, hr3 };
-            Movements = new Button[] { absent, present };
+            HeartRates = new Button[] { HeartRate0Button, HeartRate1Button, HeartRate2Button, HeartRate3Button };
+            Movements = new Button[] { AbsentButton, PresentButton };
+            Responses = new Button[] { Response0Button, Response1Button, Response2Button, Response3Button };
             Airways = new Button[] { MaskButton, ETTButton };
             Breathings = new Button[] { VentilationButton, InflationButton };
             Compressions = new Button[] { CPRButton };
@@ -68,18 +67,6 @@ namespace Resuscitate.Pages
             SetCPRStopButton(ResusData.CPRIsRunning());
 
             base.OnNavigatedTo(e);
-        }
-
-        private void SetCPRStopButton(bool hasStarted)
-        {
-            if (hasStarted) {
-                StopCPRButton.Background = new SolidColorBrush(CPR_SELECTED_COLOUR);
-                ((TextBlock)StopCPRButton.Content).Text = "Stop";
-            } else
-            {
-                StopCPRButton.Background = new SolidColorBrush(CPR_UNSELECTED_COLOUR);
-                ((TextBlock)StopCPRButton.Content).Text = "Start";
-            }
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -109,39 +96,34 @@ namespace Resuscitate.Pages
             ResetAllButtonsAndFields();
         }
 
-        private void movement_Click(object sender, RoutedEventArgs e)
+        private void MovementButton_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
-            MovementEvent = ClickReassessmentButton(selected, Movements, "Chest Movement");
+            MovementEvent = ClickReassessmentButton((Button) sender, Movements, "Chest Movement");
         }
 
-        private void hr_Click(object sender, RoutedEventArgs e)
+        private void HeartRateButton_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
-            HeartrateButtonEvent = ClickReassessmentButton(selected, HeartRates, "Heart Rate Range");
+            HeartrateButtonEvent = ClickReassessmentButton((Button )sender, HeartRates, "Heart Rate Range");
         }
 
-        private void resp_Click(object sender, RoutedEventArgs e)
+        private void ResponseButton_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
-            RespirationEvent = ClickReassessmentButton(selected, Responses, "Breathing");
+            RespirationEvent = ClickReassessmentButton((Button) sender, Responses, "Breathing");
         }
 
         private void AirwayManagement_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
-            AirwayEvent = ClickReassessmentButton(selected, Airways, "Airway Management");
+            AirwayEvent = ClickReassessmentButton((Button) sender, Airways, "Airway Management");
         }
 
         private void Breathing_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = (sender as Button);
-            BreathingEvent = ClickReassessmentButton(selected, Breathings, "Breathing Management");
+            BreathingEvent = ClickReassessmentButton((Button )sender, Breathings, "Breathing Management");
         }
 
         private void OngoingCirculation_Click(object sender, RoutedEventArgs e)
         {
-            Button selected = InputUtils.ClickWithDefaults((Button)sender, new Button[] { (Button)sender });
+            Button selected = InputUtils.ClickWithDefaults((Button) sender, new Button[] { (Button)sender });
 
             if (selected == null)
             {
@@ -158,7 +140,7 @@ namespace Resuscitate.Pages
 
             if (hasStarted)
             {
-                // Stop button
+                // Stop timer
                 string Milieconds = ResusData.CPRElapsedMiliseconds().ToString();
                 string Seconds = "0";
 
@@ -173,7 +155,7 @@ namespace Resuscitate.Pages
 
             } else
             {
-                // Start button
+                // Start new timer
                 ResusData.StartNewCPRTimer();
                 CPREvents.Add(new StatusEvent("Cardiac Compressions", "Started", TimingCount.Time));
             }
@@ -192,9 +174,8 @@ namespace Resuscitate.Pages
         {
             TextBox textBox = (TextBox) sender;
 
-            textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
-            int oxygenLevel;
-            Int32.TryParse(textBox.Text, out oxygenLevel);
+            textBox.Text = new string(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
+            Int32.TryParse(textBox.Text, out int oxygenLevel);
 
             bool valid = !string.IsNullOrWhiteSpace(textBox.Text) && oxygenLevel <= MAX_PERCENTAGE;
 
@@ -203,13 +184,12 @@ namespace Resuscitate.Pages
             OxySaturationEvent = valid ? new StatusEvent("Oxygen Saturation", textBox.Text + "%", TimingCount.Time) : null;
         }
 
-        private void PercentOxygen_TextChanged(object sender, TextChangedEventArgs e)
+        private void OxygenPercent_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox) sender;
 
             textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c)).ToArray());
-            int oxygenPercent;
-            Int32.TryParse(textBox.Text, out oxygenPercent);
+            Int32.TryParse(textBox.Text, out int oxygenPercent);
 
             bool valid = !string.IsNullOrWhiteSpace(textBox.Text) && oxygenPercent <= MAX_PERCENTAGE;
 
@@ -231,6 +211,21 @@ namespace Resuscitate.Pages
             InputUtils.UpdateValidColours(textBox, valid);
 
             HeartrateBpmEvent = valid ? new StatusEvent("Heart Rate", textBox.Text + " bpm", TimingCount.Time) : null;
+        }
+
+        private void SetCPRStopButton(bool hasStarted)
+        {
+            if (hasStarted)
+            {
+                // Change to stop button
+                StopCPRButton.Background = new SolidColorBrush(CPR_SELECTED_COLOUR);
+                ((TextBlock)StopCPRButton.Content).Text = "Stop";
+            } else
+            {
+                // Change to start button
+                StopCPRButton.Background = new SolidColorBrush(CPR_UNSELECTED_COLOUR);
+                ((TextBlock)StopCPRButton.Content).Text = "Start";
+            }
         }
 
         // Returns true if one or more StatusEvents were added

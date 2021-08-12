@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Navigation;
 
 namespace Resuscitate.Pages
 {
-
     public sealed partial class LineInsertionPage : Page
     {
+        private readonly Button[] InsertionButtons;
+        private readonly Button[] Successes;
+
         private Timing TimingCount;
-        private Button[] InsertionButtons;
-        private Button[] Successes;
 
         private StatusEvent LineInsertionEvent;
 

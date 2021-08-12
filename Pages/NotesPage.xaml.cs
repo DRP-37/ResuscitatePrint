@@ -17,7 +17,6 @@ namespace Resuscitate.Pages
         private Timing TimingCount;
         private PatientData PatientData;
 
-        private Note note;
         //private AudioRecorder _audioRecorder;
         //private bool isRecording = false;
 

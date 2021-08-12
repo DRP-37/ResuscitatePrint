@@ -15,6 +15,8 @@ namespace Resuscitate.Pages
         // Default TextBox colours
         private static readonly Color INCORRECT_INPUT_BACKGROUND_COLOR = InputUtils.DEFAULT_INCORRECT_INPUT_BACKGROUND;
 
+        private const int NUM_BLOOD_GAS_INPUTS = 6;
+
         private const int PH_INDEX = 0;
         private const int PCO2_INDEX = 1;
         private const int EXCESS_INDEX = 2;
@@ -22,16 +24,18 @@ namespace Resuscitate.Pages
         private const int GLUCOSE_INDEX = 4;
         private const int HAEMOGLOBIN_INDEX = 5;
 
+        private readonly string[] Suffixes;
+        private readonly TextBox[] BloodGasViews;
+
         private Timing TimingCount;
         private StatusEvent[] StatusEvents;
-        private string[] Suffixes;
-
-        private TextBox[] BloodGasViews;
 
         public BloodGasPage()
         {
             this.InitializeComponent();
-            BloodGasViews = new TextBox[] { pH, pCO2, excess, lactate, glucose, haemoglobin };
+
+            BloodGasViews = new TextBox[] { PHView, PCO2View, ExcessView, LactateView, GlucoseView, HaemoglobinView };
+            // Suffixes could be Tags on the views
             Suffixes = new string[] { "", "", "", "", " mmol/l", " g/l" };
         }
 
@@ -40,7 +44,7 @@ namespace Resuscitate.Pages
             // Take value from previous screen
             TimingCount = (Timing)e.Parameter;
 
-            StatusEvents = new StatusEvent[6];
+            StatusEvents = new StatusEvent[NUM_BLOOD_GAS_INPUTS];
 
             base.OnNavigatedTo(e);
         }
@@ -76,7 +80,7 @@ namespace Resuscitate.Pages
             Frame.Navigate(typeof(Resuscitation), new TimingAndEvents(TimingCount, statusEvents));
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void BloodGasView_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
             int index = Array.IndexOf(BloodGasViews, textBox);
@@ -85,10 +89,10 @@ namespace Resuscitate.Pages
             if (index == EXCESS_INDEX)
             {
                 // Excess also enables minus character
-                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.' || c == '-').ToArray());
+                textBox.Text = new string(textBox.Text.Where(c => char.IsDigit(c) || c == '.' || c == '-').ToArray());
             } else
             {
-                textBox.Text = new String(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+                textBox.Text = new string(textBox.Text.Where(c => char.IsDigit(c) || c == '.').ToArray());
             }
 
             double value = -1;
@@ -128,7 +132,7 @@ namespace Resuscitate.Pages
         }
 
         private bool LessThanXDecimalPlaces(int x, double number)
-        { 
+        {
             double decimalPlaces = Math.Pow(10, x);
             double value = number * decimalPlaces;
             return value == (int) value;

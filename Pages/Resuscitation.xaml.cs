@@ -34,6 +34,8 @@ namespace Resuscitate.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             CurrTime = DateTime.Now.ToString("HH:mm");
 
             // If you want to specify you have come back from a page (eg StaffPage) use:
@@ -63,8 +65,6 @@ namespace Resuscitate.Pages
             ResusData.SaveLocally();
 
             StatusListView.ScrollIntoView(StatusList.LastItem());
-
-            base.OnNavigatedTo(e);
         }
 
         /* Runs every second */

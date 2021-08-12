@@ -45,7 +45,7 @@ namespace Resuscitate.DataClasses
             PatientData.DOB = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
-        /* Used on the InputTime page, where time of birth is unknown*/
+        /* Used on the InputTime page, where time of birth is unknown */
         public ResuscitationData(PatientData patient, StaffList staff)
         {
             this.IsComplete = false;
@@ -114,7 +114,7 @@ namespace Resuscitate.DataClasses
                 return null;
             }
 
-            return TimeSpan.FromMilliseconds(Environment.TickCount - CPRStartTime);
+            return TimeSpan.FromMilliseconds(CPRElapsedMiliseconds());
         }
 
         public long CPRElapsedMiliseconds()

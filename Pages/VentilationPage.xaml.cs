@@ -20,11 +20,11 @@ namespace Resuscitate.Pages
         private const bool IS_RETURNING = true;
         private const bool IS_NOT_RETURNING = false;
 
+        private readonly Button[] AirwayPositions;
+        private readonly Button[] Ventilations;
+
         private ResuscitationData ResusData;
         private Timing TimingCount;
-
-        private Button[] AirwayPositions;
-        private Button[] Ventilations;
 
         private StatusEvent AirwayEvent;
         private StatusEvent VentilationEvent;

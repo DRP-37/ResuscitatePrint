@@ -20,17 +20,17 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="1">
-                <Button x:Name="ChestDrainLeft" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="29" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Drain_Click" Foreground="#FF494949" Margin="0,0,252,0" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
+                <Button x:Name="ChestDrainLeft" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="29" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DrainButton_Click" Foreground="#FF494949" Margin="0,0,252,0" HorizontalAlignment="Right" FontFamily="Microsoft JhengHei UI">
                     <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Chest Drain:&#xA;Left Side" FontSize="27"/>
                 </Button>
             </Grid>
             <Grid Grid.Row="1">
-                <Button x:Name="ChestDrainRight" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="29" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Drain_Click" Foreground="#FF494949" HorizontalAlignment="Left" Margin="252,0,0,0" FontFamily="Microsoft JhengHei UI">
+                <Button x:Name="ChestDrainRight" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="29" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DrainButton_Click" Foreground="#FF494949" HorizontalAlignment="Left" Margin="252,0,0,0" FontFamily="Microsoft JhengHei UI">
                     <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Chest Drain:&#xA;Right Side" FontSize="27"/>
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Button x:Name="AbdominalDrain" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="29" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="Drain_Click" Foreground="#FF494949" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei UI">
+                <Button x:Name="AbdominalDrain" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="89" UseLayoutRounding="False" Width="293" d:LayoutRounding="Auto" FontSize="29" IsRightTapEnabled="False" IsDoubleTapEnabled="False" IsHoldingEnabled="False" Background="White" BorderBrush="Black" Click="DrainButton_Click" Foreground="#FF494949" HorizontalAlignment="Center" FontFamily="Microsoft JhengHei UI">
                     <TextBlock TextAlignment="Center" SelectionChanged="TextBlock_SelectionChanged" Text="Abdominal Drain" FontSize="27"/>
                 </Button>
             </Grid>

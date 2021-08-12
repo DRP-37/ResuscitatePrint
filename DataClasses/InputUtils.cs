@@ -56,7 +56,7 @@ namespace Resuscitate.DataClasses
         }
 
         /* Same as ClickWithColours but allows all buttons to be selected at once.
-         * Returns the sender if the sender was already selected, otherwise null */
+         * Returns null if the sender was already selected, otherwise the sender */
         public static Button ClickAnyWithColours(Button sender, Button[] buttons, Color selectedColour, Color unselectedColour)
         {
             SolidColorBrush senderColour = (SolidColorBrush) sender.Background;

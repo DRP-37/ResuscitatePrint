@@ -14,10 +14,11 @@ namespace Resuscitate.Pages
         private static readonly Color SELECTED_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
         private static readonly Color UNSELECTED_COLOUR = InputUtils.DEFAULT_UNSELECTED_COLOUR;
 
+        private readonly Button[] IntubationSuction;
+        private readonly Button[] Successes;
+        private readonly Button[] Confirmations;
+
         private Timing TimingCount;
-        private Button[] IntubationSuction;
-        private Button[] Successes;
-        private Button[] Confirmations;
 
         private StatusEvent IntubationEvent = null;
 

@@ -12,9 +12,10 @@ namespace Resuscitate.Pages
         private static readonly Color UNCHANGED_COLOR = InputUtils.DEFAULT_NAVIGATION_BUTTON_COLOUR;
         private static readonly Color CONFIRM_UPDATABLE_COLOR = InputUtils.DEFAULT_SELECTED_COLOUR;
 
+        private readonly TextBox[] InfoViews;
+
         private ResuscitationData ResusData;
 
-        private TextBox[] InfoViews;
         private string[] PreviousText;
 
         public PatientPage()

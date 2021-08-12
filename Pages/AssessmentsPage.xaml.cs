@@ -13,15 +13,15 @@ namespace Resuscitate.Pages
     {
         private const int MAX_ALLOWED_EST_WEIGHT = 9;
 
+        private readonly Button[] Colours;
+        private readonly Button[] HeartRates;
+        private readonly Button[] Respirations;
+        private readonly Button[] Tones;
+        private readonly Button[] Temperatures;
+        private readonly Button[] CordClampings;
+
         private ResuscitationData ResusData;
         private Timing TimingCount;
-
-        private Button[] Colours;
-        private Button[] HeartRates;
-        private Button[] Respirations;
-        private Button[] Tones;
-        private Button[] Temperatures;
-        private Button[] CordClampings;
 
         // StatusEvents
         private StatusEvent CordClampingEvent;

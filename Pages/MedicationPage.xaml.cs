@@ -10,30 +10,33 @@ namespace Resuscitate.Pages
 {
     public sealed partial class MedicationPage : Page
     {
-        private const bool SAVE_DOSES = true;
-        private const bool DONT_SAVE_DOSES = false;
-
         private static readonly Color SELECTED_COLOUR = InputUtils.DEFAULT_SELECTED_COLOUR;
         private static readonly Color UNSELECTED_COLOUR = InputUtils.DEFAULT_UNSELECTED_COLOUR;
 
+        private const bool SAVE_DOSES = true;
+        private const bool DONT_SAVE_DOSES = false;
+
+        /* Stores the Name, Button and DoseView for every Medication */
+        private readonly List<Medication> Medications;
+
         private ResuscitationData ResusData;
         private Timing TimingCount;
-
-        private List<Medication> Medications;
 
         public MedicationPage()
         {
             this.InitializeComponent();
 
-            Medications = new List<Medication>();
-            Medications.Add(new Medication(ADR1View.Text, ADR1Button, ADR1Dose));
-            Medications.Add(new Medication(ADR2View.Text, ADR2Button, ADR2Dose));
-            Medications.Add(new Medication(SodBicarbView.Text, SodBicarbButton, SodBicarbDose));
-            Medications.Add(new Medication(DextroseView.Text, DextroseButton, DextroseDose));
-            Medications.Add(new Medication(CellTransfusionView.Text, CellTransfusionButton, CellTransfusionDose));
-            Medications.Add(new Medication(ADRviaETTView.Text, ADRviaETTButton, ADRviaETTDose));
-            Medications.Add(new Medication(Surfactant120View.Text, Surfactant120Button, Surfactant120Dose));
-            Medications.Add(new Medication(Surfactant240View.Text, Surfactant240Button, Surfactant240Dose));
+            Medications = new List<Medication>
+            {
+                new Medication(ADR1View.Text, ADR1Button, ADR1Dose),
+                new Medication(ADR2View.Text, ADR2Button, ADR2Dose),
+                new Medication(SodBicarbView.Text, SodBicarbButton, SodBicarbDose),
+                new Medication(DextroseView.Text, DextroseButton, DextroseDose),
+                new Medication(CellTransfusionView.Text, CellTransfusionButton, CellTransfusionDose),
+                new Medication(ADRviaETTView.Text, ADRviaETTButton, ADRviaETTDose),
+                new Medication(Surfactant120View.Text, Surfactant120Button, Surfactant120Dose),
+                new Medication(Surfactant240View.Text, Surfactant240Button, Surfactant240Dose)
+            };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

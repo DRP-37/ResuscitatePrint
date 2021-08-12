@@ -1,10 +1,8 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Microsoft.Toolkit.Uwp.Helpers;
 using Resuscitate.DataClasses;
 using Windows.Storage;
-using Windows.UI;
-using Windows.UI.Xaml.Media;
-using Microsoft.Toolkit.Uwp.Helpers;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Resuscitate.Pages
 {
@@ -12,7 +10,8 @@ namespace Resuscitate.Pages
     {
         private const string HAS_STORE_KEY = ResuscitationData.HAS_STORE_KEY;
 
-        private bool HasLocalStore;
+        private readonly bool HasLocalStore;
+
         private static ResuscitationData StoredData;
 
         public MainPage()
@@ -28,7 +27,7 @@ namespace Resuscitate.Pages
             {
                 ReturnButton.IsEnabled = false;
             }
-        } 
+        }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {

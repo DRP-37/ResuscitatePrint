@@ -10,17 +10,17 @@ namespace Resuscitate.Pages
 {
     public sealed partial class ApgarAssessment : Page
     {
+        private readonly Button[] Colours;
+        private readonly Button[] HeartRates;
+        private readonly Button[] Responses;
+        private readonly Button[] Tones;
+        private readonly Button[] Respirations;
+
         private ResuscitationData ResusData;
         private Timing TimingCount;
 
-        private Button[] Colours;
-        private Button[] HeartRates;
-        private Button[] Responses;
-        private Button[] Tones;
-        private Button[] Respirations;
-
-        /* scoreCount holds the current total score
-         * lastTime holds the time at which the last button was selected */
+        /* ScoreCount holds the current total score
+         * LastTime holds the time at which the last button was selected */
         private int ScoreCount;
         private string LastTime;
 
@@ -28,11 +28,11 @@ namespace Resuscitate.Pages
         {
             this.InitializeComponent();
 
-            Colours = new Button[] { colour0, colour1, colour2 };
-            HeartRates = new Button[] { hr0, hr1, hr2 };
-            Responses = new Button[] { response0, response1, response2 };
-            Tones = new Button[] { tone0, tone1, tone2 };
-            Respirations = new Button[] { resp0, resp1, resp2 };
+            Colours = new Button[] { Colour0Button, Colour1Button, Colour2Button };
+            HeartRates = new Button[] { HeartRate0Button, HeartRate1Button, HeartRate2Button };
+            Responses = new Button[] { Response0Button, Response1Button, Response2Button };
+            Tones = new Button[] { Tone0Button, Tone1Button, Tone2Button };
+            Respirations = new Button[] { Respiration0Button, Respiration1Button, Respiration2Button };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -106,27 +106,27 @@ namespace Resuscitate.Pages
             Score.Text = ScoreCount.ToString();
         }
 
-        private void colour_Click(object sender, RoutedEventArgs e)
+        private void ColourButton_Click(object sender, RoutedEventArgs e)
         {
             ApgarDefaultClick((Button) sender, Colours);
         }
 
-        private void hr_Click(object sender, RoutedEventArgs e)
+        private void HeartRateButton_Click(object sender, RoutedEventArgs e)
         {
             ApgarDefaultClick((Button)sender, HeartRates);
         }
 
-        private void response_Click(object sender, RoutedEventArgs e)
+        private void ResponseButton_Click(object sender, RoutedEventArgs e)
         {
             ApgarDefaultClick((Button)sender, Responses);
         }
 
-        private void tone_Click(object sender, RoutedEventArgs e)
+        private void ToneButton_Click(object sender, RoutedEventArgs e)
         {
             ApgarDefaultClick((Button)sender, Tones);
         }
 
-        private void resp_Click(object sender, RoutedEventArgs e)
+        private void RespirationButton_Click(object sender, RoutedEventArgs e)
         {
             ApgarDefaultClick((Button)sender, Respirations);
         }
