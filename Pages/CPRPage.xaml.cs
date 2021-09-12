@@ -89,14 +89,21 @@ namespace Resuscitate.Pages
 
             } else
             {
-                string Miliseconds = ResusData.CPRElapsedMiliseconds().ToString();
-                string Seconds = "0";
+                long? miliseconds = ResusData.CPRElapsedMiliseconds();
 
-                if (Miliseconds.Length > 3) { 
-                    Seconds = Miliseconds.Substring(0, Miliseconds.Length - 3);
+                if (miliseconds == null)
+                {
+                    throw new System.ArithmeticException();
                 }
 
-                Data = "Ended after " + Seconds + " seconds";
+                string MilisecondsStr = miliseconds.ToString();
+                string SecondsStr = "0";
+
+                if (MilisecondsStr.Length > 3) { 
+                    SecondsStr = MilisecondsStr.Substring(0, MilisecondsStr.Length - 3);
+                }
+
+                Data = "Ended after " + SecondsStr + " seconds";
             }
 
             CPREvents.Add(new StatusEvent("Cardiac Compressions", Data, TimingCount.Time));

@@ -61,7 +61,7 @@ namespace Resuscitate.DataClasses
         {
             SolidColorBrush senderColour = (SolidColorBrush) sender.Background;
 
-            if (senderColour.Equals(selectedColour))
+            if (senderColour.Color.Equals(selectedColour))
             {
                 sender.Background = new SolidColorBrush(unselectedColour);
 

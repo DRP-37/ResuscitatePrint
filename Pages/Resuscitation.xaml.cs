@@ -99,15 +99,15 @@ namespace Resuscitate.Pages
                 return false;
             }
 
-            int CPRStartTime = ResusData.CPRStartTime;
-            int ReassessStartTime = ResusData.LastReassessmentTime;
+            long? CPRStartTime = ResusData.CPRStartTime;
+            long ReassessStartTime = ResusData.LastReassessmentTime;
 
-            if (ReassessStartTime < CPRStartTime)
+            if (CPRStartTime != null && ReassessStartTime < CPRStartTime)
             {
                 return TimeSpan.Compare((TimeSpan) ResusData.CPRElapsed(), new TimeSpan(0, 0, 30)) >= 0;
             } else
             {
-                return TimeSpan.Compare((TimeSpan)ResusData.ReassessmentElapsed(), new TimeSpan(0, 0, 30)) >= 0;
+                return TimeSpan.Compare(ResusData.ReassessmentElapsed(), new TimeSpan(0, 0, 30)) >= 0;
             }
         }
 

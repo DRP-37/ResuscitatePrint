@@ -141,12 +141,19 @@ namespace Resuscitate.Pages
             if (hasStarted)
             {
                 // Stop timer
-                string Milieconds = ResusData.CPRElapsedMiliseconds().ToString();
+                long? miliseconds = ResusData.CPRElapsedMiliseconds();
+
+                if (miliseconds == null)
+                {
+                    throw new System.ArithmeticException();
+                }
+
+                string MilisecondsStr = miliseconds.ToString();
                 string Seconds = "0";
 
-                if (Milieconds.Length > 3)
+                if (MilisecondsStr.Length > 3)
                 {
-                    Seconds = Milieconds.Substring(0, Milieconds.Length - 3);
+                    Seconds = MilisecondsStr.Substring(0, MilisecondsStr.Length - 3);
                 }
 
                 CPREvents.Add(new StatusEvent("Cardiac Compressions", "Ended after " + Seconds + " seconds", TimingCount.Time));
